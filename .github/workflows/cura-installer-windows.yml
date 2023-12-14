@@ -2,7 +2,7 @@ name: Windows Installer
 run-name: ${{ inputs.cura_conan_version }} for Windows-${{ inputs.architecture }} by @${{ github.actor }}
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       # cura_conan_version:
       #   description: 'Cura Conan Version'
