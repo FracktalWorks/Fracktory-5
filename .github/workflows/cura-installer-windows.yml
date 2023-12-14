@@ -42,7 +42,7 @@ on:
 
       conan_internal:
         required: false
-        default: False
+        default: false
         type: boolean
 
 permissions:
@@ -134,13 +134,13 @@ jobs:
           organization: ultimaker-o7
           project: curaengine
 
-      - name: Upload and remove debug symbols
-        run: |
-          sentry-cli debug-files upload .\UltiMaker-Cura\CuraEngine.exe
-          sentry-cli debug-files upload .\UltiMaker-Cura\CuraEngine.pdb
-          sentry-cli debug-files upload .\UltiMaker-Cura\Arcus.dll
-          sentry-cli debug-files upload .\UltiMaker-Cura\polyclipping.dll
-        working-directory: dist
+      # - name: Upload and remove debug symbols
+      #   run: |
+      #     sentry-cli debug-files upload .\UltiMaker-Cura\CuraEngine.exe
+      #     sentry-cli debug-files upload .\UltiMaker-Cura\CuraEngine.pdb
+      #     sentry-cli debug-files upload .\UltiMaker-Cura\Arcus.dll
+      #     sentry-cli debug-files upload .\UltiMaker-Cura\polyclipping.dll
+      #   working-directory: dist
 
       - name: Get installer helper scripts
         run: |
@@ -190,14 +190,14 @@ jobs:
           & "C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe" sign /f $Env:PFX_PATH /p "$Env:WIN_CERT_INSTALLER_CER_PASS" /fd SHA256 /t http://timestamp.digicert.com "${{steps.filename.outputs.INSTALLER_FILENAME }}.exe"
         working-directory: dist
 
-      - name: Remove internal packages before uploading
-        run: |
-          conan remove "*@internal/*" -f || true
-          conan remove "cura_private_data*" -f || true
+      # - name: Remove internal packages before uploading
+      #   run: |
+      #     conan remove "*@internal/*" -f || true
+      #     conan remove "cura_private_data*" -f || true
 
-      - name: Upload the Package(s)
-        if: ${{ always() && ! inputs.conan_internal }}
-        run: conan upload "*" -r cura --all -c
+      # - name: Upload the Package(s)
+      #   if: ${{ always() && ! inputs.conan_internal }}
+      #   run: conan upload "*" -r cura --all -c
 
       - name: Upload the msi
         uses: actions/upload-artifact@v3
