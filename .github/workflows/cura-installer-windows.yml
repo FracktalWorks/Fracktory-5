@@ -42,7 +42,7 @@ on:
 
       conan_internal:
         required: false
-        default: false
+        default: False
         type: boolean
 
 permissions:
