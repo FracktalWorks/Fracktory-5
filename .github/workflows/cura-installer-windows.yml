@@ -11,7 +11,7 @@ on:
       #   type: string
 
       conan_args:
-        description: 'Conan args: eq.: --require-override'
+        description: 'OLD_ALT Conan args: eq.: --require-override'
         default: ''
         required: false
         type: string
