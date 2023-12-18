@@ -1,5 +1,5 @@
 name: Windows Installer
-run-name: ${{ inputs.cura_conan_version }} for Windows-${{ inputs.architecture }} by @${{ github.actor }}
+run-name: ${{ inputs.cura_conan_version }} for OLD_ALT Windows-${{ inputs.architecture }} by @${{ github.actor }}
 
 on:
   workflow_dispatch:
