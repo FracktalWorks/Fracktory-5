@@ -121,6 +121,8 @@ jobs:
         run: |
           DIR
           TREE .\cura_inst\ /f
+          Get-Content -Path .\cura_inst\Scripts\activate_github_actions_env.ps1
+          Get-Content -Path .\cura_inst\Scripts\activate_github_actions_version_env.ps1
 
       - name: Set Environment variables for Cura (Powershell)
         run: |
