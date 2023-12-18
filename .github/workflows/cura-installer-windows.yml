@@ -115,20 +115,20 @@ jobs:
             ${{ runner.os }}-conan-downloads-
 
       - name: Create the Packages (Powershell)
-        run: conan install . ${{ inputs.conan_args }} --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo
+        run: conan install cura/5.7.0-alpha.0+468f20@ultimaker/testing ${{ inputs.conan_args }} --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo
 
       - name: List DIR and Files
         run: |
           DIR
           TREE .\cura_inst\Scripts /f
-          # Get-Content -Path .\cura_inst\Scripts\activate_github_actions_env.ps1
-          # Get-Content -Path .\cura_inst\Scripts\activate_github_actions_version_env.ps1
+          Get-Content -Path .\cura_inst\Scripts\activate_github_actions_env.ps1
+          Get-Content -Path .\cura_inst\Scripts\activate_github_actions_version_env.ps1
 
       - name: Set Environment variables for Cura (Powershell)
         run: |
           echo "${Env:WIX}\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          # .\cura_inst\Scripts\activate_github_actions_env.ps1
-          # .\cura_inst\Scripts\activate_github_actions_version_env.ps1
+          .\cura_inst\Scripts\activate_github_actions_env.ps1
+          .\cura_inst\Scripts\activate_github_actions_version_env.ps1
 
       - name: Create the Cura dist
         run: pyinstaller ./cura_inst/UltiMaker-Cura.spec
