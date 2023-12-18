@@ -120,7 +120,7 @@ jobs:
       - name: List DIR and Files
         run: |
           DIR
-          TREE .\cura_inst\ /f
+          TREE .\cura_inst\Scripts /f
           Get-Content -Path .\cura_inst\Scripts\activate_github_actions_env.ps1
           Get-Content -Path .\cura_inst\Scripts\activate_github_actions_version_env.ps1
 
