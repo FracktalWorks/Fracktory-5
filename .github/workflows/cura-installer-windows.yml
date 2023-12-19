@@ -1,5 +1,5 @@
 name: Windows Installer
-run-name: ${{ inputs.cura_conan_version }} for Windows-${{ inputs.architecture }} by @${{ github.actor }}
+run-name: ${{ inputs.cura_conan_version }} for MAIN Windows-${{ inputs.architecture }} by @${{ github.actor }}
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
       #   type: string
 
       conan_args:
-        description: 'Conan args: eq.: --require-override'
+        description: 'MAIN Conan args: eq.: --require-override'
         default: ''
         required: false
         type: string
@@ -115,23 +115,32 @@ jobs:
             ${{ runner.os }}-conan-downloads-
 
       - name: Create the Packages (Powershell)
-        run: conan install . ${{ inputs.conan_args }} --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo
+        run: |
+          conan create . local/test
+          conan install cura/5.6.1-beta.0@local/test  ${{ inputs.conan_args }} --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo
 
       - name: List DIR and Files
         run: |
-          DIR
-          TREE .\cura_inst\Scripts /f
-          Get-Content -Path .\cura_inst\Scripts\activate_github_actions_env.ps1
-          Get-Content -Path .\cura_inst\Scripts\activate_github_actions_version_env.ps1
+          gci -recurse -filter *activate_github_actions* -File
+          gci -recurse -filter *.ps1 -File
+          # pip install pyinstaller==5.8.0
+          # pip install pywin32-ctypes
+          # Get-Content -Path .\cura_inst\Scripts\activate_github_actions_env.ps1
+          # Get-Content -Path .\cura_inst\Scripts\activate_github_actions_version_env.ps1
 
       - name: Set Environment variables for Cura (Powershell)
         run: |
           echo "${Env:WIX}\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          # Get-Content -Path .\venv\Scripts\activate_github_actions_env.ps1
+          # Get-Content -Path .\venv\Scripts\Activate.ps1
           .\cura_inst\Scripts\activate_github_actions_env.ps1
           .\cura_inst\Scripts\activate_github_actions_version_env.ps1
 
       - name: Create the Cura dist
-        run: pyinstaller ./cura_inst/UltiMaker-Cura.spec
+        run: |
+          # .\venv\Scripts\activate_github_actions_env.ps1
+          # .\venv\Scripts\Activate.ps1
+          pyinstaller ./cura_inst/UltiMaker-Cura.spec
 
       - name: Setup Sentry CLI
         uses: mathieu-bour/setup-sentry-cli@v1
