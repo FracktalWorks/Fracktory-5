@@ -117,7 +117,7 @@ jobs:
       - name: Create the Packages (Powershell)
         run: |
           conan create . local/test
-          conan install cura/5.6.1-beta.0@local/test  ${{ inputs.conan_args }} --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo
+          conan install cura/5.7.0-alpha.0@local/test  ${{ inputs.conan_args }} --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo
 
       - name: List DIR and Files
         run: |
