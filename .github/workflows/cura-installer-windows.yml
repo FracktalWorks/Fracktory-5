@@ -4,6 +4,11 @@ run-name: ${{ inputs.cura_conan_version }} for MAIN Windows-${{ inputs.architect
 on:
   workflow_dispatch:
     inputs:
+      installer_name:
+        description: 'Exe name'
+        default: 'Fracktal Cura'
+        required: False
+        typr: string
       # cura_conan_version:
       #   description: 'Cura Conan Version'
       #   default: 'cura/5.6.0'
@@ -218,7 +223,7 @@ jobs:
       - name: Upload the msi
         uses: actions/upload-artifact@v3
         with:
-          name: ${{steps.filename.outputs.INSTALLER_FILENAME }}-msi
+          name: ${{inputs.installer_name }}-msi
           path: |
             dist/${{steps.filename.outputs.INSTALLER_FILENAME }}.msi
           retention-days: 5
@@ -226,7 +231,7 @@ jobs:
       - name: Upload the exe
         uses: actions/upload-artifact@v3
         with:
-          name: ${{steps.filename.outputs.INSTALLER_FILENAME }}-exe
+          name: ${{inputs.installer_name}}-exe
           path: |
             dist/${{steps.filename.outputs.INSTALLER_FILENAME }}.exe
           retention-days: 5
