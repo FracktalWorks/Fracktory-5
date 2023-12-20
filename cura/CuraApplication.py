@@ -179,6 +179,7 @@ class CuraApplication(QtApplication):
         self._use_single_instance = False
 
         self._single_instance = None
+        self._open_project_mode: Optional[str] = None
 
         self._cura_formula_functions = None  # type: Optional[CuraFormulaFunctions]
 
@@ -1555,15 +1556,14 @@ class CuraApplication(QtApplication):
                     Logger.log("w", "Unable to reload data because we don't have a filename.")
 
         for file_name, nodes in objects_in_filename.items():
-            for node in nodes:
-                file_path = os.path.normpath(os.path.dirname(file_name))
-                job = ReadMeshJob(file_name, add_to_recent_files = file_path != tempfile.gettempdir())  # Don't add temp files to the recent files list
-                job._node = node  # type: ignore
-                job.finished.connect(self._reloadMeshFinished)
-                if has_merged_nodes:
-                    job.finished.connect(self.updateOriginOfMergedMeshes)
-
-                job.start()
+            file_path = os.path.normpath(os.path.dirname(file_name))
+            job = ReadMeshJob(file_name,
+                              add_to_recent_files=file_path != tempfile.gettempdir())  # Don't add temp files to the recent files list
+            job._nodes = nodes  # type: ignore
+            job.finished.connect(self._reloadMeshFinished)
+            if has_merged_nodes:
+                job.finished.connect(self.updateOriginOfMergedMeshes)
+            job.start()
 
     @pyqtSlot("QStringList")
     def setExpandedCategories(self, categories: List[str]) -> None:
@@ -1735,9 +1735,10 @@ class CuraApplication(QtApplication):
 
     def _reloadMeshFinished(self, job) -> None:
         """
-        Function called whenever a ReadMeshJob finishes in the background. It reloads a specific node object in the
+        Function called when ReadMeshJob finishes reloading a file in the background, then update node objects in the
         scene from its source file. The function gets all the nodes that exist in the file through the job result, and
-        then finds the scene node that it wants to refresh by its object id. Each job refreshes only one node.
+        then finds the scene nodes that need to be refreshed by their name. Each job refreshes all nodes of a file.
+        Nodes that are not present in the updated file are kept in the scene.
 
         :param job: The :py:class:`Uranium.UM.ReadMeshJob.ReadMeshJob` running in the background that reads all the
         meshes in a file
@@ -1747,21 +1748,37 @@ class CuraApplication(QtApplication):
         if len(job_result) == 0:
             Logger.log("e", "Reloading the mesh failed.")
             return
-        object_found = False
-        mesh_data = None
+        renamed_nodes = {} # type: Dict[str, int]
         # Find the node to be refreshed based on its id
         for job_result_node in job_result:
-            if job_result_node.getId() == job._node.getId():
-                mesh_data = job_result_node.getMeshData()
-                object_found = True
-                break
-        if not object_found:
-            Logger.warning("The object with id {} no longer exists! Keeping the old version in the scene.".format(job_result_node.getId()))
-            return
-        if not mesh_data:
-            Logger.log("w", "Could not find a mesh in reloaded node.")
-            return
-        job._node.setMeshData(mesh_data)
+            mesh_data = job_result_node.getMeshData()
+            if not mesh_data:
+                Logger.log("w", "Could not find a mesh in reloaded node.")
+                continue
+
+            # Solves issues with object naming
+            result_node_name = job_result_node.getName()
+            if not result_node_name:
+                result_node_name = os.path.basename(mesh_data.getFileName())
+            if result_node_name in renamed_nodes:  # objects may get renamed by ObjectsModel._renameNodes() when loaded
+                renamed_nodes[result_node_name] += 1
+                result_node_name = "{0}({1})".format(result_node_name, renamed_nodes[result_node_name])
+            else:
+                renamed_nodes[job_result_node.getName()] = 0
+
+            # Find the matching scene node to replace
+            scene_node = None
+            for replaced_node in job._nodes:
+                if replaced_node.getName() == result_node_name:
+                    scene_node = replaced_node
+                    break
+
+            if scene_node:
+                scene_node.setMeshData(mesh_data)
+            else:
+                # Current node is a new one in the file, or it's name has changed
+                # TODO: Load this mesh into the scene. Also alter the "_reloadJobFinished" action in UM.Scene
+                Logger.log("w", "Could not find matching node for object '{0}' in the scene.".format(result_node_name))
 
     def _openFile(self, filename):
         self.readLocalFile(QUrl.fromLocalFile(filename))
@@ -1829,7 +1846,7 @@ class CuraApplication(QtApplication):
         Logger.log("i", "Attempting to read file %s", file.toString())
         if not file.isValid():
             return
-
+        self._open_project_mode = project_mode
         scene = self.getController().getScene()
 
         for node in DepthFirstIterator(scene.getRoot()):
@@ -1839,16 +1856,16 @@ class CuraApplication(QtApplication):
 
         is_project_file = self.checkIsValidProjectFile(file)
 
-        if project_mode is None:
-            project_mode = self.getPreferences().getValue("cura/choice_on_open_project")
+        if self._open_project_mode is None:
+            self._open_project_mode = self.getPreferences().getValue("cura/choice_on_open_project")
 
-        if is_project_file and project_mode == "open_as_project":
+        if is_project_file and self._open_project_mode == "open_as_project":
             # open as project immediately without presenting a dialog
             workspace_handler = self.getWorkspaceFileHandler()
             workspace_handler.readLocalFile(file, add_to_recent_files_hint = add_to_recent_files)
             return
 
-        if is_project_file and project_mode == "always_ask":
+        if is_project_file and self._open_project_mode == "always_ask":
             # present a dialog asking to open as project or import models
             self.callLater(self.openProjectFile.emit, file, add_to_recent_files)
             return
@@ -1948,7 +1965,8 @@ class CuraApplication(QtApplication):
                     node.scale(original_node.getScale())
 
             node.setSelectable(True)
-            node.setName(os.path.basename(file_name))
+            if not node.getName():
+                node.setName(os.path.basename(file_name))
             self.getBuildVolume().checkBoundsAndUpdate(node)
 
             is_non_sliceable = "." + file_extension in self._non_sliceable_extensions
@@ -1982,8 +2000,11 @@ class CuraApplication(QtApplication):
                         center_y = 0
 
                     node.translate(Vector(0, center_y, 0))
-
                     nodes_to_arrange.append(node)
+            # If the file is a project,and models are to be loaded from a that project,
+            # models inside file should be arranged in buildplate.
+            elif self._open_project_mode == "open_as_model":
+                nodes_to_arrange.append(node)
 
             # This node is deep copied from some other node which already has a BuildPlateDecorator, but the deepcopy
             # of BuildPlateDecorator produces one that's associated with build plate -1. So, here we need to check if

@@ -244,7 +244,7 @@ class CuraConan(ConanFile):
                 self.output.warning(f"Source path for binary {binary['binary']} does not exist")
                 continue
 
-            for bin in Path(src_path).glob(binary["binary"] + "*[.exe|.dll|.so|.dylib|.so.]*"):
+            for bin in Path(src_path).glob(binary["binary"] + "*[.exe|.dll|.so|.dylib|.so.|.pdb]*"):
                 binaries.append((str(bin), binary["dst"]))
             for bin in Path(src_path).glob(binary["binary"]):
                 binaries.append((str(bin), binary["dst"]))
@@ -320,7 +320,6 @@ class CuraConan(ConanFile):
         if self.settings.os == "Linux":
             self.options["curaengine_grpc_definitions"].shared = True
             self.options["openssl"].shared = True
-
 
     def validate(self):
         version = self.conf.get("user.cura:version", default = self.version, check_type = str)
