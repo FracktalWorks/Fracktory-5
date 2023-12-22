@@ -5,8 +5,14 @@ on:
   workflow_dispatch:
     inputs:
       installer_name:
-        description: 'Exe name'
-        default: 'Fracktal Cura'
+        description: 'Name of the .exe and .msi'
+        default: 'Fracktory'
+        required: False
+        typr: string
+
+      app_name:
+        description: 'Name of the Application in the installer'
+        default: 'Fracktory'
         required: False
         typr: string
 
@@ -158,7 +164,7 @@ jobs:
         run: python runner_scripts/cura_installer_filename.py --os ${{ runner.os }} --arch ${{ inputs.architecture }} --enterprise ${{ inputs.enterprise }} --internal ${{ inputs.conan_internal }}
 
       - name: Summarize the used dependencies
-        run: python runner_scripts/summarize_used_dependencies.py --installer_filename ${{ steps.filename.outputs.INSTALLER_FILENAME }}
+        run: python runner_scripts/summarize_used_dependencies.py --installer_filename ${{ inputs.installer_name }}
 
       - name: Create PFX certificate from BASE64_PFX_CONTENT secret
         id: create-pfx
@@ -172,26 +178,26 @@ jobs:
 
       - name: Create the Windows msi installer (Powershell)
         run: |
-          python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\UltiMaker-Cura "${{steps.filename.outputs.INSTALLER_FILENAME }}.msi" Fractory
+          python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\UltiMaker-Cura "${{ inputs.installer_name }}.msi" ${{ inputs.app_name }}
         working-directory: dist
 
       # - name: Sign the Windows msi installer (Powershell)
       #   env:
       #     PFX_PATH: ${{ steps.create-pfx.outputs.PFX_PATH }}
       #   run: |
-      #     & "C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe" sign /f $Env:PFX_PATH /p "$Env:WIN_CERT_INSTALLER_CER_PASS" /fd SHA256 /t http://timestamp.digicert.com "${{steps.filename.outputs.INSTALLER_FILENAME }}.msi"
+      #     & "C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe" sign /f $Env:PFX_PATH /p "$Env:WIN_CERT_INSTALLER_CER_PASS" /fd SHA256 /t http://timestamp.digicert.com "${{ inputs.installer_name }}.msi"
       #   working-directory: dist
 
       - name: Create the Windows exe installer (Powershell)
         run: |
-          python ..\cura_inst\packaging\NSIS\create_windows_installer.py ../cura_inst . "${{steps.filename.outputs.INSTALLER_FILENAME }}.exe"
+          python ..\cura_inst\packaging\NSIS\create_windows_installer.py ../cura_inst . "${{ inputs.installer_name }}.exe"
         working-directory: dist
 
       # - name: Sign the Windows exe installer (Powershell)
       #   env:
       #     PFX_PATH: ${{ steps.create-pfx.outputs.PFX_PATH }}
       #   run: |
-      #     & "C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe" sign /f $Env:PFX_PATH /p "$Env:WIN_CERT_INSTALLER_CER_PASS" /fd SHA256 /t http://timestamp.digicert.com "${{steps.filename.outputs.INSTALLER_FILENAME }}.exe"
+      #     & "C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe" sign /f $Env:PFX_PATH /p "$Env:WIN_CERT_INSTALLER_CER_PASS" /fd SHA256 /t http://timestamp.digicert.com "${{ inputs.installer_name }}.exe"
       #   working-directory: dist
 
       # - name: Remove internal packages before uploading
@@ -206,17 +212,17 @@ jobs:
       - name: Upload the msi
         uses: actions/upload-artifact@v3
         with:
-          name: ${{inputs.installer_name }}-msi
+          name: ${{inputs.installer_name}}-msi
           path: |
-            dist/${{steps.filename.outputs.INSTALLER_FILENAME }}.msi
+            dist/${{inputs.installer_name }}.msi
           retention-days: 5
 
       - name: Upload the exe
         uses: actions/upload-artifact@v3
         with:
-          name: ${{inputs.installer_name }}-exe
+          name: ${{inputs.installer_name}}-exe
           path: |
-            dist/${{steps.filename.outputs.INSTALLER_FILENAME }}.exe
+            dist/${{inputs.installer_name }}.exe
           retention-days: 5
 
       # NOTE: The extension is .sh, since this isn't going to build-environment, so not on the Win build image.
