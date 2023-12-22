@@ -42,14 +42,14 @@ def generate_nsi(source_path: str, dist_path: str, filename: str):
 
 
     nsis_content = template.render(
-        app_name = f"UltiMaker Cura {os.getenv('CURA_VERSION_FULL')}",
-        main_app = "UltiMaker-Cura.exe",
+        app_name = f"Fracktory {os.getenv('CURA_VERSION_FULL')}",
+        main_app = "Fracktory.exe",
         version = os.getenv('CURA_VERSION_FULL'),
         version_major = os.environ.get("CURA_VERSION_MAJOR"),
         version_minor = os.environ.get("CURA_VERSION_MINOR"),
         version_patch = os.environ.get("CURA_VERSION_PATCH"),
-        company = "UltiMaker",
-        web_site = "https://ultimaker.com",
+        company = "Fracktal",
+        web_site = "https://fracktal.in",
         year = datetime.now().year,
         cura_license_file = str(source_loc.joinpath("packaging", "cura_license.txt")),
         compression_method = "LZMA",  # ZLIB, BZIP2 or LZMA
