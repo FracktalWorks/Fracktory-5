@@ -47,6 +47,7 @@ def generate_wxs(source_path: Path, dist_path: Path, filename: Path, app_name: s
         cura_icon=str(source_loc.joinpath("packaging", "icons", "Cura.ico")),
     )
 
+    print(wxs_content)
     with open(work_loc.joinpath("UltiMaker-Cura.wxs"), "w") as f:
         f.write(wxs_content)
 
