@@ -181,24 +181,24 @@ jobs:
           python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\UltiMaker-Cura "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
         working-directory: dist
 
-      - name: Sign the Windows msi installer (Powershell)
-        env:
-          PFX_PATH: ${{ steps.create-pfx.outputs.PFX_PATH }}
-        run: |
-          & "C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe" sign /f $Env:PFX_PATH /p "$Env:WIN_CERT_INSTALLER_CER_PASS" /fd SHA256 /t http://timestamp.digicert.com "${{ inputs.installer_name }}.msi"
-        working-directory: dist
+      # - name: Sign the Windows msi installer (Powershell)
+      #   env:
+      #     PFX_PATH: ${{ steps.create-pfx.outputs.PFX_PATH }}
+      #   run: |
+      #     & "C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe" sign /f $Env:PFX_PATH /p "$Env:WIN_CERT_INSTALLER_CER_PASS" /fd SHA256 /t http://timestamp.digicert.com "${{ inputs.installer_name }}.msi"
+      #   working-directory: dist
 
       - name: Create the Windows exe installer (Powershell)
         run: |
           python ..\cura_inst\packaging\NSIS\create_windows_installer.py ../cura_inst . "${{inputs.installer_name}}.exe"
         working-directory: dist
 
-      - name: Sign the Windows exe installer (Powershell)
-        env:
-          PFX_PATH: ${{ steps.create-pfx.outputs.PFX_PATH }}
-        run: |
-          & "C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe" sign /f $Env:PFX_PATH /p $Env:WIN_CERT_INSTALLER_CER_PASS /fd SHA256 /t http://timestamp.digicert.com "${{ inputs.installer_name }}.exe"
-        working-directory: dist
+      # - name: Sign the Windows exe installer (Powershell)
+      #   env:
+      #     PFX_PATH: ${{ steps.create-pfx.outputs.PFX_PATH }}
+      #   run: |
+      #     & "C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe" sign /f $Env:PFX_PATH /p $Env:WIN_CERT_INSTALLER_CER_PASS /fd SHA256 /t http://timestamp.digicert.com "${{ inputs.installer_name }}.exe"
+      #   working-directory: dist
 
       # - name: Remove internal packages before uploading
       #   run: |
