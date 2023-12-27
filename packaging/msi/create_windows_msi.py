@@ -32,7 +32,7 @@ def generate_wxs(source_path: Path, dist_path: Path, filename: Path, app_name: s
 
     wxs_content = template.render(
         app_name=f"{app_name}",
-        main_app="Fracktory.exe",
+        main_app="UltiMaker-Cura.exe",
         version=os.getenv('CURA_VERSION_FULL'),
         version_major=os.environ.get("CURA_VERSION_MAJOR"),
         version_minor=os.environ.get("CURA_VERSION_MINOR"),
