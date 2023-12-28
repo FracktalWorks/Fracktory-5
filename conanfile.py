@@ -42,7 +42,7 @@ class CuraConan(ConanFile):
         "staging": "False",
         "devtools": False,
         "cloud_api_version": "1",
-        "display_name": "UltiMaker Cura",
+        "display_name": "Fracktory",
         "cura_debug_mode": False,  # Not yet implemented
         "internal": "False",
         "enable_i18n": False,
@@ -90,6 +90,7 @@ class CuraConan(ConanFile):
 
     @property
     def _app_name(self):
+        return "Fractory"
         if self._enterprise:
             return str(self.options.display_name) + " Enterprise"
         return str(self.options.display_name)

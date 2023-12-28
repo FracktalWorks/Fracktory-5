@@ -58,7 +58,7 @@ IsAlternateVersion = CuraBuildType.lower() not in [DEFAULT_CURA_BUILD_TYPE, __EN
 # NOTE: IsAlternateVersion is to make it possibile to have 'non-numbered' versions, at least as presented to the user.
 #       (Internally, it'll still have some sort of version-number, but the user is never meant to see it in the GUI).
 #       Warning: This will also change (some of) the icons/splash-screen to the 'work in progress' alternatives!
-
+'''
 try:
     from cura.CuraVersion import CuraAppDisplayName  # type: ignore
     if CuraAppDisplayName == "":
@@ -68,7 +68,9 @@ try:
 
 except ImportError:
     CuraAppDisplayName = DEFAULT_CURA_DISPLAY_NAME
+'''
 
+CuraAppDisplayName = "Fracktory"
 
 try:
     from cura.CuraVersion import ConanInstalls
