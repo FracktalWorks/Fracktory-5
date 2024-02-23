@@ -224,13 +224,13 @@ msgstr ""
 
 msgctxt "@label crash message"
 msgid ""
-"<p><b>Oops, UltiMaker Cura has encountered something that doesn't seem right.</p></b>\n"
+"<p><b>Oops, Fracktory has encountered something that doesn't seem right.</p></b>\n"
 "                    <p>We encountered an unrecoverable error during start up. It was possibly caused by some incorrect configuration files. We suggest to backup and reset your configuration.</p>\n"
 "                    <p>Backups can be found in the configuration folder.</p>\n"
 "                    <p>Please send us this Crash Report to fix the problem.</p>\n"
 "                "
 msgstr ""
-"<p> <b> 죄송합니다, UltiMaker Cura가 정상적이지 않습니다. &lt;/ p&gt; &lt;/ b&gt;\n"
+"<p> <b> 죄송합니다, Fracktory가 정상적이지 않습니다. &lt;/ p&gt; &lt;/ b&gt;\n"
 "                     <p> 시작할 때 복구 할 수없는 오류가 발생했습니다. 이 오류는 잘못된 구성 파일로 인해 발생할 수 있습니다. 설정을 백업하고 재설정하는 것이 좋습니다. &lt;/ p&gt;\n"
 "                     <p> 백업은 설정 폴더에서 찾을 수 있습니다. &lt;/ p&gt;\n"
 "                     <p> 문제를 해결하기 위해이 오류 보고서를 보내주십시오. &lt;/ p&gt;\n"
@@ -1552,8 +1552,8 @@ msgid "Exported profile to <filename>{0}</filename>"
 msgstr "프로파일을 <filename>{0}</filename> 에 내보냅니다"
 
 msgctxt "@tooltip:button"
-msgid "Extend UltiMaker Cura with plugins and material profiles."
-msgstr "플러그인 및 재료 프로파일을 사용하여 UltiMaker Cura를 확장하십시오."
+msgid "Extend Fracktory with plugins and material profiles."
+msgstr "플러그인 및 재료 프로파일을 사용하여 Fracktory를 확장하십시오."
 
 msgctxt "description"
 msgid "Extension that allows for user created scripts for post processing"
@@ -2200,8 +2200,8 @@ msgid "Learn how to connect your printer to Digital Factory"
 msgstr "Digital Factory에 프린터를 연결하는 방법 알아보기"
 
 msgctxt "@tooltip:button"
-msgid "Learn how to get started with UltiMaker Cura."
-msgstr "UltiMaker Cura로 시작하는 방법을 알아보십시오."
+msgid "Learn how to get started with Fracktory."
+msgstr "Fracktory로 시작하는 방법을 알아보십시오."
 
 msgctxt "@action"
 msgid "Learn more"
@@ -2412,8 +2412,8 @@ msgid "Manage printers"
 msgstr "프린터 관리"
 
 msgctxt "@text"
-msgid "Manage your UltiMaker Cura plugins and material profiles here. Make sure to keep your plugins up to date and backup your setup regularly."
-msgstr "여기서 UltiMaker Cura 플러그인 및 재료 프로파일을 관리하십시오. 플러그인을 최신 상태로 유지하고 설정을 정기적으로 백업하십시오."
+msgid "Manage your Fracktory plugins and material profiles here. Make sure to keep your plugins up to date and backup your setup regularly."
+msgstr "여기서 Fracktory 플러그인 및 재료 프로파일을 관리하십시오. 플러그인을 최신 상태로 유지하고 설정을 정기적으로 백업하십시오."
 
 msgctxt "description"
 msgid "Manages extensions to the application and allows browsing extensions from the UltiMaker website."
@@ -3039,8 +3039,8 @@ msgid "Please select any upgrades made to this UltiMaker Original"
 msgstr "이 UltiMaker Original에 업그레이드 할 항목을 선택하십시오"
 
 msgctxt "@description"
-msgid "Please sign in to get verified plugins and materials for UltiMaker Cura Enterprise"
-msgstr "UltiMaker Cura Enterprise용으로 검증된 플러그인 및 재료를 받으려면 로그인하십시오."
+msgid "Please sign in to get verified plugins and materials for Fracktory Enterprise"
+msgstr "Fracktory Enterprise용으로 검증된 플러그인 및 재료를 받으려면 로그인하십시오."
 
 msgctxt "@action:button"
 msgid "Please sync the material profiles with your printers before starting to print."
@@ -3357,8 +3357,8 @@ msgstr "프로젝트 파일 <filename>{0}</filename>이 손상됨: <message>{1}<
 
 #, python-brace-format
 msgctxt "@info:error Don't translate the XML tag <filename>!"
-msgid "Project file <filename>{0}</filename> is made using profiles that are unknown to this version of UltiMaker Cura."
-msgstr "프로젝트 파일 <filename>{0}</filename>이(가) 이 버전의 UltiMaker Cura에서 확인할 수 없는 프로파일을 사용하였습니다."
+msgid "Project file <filename>{0}</filename> is made using profiles that are unknown to this version of Fracktory."
+msgstr "프로젝트 파일 <filename>{0}</filename>이(가) 이 버전의 Fracktory에서 확인할 수 없는 프로파일을 사용하였습니다."
 
 #, python-brace-format
 msgctxt "@info:error Don't translate the XML tags <filename> or <message>!"
@@ -3603,8 +3603,8 @@ msgid "Report a bug"
 msgstr "버그 보고"
 
 msgctxt "@message:description"
-msgid "Report a bug on UltiMaker Cura's issue tracker."
-msgstr "UltiMaker Cura의 이슈 트래커에서 버그를 보고하세요."
+msgid "Report a bug on Fracktory's issue tracker."
+msgstr "Fracktory의 이슈 트래커에서 버그를 보고하세요."
 
 msgctxt "@label:status"
 msgid "Requires configuration changes"
@@ -4182,8 +4182,8 @@ msgid "Starts"
 msgstr "시작"
 
 msgctxt "@text"
-msgid "Streamline your workflow and customize your UltiMaker Cura experience with plugins contributed by our amazing community of users."
-msgstr "당사의 놀라운 사용자 커뮤니티에서 기여한 플러그인으로 워크 플로를 간소화하고 UltiMaker Cura 경험을 맞춤화하세요."
+msgid "Streamline your workflow and customize your Fracktory experience with plugins contributed by our amazing community of users."
+msgstr "당사의 놀라운 사용자 커뮤니티에서 기여한 플러그인으로 워크 플로를 간소화하고 Fracktory 경험을 맞춤화하세요."
 
 msgctxt "@label"
 msgid "Strength"
@@ -4801,8 +4801,8 @@ msgid "UltiMaker Certified Material"
 msgstr "UltiMaker 인증된 재료"
 
 msgctxt "@text:window"
-msgid "UltiMaker Cura collects anonymous data in order to improve the print quality and user experience. Below is an example of all the data that is shared:"
-msgstr "UltiMaker Cura는 인쇄 품질과 사용자 경험을 개선하기 위해 익명 데이터를 수집합니다. 공유되는 모든 데이터의 예는 다음과 같습니다:"
+msgid "Fracktory collects anonymous data in order to improve the print quality and user experience. Below is an example of all the data that is shared:"
+msgstr "Fracktory는 인쇄 품질과 사용자 경험을 개선하기 위해 익명 데이터를 수집합니다. 공유되는 모든 데이터의 예는 다음과 같습니다:"
 
 msgctxt "@item:inlistbox"
 msgid "UltiMaker Format Package"
@@ -5316,8 +5316,8 @@ msgid "We have found one or more project file(s) within the files you have selec
 msgstr "선택한 파일 내에 하나 이상의 프로젝트 파일이 있습니다. 한 번에 하나의 프로젝트 파일 만 열 수 있습니다. 해당 파일에서 모델 만 가져 오기를 권장합니다. 계속 하시겠습니까?"
 
 msgctxt "@info"
-msgid "Webcam feeds for cloud printers cannot be viewed from UltiMaker Cura. Click \"Manage printer\" to visit Ultimaker Digital Factory and view this webcam."
-msgstr "클라우드 프린터용 Webcam 피드는 UltiMaker Cura에서 볼 수 없습니다. '프린터 관리'를 클릭하여 Ultimaker Digital Factory를 방문하고 이 웹캠을 확인하십시오."
+msgid "Webcam feeds for cloud printers cannot be viewed from Fracktory. Click \"Manage printer\" to visit Ultimaker Digital Factory and view this webcam."
+msgstr "클라우드 프린터용 Webcam 피드는 Fracktory에서 볼 수 없습니다. '프린터 관리'를 클릭하여 Ultimaker Digital Factory를 방문하고 이 웹캠을 확인하십시오."
 
 msgctxt "@button"
 msgid "Website"

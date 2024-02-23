@@ -98,7 +98,7 @@ conan.lock
 conan_imports_manifest.txt
 conanbuildinfo.txt
 graph_info.json
-Ultimaker-Cura.spec
+Fracktory.spec
 .run/
 /printer-linter/src/printerlinter.egg-info/
 /plugins/CuraEngineGradualFlow

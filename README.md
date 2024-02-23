@@ -18,13 +18,13 @@
 
 ![Logo]
 
-# Ultimaker Cura
+# Fracktory
 
 *State-of-the-art slicer app to prepare* <br>
 *your 3D models for your 3D printer.*
 
 *With hundreds of settings & community-managed print profiles,* <br>
-*Ultimaker Cura is sure to lead your next project to a success.*
+*Fracktory is sure to lead your next project to a success.*
 
 <br>
 <br>

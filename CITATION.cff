@@ -5,7 +5,7 @@ type: software
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
-title: Ultimaker Cura
+title: Fracktory
 abstract: >-
   A state-of-the-art slicer application built on top
   of the Uranium framework.
@@ -14,7 +14,7 @@ authors:
 contact:
   - email: info@ultimaker.com
     name: "Ultimaker B.V."
-url: "https://ultimaker.com/software/ultimaker-cura"
+url: "https://ultimaker.com/software/Fracktory"
 repository-code: "https://github.com/Ultimaker/Cura"
 license: LGPL-3.0
 license-url: "https://github.com/Ultimaker/Cura/blob/main/LICENSE"

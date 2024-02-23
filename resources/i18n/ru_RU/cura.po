@@ -230,13 +230,13 @@ msgstr ""
 
 msgctxt "@label crash message"
 msgid ""
-"<p><b>Oops, UltiMaker Cura has encountered something that doesn't seem right.</p></b>\n"
+"<p><b>Oops, Fracktory has encountered something that doesn't seem right.</p></b>\n"
 "                    <p>We encountered an unrecoverable error during start up. It was possibly caused by some incorrect configuration files. We suggest to backup and reset your configuration.</p>\n"
 "                    <p>Backups can be found in the configuration folder.</p>\n"
 "                    <p>Please send us this Crash Report to fix the problem.</p>\n"
 "                "
 msgstr ""
-"<p><b>В ПО UltiMaker Cura обнаружена ошибка.</p></b>\n"
+"<p><b>В ПО Fracktory обнаружена ошибка.</p></b>\n"
 "                    <p>Во время запуска обнаружена неустранимая ошибка. Возможно, она вызвана некоторыми файлами конфигурации с неправильными данными. Рекомендуется создать резервную копию конфигурации и сбросить ее.</p>\n"
 "                    <p>Резервные копии хранятся в папке конфигурации.</p>\n"
 "                    <p>Отправьте нам этот отчет о сбое для устранения проблемы.</p>\n"
@@ -1561,8 +1561,8 @@ msgid "Exported profile to <filename>{0}</filename>"
 msgstr "Экспортирование профиля в <filename>{0}</filename>"
 
 msgctxt "@tooltip:button"
-msgid "Extend UltiMaker Cura with plugins and material profiles."
-msgstr "Расширяйте возможности UltiMaker Cura за счет плагинов и профилей материалов."
+msgid "Extend Fracktory with plugins and material profiles."
+msgstr "Расширяйте возможности Fracktory за счет плагинов и профилей материалов."
 
 msgctxt "description"
 msgid "Extension that allows for user created scripts for post processing"
@@ -2209,8 +2209,8 @@ msgid "Learn how to connect your printer to Digital Factory"
 msgstr "Узнайте, как подключить принтер к Digital Factory"
 
 msgctxt "@tooltip:button"
-msgid "Learn how to get started with UltiMaker Cura."
-msgstr "Узнайте, как начать работу с UltiMaker Cura."
+msgid "Learn how to get started with Fracktory."
+msgstr "Узнайте, как начать работу с Fracktory."
 
 msgctxt "@action"
 msgid "Learn more"
@@ -2421,8 +2421,8 @@ msgid "Manage printers"
 msgstr "Управление принтерами"
 
 msgctxt "@text"
-msgid "Manage your UltiMaker Cura plugins and material profiles here. Make sure to keep your plugins up to date and backup your setup regularly."
-msgstr "Здесь можно управлять встраиваемыми модулями Ultimaker Cura и профилями материалов. Регулярно обновляйте встраиваемые модули и создавайте резервные копии настроек."
+msgid "Manage your Fracktory plugins and material profiles here. Make sure to keep your plugins up to date and backup your setup regularly."
+msgstr "Здесь можно управлять встраиваемыми модулями Fracktory и профилями материалов. Регулярно обновляйте встраиваемые модули и создавайте резервные копии настроек."
 
 msgctxt "description"
 msgid "Manages extensions to the application and allows browsing extensions from the UltiMaker website."
@@ -3059,8 +3059,8 @@ msgid "Please select any upgrades made to this UltiMaker Original"
 msgstr "Пожалуйста, укажите любые изменения, внесённые в UltiMaker Original"
 
 msgctxt "@description"
-msgid "Please sign in to get verified plugins and materials for UltiMaker Cura Enterprise"
-msgstr "Войдите, чтобы получить проверенные встраиваемые модули и материалы для UltiMaker Cura Enterprise"
+msgid "Please sign in to get verified plugins and materials for Fracktory Enterprise"
+msgstr "Войдите, чтобы получить проверенные встраиваемые модули и материалы для Fracktory Enterprise"
 
 msgctxt "@action:button"
 msgid "Please sync the material profiles with your printers before starting to print."
@@ -3383,8 +3383,8 @@ msgstr "Файл проекта <filename>{0}</filename> поврежден: <me
 
 #, python-brace-format
 msgctxt "@info:error Don't translate the XML tag <filename>!"
-msgid "Project file <filename>{0}</filename> is made using profiles that are unknown to this version of UltiMaker Cura."
-msgstr "Файл проекта <filename>{0}</filename> создан с использованием профилей, несовместимых с данной версией UltiMaker Cura."
+msgid "Project file <filename>{0}</filename> is made using profiles that are unknown to this version of Fracktory."
+msgstr "Файл проекта <filename>{0}</filename> создан с использованием профилей, несовместимых с данной версией Fracktory."
 
 #, python-brace-format
 msgctxt "@info:error Don't translate the XML tags <filename> or <message>!"
@@ -3629,8 +3629,8 @@ msgid "Report a bug"
 msgstr "Сообщить об ошибке"
 
 msgctxt "@message:description"
-msgid "Report a bug on UltiMaker Cura's issue tracker."
-msgstr "Сообщите об ошибке в системе отслеживания проблем UltiMaker Cura."
+msgid "Report a bug on Fracktory's issue tracker."
+msgstr "Сообщите об ошибке в системе отслеживания проблем Fracktory."
 
 msgctxt "@label:status"
 msgid "Requires configuration changes"
@@ -4208,8 +4208,8 @@ msgid "Starts"
 msgstr "Запуск"
 
 msgctxt "@text"
-msgid "Streamline your workflow and customize your UltiMaker Cura experience with plugins contributed by our amazing community of users."
-msgstr "Оптимизируйте свои рабочие процессы и настройте Ultimaker Cura с помощью встраиваемых модулей, разработанных экспертами нашего замечательного сообщества."
+msgid "Streamline your workflow and customize your Fracktory experience with plugins contributed by our amazing community of users."
+msgstr "Оптимизируйте свои рабочие процессы и настройте Fracktory с помощью встраиваемых модулей, разработанных экспертами нашего замечательного сообщества."
 
 msgctxt "@label"
 msgid "Strength"
@@ -4839,8 +4839,8 @@ msgid "UltiMaker Certified Material"
 msgstr "Сертифицированный материал UltiMaker"
 
 msgctxt "@text:window"
-msgid "UltiMaker Cura collects anonymous data in order to improve the print quality and user experience. Below is an example of all the data that is shared:"
-msgstr "UltiMaker Cura собирает анонимные данные для повышения качества печати и улучшения взаимодействия с пользователем. Ниже приведен пример всех передаваемых данных:"
+msgid "Fracktory collects anonymous data in order to improve the print quality and user experience. Below is an example of all the data that is shared:"
+msgstr "Fracktory собирает анонимные данные для повышения качества печати и улучшения взаимодействия с пользователем. Ниже приведен пример всех передаваемых данных:"
 
 msgctxt "@item:inlistbox"
 msgid "UltiMaker Format Package"
@@ -5354,8 +5354,8 @@ msgid "We have found one or more project file(s) within the files you have selec
 msgstr "Мы нашли один или более проектных файлов среди выбранных вами. Вы можете открыть только один файл проекта. Мы предлагаем импортировать только модели их этих файлов. Желаете продолжить?"
 
 msgctxt "@info"
-msgid "Webcam feeds for cloud printers cannot be viewed from UltiMaker Cura. Click \"Manage printer\" to visit Ultimaker Digital Factory and view this webcam."
-msgstr "Каналы веб-камеры для облачных принтеров невозможно просмотреть из UltiMaker Cura. Щелкните «Управление принтером», чтобы просмотреть эту веб-камеру на сайте Ultimaker Digital Factory."
+msgid "Webcam feeds for cloud printers cannot be viewed from Fracktory. Click \"Manage printer\" to visit Ultimaker Digital Factory and view this webcam."
+msgstr "Каналы веб-камеры для облачных принтеров невозможно просмотреть из Fracktory. Щелкните «Управление принтером», чтобы просмотреть эту веб-камеру на сайте Ultimaker Digital Factory."
 
 msgctxt "@button"
 msgid "Website"

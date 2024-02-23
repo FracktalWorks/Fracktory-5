@@ -94,7 +94,7 @@ Item
     Action
     {
         id: openSponsershipPageAction
-        onTriggered: Qt.openUrlExternally("https://ultimaker.com/software/ultimaker-cura/sponsor/")
+        onTriggered: Qt.openUrlExternally("https://ultimaker.com/software/Fracktory/sponsor/")
         text: catalog.i18nc("@action:inmenu", "Sponsor Cura")
     }
 

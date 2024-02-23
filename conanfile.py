@@ -42,7 +42,7 @@ class CuraConan(ConanFile):
         "staging": "False",
         "devtools": False,
         "cloud_api_version": "1",
-        "display_name": "UltiMaker Cura",
+        "display_name": "Fracktory",
         "cura_debug_mode": False,  # Not yet implemented
         "internal": "False",
         "enable_i18n": False,
@@ -264,13 +264,13 @@ class CuraConan(ConanFile):
         # Collect all dll's from PyQt6 and place them in the root
         binaries.extend([(f"{p}", ".") for p in Path(self._site_packages, "PyQt6", "Qt6").glob("**/*.dll")])
 
-        with open(os.path.join(self.recipe_folder, "UltiMaker-Cura.spec.jinja"), "r") as f:
+        with open(os.path.join(self.recipe_folder, "Fracktory.spec.jinja"), "r") as f:
             pyinstaller = Template(f.read())
 
         version = self.conf.get("user.cura:version", default = self.version, check_type = str)
         cura_version = Version(version)
 
-        with open(os.path.join(location, "UltiMaker-Cura.spec"), "w") as f:
+        with open(os.path.join(location, "Fracktory.spec"), "w") as f:
             f.write(pyinstaller.render(
                 name = str(self.options.display_name).replace(" ", "-"),
                 display_name = self._app_name,

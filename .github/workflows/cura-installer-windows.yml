@@ -134,7 +134,7 @@ jobs:
 
       - name: Create the Cura dist
         run: |
-          pyinstaller ./cura_inst/UltiMaker-Cura.spec
+          pyinstaller ./cura_inst/Fracktory.spec
 
       # - name: Setup Sentry CLI
       #   uses: mathieu-bour/setup-sentry-cli@v1
@@ -146,10 +146,10 @@ jobs:
 
       # - name: Upload and remove debug symbols
       #   run: |
-      #     sentry-cli debug-files upload .\UltiMaker-Cura\CuraEngine.exe
-      #     sentry-cli debug-files upload .\UltiMaker-Cura\CuraEngine.pdb
-      #     sentry-cli debug-files upload .\UltiMaker-Cura\Arcus.dll
-      #     sentry-cli debug-files upload .\UltiMaker-Cura\polyclipping.dll
+      #     sentry-cli debug-files upload .\Fracktory\CuraEngine.exe
+      #     sentry-cli debug-files upload .\Fracktory\CuraEngine.pdb
+      #     sentry-cli debug-files upload .\Fracktory\Arcus.dll
+      #     sentry-cli debug-files upload .\Fracktory\polyclipping.dll
       #   working-directory: dist
 
       - name: Get installer helper scripts
@@ -178,7 +178,7 @@ jobs:
 
       - name: Create the Windows msi installer (Powershell)
         run: |
-          python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\UltiMaker-Cura "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
+          python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\Fracktory "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
         working-directory: dist
 
       # - name: Sign the Windows msi installer (Powershell)
