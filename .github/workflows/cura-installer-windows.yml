@@ -112,6 +112,14 @@ jobs:
       - name: Add Cura private Artifactory remote
         if: ${{ inputs.conan_internal }}
         run: conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/internal"
+      
+      - name: clone fdm_materials from Fracktal Works repository
+        run: |
+          git clone https://github.com/FracktalWorks/fdm_materials.git
+          cd fdm_materials
+          git checkout 5.6.0
+          conan create . fdm_materials/5.6.0@FracktalWorks/stable --build=missing --update
+             
 
       - name: Cache Conan downloads
         uses: actions/cache@v3
