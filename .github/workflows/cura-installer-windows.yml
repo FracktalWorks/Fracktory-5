@@ -124,7 +124,7 @@ jobs:
       - name: Create the Packages (Powershell)
         run: |
           conan create . local/test --build=missing --update -c tools.build:skip_test=True
-          conan install cura/5.6.0@local/test  ${{ inputs.conan_args }} --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo --require-override=fdm_materials/5.6.0@FracktalWorks/stable
+          conan install cura/5.6.0@local/test  ${{ inputs.conan_args }} --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo
 
 
       - name: Set Environment variables for Cura (Powershell)
