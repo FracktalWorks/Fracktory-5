@@ -119,6 +119,7 @@ jobs:
           cd fdm_materials
           # git checkout 5.6 //to get particular commit tag if needed
           conan create . fdm_materials/5.6.0@FracktalWorks/stable --build=missing --update
+          cd..
              
 
       - name: Cache Conan downloads
