@@ -105,8 +105,12 @@ Item
         id: backButton
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        text: catalog.i18nc("@button", "Add UltiMaker printer via Digital Factory")
-        onClicked: goToUltimakerPrinter()
+        visible: base.currentItem.previous_page_button_text ? true : false
+        text: base.currentItem.previous_page_button_text ? base.currentItem.previous_page_button_text : ""
+        onClicked:
+        {
+            base.endWizard()
+        }
     }
 
     Cura.PrimaryButton
