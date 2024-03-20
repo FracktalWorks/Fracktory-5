@@ -494,6 +494,13 @@ class StartSliceJob(Job):
         settings["machine_extruder_start_code"] = self._expandGcodeTokens(settings["machine_extruder_start_code"], extruder_nr)
         settings["machine_extruder_end_code"] = self._expandGcodeTokens(settings["machine_extruder_end_code"], extruder_nr)
 
+        #FRACKTAL IDEX INCLUSION
+        from UM.Application import Application
+        print_mode = Application.getInstance().getGlobalContainerStack().getProperty("print_mode", "value")
+        if print_mode  in ("mirror", "duplication"):
+            settings["machine_extruder_start_code"] = ""
+            settings["machine_extruder_end_code"] = ""
+
         global_definition = cast(ContainerInterface, cast(ContainerStack, stack.getNextStack()).getBottom())
         own_definition = cast(ContainerInterface, stack.getBottom())
 

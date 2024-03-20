@@ -33,6 +33,11 @@ class CuraSceneNode(SceneNode):
         return self._outside_buildarea or self.callDecoration("getBuildPlateNumber") < 0
 
     def isVisible(self) -> bool:
+
+        #FRACKTAL IDEX INCLUSION
+        from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import curaSceneNodeIsVisible
+        return curaSceneNodeIsVisible((super().isVisible() and self.callDecoration("getBuildPlateNumber") == cura.CuraApplication.CuraApplication.getInstance().getMultiBuildPlateModel().activeBuildPlate))
+        
         return super().isVisible() and self.callDecoration("getBuildPlateNumber") == cura.CuraApplication.CuraApplication.getInstance().getMultiBuildPlateModel().activeBuildPlate
 
     def isSelectable(self) -> bool:

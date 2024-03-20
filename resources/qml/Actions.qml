@@ -87,14 +87,14 @@ Item
     Action
     {
         id: showTroubleShootingAction
-        onTriggered: Qt.openUrlExternally("https://ultimaker.com/en/troubleshooting?utm_source=cura&utm_medium=software&utm_campaign=dropdown-troubleshooting")
+        onTriggered: Qt.openUrlExternally("https://care.fracktal.in")
         text: catalog.i18nc("@action:inmenu", "Show Online Troubleshooting")
     }
 
     Action
     {
         id: openSponsershipPageAction
-        onTriggered: Qt.openUrlExternally("https://ultimaker.com/software/Fracktory/sponsor/")
+        onTriggered: Qt.openUrlExternally("https://fracktal.in")
         text: catalog.i18nc("@action:inmenu", "Sponsor Cura")
     }
 
@@ -283,7 +283,7 @@ Item
         id: reportBugAction
         text: catalog.i18nc("@action:inmenu menubar:help", "Report a &Bug")
         icon.name: "tools-report-bug"
-        onTriggered: CuraActions.openBugReportPage()
+        onTriggered: Qt.openUrlExternally("https://care.fracktal.in/")
     }
 
     Action

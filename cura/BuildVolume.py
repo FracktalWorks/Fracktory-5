@@ -304,6 +304,10 @@ class BuildVolume(SceneNode):
 
                 node.setOutsideBuildArea(False)
 
+        #FRACKTAL IDEX INCLUSION
+        from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import updateNodeBoundaryCheckForDuplicated
+        updateNodeBoundaryCheckForDuplicated()
+
         # Group nodes should override the _outside_buildarea property of their children.
         for group_node in group_nodes:
             children = group_node.getAllChildren()

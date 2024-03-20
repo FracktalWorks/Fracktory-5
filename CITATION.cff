@@ -10,10 +10,10 @@ abstract: >-
   A state-of-the-art slicer application built on top
   of the Uranium framework.
 authors:
-  - name: Ultimaker B.V.
+  - name: Fracktal Works
 contact:
-  - email: info@ultimaker.com
-    name: "Ultimaker B.V."
+  - email: info@fracktal.in
+    name: "Fracktal WOrks"
 url: "https://ultimaker.com/software/Fracktory"
 repository-code: "https://github.com/Ultimaker/Cura"
 license: LGPL-3.0

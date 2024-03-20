@@ -14,4 +14,5 @@ def register(app):
     """
     Register the plug-in object with Uranium.
     """
+    return {} #FRACKTAL WORKS INCLUSION
     return { "extension": [SyncOrchestrator(app), Marketplace()] }
