@@ -336,8 +336,8 @@ class CuraApplication(QtApplication):
         self._preferences.addPreference("cura/single_instance", False)
         self._use_single_instance = self._preferences.getValue("cura/single_instance") or self._cli_args.single_instance
 
-        #FRACKTAL INCLUSION - MIGHT NOT BE NEEDED FOR IDEX
-        self._preferences.addPreference("cura/check_material_compatibility", True)
+        # #FRACKTAL INCLUSION - MIGHT NOT BE NEEDED FOR IDEX
+        # self._preferences.addPreference("cura/check_material_compatibility", True)
 
         self.__sendCommandToSingleInstance()
         self._initializeSettingDefinitions()
@@ -432,10 +432,10 @@ class CuraApplication(QtApplication):
         SettingFunction.registerOperator("valueFromContainer", self._cura_formula_functions.getValueFromContainerAtIndex)
         SettingFunction.registerOperator("extruderValueFromContainer", self._cura_formula_functions.getValueFromContainerAtIndexInExtruder)
 
-        #FRACKTAL INCLUSION - MIGHT NOT BE NEEDED FOR IDEX
-        from cura.Utils.BCN3Dutils.Bcn3dUtils import getMaterialInfoInExtruder, setOptimalAdhesionType
-        SettingFunction.registerOperator("materialInfoInExtruder", getMaterialInfoInExtruder)
-        SettingFunction.registerOperator("optimalAdhesionType", setOptimalAdhesionType)
+        # #FRACKTAL INCLUSION - MIGHT NOT BE NEEDED FOR IDEX
+        # from cura.Utils.BCN3Dutils.Bcn3dUtils import getMaterialInfoInExtruder, setOptimalAdhesionType
+        # SettingFunction.registerOperator("materialInfoInExtruder", getMaterialInfoInExtruder)
+        # SettingFunction.registerOperator("optimalAdhesionType", setOptimalAdhesionType)
 
 
     def __addAllResourcesAndContainerResources(self) -> None:

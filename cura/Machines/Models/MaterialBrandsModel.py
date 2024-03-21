@@ -107,9 +107,9 @@ class MaterialBrandsModel(BaseMaterialsModel):
         # Sort brand by name
         brand_item_list = sorted(brand_item_list, key = lambda x: x["name"].upper())
 
-        # FRACKTAL INCLUSION
-        from cura.Utils.BCN3Dutils.Bcn3dUtils import putBcn3dFirstInMaterials
-        brand_item_list = putBcn3dFirstInMaterials(brand_item_list)
+        # # FRACKTAL INCLUSION
+        # from cura.Utils.BCN3Dutils.Bcn3dUtils import putBcn3dFirstInMaterials
+        # brand_item_list = putBcn3dFirstInMaterials(brand_item_list)
 
 
         self.setItems(brand_item_list)

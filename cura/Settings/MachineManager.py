@@ -479,22 +479,22 @@ class MachineManager(QObject):
     def numUserSettings(self) -> int:
         return self._num_user_settings
     
-    #FRACKTAL INCLUSION
-    @pyqtProperty(bool, notify = activeMaterialChanged)
-    def hasFlexibleBed(self) -> bool:
+    # #FRACKTAL INCLUSION
+    # @pyqtProperty(bool, notify = activeMaterialChanged)
+    # def hasFlexibleBed(self) -> bool:
 
-        if self._active_container_stack is None or self._global_container_stack is None:
-            return True
+    #     if self._active_container_stack is None or self._global_container_stack is None:
+    #         return True
 
-        from UM.Application import Application
-        um_application = Application.getInstance()
-        cura_formula_functions = um_application.getCuraFormulaFunctions()
-        extrusor0type = cura_formula_functions.getValueInExtruder(0, "machine_nozzle_type")
-        extrusor1rype = cura_formula_functions.getValueInExtruder(1, "machine_nozzle_type")
-        flexibleBed = True
-        if (extrusor0type == "M" or extrusor1rype == "M"):
-            flexibleBed = False
-        return flexibleBed
+    #     from UM.Application import Application
+    #     um_application = Application.getInstance()
+    #     cura_formula_functions = um_application.getCuraFormulaFunctions()
+    #     extrusor0type = cura_formula_functions.getValueInExtruder(0, "machine_nozzle_type")
+    #     extrusor1rype = cura_formula_functions.getValueInExtruder(1, "machine_nozzle_type")
+    #     flexibleBed = True
+    #     if (extrusor0type == "M" or extrusor1rype == "M"):
+    #         flexibleBed = False
+    #     return flexibleBed
 
     @pyqtSlot(str)
     def clearUserSettingAllCurrentStacks(self, key: str) -> None:
@@ -666,9 +666,9 @@ class MachineManager(QObject):
         active_quality_group = self.activeQualityGroup()
         if active_quality_group is None:
             return False
-        #FRACKTAL INCLUSION
-        from cura.Utils.BCN3Dutils.Bcn3dUtils import checkMaterialcompatibility
-        return checkMaterialcompatibility(active_quality_group, global_container_stack)
+        # #FRACKTAL INCLUSION
+        # from cura.Utils.BCN3Dutils.Bcn3dUtils import checkMaterialcompatibility
+        # return checkMaterialcompatibility(active_quality_group, global_container_stack)
     
         return active_quality_group.is_available
 
