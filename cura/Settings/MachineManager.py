@@ -167,14 +167,14 @@ class MachineManager(QObject):
                 self.numUserSettingsChanged.emit()
                 self._num_user_settings = 0
             return
-        #FRACKTAL INCLUSION
-        from cura.Utils.BCN3Dutils.Bcn3dExcludeInstances import countNonExcludedInstances
-        num_user_settings = countNonExcludedInstances(self._global_container_stack.getTop())
-        #num_user_settings = self._global_container_stack.getTop().getNumInstances()
+        # #FRACKTAL INCLUSION
+        # from cura.Utils.BCN3Dutils.Bcn3dExcludeInstances import countNonExcludedInstances
+        # num_user_settings = countNonExcludedInstances(self._global_container_stack.getTop())
+        num_user_settings = self._global_container_stack.getTop().getNumInstances()
         stacks = self._global_container_stack.extruderList
         for stack in stacks:
-            num_user_settings += countNonExcludedInstances(stack.getTop()) #FRACKTAL INCLUSION
-            #num_user_settings += stack.getTop().getNumInstances() 
+            # num_user_settings += countNonExcludedInstances(stack.getTop()) #FRACKTAL INCLUSION
+            num_user_settings += stack.getTop().getNumInstances() 
 
         if self._num_user_settings != num_user_settings:
             self._num_user_settings = num_user_settings

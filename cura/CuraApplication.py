@@ -123,7 +123,7 @@ from .Machines.Models.MachineListModel import MachineListModel
 from .Machines.Models.ActiveIntentQualitiesModel import ActiveIntentQualitiesModel
 from .Machines.Models.IntentSelectionModel import IntentSelectionModel
 from .SingleInstance import SingleInstance
-from cura.Utils.BCN3Dutils.Bcn3dExcludeInstances import removeNonExcludedInstances
+#from cura.Utils.BCN3Dutils.Bcn3dExcludeInstances import removeNonExcludedInstances # #FRACKTAL INCLUSION
 
 if TYPE_CHECKING:
     from UM.Settings.EmptyInstanceContainer import EmptyInstanceContainer
@@ -784,11 +784,11 @@ class CuraApplication(QtApplication):
             return
         if option == "discard":
             for extruder in global_stack.extruderList:
-            # FRACKTAL INCLUSION/EDIT - MIGHT NOT BE NEEDED FOR IDEX
-                removeNonExcludedInstances(extruder.userChanges)
-            removeNonExcludedInstances(global_stack.userChanges)
-            #     extruder.userChanges.clear()
-            # global_stack.userChanges.clear()
+            # # FRACKTAL INCLUSION/EDIT - MIGHT NOT BE NEEDED FOR IDEX
+            #     removeNonExcludedInstances(extruder.userChanges)
+            # removeNonExcludedInstances(global_stack.userChanges)
+                extruder.userChanges.clear()
+            global_stack.userChanges.clear()
             self.getMachineManager().correctExtruderSettings()
 
         # if the user decided to keep settings then the user settings should be re-calculated and validated for errors
