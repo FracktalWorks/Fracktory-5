@@ -36,7 +36,7 @@ Item
             UM.ToolbarButton
             {
                 id: normalButton
-                text: catalog.i18nc("@label", "Dual")
+                text: catalog.i18nc("@label", "Print with both Nozzles")
                 toolItem: UM.ColorImage
                 {
                     source: Qt.resolvedUrl("./images/dualicon.svg")
@@ -54,7 +54,7 @@ Item
             UM.ToolbarButton
             {
                 id: singleT0Button
-                text: catalog.i18nc("@label", "Single 1")
+                text: catalog.i18nc("@label", "Print only with Nozzle 1")
                 toolItem: UM.ColorImage
                 {
                     source: Qt.resolvedUrl("./images/single1.svg")
@@ -73,7 +73,7 @@ Item
             UM.ToolbarButton
             {
                 id: singleT1Button
-                text: catalog.i18nc("@label", "Single 2")
+                text: catalog.i18nc("@label", "Print Only with Nozzle 2")
                 toolItem: UM.ColorImage
                 {
                     source: Qt.resolvedUrl("./images/single2.svg")
@@ -91,7 +91,7 @@ Item
             UM.ToolbarButton
             {
                 id: duplication
-                text: catalog.i18nc("@label", "Duplication")
+                text: catalog.i18nc("@label", "Print in Duplication Mode")
                 toolItem: UM.ColorImage
                 {
                     source: Qt.resolvedUrl("./images/duplicationicon.svg")
@@ -110,7 +110,7 @@ Item
             UM.ToolbarButton
             {
                 id: mirrorButton
-                text:  catalog.i18nc("@label", "Mirror")
+                text:  catalog.i18nc("@label", "Print in Mirror Mode")
                 toolItem: UM.ColorImage
                 {
                     source: Qt.resolvedUrl("./images/mirroricon.svg")

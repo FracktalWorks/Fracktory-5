@@ -1,7 +1,7 @@
 {
     "version": 2,
     "name": "Twin Dragon 600",
-    "inherits": "julia_pro_dual",
+    "inherits": "fracktal_idex_printer",
     "id": "twin_dragon_600",
     "metadata":
     {

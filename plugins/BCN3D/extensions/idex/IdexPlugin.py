@@ -32,15 +32,30 @@ class IdexPlugin(Extension):
         #application = CuraApplication.CuraApplication.getInstance()
 
 
+    # def _onGlobalContainerStackChanged(self):
+
+    #     self._global_container_stack = self._application.getGlobalContainerStack()
+
+    #     if self._global_container_stack:
+    #         self._global_container_stack.propertyChanged.connect(self._onPropertyChanged)
+
+    #         # Calling _onPropertyChanged as an initialization
+    #         self._onPropertyChanged("print_mode", "value")
+
+
     def _onGlobalContainerStackChanged(self):
 
         self._global_container_stack = self._application.getGlobalContainerStack()
 
         if self._global_container_stack:
-            self._global_container_stack.propertyChanged.connect(self._onPropertyChanged)
+            if self._global_container_stack.getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
+                self._global_container_stack.propertyChanged.connect(self._onPropertyChanged)
+                # Calling _onPropertyChanged as an initialization
+                self._onPropertyChanged("print_mode", "value")
+            else:
+                self._global_container_stack.propertyChanged.disconnect(self._onPropertyChanged)
 
-            # Calling _onPropertyChanged as an initialization
-            self._onPropertyChanged("print_mode", "value")
+
 
     def _onPropertyChanged(self, key: str, property_name: str) -> None:
         if key == "print_mode" and property_name == "value":

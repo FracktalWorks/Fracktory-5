@@ -303,3 +303,11 @@ If you face issue to run below command
      ````
 
      Then Type Y and hit [Enter]. After this you should be able to activate venv.     
+
+     in case of DLL issue try: https://github.com/Ultimaker/Cura/issues/17717
+      ````
+     $env:PYTHONPATH = 'C:\Users\Vijay\Documents\GitHub\Fracktory-5>\venv\Scripts'
+     .\venv\Scripts\activate.ps1 
+     echo $env:PYTHONPATH  
+     python cura_app.py
+     ````
