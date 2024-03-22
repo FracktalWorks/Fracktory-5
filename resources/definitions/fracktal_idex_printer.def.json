@@ -23,7 +23,7 @@
         {
             "children":
             {
-              "print_mode":
+                "print_mode":
                 {
                     "comments": "Fracktal Works Setting",
                     "default_value": "singleT0",
@@ -52,7 +52,6 @@
                     "type": "str",
                     "value": "'M605 S1' if print_mode == 'dual' or print_mode == 'singleT0' or print_mode == 'singleT1' else 'M605 S3 \\t\\t;enable mirror mode' if print_mode == 'mirror' else 'M605 S2 \\t\\t;enable duplication mode'"
                 }
-
             }
         },
         "machine_settings":
@@ -67,15 +66,15 @@
                 "is_idex":
                 {
                     "default_value": true,
-                    "label": "IDEX Configuration",
                     "description": "if the printer is IDEX, set to true",
-                    "type": "bool",
                     "enabled": false,
-                    "settable_per_mesh": false,
+                    "label": "IDEX Configuration",
                     "settable_per_extruder": false,
-                    "settable_per_meshgroup": false
+                    "settable_per_mesh": false,
+                    "settable_per_meshgroup": false,
+                    "type": "bool"
                 },
-                "machine_head_with_fans_polygon": 
+                "machine_head_with_fans_polygon":
                 {
                     "default_value": [
                         [-32, 32],
@@ -86,6 +85,5 @@
                 }
             }
         }
-            
     }
 }
