@@ -99,6 +99,7 @@ Item
                 }
                 property bool needBorder: true
                 checkable: true
+                enabled: Cura.PrintModeService.getPrintMode() == "mirror" ? false : true
                 checked: Cura.PrintModeService.getPrintMode() == "duplication"
                 onClicked:{
                  Cura.PrintModeService.setPrintMode("duplication")
@@ -118,6 +119,7 @@ Item
                 }
                 property bool needBorder: true
                 checkable: true
+                enabled: Cura.PrintModeService.getPrintMode() == "duplication" ? false : true
                 checked: Cura.PrintModeService.getPrintMode() == "mirror"
                 onClicked:{
                  Cura.PrintModeService.setPrintMode("mirror")
