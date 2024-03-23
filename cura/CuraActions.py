@@ -17,9 +17,6 @@ from UM.Operations.GroupedOperation import GroupedOperation
 from UM.Operations.RemoveSceneNodeOperation import RemoveSceneNodeOperation
 from UM.Operations.TranslateOperation import TranslateOperation
 
-#FRACKTAL INCLUSION - MIGHT NOT BE NEEDED FOR IDEX
-from UM.i18n import i18nCatalog
-i18n_catalog = i18nCatalog("cura")
 
 import cura.CuraApplication
 from cura.Operations.SetParentOperation import SetParentOperation
@@ -88,9 +85,6 @@ class CuraActions(QObject):
             # Move the object so that it's bottom is on to of the buildplate
             center_operation = TranslateOperation(current_node, Vector(0, center_y, 0), set_position = True)
 
-            #FRACKTAL IDEX INCLUSION
-            from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import recaltulateDuplicatedNodeCenterMoveOperation
-            center_operation = recaltulateDuplicatedNodeCenterMoveOperation(center_operation, current_node)
 
             operation.addOperation(center_operation)
         operation.push()
@@ -119,13 +113,7 @@ class CuraActions(QObject):
     def deleteSelection(self) -> None:
         """Delete all selected objects."""
 
-        # FRACKTAL IDEX INCLUSION
-        from UM.Application import Application
-        print_mode = Application.getInstance().getGlobalContainerStack().getProperty("print_mode", "value")
-        if print_mode == "duplication" or print_mode == "mirror":
-            from UM.Message import Message
-            Message("You cannot delete objects in IDEX mode. Please change to another mode.", title="You can not delete objects in IDEX mode").show()
-            return
+
 
         if not cura.CuraApplication.CuraApplication.getInstance().getController().getToolsEnabled():
             return
@@ -134,11 +122,6 @@ class CuraActions(QObject):
         op = GroupedOperation()
         nodes = Selection.getAllSelectedObjects()
         for node in nodes:
-
-
-            #FRACKTAL IDEX INCLUSION
-            from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import removeDuplitedNode
-            op = removeDuplitedNode(op, node)
 
 
             op.addOperation(RemoveSceneNodeOperation(node))

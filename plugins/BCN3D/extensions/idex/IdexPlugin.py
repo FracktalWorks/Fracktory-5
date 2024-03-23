@@ -8,7 +8,98 @@ from UM.i18n import i18nCatalog
 from UM.Logger import Logger
 from cura.Utils.BCN3Dutils.PrintModeManager import PrintModeManager
 
+from UM.FlameProfiler import pyqtSlot
+from UM.Scene.Selection import Selection
+from UM.Operations.GroupedOperation import GroupedOperation
+from UM.Operations.RemoveSceneNodeOperation import RemoveSceneNodeOperation
+from cura.Operations.SetParentOperation import SetParentOperation
+from UM.Operations.TranslateOperation import TranslateOperation
+
+
+from UM.i18n import i18nCatalog
+i18n_catalog = i18nCatalog("cura")
+
+
 i18n_catalog = i18nCatalog("BCN3DIdex")
+
+
+ParentCuraActions = CuraActions.CuraActions
+class IdexCuraActions(CuraActions.CuraActions):
+    @pyqtSlot()
+    def deleteSelection(self) -> None:
+        """Delete all selected objects."""
+
+        # FRACKTAL IDEX INCLUSION
+        if CuraApplication.getInstance().getGlobalContainerStack():
+            if CuraApplication.getInstance().getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
+                from UM.Application import Application
+                print_mode = Application.getInstance().getGlobalContainerStack().getProperty("print_mode", "value")
+                if print_mode == "duplication" or print_mode == "mirror":
+                    from UM.Message import Message
+                    Message("You cannot delete objects in IDEX mode. Please change to another mode.", title="You can not delete objects in IDEX mode").show()
+                    return
+
+        if not CuraApplication.getInstance().getController().getToolsEnabled():
+            return
+
+        removed_group_nodes = [] #type: List[SceneNode]
+        op = GroupedOperation()
+        nodes = Selection.getAllSelectedObjects()
+        for node in nodes:
+
+
+            #FRACKTAL IDEX INCLUSION
+            if CuraApplication.getInstance().getGlobalContainerStack():
+                if CuraApplication.getInstance().getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
+                    from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import removeDuplitedNode
+                    op = removeDuplitedNode(op, node)
+
+
+            op.addOperation(RemoveSceneNodeOperation(node))
+            group_node = node.getParent()
+            if group_node and group_node.callDecoration("isGroup") and group_node not in removed_group_nodes:
+                remaining_nodes_in_group = list(set(group_node.getChildren()) - set(nodes))
+                if len(remaining_nodes_in_group) == 1:
+                    removed_group_nodes.append(group_node)
+                    op.addOperation(SetParentOperation(remaining_nodes_in_group[0], group_node.getParent()))
+                    op.addOperation(RemoveSceneNodeOperation(group_node))
+
+            # Reset the print information
+            CuraApplication.getInstance().getController().getScene().sceneChanged.emit(node)
+
+        op.push()
+
+    def centerSelection(self) -> None:
+        """Center all objects in the selection"""
+
+        operation = GroupedOperation()
+        for node in Selection.getAllSelectedObjects():
+            current_node = node
+            parent_node = current_node.getParent()
+            while parent_node and parent_node.callDecoration("isGroup"):
+                current_node = parent_node
+                parent_node = current_node.getParent()
+
+            # Find out where the bottom of the object is
+            bbox = current_node.getBoundingBox()
+            if bbox:
+                center_y = current_node.getWorldPosition().y - bbox.bottom
+            else:
+                center_y = 0
+
+            # Move the object so that it's bottom is on to of the buildplate
+            center_operation = TranslateOperation(current_node, Vector(0, center_y, 0), set_position = True)
+
+            #FRACKTAL IDEX INCLUSION
+            if CuraApplication.getInstance().getGlobalContainerStack():
+                if CuraApplication.getInstance().getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
+                    from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import recaltulateDuplicatedNodeCenterMoveOperation
+                    center_operation = recaltulateDuplicatedNodeCenterMoveOperation(center_operation, current_node)
+
+            operation.addOperation(center_operation)
+        operation.push()
+
+CuraActions.CuraActions = IdexCuraActions
 
 
 class IdexPlugin(Extension):
@@ -41,7 +132,6 @@ class IdexPlugin(Extension):
 
     #         # Calling _onPropertyChanged as an initialization
     #         self._onPropertyChanged("print_mode", "value")
-
 
     def _onGlobalContainerStackChanged(self):
 
@@ -138,3 +228,5 @@ class IdexPlugin(Extension):
             if right_extruder.isEnabled:
                 # When in duplication/mirror modes force the right extruder to be disabled
                 self._application.getMachineManager().setExtruderEnabled(1, False)
+
+
