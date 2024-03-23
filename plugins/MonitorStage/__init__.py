@@ -18,7 +18,6 @@ def getMetaData():
 
 
 def register(app):
-    return {} #FRACKTAL WORKS INCLUSION
     return {
         "stage": MonitorStage.MonitorStage()
     }

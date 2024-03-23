@@ -132,11 +132,6 @@ class UserChangesModel(ListModel):
 
                 if category_label not in item_dict:
                     item_dict[category_label] = []
-
-                # #FRACKTAL INCLUSION    
-                # from cura.Utils.BCN3Dutils.Bcn3dExcludeInstances import hidrateCategoryLabel
-                # item_dict[category_label] = hidrateCategoryLabel(item_dict[category_label], item_to_add)
-
                 item_dict[category_label].append(item_to_add)
         for each_item_list in item_dict.values():
             item_list += each_item_list

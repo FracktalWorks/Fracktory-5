@@ -78,11 +78,6 @@ class MultiplyObjectsJob(Job):
         found_solution_for_all = True
         group_operation = GroupedOperation()
         if nodes:
-
-            #FRACKTAL IDEX INCLUSION
-            from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import idexMultiplyObjectsJob
-            group_operation = idexMultiplyObjectsJob(group_operation, nodes, scene)
-
             if self._grid_arrange:
                 arranger = GridArrange(nodes, Application.getInstance().getBuildVolume(), fixed_nodes)
             else:

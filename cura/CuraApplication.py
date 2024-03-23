@@ -123,7 +123,6 @@ from .Machines.Models.MachineListModel import MachineListModel
 from .Machines.Models.ActiveIntentQualitiesModel import ActiveIntentQualitiesModel
 from .Machines.Models.IntentSelectionModel import IntentSelectionModel
 from .SingleInstance import SingleInstance
-#from cura.Utils.BCN3Dutils.Bcn3dExcludeInstances import removeNonExcludedInstances # #FRACKTAL INCLUSION
 
 if TYPE_CHECKING:
     from UM.Settings.EmptyInstanceContainer import EmptyInstanceContainer
@@ -336,9 +335,6 @@ class CuraApplication(QtApplication):
         self._preferences.addPreference("cura/single_instance", False)
         self._use_single_instance = self._preferences.getValue("cura/single_instance") or self._cli_args.single_instance
 
-        # #FRACKTAL INCLUSION - MIGHT NOT BE NEEDED FOR IDEX
-        # self._preferences.addPreference("cura/check_material_compatibility", True)
-
         self.__sendCommandToSingleInstance()
         self._initializeSettingDefinitions()
         self._initializeSettingFunctions()
@@ -431,12 +427,6 @@ class CuraApplication(QtApplication):
         SettingFunction.registerOperator("defaultExtruderPosition", self._cura_formula_functions.getDefaultExtruderPosition)
         SettingFunction.registerOperator("valueFromContainer", self._cura_formula_functions.getValueFromContainerAtIndex)
         SettingFunction.registerOperator("extruderValueFromContainer", self._cura_formula_functions.getValueFromContainerAtIndexInExtruder)
-
-        # #FRACKTAL INCLUSION - MIGHT NOT BE NEEDED FOR IDEX
-        # from cura.Utils.BCN3Dutils.Bcn3dUtils import getMaterialInfoInExtruder, setOptimalAdhesionType
-        # SettingFunction.registerOperator("materialInfoInExtruder", getMaterialInfoInExtruder)
-        # SettingFunction.registerOperator("optimalAdhesionType", setOptimalAdhesionType)
-
 
     def __addAllResourcesAndContainerResources(self) -> None:
         """Adds all resources and container related resources."""
@@ -667,10 +657,6 @@ class CuraApplication(QtApplication):
     def closeApplication(self) -> None:
         Logger.log("i", "Close application")
 
-        #FRACKTAL IDEX INCLUSION
-        from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import closeApplication
-        closeApplication(self._global_container_stack)
-
         # Workaround: Before closing the window, remove the global stack.
         # This is necessary because as the main window gets closed, hundreds of QML elements get updated which often
         # request the global stack. However as the Qt-side of the Machine Manager is being dismantled, the conversion of
@@ -736,11 +722,6 @@ class CuraApplication(QtApplication):
     @override(Application)
     def setGlobalContainerStack(self, stack: Optional["GlobalStack"]) -> None:
         self._setLoadingHint(self._i18n_catalog.i18nc("@info:progress", "Initializing Active Machine..."))
-
-        #FRACKTAL IDEX INCLUSION
-        from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import extractAndSavePrintMode
-        extractAndSavePrintMode(stack)
-
         super().setGlobalContainerStack(stack)
 
     showMessageBox = pyqtSignal(str,str, str, str, int, int,
@@ -784,9 +765,6 @@ class CuraApplication(QtApplication):
             return
         if option == "discard":
             for extruder in global_stack.extruderList:
-            # # FRACKTAL INCLUSION/EDIT - MIGHT NOT BE NEEDED FOR IDEX
-            #     removeNonExcludedInstances(extruder.userChanges)
-            # removeNonExcludedInstances(global_stack.userChanges)
                 extruder.userChanges.clear()
             global_stack.userChanges.clear()
             self.getMachineManager().correctExtruderSettings()
@@ -1712,10 +1690,6 @@ class CuraApplication(QtApplication):
             if parent is not None and parent in selected_nodes and not parent.callDecoration("isGroup"):
                 Selection.remove(node)
 
-        #FRACKTAL IDEX INCLUSION
-        from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import duplicatedGroupSelected
-        duplicatedGroupSelected(self.getController(), group_node, Selection, SetParentOperation)
-
         # Move selected nodes into the group-node
         Selection.applyOperation(SetParentOperation, group_node)
 
@@ -1743,10 +1717,6 @@ class CuraApplication(QtApplication):
 
                     # Add all individual nodes to the selection
                     Selection.add(child)
-
-                #FRACKTAL IDEX INCLUSION
-                from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import onDuplicatedgroupSelected
-                op = onDuplicatedgroupSelected(op, node)
 
                 op.push()
                 # Note: The group removes itself from the scene once all its children have left it,
@@ -2026,11 +1996,6 @@ class CuraApplication(QtApplication):
 
             operation = AddSceneNodeOperation(node, scene.getRoot())
             operation.push()
-
-            #FRACKTAL IDEX INCLUSION
-            from cura.Utils.BCN3Dutils.Bcn3dIdexSupport import onReadMeshFinished
-            nodes_to_arrange = onReadMeshFinished(nodes_to_arrange, node, scene)
-
 
             node.callDecoration("setActiveExtruder", default_extruder_id)
             scene.sceneChanged.emit(node)

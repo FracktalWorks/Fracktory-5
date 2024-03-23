@@ -7,7 +7,6 @@ def getMetaData():
     return {}
 
 def register(app):
-    return{} #FRACKTAL WORKS INCLUSION
     return { "machine_action": [
         FirmwareUpdaterMachineAction.FirmwareUpdaterMachineAction()
     ]}

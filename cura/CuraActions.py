@@ -17,7 +17,6 @@ from UM.Operations.GroupedOperation import GroupedOperation
 from UM.Operations.RemoveSceneNodeOperation import RemoveSceneNodeOperation
 from UM.Operations.TranslateOperation import TranslateOperation
 
-
 import cura.CuraApplication
 from cura.Operations.SetParentOperation import SetParentOperation
 from cura.MultiplyObjectsJob import MultiplyObjectsJob
@@ -84,8 +83,6 @@ class CuraActions(QObject):
 
             # Move the object so that it's bottom is on to of the buildplate
             center_operation = TranslateOperation(current_node, Vector(0, center_y, 0), set_position = True)
-
-
             operation.addOperation(center_operation)
         operation.push()
     @pyqtSlot(int)
@@ -113,8 +110,6 @@ class CuraActions(QObject):
     def deleteSelection(self) -> None:
         """Delete all selected objects."""
 
-
-
         if not cura.CuraApplication.CuraApplication.getInstance().getController().getToolsEnabled():
             return
 
@@ -122,8 +117,6 @@ class CuraActions(QObject):
         op = GroupedOperation()
         nodes = Selection.getAllSelectedObjects()
         for node in nodes:
-
-
             op.addOperation(RemoveSceneNodeOperation(node))
             group_node = node.getParent()
             if group_node and group_node.callDecoration("isGroup") and group_node not in removed_group_nodes:

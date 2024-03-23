@@ -29,7 +29,6 @@ class MachineListModel(ListModel):
     IsAbstractMachineRole = Qt.ItemDataRole.UserRole + 7
     ComponentTypeRole = Qt.ItemDataRole.UserRole + 8
     IsNetworkedMachineRole = Qt.ItemDataRole.UserRole + 9
-    MachineDefinition = Qt.ItemDataRole.UserRole + 10 #FRACKTAL INCLUSION
 
     def __init__(self, parent: Optional[QObject] = None, machines_filter: List[GlobalStack] = None, listenToChanges: bool = True) -> None:
         super().__init__(parent)
@@ -48,7 +47,6 @@ class MachineListModel(ListModel):
         self.addRoleName(self.IsAbstractMachineRole, "isAbstractMachine")
         self.addRoleName(self.ComponentTypeRole, "componentType")
         self.addRoleName(self.IsNetworkedMachineRole, "isNetworked")
-        self.addRoleName(self.MachineDefinition, "machineDefinition") #FRACKTAL INCLUSION
 
         self._change_timer = QTimer()
         self._change_timer.setInterval(200)
@@ -157,8 +155,7 @@ class MachineListModel(ListModel):
             "metadata": container_stack.getMetaData().copy(),
             "isOnline": is_online,
             "isAbstractMachine": parseBool(container_stack.getMetaDataEntry("is_abstract_machine", False)),
-            "isNetworked": cast(GlobalStack, container_stack).hasNetworkedConnection() if isinstance(container_stack, GlobalStack) else False,   
+            "isNetworked": cast(GlobalStack, container_stack).hasNetworkedConnection() if isinstance(container_stack, GlobalStack) else False,
             "machineCount": machine_count,
-            "machineDefinition" : container_stack.definition.id,  #FRACKTAL INCLUSION
             "catergory": "connected" if is_online else "other",
         })
