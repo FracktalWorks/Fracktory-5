@@ -312,3 +312,31 @@ If you face issue to run below command
      python cura_app.py
 
      ````
+
+     ## Settings latest verion for update checks:
+
+     change values in `latest.json` file in `Fracktory-5` folder in the following format to have cura check for latest version available
+
+     ````
+     {
+    "cura": {
+        "Windows": {
+            "major": 5,
+            "minor": 6,
+            "revision": 0,
+            "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
+        }
+    },
+    "cura-beta": {
+        "Windows": {
+            "major": 5,
+            "minor": 6,
+            "revision": 0,
+            "postfix_type": "beta",
+            "postfix_version": 1,
+            "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
+        }
+    }
+} 
+
+````
