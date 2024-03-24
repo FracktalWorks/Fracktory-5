@@ -304,7 +304,6 @@ class BuildVolume(SceneNode):
 
                 node.setOutsideBuildArea(False)
 
-
         # Group nodes should override the _outside_buildarea property of their children.
         for group_node in group_nodes:
             children = group_node.getAllChildren()
