@@ -10,11 +10,11 @@
     "cura-beta": {
         "Windows": {
             "major": 5,
-            "minor": 7,
+            "minor": 9,
             "revision": 0,
             "postfix_type": "beta",
-            "postfix_version": 1,
-            "url": "https://github.com/Ultimaker/Cura/releases/tag/5.6.0-beta.1"
+            "postfix_version": 3,
+            "url": "https://github.com/Ultimaker/Cura/releases/tag/5.9.0-beta.3"
         }
     }
 } 
