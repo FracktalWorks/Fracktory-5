@@ -1,7 +1,5 @@
 from .tools import ToolsLoader
 from .extensions import ExtensionsLoader
-from .output_devices import OutputDeviceLoader
-from .extensions.api import BCN3DApplication
 from UM.Logger import Logger
 
 from UM.i18n import i18nCatalog
