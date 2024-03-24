@@ -7,7 +7,7 @@ i18n_catalog = i18nCatalog("uranium")
 
 """ INFO: We can't load multiple metaData for the same plugin type (Ex: multiple tool)"""
 def getMetaData():
-    Logger.info(f"BCN3D plugin get metadata")
+    Logger.info(f"FracktoryIDEX plugin get metadata")
     return {
         "tool": [
             {
@@ -21,13 +21,12 @@ def getMetaData():
     }
    
 def register(app):
-    Logger.info(f"BCN3D plugin register")
+    Logger.info(f"FracktoryIDEX plugin register")
     return {
-            #extruder management, discovering printers, api
+
             "extension": ExtensionsLoader.ExtensionsLoader(),          
             "tool": ToolsLoader.ToolsLoader(), # print_modes
-            #"output_device": OutputDeviceLoader.OutputDeviceLoader(),
-            #"cura_application": BCN3DApplication.BCN3DApplication(),
+
             }
 
 

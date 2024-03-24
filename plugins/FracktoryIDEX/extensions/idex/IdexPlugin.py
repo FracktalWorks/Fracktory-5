@@ -12,7 +12,7 @@ from cura.Settings.SimpleModeSettingsManager import SimpleModeSettingsManager
 
 from UM.i18n import i18nCatalog
 from UM.Logger import Logger
-from plugins.BCN3D.IDEXutils.PrintModeManager import PrintModeManager
+from plugins.FracktoryIDEX.IDEXutils.PrintModeManager import PrintModeManager
 
 from UM.FlameProfiler import pyqtSlot
 from UM.Scene.Selection import Selection
@@ -85,7 +85,7 @@ def deleteSelection(self) -> None:
         #FRACKTAL IDEX INCLUSION
         if CuraApplication.getInstance().getGlobalContainerStack():
             if CuraApplication.getInstance().getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-                from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import removeDuplitedNode
+                from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import removeDuplitedNode
                 op = removeDuplitedNode(op, node)
 
 
@@ -128,7 +128,7 @@ def centerSelection(self) -> None:
         #FRACKTAL IDEX INCLUSION
         if CuraApplication.getInstance().getGlobalContainerStack():
             if CuraApplication.getInstance().getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-                from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import recaltulateDuplicatedNodeCenterMoveOperation
+                from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import recaltulateDuplicatedNodeCenterMoveOperation
                 center_operation = recaltulateDuplicatedNodeCenterMoveOperation(center_operation, current_node)
 
         operation.addOperation(center_operation)
@@ -147,7 +147,7 @@ def closeApplication(self) -> None:
     #FRACKTAL IDEX INCLUSION
     if self.getGlobalContainerStack():
         if self.getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-            from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import closeApplication
+            from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import closeApplication
             closeApplication(self.getGlobalContainerStack())
 
     # Workaround: Before closing the window, remove the global stack.
@@ -174,7 +174,7 @@ def setGlobalContainerStack(self, stack: Optional["GlobalStack"]) -> None:
     #FRACKTAL IDEX INCLUSION
     if self.getGlobalContainerStack():
         if self.getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-            from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import extractAndSavePrintMode
+            from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import extractAndSavePrintMode
             extractAndSavePrintMode(stack)
 
     QtApplication.setGlobalContainerStack(stack)
@@ -203,7 +203,7 @@ def groupSelected(self) -> None:
     #FRACKTAL IDEX INCLUSION
     if self.getGlobalContainerStack():
         if self.getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-            from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import duplicatedGroupSelected
+            from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import duplicatedGroupSelected
             duplicatedGroupSelected(self.getController(), group_node, Selection, SetParentOperation)
 
     # Move selected nodes into the group-node
@@ -237,7 +237,7 @@ def ungroupSelected(self) -> None:
             #FRACKTAL IDEX INCLUSION
             if self.getGlobalContainerStack():
                 if self.getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-                    from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import onDuplicatedgroupSelected
+                    from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import onDuplicatedgroupSelected
                     op = onDuplicatedgroupSelected(op, node)
 
             op.push()
@@ -351,7 +351,7 @@ def _readMeshFinished(self, job):
         #FRACKTAL IDEX INCLUSION
         if self.getGlobalContainerStack():
             if self.getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-                from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import onReadMeshFinished
+                from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import onReadMeshFinished
                 nodes_to_arrange = onReadMeshFinished(nodes_to_arrange, node, scene)
 
 
@@ -435,7 +435,7 @@ def updateNodeBoundaryCheck(self):
         #FRACKTAL IDEX INCLUSION
         if CuraApplication.getInstance().getGlobalContainerStack():
             if CuraApplication.getInstance().getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-                from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import updateNodeBoundaryCheckForDuplicated
+                from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import updateNodeBoundaryCheckForDuplicated
                 updateNodeBoundaryCheckForDuplicated()
 
         # Group nodes should override the _outside_buildarea property of their children.
@@ -508,7 +508,7 @@ def run(self) -> None:
         #FRACKTAL IDEX INCLUSION
         if CuraApplication.getInstance().getGlobalContainerStack():
             if CuraApplication.getInstance().getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-                from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import idexMultiplyObjectsJob
+                from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import idexMultiplyObjectsJob
                 group_operation = idexMultiplyObjectsJob(group_operation, nodes, scene)
 
         if self._grid_arrange:
@@ -544,7 +544,7 @@ def undo(self) -> None:
     #FRACKTAL IDEX INCLUSION
     if CuraApplication.getInstance().getGlobalContainerStack():
         if CuraApplication.getInstance().getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-            from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import setParentOperationUndo
+            from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import setParentOperationUndo
             setParentOperationUndo(self._set_parent, self._parent, self._old_parent, self._node, Application.getInstance().getController().getScene().getRoot())
         else:
             self._set_parent(self._old_parent)
@@ -556,7 +556,7 @@ def redo(self) -> None:
     
     if CuraApplication.getInstance().getGlobalContainerStack():
         if CuraApplication.getInstance().getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-            from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import setParentOperationRedo
+            from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import setParentOperationRedo
             setParentOperationRedo(self._set_parent, self._parent, self._old_parent, self._node, Application.getInstance().getController().getScene().getRoot())
         else:
             self._set_parent(self._parent)
@@ -569,7 +569,7 @@ def isVisible(self) -> bool:
     #FRACKTAL IDEX INCLUSION
     if CuraApplication.getInstance().getGlobalContainerStack():
         if CuraApplication.getInstance().getGlobalContainerStack().getProperty("is_idex", "value"):  #If printer is not IDEX, do nothing
-            from plugins.BCN3D.IDEXutils.Bcn3dIdexSupport import curaSceneNodeIsVisible
+            from plugins.FracktoryIDEX.IDEXutils.Bcn3dIdexSupport import curaSceneNodeIsVisible
             return curaSceneNodeIsVisible((SceneNode.isVisible(self) and self.callDecoration("getBuildPlateNumber") == CuraApplication.getInstance().getMultiBuildPlateModel().activeBuildPlate))
     
     return SceneNode.isVisible(self) and self.callDecoration("getBuildPlateNumber") == CuraApplication.getInstance().getMultiBuildPlateModel().activeBuildPlate
