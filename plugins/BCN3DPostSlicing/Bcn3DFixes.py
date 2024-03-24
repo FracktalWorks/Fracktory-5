@@ -24,8 +24,11 @@ class Bcn3DFixes(Job):
         Job.yieldThread()
         self._changeCuraForStratos()
         if self._dualPrint:
+            Logger.info("Dual Print Detected")
             self._fixAllToolchange()
             self._afterFirstToolChangeFix()
+        else:
+            Logger.info("Dual Print NOT Detected")
         
         scene = Application.getInstance().getController().getScene()
         setattr(scene, "gcode_list", self._gcode_list)
@@ -118,6 +121,6 @@ class Bcn3DFixes(Job):
                 break
                 
         if done:
-            lines[0] = ';Generated with StratosEngine ' + str(self._stratos_version)
+            lines[0] = ';Generated with FracktalEngine ' + str(self._stratos_version)
             layer = "\n".join(lines)
             self._gcode_list[index] = layer

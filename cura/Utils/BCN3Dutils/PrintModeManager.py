@@ -7,7 +7,7 @@ from UM.Math.Vector import Vector
 from UM.Message import Message
 import cura.CuraApplication
 from cura.Scene.CuraSceneNode import CuraSceneNode
-from cura.Utils.BCN3Dutils.Scene.DuplicatedNode import DuplicatedNode
+from plugins.BCN3D.IDEXutils.Scene.DuplicatedNode import DuplicatedNode
 from cura.Settings.ExtruderManager import ExtruderManager
 from UM.Scene.Selection import Selection
 from UM.Logger import Logger

@@ -1,7 +1,7 @@
 {
     "version": 2,
     "name": "BCN3D Printer Base Description",
-    "inherits": "fdmprinter",
+    "inherits": "fracktal_idex_printer",
     "metadata":
     {
         "visible": false,
@@ -19,7 +19,6 @@
     },
     "overrides":
     {
-        "adhesion_type": { "resolve": "optimalAdhesionType()" },
         "meshfix_maximum_deviation": { "value": "layer_height / 4" },
         "meshfix_maximum_resolution": { "value": "(speed_wall_0 + speed_wall_x) / 60" },
         "retraction_hop_after_extruder_switch_height": { "value": 5 }
