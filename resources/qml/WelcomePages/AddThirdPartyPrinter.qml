@@ -29,50 +29,6 @@ Item
 
         spacing: UM.Theme.getSize("default_margin").height
 
-        DropDownWidget
-        {
-            id: addNetworkPrinterDropDown
-
-            Layout.fillWidth: true
-            Layout.fillHeight: contentShown
-
-            title: catalog.i18nc("@label", "Add a networked printer")
-            contentShown: true  // by default expand the network printer list
-
-            onClicked:
-            {
-                addLocalPrinterDropDown.contentShown = !contentShown
-            }
-
-            contentComponent: networkPrinterListComponent
-            Component
-            {
-                id: networkPrinterListComponent
-                AddNetworkPrinterScrollView
-                {
-                    id: networkPrinterScrollView
-
-                    onRefreshButtonClicked:
-                    {
-                        UM.OutputDeviceManager.startDiscovery()
-                    }
-
-                    onAddByIpButtonClicked:
-                    {
-                        base.goToPage("add_printer_by_ip")
-                    }
-
-                    onAddCloudPrinterButtonClicked:
-                    {
-                        base.goToPage("add_cloud_printers")
-                        if (!Cura.API.account.isLoggedIn)
-                        {
-                            Cura.API.account.login()
-                        }
-                    }
-                }
-            }
-        }
 
         DropDownWidget
         {
@@ -80,12 +36,12 @@ Item
 
             Layout.fillWidth: true
             Layout.fillHeight: contentShown
-
-            title: catalog.i18nc("@label", "Add a non-networked printer")
+            title: catalog.i18nc("@label", "Add a Fracktal Works 3D printer")
+            contentShown: true  // by default expand the network printer list
 
             onClicked:
             {
-                addNetworkPrinterDropDown.contentShown = !contentShown
+                addLocalPrinterDropDown.contentShown = true
             }
 
             contentComponent: localPrinterListComponent
