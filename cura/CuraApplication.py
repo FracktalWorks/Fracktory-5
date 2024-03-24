@@ -592,7 +592,7 @@ class CuraApplication(QtApplication):
         preferences.addPreference("view/settings_ypos", 56)
         preferences.addPreference("view/colorscheme_xpos", 0)
         preferences.addPreference("view/colorscheme_ypos", 56)
-        preferences.addPreference("cura/currency", "€")
+        preferences.addPreference("cura/currency", "₹")
         preferences.addPreference("cura/material_settings", "{}")
 
         preferences.addPreference("view/invert_zoom", False)

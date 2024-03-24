@@ -303,3 +303,40 @@ If you face issue to run below command
      ````
 
      Then Type Y and hit [Enter]. After this you should be able to activate venv.     
+
+     in case of DLL issue try: https://github.com/Ultimaker/Cura/issues/17717
+      ````
+     $env:PYTHONPATH = 'C:\Users\Vijay\Documents\GitHub\Fracktory-5>\venv\Scripts'
+     .\venv\Scripts\activate.ps1 
+     echo $env:PYTHONPATH  
+     python cura_app.py
+
+     ````
+
+     ## Settings latest verion for update checks:
+
+     change values in `latest.json` file in `Fracktory-5` folder in the following format to have cura check for latest version available
+
+     ````
+     {
+    "cura": {
+        "Windows": {
+            "major": 5,
+            "minor": 6,
+            "revision": 0,
+            "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
+        }
+    },
+    "cura-beta": {
+        "Windows": {
+            "major": 5,
+            "minor": 6,
+            "revision": 0,
+            "postfix_type": "beta",
+            "postfix_version": 1,
+            "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
+        }
+    }
+} 
+
+````

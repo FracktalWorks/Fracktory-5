@@ -1037,7 +1037,7 @@ class CuraEngineBackend(QObject, Backend):
         """
         Triggered when the user wants to report an error in the back-end.
         """
-        QDesktopServices.openUrl(QUrl("https://github.com/Ultimaker/Cura/issues/new/choose"))
+        QDesktopServices.openUrl(QUrl("https://github.com/FracktalWorks/Fracktory-5/issues/new/choose"))
 
     def _onGlobalStackChanged(self) -> None:
         """Called when the global container stack changes"""
