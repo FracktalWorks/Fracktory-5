@@ -15,7 +15,8 @@
         "preferred_material": "fracktal_pla_175",
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.4 mm",
-        "variants_name": "Nozzle"
+        "variants_name": "Nozzle",
+        "post_processing_scripts" : "[CreateThumbnail]\\\nwidth = 64\\\nheight = 64\\\n\\\n"
     },
     "settings":
     {
