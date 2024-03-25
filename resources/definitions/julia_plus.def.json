@@ -24,11 +24,9 @@
     },
     "overrides":
     {
-
         "machine_depth": { "default_value": 250 },
         "machine_height": { "default_value": 260 },
         "machine_name": { "default_value": "Julia Plus" },
         "machine_width": { "default_value": 210 }
-        
     }
 }

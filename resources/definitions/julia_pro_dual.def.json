@@ -24,6 +24,5 @@
         "machine_name": { "default_value": "Julia Pro Dual" },
         "machine_show_variants": { "default_value": true },
         "machine_width": { "default_value": 370 }
-
     }
 }
