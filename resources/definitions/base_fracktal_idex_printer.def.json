@@ -18,7 +18,6 @@
     },
     "overrides":
     {
-        "prime_tower_enable": { "value": "False" },
         "gantry_height": { "value": "20" },
         "machine_disallowed_areas": { "value": "[] if print_mode == 'dual' or print_mode == 'singleT0' or print_mode == 'singleT1' else [[[-(abs(machine_head_with_fans_polygon[0][0]) + abs(machine_head_with_fans_polygon[2][0])) / 2, machine_depth / 2], [-(abs(machine_head_with_fans_polygon[0][0]) + abs(machine_head_with_fans_polygon[2][0])) / 2, -machine_depth / 2], [machine_width / 2, -machine_depth / 2], [machine_width / 2, machine_depth / 2]]] if print_mode == 'mirror' else [[[0, machine_depth / 2], [0, -machine_depth / 2], [machine_width / 2, -machine_depth / 2], [machine_width / 2, machine_depth / 2]]]" },
         "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
@@ -30,7 +29,8 @@
                 [32, -42],
                 [-32, -42]
             ]
-        }
+        },
+        "prime_tower_enable": { "value": "False" }
     },
     "settings":
     {
@@ -84,7 +84,6 @@
                     "settable_per_meshgroup": false,
                     "type": "bool"
                 }
-
             }
         }
     }

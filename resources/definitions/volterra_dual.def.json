@@ -11,23 +11,23 @@
         "has_machine_materials": true,
         "has_machine_quality": true,
         "has_variants": true,
+        "machine_variant_shortcode": "VD",
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.4 mm",
         "quality_definition": "julia_pro_dual",
-        "variants_name": "Nozzle",
-        "machine_variant_shortcode": "VD"
+        "variants_name": "Nozzle"
     },
     "overrides":
     {
+        "default_material_print_temperature":
+        {
+            "maximum_value": "450",
+            "maximum_value_warning": "350"
+        },
         "machine_depth": { "default_value": 400 },
+        "machine_height": { "default_value": 400 },
         "machine_name": { "default_value": "Volterra 400" },
         "machine_show_variants": { "default_value": true },
-        "machine_width": { "default_value": 400 },
-        "machine_height": { "default_value": 400 },
-        "default_material_print_temperature":
-                {
-                    "maximum_value_warning": "350",
-                    "maximum_value": "450"
-                }
+        "machine_width": { "default_value": 400 }
     }
 }
