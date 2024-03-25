@@ -11,20 +11,10 @@
         "has_machine_materials": true,
         "has_machine_quality": true,
         "has_variants": true,
-        "machine_extruder_trains":
-        {
-            "0": "julia_pro_dual_extruder_0",
-            "1": "julia_pro_dual_extruder_1"
-        },
         "machine_variant_shortcode": "PD",
-        "platform_offset": [
-            0,
-            0,
-            0
-        ],
-        "preferred_material": "fracktal_abs_175,fracktal_aquatek-bvoh_175,fracktal_breakaway_175,fracktal_cf-nylon_175,fracktal_cpe_175,fracktal_hips_175,fracktal_nylon_175,fracktal_pc_175,fracktal_petg_175,fracktal_pla_175,fracktal_pva_175,fracktal_tpu85a_175,fracktal_tpu95a_175",
+        "preferred_material": "fracktal_pla_175",
         "preferred_quality_type": "normal",
-        "preferred_variant_name": "Model 0.6 mm",
+        "preferred_variant_name": "Model 0.4 mm",
         "variants_name": "Nozzle"
     },
     "overrides":
