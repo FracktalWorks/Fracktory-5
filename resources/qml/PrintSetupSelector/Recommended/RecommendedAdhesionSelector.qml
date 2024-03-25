@@ -34,4 +34,36 @@ RecommendedSettingSection
     {
         curaRecommendedMode.setAdhesion(state)
     }
+    contents: [
+        RecommendedSettingItem
+        {
+            settingName: catalog.i18nc("@action:label", "Adhesion Type")
+            tooltipText: catalog.i18nc("@label", "Chooses the platform adhesion type.")
+            isCompressed: enableAdhesionRow.isCompressed
+
+            settingControl: Cura.SingleSettingComboBox
+            {
+                id:adhesion
+                width: parent.width
+                settingName: "adhesion_type"
+                propertyRemoveUnusedValue: false
+            }
+        },
+        RecommendedSettingItem
+        {
+            Layout.preferredHeight: childrenRect.height
+            settingName: catalog.i18nc("@action:label", "Print with")
+            tooltipText: catalog.i18nc("@label", "The extruder train to use for printing the adhesion type. This is used in multi-extrusion.")
+            // Hide this component when there is only one extruder
+            enabled: Cura.ExtruderManager.enabledExtruderCount > 1
+            visible: Cura.ExtruderManager.enabledExtruderCount > 1
+            isCompressed: enableAdhesionRow.isCompressed || Cura.ExtruderManager.enabledExtruderCount <= 1
+
+            settingControl: Cura.SingleSettingExtruderSelectorBar
+            {
+                extruderSettingName: "adhesion_extruder_nr"
+                onSelectedIndexChanged: adhesion.forceUpdateSettings()
+            }
+        }
+    ]
 }

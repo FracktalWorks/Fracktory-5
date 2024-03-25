@@ -2,10 +2,10 @@
     "version": 2,
     "name": "Extruder",
     "inherits": "fdmextruder",
-    "id": "julia_intermediate_extruder_0",
+    "id": "base_fracktal_extruder_0",
     "metadata":
     {
-        "machine": "julia_intermediate",
+        "machine": "base_fracktal_printer",
         "position": "0"
     },
     "overrides":
