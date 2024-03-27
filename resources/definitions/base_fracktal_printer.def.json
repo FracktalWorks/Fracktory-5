@@ -13,12 +13,12 @@
         "has_variant_materials": true,
         "has_variants": true,
         "machine_extruder_trains": { "0": "base_fracktal_extruder_0" },
-        "post_processing_scripts": "[CreateThumbnail]\\\nwidth = 64\\\nheight = 64\\\n\\\n",
         "platform_offset": [
             0,
             0,
             0
         ],
+        "post_processing_scripts": "[CreateThumbnail]\\\nwidth = 64\\\nheight = 64\\\n\\\n",
         "preferred_material": "fracktal_pla_175",
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.4 mm",
@@ -99,6 +99,7 @@
         "meshfix_maximum_deviation": { "value": "layer_height / 5" },
         "meshfix_maximum_resolution": { "value": "(speed_wall_0 + speed_wall_x) / 60" },
         "optimize_wall_printing_order": { "value": true },
+        "raft_airgap": { "value": 0.2 },
         "raft_base_line_spacing": { "value": "2*raft_base_line_width" },
         "raft_base_line_width": { "value": 1.4 },
         "raft_base_thickness": { "value": 0.6 },
@@ -173,7 +174,6 @@
         "wall_thickness": { "value": "wall_line_width_0 + wall_line_width_x" },
         "z_seam_corner": { "value": "'z_seam_corner_weighted'" },
         "z_seam_type": { "value": "'shortest'" },
-        "zig_zaggify_infill": { "value": true },
-        "raft_airgap": { "value": 0.2 }
+        "zig_zaggify_infill": { "value": true }
     }
 }
