@@ -1,7 +1,7 @@
 {
     "version": 2,
     "name": "BCN3D Printer Base Description",
-    "inherits": "fracktal_idex_printer",
+    "inherits": "base_fracktal_idex_printer",
     "metadata":
     {
         "visible": false,
