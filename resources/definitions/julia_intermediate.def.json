@@ -9,19 +9,8 @@
         "manufacturer": "Julia Series",
         "file_formats": "text/x-gcode",
         "category": "Julia Series",
-        "has_machine_materials": true,
-        "has_machine_quality": true,
-        "has_variants": true,
         "machine_variant_shortcode": "JI",
-        "platform_offset": [
-            0,
-            0,
-            0
-        ],
-        "preferred_quality_type": "normal",
-        "preferred_variant_name": "Model 0.4 mm",
-        "quality_definition": "julia_extended",
-        "variants_name": "Nozzle"
+        "quality_definition": "base_fracktal_printer"
     },
     "overrides":
     {
