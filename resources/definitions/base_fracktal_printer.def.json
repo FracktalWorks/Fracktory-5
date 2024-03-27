@@ -13,6 +13,7 @@
         "has_variant_materials": true,
         "has_variants": true,
         "machine_extruder_trains": { "0": "base_fracktal_extruder_0" },
+        
         "platform_offset": [
             0,
             0,
