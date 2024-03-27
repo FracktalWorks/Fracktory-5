@@ -166,7 +166,7 @@
         "support_tower_diameter": { "value": "5" },
         "support_tower_maximum_supported_diameter": { "value": "support_tower_diameter" },
         "support_tower_roof_angle": { "value": "0 if support_interface_enable else 65" },
-        "support_use_towers": { "value": "False if support_structure == 'tree' else true" },
+        "support_use_towers": { "value": "False" },
         "support_wall_count": { "value": "1 if support_structure == 'tree' else 0" },
         "support_xy_distance": { "value": "machine_nozzle_size * 2" },
         "support_xy_distance_overhang": { "value": "machine_nozzle_size" },
