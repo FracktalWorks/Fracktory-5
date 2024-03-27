@@ -32,6 +32,8 @@
         "prime_tower_position_x": { "value": "prime_tower_size + 20" },
         "prime_tower_position_y": { "value": "20" },
         "prime_tower_size": { "value": "40" },
-        "prime_tower_wipe_enabled": { "value": "False" }
+        "prime_tower_wipe_enabled": { "value": "False" },
+        "raft_surface_extruder_nr": { "value": "int(anyExtruderWithMaterial('material_is_support_material')) if support_enable and extruderValue(support_extruder_nr,'material_is_support_material') else raft_base_extruder_nr" }
+
     }
 }
