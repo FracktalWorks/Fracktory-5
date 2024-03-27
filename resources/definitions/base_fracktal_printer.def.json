@@ -124,8 +124,8 @@
         "retraction_hop_enabled": { "value": true },
         "retraction_hop_only_when_collides": { "value": false },
         "retraction_min_travel": { "value": "machine_nozzle_size * 3" },
+        "retraction_prime_speed": { "value": "retraction_speed * 0.6" },
         "retraction_speed": { "value": "40" },
-        "retraction_prime_speed":{ "value": "retraction_speed * 0.6" },
         "roofing_layer_count": { "value": "1" },
         "skin_edge_support_thickness": { "value": "4 * layer_height if infill_sparse_density < 30 else 0" },
         "skin_material_flow": { "value": "0.98 * material_flow" },
@@ -161,7 +161,6 @@
         "support_line_distance": { "minimum_value_warning": "0 if support_structure == 'tree' else support_line_width" },
         "support_material_flow": { "value": "0.75 * material_flow" },
         "support_offset": { "value": "machine_nozzle_size * 1.5" },
-        "zig_zaggify_support" : { "value": true },
         "support_pattern": { "value": "'lines'" },
         "support_tower_diameter": { "value": "5" },
         "support_tower_maximum_supported_diameter": { "value": "support_tower_diameter" },
@@ -180,6 +179,7 @@
         "wall_thickness": { "value": "wall_line_width_0 + wall_line_width_x" },
         "z_seam_corner": { "value": "'z_seam_corner_weighted'" },
         "z_seam_type": { "value": "'shortest'" },
-        "zig_zaggify_infill": { "value": true }
+        "zig_zaggify_infill": { "value": true },
+        "zig_zaggify_support": { "value": true }
     }
 }
