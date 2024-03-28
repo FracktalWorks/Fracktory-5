@@ -487,7 +487,7 @@ UM.PreferencesPage
                 {
                     id: pushFreeCheckbox
                     text: catalog.i18nc("@option:check", "Ensure models are kept apart")
-                    checked: boolCheck(UM.Preferences.getValue("physics/automatic_push_free"))
+                    checked: true
                     onCheckedChanged: UM.Preferences.setValue("physics/automatic_push_free", checked)
                 }
             }
@@ -689,7 +689,7 @@ UM.PreferencesPage
                 {
                     id: selectModelsOnLoadCheckbox
                     text: catalog.i18nc("@option:check","Select models when loaded")
-                    checked: boolCheck(UM.Preferences.getValue("cura/select_models_on_load"))
+                    checked: true
                     onCheckedChanged: UM.Preferences.setValue("cura/select_models_on_load", checked)
                 }
             }

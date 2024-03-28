@@ -14,7 +14,7 @@
         "machine_variant_shortcode": "VD",
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.4 mm",
-        "quality_definition": "julia_pro_dual",
+        "quality_definition": "base_fracktal_printer",
         "variants_name": "Nozzle"
     },
     "overrides":

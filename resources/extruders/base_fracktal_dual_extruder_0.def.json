@@ -6,7 +6,8 @@
     "metadata":
     {
         "machine": "base_fracktal_printer",
-        "position": "0"
+        "position": "0",
+        "quality_definition": "base_fracktal_printer"
     },
     "overrides":
     {

@@ -13,8 +13,8 @@
         "has_variants": true,
         "machine_extruder_trains":
         {
-            "0": "twin_dragon_600_extruder_0",
-            "1": "twin_dragon_600_extruder_1"
+            "0": "base_fracktal_idex_extruder_0",
+            "1": "base_fracktal_idex_extruder_1"
         },
         "machine_variant_shortcode": "TD",
         "platform_offset": [
@@ -24,7 +24,7 @@
         ],
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.4 mm",
-        "quality_definition": "julia_pro_dual",
+        "quality_definition": "base_fracktal_printer",
         "variants_name": "Nozzle"
     },
     "overrides":
