@@ -15,8 +15,8 @@
         "preferred_material": "fracktal_pla_175",
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.4 mm",
-        "variants_name": "Nozzle",
-        "quality_definition": "base_fracktal_printer"
+        "quality_definition": "base_fracktal_printer",
+        "variants_name": "Nozzle"
     },
     "overrides":
     {
