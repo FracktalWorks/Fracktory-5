@@ -32,8 +32,11 @@
         "prime_tower_position_y": { "value": "20" },
         "prime_tower_size": { "value": "40" },
         "prime_tower_wipe_enabled": { "value": "False" },
-        "raft_interface_extruder_nr": { "value": "raft_surface_extruder_nr" },
-        "raft_surface_extruder_nr": { "value": "int(anyExtruderWithMaterial('material_is_support_material')) if support_enable and extruderValue(support_extruder_nr,'material_is_support_material') else raft_base_extruder_nr" }
+        "adhesion_extruder_nr": { "value": "0" },
+        "raft_interface_extruder_nr": { "value": "0" },
+        "raft_surface_extruder_nr": { "value": "int(anyExtruderWithMaterial('material_is_support_material')) if support_enable and extruderValue(support_extruder_nr,'material_is_support_material') else raft_base_extruder_nr" },
+        "support_infill_extruder_nr" : { "value": "0 if soluble_support_placement == 'interface_only' else 1 "},
+        "support_extruder_nr_layer_0" : { "value": "0 if soluble_support_placement == 'interface_only' else 1 "}
         },
     "settings":
     {
@@ -41,13 +44,13 @@
         {
             "children":
             {
-                "soluable_support_placement":
+                "soluble_support_placement":
                 {
-                    "label": "Soluable Support Placement",
+                    "label": "Soluble Support Placement",
                     "description": "Print all support structures with soluable support, or place soluable support only on interface?",
                     "default_value": "everywhere",
                     "settable_per_mesh": true,
-                    "enabled": true,
+                    "enabled": "extruderValue(support_interface_extruder_nr,'material_is_support_material') and support_enable",
                     "options":
                     {
                         "everywhere": "Everywhere",
