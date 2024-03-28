@@ -27,7 +27,6 @@
         "machine_depth": { "default_value": 400 },
         "machine_height": { "default_value": 400 },
         "machine_name": { "default_value": "Volterra 400" },
-        "machine_show_variants": { "default_value": true },
         "machine_width": { "default_value": 400 }
     }
 }
