@@ -19,6 +19,7 @@
     },
     "overrides":
     {
+        "adhesion_extruder_nr": { "value": "0" },
         "machine_end_gcode": { "default_value": ";End GCode\nM104 T0 S0 ;extruder heater off\nM104 T1 S0 ;extruder heater off\nM140 S0 ;heated bed heater off (if you have it)\nG91 ;relative positioning\nG1 E-1 F300 ;retract the filament a bit before lifting the nozzle, to release some of the pressure\nG1 Z+0.5 E-5 X-20 Y-20 F3000 ;move Z up a bit and retract filament even more\nG28;move X/Y to min endstops, so the head is out of the way\nM84 ;steppers off\nM107\nG90 ;absolute positioning" },
         "machine_extruder_count": { "default_value": 2 },
         "machine_start_gcode": { "default_value": ";Machine Model: {machine_name} \n;Nozzles used: {'T0 ' + str(extruderValue(0, 'machine_nozzle_size'))  + ' T1 ' + str(extruderValue(1, 'machine_nozzle_size'))}\n;Sliced at: {day} {date} {time}\nG21 ;metric values\nM107\nG28\nM420 S1\nG90 ;absolute positioning\nG1 X0 Y0 Z5 F5000 ;move nozzle up 5mm for safe homing\nT0;always start probe with T0\nG29;ABL\nM500\nM82 ;set extruder to absolute mode\nM107 ;start with the fan off\nG1 X0 Y0 Z15.0 F5000 ;move the platform down 15mm\n\n; Extrude purge line\n\nG92 E0 ; reset extruder position\nG0 Z0.2 F500 ; purge\nG0 X15 E4 F500 ; purge\nG92 E0 ; reset extruder position\nG0 X25 E4 F650 ; purge\nG92 E0 ; reset extruder position\nG0 X35 E4 F800 ; purge\nG0 X{35 + 3} Z{0.05} F{8000} ; wipe, move close to the bed\nG0 X{35 + 3 * 2} Z0.2 F{8000} ; wipe, move quickly away from the bed\n\nG92 E0 ; zero the extruded length again\n " },
@@ -32,12 +33,11 @@
         "prime_tower_position_y": { "value": "20" },
         "prime_tower_size": { "value": "40" },
         "prime_tower_wipe_enabled": { "value": "False" },
-        "adhesion_extruder_nr": { "value": "0" },
         "raft_interface_extruder_nr": { "value": "0" },
         "raft_surface_extruder_nr": { "value": "int(anyExtruderWithMaterial('material_is_support_material')) if support_enable and extruderValue(support_extruder_nr,'material_is_support_material') else raft_base_extruder_nr" },
-        "support_infill_extruder_nr" : { "value": "0 if soluble_support_placement == 'interface_only' else 1 "},
-        "support_extruder_nr_layer_0" : { "value": "0 if soluble_support_placement == 'interface_only' else 1 "}
-        },
+        "support_extruder_nr_layer_0": { "value": "0 if soluble_support_placement == 'interface_only' else 1 " },
+        "support_infill_extruder_nr": { "value": "0 if soluble_support_placement == 'interface_only' else 1 " }
+    },
     "settings":
     {
         "support":
@@ -46,17 +46,17 @@
             {
                 "soluble_support_placement":
                 {
-                    "label": "Soluble Support Placement",
-                    "description": "Print all support structures with soluable support, or place soluable support only on interface?",
                     "default_value": "everywhere",
-                    "settable_per_mesh": true,
+                    "description": "Print all support structures with soluable support, or place soluable support only on interface?",
                     "enabled": "extruderValue(support_interface_extruder_nr,'material_is_support_material') and support_enable",
+                    "label": "Soluble Support Placement",
                     "options":
                     {
                         "everywhere": "Everywhere",
                         "interface_only": "Only on Interface"
                     },
                     "settable_per_extruder": false,
+                    "settable_per_mesh": true,
                     "type": "enum"
                 }
             }
