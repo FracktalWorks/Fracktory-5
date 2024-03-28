@@ -23,7 +23,6 @@
         "machine_depth": { "default_value": 395 },
         "machine_height": { "default_value": 400 },
         "machine_name": { "default_value": "Julia Pro Dual" },
-        "machine_show_variants": { "default_value": true },
         "machine_width": { "default_value": 370 }
     }
 }

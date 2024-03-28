@@ -14,7 +14,12 @@
         "has_variants": true,
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.4 mm",
-        "variants_name": "Nozzle"
+        "variants_name": "Nozzle",
+        "machine_extruder_trains":
+        {
+            "0": "base_fracktal_idex_extruder_0",
+            "1": "base_fracktal_idex_extruder_1"
+        }
     },
     "overrides":
     {
