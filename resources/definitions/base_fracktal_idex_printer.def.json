@@ -14,8 +14,8 @@
         "has_variants": true,
         "machine_extruder_trains":
         {
-            "0": "base_fracktal_idex_extruder_0",
-            "1": "base_fracktal_idex_extruder_1"
+            "0": "base_fracktal_dual_extruder_0",
+            "1": "base_fracktal_dual_extruder_1"
         }
     },
     "overrides":

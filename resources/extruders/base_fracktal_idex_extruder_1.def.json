@@ -2,10 +2,10 @@
     "version": 2,
     "name": "Extruder 1",
     "inherits": "fdmextruder",
-    "id": "twin_dragon_600_extruder_1",
+    "id": "base_fracktal_idex_extruder_0",
     "metadata":
     {
-        "machine": "twin_dragon_600",
+        "machine": "base_fracktal_idex_printer_x",
         "position": "1"
     },
     "overrides":
