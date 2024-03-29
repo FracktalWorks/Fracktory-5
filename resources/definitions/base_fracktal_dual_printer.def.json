@@ -6,6 +6,7 @@
     {
         "visible": false,
         "author": "Fracktal Works",
+        "manufacturer": "Fracktal Works",
         "has_machine_materials": true,
         "has_machine_quality": true,
         "has_materials": true,
