@@ -35,13 +35,13 @@
         "prime_tower_wipe_enabled": { "value": "False" },
         "raft_interface_extruder_nr": { "value": "0" },
         "raft_surface_extruder_nr": { "value": "int(anyExtruderWithMaterial('material_is_support_material')) if support_enable and extruderValue(support_extruder_nr,'material_is_support_material') else raft_base_extruder_nr" },
+        "retraction_hop": { "value": "0.1" },
         "support_extruder_nr_layer_0": { "value": "(0 if support_extruder_nr == 1 else 1) if soluble_support_placement == 'interface_only' and extruderValue(support_extruder_nr,'material_is_support_material') else support_extruder_nr " },
         "support_infill_extruder_nr": { "value": "(0 if support_extruder_nr == 1 else 1) if soluble_support_placement == 'interface_only' and extruderValue(support_extruder_nr,'material_is_support_material') else support_extruder_nr " },
         "support_interface_density": { "value": "100 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else support_infill_rate if gradual_support_infill_steps != 0 else 60" },
         "support_interface_height": { "value": "3 * layer_height if extruderValue(support_interface_extruder_nr,'material_is_support_material') else 2 * layer_height" },
         "support_interface_pattern": { "value": "'concentric' if extruderValue(support_interface_extruder_nr,'material_is_support_material') else 'zigzag'" },
-        "support_z_distance": { "value": "0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else min(0.2, layer_height) if support_structure != 'tree' else layer_height" },
-        "retraction_hop": { "value": "0.1" }
+        "support_z_distance": { "value": "0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else min(0.2, layer_height) if support_structure != 'tree' else layer_height" }
     },
     "settings":
     {
