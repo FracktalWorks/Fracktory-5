@@ -16,10 +16,7 @@
         {
             "0": "base_fracktal_idex_extruder_0",
             "1": "base_fracktal_idex_extruder_1"
-        },
-        "preferred_quality_type": "normal",
-        "preferred_variant_name": "Model 0.4 mm",
-        "variants_name": "Nozzle"
+        }
     },
     "overrides":
     {

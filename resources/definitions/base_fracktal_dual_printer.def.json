@@ -16,7 +16,10 @@
         {
             "0": "base_fracktal_dual_extruder_0",
             "1": "base_fracktal_dual_extruder_1"
-        }
+        },
+        "preferred_quality_type": "normal",
+        "preferred_variant_name": "Model 0.6 mm",
+        "variants_name": "Nozzle"
     },
     "overrides":
     {
