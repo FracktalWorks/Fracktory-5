@@ -1,8 +1,8 @@
 {
     "version": 2,
-    "name": "Twin Dragon 600",
+    "name": "Twin Dragon 600 x 300",
     "inherits": "base_fracktal_idex_printer",
-    "id": "twin_dragon_600",
+    "id": "twin_dragon_600x300",
     "metadata":
     {
         "visible": true,
