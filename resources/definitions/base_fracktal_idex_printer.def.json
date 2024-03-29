@@ -35,7 +35,6 @@
                 [-32, -42]
             ]
         },
-        "material_flow": { "value": "95 if speed_print < 90 else 100" },
         "prime_tower_enable": { "value": "False" },
         "speed_print": { "value": "100" },
         "speed_travel": { "value": "200" },
