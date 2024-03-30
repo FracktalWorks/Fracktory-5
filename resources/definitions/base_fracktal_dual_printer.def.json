@@ -50,7 +50,12 @@
         "switch_extruder_extra_prime_amount": { "value": "0.5" },
         "switch_extruder_prime_speed": { "value": "25" },
         "switch_extruder_retraction_amount": { "value": "machine_heat_zone_length * 0.75" },
-        "switch_extruder_speeds": { "value": "45" }
+        "switch_extruder_retraction_speeds": { "value": "45" },
+        "support_material_flow": { "value": "material_flow if extruderValue(support_extruder_nr,'material_is_support_material') else 0.9 * material_flow" },
+        "speed_support_bottom": { "value": "speed_support_interface * 0.50 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
+        "speed_support_infill": { "value": "speed_print * 0.80 if extruderValue(support_infill_extruder_nr,'material_is_support_material') else speed_print" },
+        "speed_support_roof": { "value": "speed_support_interface * 0.75 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
+        "speed_topbottom": { "value": "speed_wall_0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_wall"}
     },
     "settings":
     {

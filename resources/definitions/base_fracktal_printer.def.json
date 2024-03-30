@@ -162,7 +162,7 @@
         "support_interface_pattern": { "value": "'zigzag'" },
         "support_interface_wall_count": { "value": "1" },
         "support_line_distance": { "minimum_value_warning": "0 if support_structure == 'tree' else support_line_width" },
-        "support_material_flow": { "value": "0.85 * material_flow" },
+        "support_material_flow": { "value": "0.9 * material_flow" },
         "support_offset": { "value": "machine_nozzle_size * 1.5" },
         "support_pattern": { "value": "'lines'" },
         "support_tower_diameter": { "value": "5" },
