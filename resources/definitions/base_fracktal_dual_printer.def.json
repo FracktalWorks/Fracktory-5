@@ -45,7 +45,12 @@
         "support_interface_density": { "value": "100 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else support_infill_rate if gradual_support_infill_steps != 0 else 60" },
         "support_interface_height": { "value": "3 * layer_height if extruderValue(support_interface_extruder_nr,'material_is_support_material') else 2 * layer_height" },
         "support_interface_pattern": { "value": "'concentric' if extruderValue(support_interface_extruder_nr,'material_is_support_material') else 'zigzag'" },
-        "support_z_distance": { "value": "0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else min(0.2, layer_height) if support_structure != 'tree' else layer_height" }
+        "support_z_distance": { "value": "0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else min(0.2, layer_height) if support_structure != 'tree' else layer_height" },
+        "support_pattern": { "value": "'zigzag' if extruderValue(support_infill_extruder_nr,'material_is_support_material') and support_structure != 'tree' else 'lines'" },
+        "switch_extruder_prime_speed": { "value": "25" },
+        "switch_extruder_retraction_amount": { "value": "machine_heat_zone_length * 0.75" },
+        "switch_extruder_speeds": { "value": "45" },
+        "switch_extruder_extra_prime_amount": { "value": "0.5" }
     },
     "settings":
     {
