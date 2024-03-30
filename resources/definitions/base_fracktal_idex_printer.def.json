@@ -35,6 +35,11 @@
         "prime_tower_enable": { "value": "False" },
         "retraction_hop_after_extruder_switch": { "value": false },
         "speed_print": { "value": "100" },
+        "speed_roofing": { "value": "speed_wall" },
+        "speed_support_bottom": { "value": "speed_support_interface * 0.50 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
+        "speed_support_infill": { "value": "speed_print * 0.90 if extruderValue(support_infill_extruder_nr,'material_is_support_material') else speed_print" },
+        "speed_support_roof": { "value": "speed_support_interface * 0.75 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
+        "speed_topbottom": { "value": "speed_wall_0" },
         "speed_travel":
         {
             "maximum_value": "600",
@@ -45,11 +50,6 @@
         "speed_wall": { "value": "round(speed_print * 0.50, 0)" },
         "speed_wall_0": { "value": "round(speed_wall * 0.75, 0)" },
         "speed_wall_x": { "value": "speed_wall" },
-        "speed_topbottom": { "value": "speed_wall_0" },
-        "speed_roofing": { "value": "speed_wall" },
-        "speed_support_infill": { "value": "speed_print * 0.90 if extruderValue(support_infill_extruder_nr,'material_is_support_material') else speed_print" },
-        "speed_support_roof": { "value": "speed_support_interface * 0.75 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
-        "speed_support_bottom": { "value": "speed_support_interface * 0.50 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
         "switch_extruder_extra_prime_amount": { "value": "(3.14 * (1.75/2)**2 * (switch_extruder_retraction_amount + 0.2))*(100/material_flow)" },
         "switch_extruder_retraction_amount": { "value": "retraction_amount" }
     },
