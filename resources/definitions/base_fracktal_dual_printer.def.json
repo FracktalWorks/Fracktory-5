@@ -40,22 +40,22 @@
         "raft_interface_extruder_nr": { "value": "0" },
         "raft_surface_extruder_nr": { "value": "int(anyExtruderWithMaterial('material_is_support_material')) if support_enable and extruderValue(support_extruder_nr,'material_is_support_material') else raft_base_extruder_nr" },
         "retraction_hop": { "value": "0.1" },
+        "speed_support_bottom": { "value": "speed_support_interface * 0.50 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
+        "speed_support_infill": { "value": "speed_print * 0.80 if extruderValue(support_infill_extruder_nr,'material_is_support_material') else speed_print" },
+        "speed_support_roof": { "value": "speed_support_interface * 0.75 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
+        "speed_topbottom": { "value": "speed_wall_0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_wall" },
         "support_extruder_nr_layer_0": { "value": "(0 if support_extruder_nr == 1 else 1) if soluble_support_placement == 'interface_only' and extruderValue(support_extruder_nr,'material_is_support_material') else support_extruder_nr " },
         "support_infill_extruder_nr": { "value": "(0 if support_extruder_nr == 1 else 1) if soluble_support_placement == 'interface_only' and extruderValue(support_extruder_nr,'material_is_support_material') else support_extruder_nr " },
         "support_interface_density": { "value": "100 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else support_infill_rate if gradual_support_infill_steps != 0 else 60" },
         "support_interface_height": { "value": "3 * layer_height if extruderValue(support_interface_extruder_nr,'material_is_support_material') else 2 * layer_height" },
         "support_interface_pattern": { "value": "'concentric' if extruderValue(support_interface_extruder_nr,'material_is_support_material') else 'zigzag'" },
+        "support_material_flow": { "value": "material_flow if extruderValue(support_extruder_nr,'material_is_support_material') else 0.9 * material_flow" },
         "support_pattern": { "value": "'zigzag' if extruderValue(support_infill_extruder_nr,'material_is_support_material') and support_structure != 'tree' else 'lines'" },
         "support_z_distance": { "value": "0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else min(0.2, layer_height) if support_structure != 'tree' else layer_height" },
         "switch_extruder_extra_prime_amount": { "value": "0.5" },
         "switch_extruder_prime_speed": { "value": "25" },
         "switch_extruder_retraction_amount": { "value": "machine_heat_zone_length * 0.75" },
-        "switch_extruder_retraction_speeds": { "value": "45" },
-        "support_material_flow": { "value": "material_flow if extruderValue(support_extruder_nr,'material_is_support_material') else 0.9 * material_flow" },
-        "speed_support_bottom": { "value": "speed_support_interface * 0.50 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
-        "speed_support_infill": { "value": "speed_print * 0.80 if extruderValue(support_infill_extruder_nr,'material_is_support_material') else speed_print" },
-        "speed_support_roof": { "value": "speed_support_interface * 0.75 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
-        "speed_topbottom": { "value": "speed_wall_0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_wall"}
+        "switch_extruder_retraction_speeds": { "value": "45" }
     },
     "settings":
     {

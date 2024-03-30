@@ -35,6 +35,7 @@
         "prime_tower_enable": { "value": "False" },
         "retraction_hop_after_extruder_switch": { "value": false },
         "speed_print": { "value": "100" },
+        "speed_roofing": { "value": "speed_wall" },
         "speed_travel":
         {
             "maximum_value": "600",
@@ -42,7 +43,6 @@
             "value": "300"
         },
         "speed_travel_layer_0": { "value": "150" },
-        "speed_roofing": { "value": "speed_wall" },
         "speed_wall": { "value": "round(speed_print * 0.50, 0)" },
         "speed_wall_0": { "value": "round(speed_wall * 0.75, 0)" },
         "speed_wall_x": { "value": "speed_wall" },
