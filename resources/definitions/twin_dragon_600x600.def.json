@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "Twin Dragon 600 x 300",
+    "name": "Twin Dragon 600 x 600",
     "inherits": "base_fracktal_idex_printer",
     "id": "twin_dragon_600x300",
     "metadata":
@@ -24,9 +24,9 @@
     },
     "overrides":
     {
-        "machine_depth": { "default_value": 300 },
+        "machine_depth": { "default_value": 600 },
         "machine_height": { "default_value": 400 },
-        "machine_name": { "default_value": "Twin Dragon 600 x 300" },
+        "machine_name": { "default_value": "Twin Dragon 600 x 600" },
         "machine_width": { "default_value": 600 }
     }
 }
