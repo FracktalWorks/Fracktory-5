@@ -43,6 +43,7 @@
             "maximum_value_warning": "600",
             "value": "300"
         },
+        "adhesion_type": { "value": "'brim' if print_mode == 'dual' or print_mode == 'singleT0' or print_mode == 'singleT1' else 'raft'" },
         "speed_travel_layer_0": { "value": "150" },
         "speed_wall": { "value": "round(speed_print * 0.60, 0)" },
         "speed_wall_0": { "value": "round(speed_wall * 0.75, 0)" },
