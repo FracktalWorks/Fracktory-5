@@ -921,7 +921,7 @@ UM.PreferencesPage
                 {
                     id: checkUpdatesCheckbox
                     text: catalog.i18nc("@option:check","Check for updates on start")
-                    checked: false
+                    checked: true
                     onCheckedChanged: UM.Preferences.setValue("info/automatic_update_check", checked)
                 }
             }
