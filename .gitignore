@@ -55,7 +55,6 @@ plugins/CuraVariSlicePlugin
 plugins/Doodle3D-cura-plugin
 plugins/FlatProfileExporter
 plugins/GodMode
-plugins/OctoPrintPlugin
 plugins/ProfileFlattener
 plugins/SettingsGuide
 plugins/SettingsGuide2
