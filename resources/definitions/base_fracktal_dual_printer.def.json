@@ -39,7 +39,6 @@
         "prime_tower_wipe_enabled": { "value": "False" },
         "raft_interface_extruder_nr": { "value": "0" },
         "raft_surface_extruder_nr": { "value": "int(anyExtruderWithMaterial('material_is_support_material')) if support_enable and extruderValue(support_extruder_nr,'material_is_support_material') else raft_base_extruder_nr" },
-        "retraction_hop": { "value": "0.1" },
         "speed_support_bottom": { "value": "speed_support_interface * 0.50 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
         "speed_support_infill": { "value": "speed_print * 0.80 if extruderValue(support_infill_extruder_nr,'material_is_support_material') else speed_print" },
         "speed_support_roof": { "value": "speed_support_interface * 0.75 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },

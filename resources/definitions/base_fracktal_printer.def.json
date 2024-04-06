@@ -123,7 +123,7 @@
         "retraction_enable": { "value": true },
         "retraction_extra_prime_amount": { "default_value": 0.04 },
         "retraction_extrusion_window": { "value": "retraction_amount" },
-        "retraction_hop": { "value": "0.2" },
+        "retraction_hop": { "value": "layer_height * 1.25" },
         "retraction_hop_enabled": { "value": true },
         "retraction_hop_only_when_collides": { "value": true },
         "retraction_min_travel": { "value": "machine_nozzle_size * 3" },
