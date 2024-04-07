@@ -121,7 +121,7 @@
         "retraction_combing_max_distance": { "value": "machine_nozzle_size * 5" },
         "retraction_count_max": { "value": "int(15 * retraction_extrusion_window)" },
         "retraction_enable": { "value": true },
-        "retraction_extra_prime_amount": { "value": "0.05 if machine_nozzle_size <= 0.25 else 0.1 if machine_nozzle_size <= 0.4 else 0.2 if machine_nozzle_size <= 0.6 else 0.4" },        
+        "retraction_extra_prime_amount": { "value": "0.05 if machine_nozzle_size <= 0.25 else 0.1 if machine_nozzle_size <= 0.4 else 0.2 if machine_nozzle_size <= 0.6 else 0.4" },
         "retraction_extrusion_window": { "value": "retraction_amount" },
         "retraction_hop": { "value": "layer_height * 1.25" },
         "retraction_hop_enabled": { "value": true },
