@@ -387,12 +387,12 @@ class CuraConan(ConanFile):
                 copy(self, "*", curaengine_plugin_gradual_flow.resdirs[0], str(self.source_path.joinpath("plugins", "NativeCADplugin")), keep_path = True)
                 copy(self, "bundled_*.json", curaengine_plugin_gradual_flow.resdirs[1], str(self.source_path.joinpath("resources", "bundled_packages")), keep_path = False)
 
-        # Copy resources of cura_binary_data
-        cura_binary_data = self.dependencies["cura_binary_data"].cpp_info
-        copy(self, "*", cura_binary_data.resdirs[0], str(self._share_dir.joinpath("cura")), keep_path = True)
-        copy(self, "*", cura_binary_data.resdirs[1], str(self._share_dir.joinpath("uranium")), keep_path = True)
-        if self.settings.os == "Windows":
-            copy(self, "*", cura_binary_data.resdirs[2], str(self._share_dir.joinpath("windows")), keep_path = True)
+        # # Copy resources of cura_binary_data
+        # cura_binary_datadependencies["cura_binary_data"].cpp_info
+        # copy(self, "*", cura_binary_data.resdirs[0], str(self._share_dir.joinpath("cura")), keep_path = True)
+        # copy(self, "*", cura_binary_data.resdirs[1], str(self._share_dir.joinpath("uranium")), keep_path = True)
+        # if self.settings.os == "Windows":
+        #     copy(self, "*", cura_binary_data.resdirs[2], str(self._share_dir.joinpath("windows")), keep_path = True)
 
         for dependency in self.dependencies.host.values():
             for bindir in dependency.cpp_info.bindirs:
@@ -402,10 +402,10 @@ class CuraConan(ConanFile):
                 copy(self, "*.pyi", libdir, str(self._site_packages), keep_path = False)
                 copy(self, "*.dylib", libdir, str(self._base_dir.joinpath("lib")), keep_path = False)
 
-        # Copy materials (flat)
-        rmdir(self, os.path.join(self.source_folder, "resources", "materials"))
-        fdm_materials = self.dependencies["fdm_materials"].cpp_info
-        copy(self, "*", fdm_materials.resdirs[0], self.source_folder)
+        # # Copy materials (flat)
+        # rmdir(self, os.path.join(self.source_folder, "resources", "materials"))
+        # fdm_materials = self.dependencies["fdm_materials"].cpp_info
+        # copy(self, "*", fdm_materials.resdirs[0], self.source_folder)
 
         # Copy internal resources
         if self._internal:
@@ -501,8 +501,8 @@ echo "CURA_APP_NAME={{ cura_app_name }}" >> ${{ env_prefix }}GITHUB_ENV
         rmdir(self, os.path.join(self.package_folder, self.cpp.package.resdirs[1], "CuraEngineGradualFlow"))
         rm(self, "bundled_*.json", os.path.join(self.package_folder, self.cpp.package.resdirs[0], "bundled_packages"), recursive = False)
 
-        # Remove the fdm_materials from the package
-        rmdir(self, os.path.join(self.package_folder, self.cpp.package.resdirs[0], "materials"))
+        # # Remove the fdm_materials from the package
+        # rmdir(self, os.path.join(self.package_folder, self.cpp.package.resdirs[0], "materials"))
 
     def package_info(self):
         self.user_info.pip_requirements = "requirements.txt"
