@@ -83,7 +83,7 @@ pyinstaller:
         # windows_binary_data:
         #     package: "cura_binary_data"
         #     src: "windows"
-        # #     dst: "share/windows"
+        #      dst: "share/windows"
         # fdm_materials:
         #     package: "fdm_materials"
         #     src: "res/resources/materials"
