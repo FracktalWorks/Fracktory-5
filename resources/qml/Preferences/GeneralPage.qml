@@ -495,7 +495,7 @@ UM.PreferencesPage
                 {
                     id: pushFreeCheckbox
                     text: catalog.i18nc("@option:check", "Ensure models are kept apart")
-                    checked: boolCheck(UM.Preferences.getValue("physics/automatic_push_free"))
+                    checked: true
                     onCheckedChanged: UM.Preferences.setValue("physics/automatic_push_free", checked)
                 }
             }
@@ -750,7 +750,7 @@ UM.PreferencesPage
                 {
                     id: selectModelsOnLoadCheckbox
                     text: catalog.i18nc("@option:check","Select models when loaded")
-                    checked: boolCheck(UM.Preferences.getValue("cura/select_models_on_load"))
+                    checked: true
                     onCheckedChanged: UM.Preferences.setValue("cura/select_models_on_load", checked)
                 }
             }
@@ -901,6 +901,20 @@ UM.PreferencesPage
                         }
                         onActivated: UM.Preferences.setValue("cura/choice_on_profile_override", model.get(index).code)
                     }
+                    UM.TooltipArea
+                    {
+                        width: childrenRect.width
+                        height: childrenRect.height
+                        text: catalog.i18nc("@info:tooltip","Check material compatibility between materials, if the materials do not match, a warning will be displayed and our configuration of these cannot be used")
+
+                        UM.CheckBox
+                        {
+                            id: selectModelsOnLoadCheckboxaa
+                            text: catalog.i18nc("@option:check","Check material compatibility")
+                            checked: boolCheck(UM.Preferences.getValue("cura/check_material_compatibility"))
+                            onCheckedChanged: UM.Preferences.setValue("cura/check_material_compatibility", checked)
+                        }
+                    }
                 }
             }
 
@@ -1025,7 +1039,7 @@ UM.PreferencesPage
                 {
                     id: checkUpdatesCheckbox
                     text: catalog.i18nc("@option:check","Check for updates on start")
-                    checked: boolCheck(UM.Preferences.getValue("info/automatic_update_check"))
+                    checked: true
                     onCheckedChanged: UM.Preferences.setValue("info/automatic_update_check", checked)
                 }
             }

@@ -484,7 +484,7 @@ UM.Dialog
         Cura.NotificationIcon
         {
             id: activeScriptCountIcon
-            visible: activeScriptsList.count > 0
+            visible: activeScriptsList.count > 1
             anchors
             {
                 horizontalCenter: parent.right

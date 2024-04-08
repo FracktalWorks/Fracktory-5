@@ -28,7 +28,7 @@ class SingleInstance:
         Logger.log("i", "Checking for the presence of an ready running Cura instance.")
         single_instance_socket = QLocalSocket(self._application)
         Logger.log("d", "Full single instance server name: %s", single_instance_socket.fullServerName())
-        single_instance_socket.connectToServer("ultimaker-cura")
+        single_instance_socket.connectToServer("Fracktory")
         single_instance_socket.waitForConnected(msecs = 3000)  # wait for 3 seconds
 
         if single_instance_socket.state() != QLocalSocket.LocalSocketState.ConnectedState:
@@ -72,7 +72,7 @@ class SingleInstance:
         self._single_instance_server = QLocalServer()
         if self._single_instance_server:
             self._single_instance_server.newConnection.connect(self._onClientConnected)
-            self._single_instance_server.listen("ultimaker-cura")
+            self._single_instance_server.listen("Fracktory")
         else:
             Logger.log("e", "Single instance server was not created.")
 

@@ -191,7 +191,7 @@ class CuraEngineBackend(QObject, Backend):
         self._slicing_error_message.addAction(
             action_id = "report_bug",
             name = catalog.i18nc("@message:button", "Report a bug"),
-            description = catalog.i18nc("@message:description", "Report a bug on UltiMaker Cura's issue tracker."),
+            description = catalog.i18nc("@message:description", "Report a bug on Fracktory's issue tracker."),
             icon = "[no_icon]"
         )
         self._slicing_error_message.actionTriggered.connect(self._reportBackendError)
@@ -1048,7 +1048,7 @@ class CuraEngineBackend(QObject, Backend):
         """
         Triggered when the user wants to report an error in the back-end.
         """
-        QDesktopServices.openUrl(QUrl("https://github.com/Ultimaker/Cura/issues/new/choose"))
+        QDesktopServices.openUrl(QUrl("https://github.com/FracktalWorks/Fracktory-5/issues/new/choose"))
 
     def _onGlobalStackChanged(self) -> None:
         """Called when the global container stack changes"""

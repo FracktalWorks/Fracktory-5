@@ -22,8 +22,8 @@ Item
     property var currentSections: new Set()
     // By default (when this list shows up) we always expand the "Ultimaker" section.
     property var preferredCategories: {
-        "Ultimaker B.V.": -2,
-        "Custom": -1
+        "Fracktal Works": -1,
+        "Custom": -2
     }
 
     // User-editable printer name

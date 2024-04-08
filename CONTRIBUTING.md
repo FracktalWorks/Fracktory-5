@@ -16,7 +16,7 @@ If you want to propose a change to Cura's source code, please create a pull requ
 * [Cura](https://github.com/Ultimaker/Cura)
 * [Uranium](https://github.com/Ultimaker/Uranium)
 * [CuraEngine](https://github.com/Ultimaker/CuraEngine)
-* [fdm_materials](https://github.com/Ultimaker/fdm_materials)
+* [fdm_materials](https://github.com/FracktalWorks/fdm_materials)
 * [libArcus](https://github.com/Ultimaker/libArcus)
 * [libSavitar](https://github.com/Ultimaker/libSavitar)
 * [libCharon](https://github.com/Ultimaker/libCharon)

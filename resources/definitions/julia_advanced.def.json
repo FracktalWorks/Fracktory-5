@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "name": "Julia Advanced",
+    "inherits": "base_fracktal_printer",
+    "id": "julia_advanced",
+    "metadata":
+    {
+        "visible": true,
+        "manufacturer": "Julia Series",
+        "category": "Julia Series",
+        "machine_variant_shortcode": "JA",
+        "quality_definition": "base_fracktal_printer"
+    },
+    "overrides":
+    {
+        "machine_depth": { "default_value": 200 },
+        "machine_height": { "default_value": 200 },
+        "machine_name": { "default_value": "Julia Advanced" },
+        "machine_width": { "default_value": 200 }
+    }
+}
