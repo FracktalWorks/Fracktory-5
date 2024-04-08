@@ -7,7 +7,7 @@ from PyQt6.QtCore import QObject, pyqtSlot
 
 from UM.i18n import i18nCatalog
 from UM.Logger import Logger
-from plugins.FracktoryIDEX.IDEXutils.PrintModeManager import PrintModeManager
+from ...IDEXutils.PrintModeManager import PrintModeManager
 
 class PrintModesLitsener(QObject):
 
