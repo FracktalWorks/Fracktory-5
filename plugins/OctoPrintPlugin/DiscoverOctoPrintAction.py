@@ -276,7 +276,7 @@ class DiscoverOctoPrintAction(MachineAction):
             basic_auth_password,
         )
         self._appkey_request.setRawHeader(b"Content-Type", b"application/json")
-        data = json.dumps({"app": "Cura"})
+        data = json.dumps({"app": "Fracktory"})
         self._appkey_reply = self._network_manager.post(
             self._appkey_request, data.encode()
         )

@@ -105,7 +105,7 @@
         "raft_base_line_spacing": { "value": "2*raft_base_line_width" },
         "raft_base_line_width": { "value": "machine_nozzle_size *2" },
         "raft_base_speed": { "value": "speed_layer_0 * 0.7" },
-        "raft_base_thickness": { "value": 0.5 },
+        "raft_base_thickness": { "value": "machine_nozzle_size " },
         "raft_interface_extruder_nr": { "value": "raft_surface_extruder_nr" },
         "raft_interface_layers": { "value": 1 },
         "raft_interface_line_width": { "value": 0.7 },
