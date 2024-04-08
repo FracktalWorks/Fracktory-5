@@ -52,7 +52,7 @@
         "bridge_wall_speed": { "value": "speed_wall" },
         "brim_replaces_support": { "value": false },
         "brim_width": { "value": "2" },
-        "cool_fan_speed_0": { "value": "cool_fan_speed_min" },
+        "cool_fan_speed_0": { "value": 0 },
         "cool_fan_speed_max": { "value": "100" },
         "cool_min_layer_time": { "value": 10 },
         "cool_min_layer_time_fan_speed_max": { "value": "cool_min_layer_time + 5" },
