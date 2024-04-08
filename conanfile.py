@@ -331,10 +331,10 @@ class CuraConan(ConanFile):
         if self.settings.os == "Linux":
             self.options["curaengine_grpc_definitions"].shared = True
             self.options["openssl"].shared = True
-        if self.conf.get("user.curaengine:sentry_url", "", check_type=str) != "":
-            self.options["curaengine"].enable_sentry = True
-            self.options["arcus"].enable_sentry = True
-            self.options["clipper"].enable_sentry = True
+        # if self.conf.get("user.curaengine:sentry_url", "", check_type=str) != "":
+        #     self.options["curaengine"].enable_sentry = True
+        #     self.options["arcus"].enable_sentry = True
+        #     self.options["clipper"].enable_sentry = True
 
     def validate(self):
         version = self.conf.get("user.cura:version", default = self.version, check_type = str)
