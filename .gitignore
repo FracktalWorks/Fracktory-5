@@ -53,8 +53,6 @@ plugins/Doodle3D-cura-plugin
 plugins/FlatProfileExporter
 plugins/GodMode
 plugins/ProfileFlattener
-plugins/SettingsGuide
-plugins/SettingsGuide2
 plugins/SVGToolpathReader
 plugins/X3GWriter
 plugins/CuraFlatPack
@@ -62,7 +60,6 @@ plugins/CuraRemoteSupport
 plugins/ModelCutter
 plugins/PrintProfileCreator
 plugins/MultiPrintPlugin
-plugins/CuraOrientationPlugin
 
 #Build stuff
 CMakeCache.txt
