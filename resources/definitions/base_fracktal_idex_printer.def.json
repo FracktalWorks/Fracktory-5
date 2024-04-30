@@ -43,9 +43,9 @@
         {
             "maximum_value": "600",
             "maximum_value_warning": "600",
-            "value": "300"
+            "value": "150"
         },
-        "speed_travel_layer_0": { "value": "150" },
+        "speed_travel_layer_0": { "value": "100" },
         "speed_wall": { "value": "round(speed_print * 0.60, 0)" },
         "speed_wall_0": { "value": "round(speed_wall * 0.75, 0)" },
         "speed_wall_x": { "value": "speed_wall" },
