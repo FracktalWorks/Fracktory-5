@@ -30,7 +30,7 @@ Generic PVA 1.75mm profile. The data in this file may not be correct for your sp
         <cura:setting key="material_is_support_material">True</cura:setting>
         
         <cura:setting key="brim_width">5</cura:setting>
-        <cura:setting key="speed_print">50</cura:setting>
+        <cura:setting key="speed_print">60</cura:setting>
         
 
     </settings>

@@ -6,12 +6,12 @@ Generic ABS 1.75mm profile. The data in this file may not be correct for your sp
     <metadata>
         <name>
             <brand>Fracktal Works</brand>
-            <material>ABS</material>
+            <material>ABS+</material>
             <color>Generic</color>
         </name>
         <GUID>2780b345-577b-4a24-a2c5-12e6aad3e690</GUID>
         <version>11</version>
-        <reference_material_id>abs</reference_material_id>
+        <reference_material_id>abs+</reference_material_id>
         <color_code>#8cb219</color_code>
         <description>Tough and durable. ABS is good for mechanical parts. It is impact resistant, dimensionally stable and handles temperatures up to 85ºC.</description>
         <adhesion_info>No glue needed</adhesion_info>
@@ -21,10 +21,10 @@ Generic ABS 1.75mm profile. The data in this file may not be correct for your sp
         <diameter>1.75</diameter>
     </properties>
     <settings>
-        <setting key="print temperature">230</setting>
+        <setting key="print temperature">260</setting>
         <setting key="standby temperature">200</setting>
         <setting key="heated bed temperature">100</setting>
-        <setting key="build volume temperature">36</setting>
+        <setting key="build volume temperature">60</setting>
         <setting key="adhesion tendency">0</setting>
         <setting key="surface energy">70</setting>
 
@@ -32,6 +32,7 @@ Generic ABS 1.75mm profile. The data in this file may not be correct for your sp
         <cura:setting key="cool_fan_enabled">False</cura:setting>
         <cura:setting key="support_fan_enable">False</cura:setting>
         <cura:setting key="brim_width">8</cura:setting>
+        <cura:setting key="speed_print">60</cura:setting>
 
 
 

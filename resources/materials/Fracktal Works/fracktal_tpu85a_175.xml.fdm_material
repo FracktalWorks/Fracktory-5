@@ -20,10 +20,10 @@ Generic TPU 95A 1.75mm profile. The data in this file may not be correct for you
         <diameter>1.75</diameter>
     </properties>
     <settings>
-        <setting key="print temperature">228</setting>
+        <setting key="print temperature">240</setting>
         <setting key="standby temperature">175</setting>
-        <setting key="heated bed temperature">40</setting>
-        <setting key="build volume temperature">27</setting>
+        <setting key="heated bed temperature">45</setting>
+        <setting key="build volume temperature">30</setting>
         <setting key="adhesion tendency">3</setting>
         <setting key="surface energy">100</setting>
         <cura:setting key="material_crystallinity">true</cura:setting>
@@ -34,10 +34,10 @@ Generic TPU 95A 1.75mm profile. The data in this file may not be correct for you
         <cura:setting key="switch_extruder_retraction_amount">5</cura:setting>
         <cura:setting key="switch_extruder_prime_speed">10</cura:setting>
         <cura:setting key="switch_extruder_retraction_speeds">30</cura:setting>
-        <cura:setting key="material_flow">100</cura:setting>
+        <cura:setting key="material_flow">105</cura:setting>
         <cura:setting key="retraction_combing">all</cura:setting>
         <cura:setting key="speed_slowdown_layers">0</cura:setting>
-        <cura:setting key="material_flow_layer_0">100</cura:setting>
+        <cura:setting key="material_flow_layer_0">105</cura:setting>
         <cura:setting key="retraction_extra_prime_amount">0.5</cura:setting>
         <cura:setting key="speed_layer_0">25</cura:setting>
         <cura:setting key="speed_topbottom">25</cura:setting>

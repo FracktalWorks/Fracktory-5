@@ -51,7 +51,7 @@
         "bridge_wall_material_flow": { "value": "material_flow" },
         "bridge_wall_speed": { "value": "speed_wall" },
         "brim_replaces_support": { "value": false },
-        "brim_width": { "value": "2" },
+        "brim_width": { "value": "3" },
         "cool_fan_speed_0": { "value": 0 },
         "cool_fan_speed_max": { "value": "100" },
         "cool_min_layer_time": { "value": 10 },
@@ -102,7 +102,7 @@
         "material_break_temperature": { "maximum_value": "500" },
         "material_diameter": { "default_value": 1.75 },
         "material_extrusion_cool_down_speed": { "value": "0.5" },
-        "material_flow": { "default_value": 95 },
+        "material_flow": { "default_value": 100 },
         "material_initial_print_temperature": { "maximum_value": "500" },
         "material_print_temperature": { "maximum_value": "500" },
         "material_print_temperature_layer_0":
@@ -150,8 +150,7 @@
         "roofing_layer_count": { "value": "1" },
         "skin_angles": { "value": "[0, 90]" },
         "skin_edge_support_thickness": { "value": "4 * layer_height if infill_sparse_density < 30 else 0" },
-        "skin_material_flow": { "value": "0.98 * material_flow" },
-        "skin_material_flow_layer_0": { "value": "95" },
+        "skin_material_flow_layer_0": { "value": "100" },
         "skin_monotonic": { "value": true },
         "skin_outline_count": { "value": "1" },
         "skin_overlap": { "value": 25 },
@@ -201,6 +200,12 @@
         "z_seam_corner": { "value": "'z_seam_corner_weighted'" },
         "z_seam_type": { "value": "'shortest'" },
         "zig_zaggify_infill": { "value": true },
-        "zig_zaggify_support": { "value": true }
+        "zig_zaggify_support": { "value": true },
+        "support_structure": { "value": "tree" },
+        "min_feature_size": { "value": "0.05" },
+        "min_bead_width": { "value": "0.8 * machine_nozzle_size" },
+        "min_wall_line_width": { "value": "0.8 * machine_nozzle_size" },
+        "initial_layer_line_width_factor": { "value": 105 },
+        "material_flow_layer_0": { "value": 105 }
     }
 }

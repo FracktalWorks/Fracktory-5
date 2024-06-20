@@ -21,12 +21,13 @@ Generic PETG 1.75mm profile. The data in this file may not be correct for your s
         <diameter>1.75</diameter>
     </properties>
     <settings>
-        <setting key="print temperature">215</setting>
-        <setting key="heated bed temperature">70</setting>
+        <setting key="print temperature">240</setting>
+        <setting key="heated bed temperature">80</setting>
         <setting key="standby temperature">120</setting>
         <setting key="print cooling">80</setting>
-
         <cura:setting key="brim_width">4</cura:setting>
+        <cura:setting key="speed_print">60</cura:setting>
+
 
 
 
