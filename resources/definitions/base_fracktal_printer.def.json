@@ -70,7 +70,6 @@
         "infill_overlap": { "value": "0 if infill_sparse_density > 40 else 5" },
         "infill_pattern": { "value": "'zigzag' if infill_sparse_density > 80 else 'triangles'" },
         "infill_sparse_density": { "value": "20" },
-        "initial_layer_line_width_factor": { "value": 105 },
         "jerk_enabled": { "default_value": false },
         "jerk_print": { "default_value": 10 },
         "jerk_travel": { "value": 10 },
@@ -104,7 +103,6 @@
         "material_diameter": { "default_value": 1.75 },
         "material_extrusion_cool_down_speed": { "value": "0.5" },
         "material_flow": { "default_value": 100 },
-        "material_flow_layer_0": { "value": 105 },
         "material_initial_print_temperature": { "maximum_value": "500" },
         "material_print_temperature": { "maximum_value": "500" },
         "material_print_temperature_layer_0":
@@ -119,9 +117,6 @@
         },
         "meshfix_maximum_deviation": { "value": "0.02" },
         "meshfix_maximum_resolution": { "value": "0.5" },
-        "min_bead_width": { "value": "0.8 * machine_nozzle_size" },
-        "min_feature_size": { "value": "0.05" },
-        "min_wall_line_width": { "value": "0.8 * machine_nozzle_size" },
         "optimize_wall_printing_order": { "value": true },
         "raft_airgap": { "value": "0.15 if machine_nozzle_size <= 0.25 else 0.25 if machine_nozzle_size <= 0.4 else 0.3 if machine_nozzle_size <= 0.6 else 0.35" },
         "raft_base_line_spacing": { "value": "2*raft_base_line_width" },
@@ -188,7 +183,6 @@
         "support_material_flow": { "value": "0.9 * material_flow" },
         "support_offset": { "value": "machine_nozzle_size * 1.5" },
         "support_pattern": { "value": "'lines'" },
-        "support_structure": { "value": "tree" },
         "support_tower_diameter": { "value": "5" },
         "support_tower_maximum_supported_diameter": { "value": "support_tower_diameter" },
         "support_tower_roof_angle": { "value": "0 if support_interface_enable else 65" },
@@ -206,6 +200,14 @@
         "z_seam_corner": { "value": "'z_seam_corner_weighted'" },
         "z_seam_type": { "value": "'shortest'" },
         "zig_zaggify_infill": { "value": true },
-        "zig_zaggify_support": { "value": true }
-    }
+        "zig_zaggify_support": { "value": true },
+        "support_structure": { "value": "tree" },
+        "min_feature_size": { "value": "0.05" },
+        "min_bead_width": { "value": "0.8 * machine_nozzle_size" },
+        "min_wall_line_width": { "value": "0.8 * machine_nozzle_size" },
+        "initial_layer_line_width_factor": { "value": 105 },
+        "material_flow_layer_0": { "value": 105 },
+        "support_tree_max_diameter": { "value": 40 },
+        "support_tree_branch_reach_limit": { "value": 50 }
+        }
 }
