@@ -372,7 +372,7 @@ Item
                     Cura.NumericTextFieldWithUnit
                     {
                         id: spoolCostTextField
-                        valueText: base.getMaterialPreferenceValue(properties.guid, "spool_cost")
+                        valueText: base.getMaterialPreferenceValue(properties.guid, "spool_cost", Cura.ContainerManager.getContainerMetaDataEntry(properties.container_id, "properties/cost"))
                         controlWidth: informationPage.columnWidth
                         controlHeight: informationPage.rowHeight
                         spacing: 0
@@ -687,7 +687,7 @@ Item
     {
         if(!spoolCost)
         {
-            spoolCost = base.getMaterialPreferenceValue(properties.guid, "spool_cost");
+            spoolCost = base.getMaterialPreferenceValue(properties.guid, "spool_cost", Cura.ContainerManager.getContainerMetaDataEntry(properties.container_id, "properties/cost"));
         }
 
         if (spoolLength == 0)

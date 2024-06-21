@@ -8,12 +8,12 @@ Generic PLA 1.75mm profile. The data in this file may not be correct for your sp
             <brand>Fracktal Works</brand>
             <material>PLA</material>
             <color>Generic</color>
-            <label>PLA</label>
+            <label>PLA+</label>
         </name>
-        <GUID>0ff92885-617b-4144-a03c-9989872454bc</GUID>
+        <GUID>0ff92885-617b-4144-a03c-9989874454bc</GUID>
         <reference_material_id>pla</reference_material_id>
         <version>11</version>
-        <color_code>#ffc934</color_code>
+        <color_code>#ffc974</color_code>
         <description>Fast, safe and reliable printing. PLA is ideal for the fast and reliable printing of parts and prototypes with a great surface quality.</description>
         <adhesion_info>Print directly of PEI flex build plate</adhesion_info>
     </metadata>
@@ -22,9 +22,9 @@ Generic PLA 1.75mm profile. The data in this file may not be correct for your sp
         <diameter>1.75</diameter>
     </properties>
     <settings>
-        <setting key="print temperature">190</setting>
+        <setting key="print temperature">210</setting>
         <setting key="standby temperature">175</setting>
-        <setting key="heated bed temperature">140</setting>
+        <setting key="heated bed temperature">60</setting>
         <setting key="build volume temperature">30</setting>
         <setting key="print cooling">100</setting>
         <setting key="adhesion tendency">0</setting>
