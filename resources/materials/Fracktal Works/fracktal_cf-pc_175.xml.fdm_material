@@ -6,11 +6,10 @@ Generic Nylon 1.75mm profile. The data in this file may not be correct for your 
     <metadata>
         <name>
             <brand>Fracktal Works</brand>
-            <material>Nylon</material>
-            <color>Generic</color>
+            <material>Carbon Fiber</material>
+            <color>PC</color>
         </name>
         <GUID>283d439a-3490-4481-920c-c51d8cdecf9c</GUID>
-        <reference_material_id>nylon</reference_material_id>
         <version>7</version>
         <color_code>#3DF266</color_code>
         <description>Nylon is strong, abrasion-resistant, durable and engineered for low moisture sensitivity.</description>
@@ -21,13 +20,12 @@ Generic Nylon 1.75mm profile. The data in this file may not be correct for your 
         <diameter>1.75</diameter>
     </properties>
     <settings>
-        <setting key="print temperature">280</setting>
+        <setting key="print temperature">270</setting>
         <setting key="standby temperature">175</setting>
-        <setting key="heated bed temperature">90</setting>
-        <setting key="build volume temperature">60</setting>
-        <setting key="adhesion tendency">2</setting>
-        <setting key="surface energy">100</setting>
-        <cura:setting key="material_crystallinity">true</cura:setting>
+        <setting key="heated bed temperature">110</setting>
+        <setting key="build volume temperature">41</setting>
+        <setting key="print cooling">0</setting>
+
         <cura:setting key="bridge_fan_speed">0</cura:setting>
         <cura:setting key="cool_fan_enabled">False</cura:setting>
         <cura:setting key="support_fan_enable">False</cura:setting>
