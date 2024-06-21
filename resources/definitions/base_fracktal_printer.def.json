@@ -70,6 +70,7 @@
         "infill_overlap": { "value": "0 if infill_sparse_density > 40 else 5" },
         "infill_pattern": { "value": "'zigzag' if infill_sparse_density > 80 else 'triangles'" },
         "infill_sparse_density": { "value": "20" },
+        "infill_wipe_dist": { "value": "0 if infill_before_walls == True else wall_line_width_x / 4" },
         "initial_layer_line_width_factor": { "value": 105 },
         "jerk_enabled": { "default_value": false },
         "jerk_print": { "default_value": 10 },
@@ -203,11 +204,10 @@
         "wall_0_wipe_dist": { "value": "2 * line_width" },
         "wall_thickness": { "value": "wall_line_width_0 + wall_line_width_x" },
         "z_seam_corner": { "value": "'z_seam_corner_none'" },
+        "z_seam_position": { "value": "'backright'" },
+        "z_seam_relative": { "value": true },
         "z_seam_type": { "value": "'back'" },
         "zig_zaggify_infill": { "value": true },
-        "zig_zaggify_support": { "value": true },
-        "infill_wipe_dist": { "value": "0 if infill_before_walls == True else wall_line_width_x / 4" },
-        "z_seam_position": { "value": "'backright'" },
-        "z_seam_relative": { "value": true }
+        "zig_zaggify_support": { "value": true }
     }
 }
