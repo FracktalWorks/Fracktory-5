@@ -19,6 +19,8 @@ Generic PC 1.75mm profile. The data in this file may not be correct for your spe
     <properties>
         <density>1.19</density>
         <diameter>1.75</diameter>
+        <weight>1000</weight>
+        <cost>4500</cost>
     </properties>
     <settings>
         <setting key="print temperature">270</setting>

@@ -19,6 +19,8 @@ Generic PETG 1.75mm profile. The data in this file may not be correct for your s
     <properties>
         <density>1.27</density>
         <diameter>1.75</diameter>
+        <weight>1000</weight>
+        <cost>2500</cost>
     </properties>
     <settings>
         <setting key="print temperature">240</setting>
