@@ -188,7 +188,6 @@
         "support_material_flow": { "value": "0.9 * material_flow" },
         "support_offset": { "value": "machine_nozzle_size * 1.5" },
         "support_pattern": { "value": "'lines'" },
-        "support_structure": { "value": "tree" },
         "support_tower_diameter": { "value": "5" },
         "support_tower_maximum_supported_diameter": { "value": "support_tower_diameter" },
         "support_tower_roof_angle": { "value": "0 if support_interface_enable else 65" },
