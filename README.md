@@ -341,3 +341,16 @@ If you face issue to run below command
 } 
 
 ````
+
+
+### Updating To latest Version of Ultimaker Cura:
+
+1. On Github website, go to Main of Fracktory-5, and Fork Sync. 
+2. Pull the changes from the main branch of Fracktory-5 to your local of Main using github desktop.
+3. In the history navigate to the commit where the version was updated. right click and select "Create branch from commit"
+3. Create a new branch on Fracktory-5 with the new version number like "Fracktory-5.6.0"
+4. In github Desktop, switch to the new branch.
+5. Merge the previous branch version of Fracktory 5 into current branch and resolve conflicts if any.
+4. Update the version number in `latest.json` file in `Fracktory-5` folder in the following format to have cura check for latest version available
+5. Update guthub actions workflow with latest verion number
+6. change mster branch to this new version on Github website.
