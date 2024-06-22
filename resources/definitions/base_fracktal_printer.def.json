@@ -208,6 +208,8 @@
         "z_seam_relative": { "value": true },
         "z_seam_type": { "value": "'back'" },
         "zig_zaggify_infill": { "value": true },
-        "zig_zaggify_support": { "value": true }
+        "meshfix_union_all": { "value": false },
+        "carve_multiple_volumes": { "value": true },
+        "alternate_carve_order": { "value": true }
     }
 }
