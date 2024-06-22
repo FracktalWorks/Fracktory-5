@@ -17,7 +17,7 @@ Item
     property var currentMaterialNode: null
 
     property bool editingEnabled: false
-    property string currency: UM.Preferences.getValue("cura/currency") ? UM.Preferences.getValue("cura/currency") : "€"
+    property string currency: UM.Preferences.getValue("cura/currency") ? UM.Preferences.getValue("cura/currency") : "₹"
     property string containerId: ""
     property var materialPreferenceValues: UM.Preferences.getValue("cura/material_settings") ? JSON.parse(UM.Preferences.getValue("cura/material_settings")) : {}
     property var materialManagementModel: CuraApplication.getMaterialManagementModel()
@@ -372,7 +372,7 @@ Item
                     Cura.NumericTextFieldWithUnit
                     {
                         id: spoolCostTextField
-                        valueText: base.getMaterialPreferenceValue(properties.guid, "spool_cost")
+                        valueText: base.getMaterialPreferenceValue(properties.guid, "spool_cost", Cura.ContainerManager.getContainerMetaDataEntry(properties.container_id, "properties/cost"))
                         controlWidth: informationPage.columnWidth
                         controlHeight: informationPage.rowHeight
                         spacing: 0
@@ -687,7 +687,7 @@ Item
     {
         if(!spoolCost)
         {
-            spoolCost = base.getMaterialPreferenceValue(properties.guid, "spool_cost");
+            spoolCost = base.getMaterialPreferenceValue(properties.guid, "spool_cost", Cura.ContainerManager.getContainerMetaDataEntry(properties.container_id, "properties/cost"));
         }
 
         if (spoolLength == 0)

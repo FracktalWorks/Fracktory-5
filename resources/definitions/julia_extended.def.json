@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "name": "Julia Extended",
+    "inherits": "base_fracktal_printer",
+    "id": "julia_extended",
+    "metadata":
+    {
+        "visible": true,
+        "manufacturer": "Julia Series",
+        "category": "Julia Series",
+        "machine_variant_shortcode": "JE",
+        "quality_definition": "base_fracktal_printer"
+    },
+    "overrides":
+    {
+        "machine_depth": { "default_value": 250 },
+        "machine_height": { "default_value": 300 },
+        "machine_name": { "default_value": "Julia Extended" },
+        "machine_width": { "default_value": 250 }
+    }
+}
