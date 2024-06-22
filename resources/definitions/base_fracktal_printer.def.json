@@ -31,6 +31,7 @@
         "acceleration_print": { "default_value": 1000 },
         "acceleration_travel": { "value": 1000 },
         "adhesion_type": { "default_value": "brim" },
+        "alternate_carve_order": { "value": true },
         "bottom_thickness": { "value": "3 * layer_height if 3 * layer_height > 0.6 else 0.6" },
         "bridge_enable_more_layers": { "value": true },
         "bridge_fan_speed": { "value": "cool_fan_speed_max" },
@@ -52,6 +53,7 @@
         "bridge_wall_speed": { "value": "speed_wall" },
         "brim_replaces_support": { "value": false },
         "brim_width": { "value": "3" },
+        "carve_multiple_volumes": { "value": true },
         "cool_fan_speed_0": { "value": 0 },
         "cool_fan_speed_max": { "value": "100" },
         "cool_min_layer_time": { "value": 10 },
@@ -120,6 +122,7 @@
         },
         "meshfix_maximum_deviation": { "value": "0.02" },
         "meshfix_maximum_resolution": { "value": "0.5" },
+        "meshfix_union_all": { "value": false },
         "min_bead_width": { "value": "0.8 * machine_nozzle_size" },
         "min_feature_size": { "value": "0.05" },
         "min_wall_line_width": { "value": "0.8 * machine_nozzle_size" },
@@ -207,9 +210,6 @@
         "z_seam_position": { "value": "'backright'" },
         "z_seam_relative": { "value": true },
         "z_seam_type": { "value": "'back'" },
-        "zig_zaggify_infill": { "value": true },
-        "meshfix_union_all": { "value": false },
-        "carve_multiple_volumes": { "value": true },
-        "alternate_carve_order": { "value": true }
+        "zig_zaggify_infill": { "value": true }
     }
 }
