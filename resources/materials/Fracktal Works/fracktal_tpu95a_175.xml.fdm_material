@@ -6,8 +6,10 @@ Generic TPU 95A 1.75mm profile. The data in this file may not be correct for you
     <metadata>
         <name>
             <brand>Fracktal Works</brand>
-            <material>TPU 95A</material>
+            <material>TPU</material>
             <color>Generic</color>
+            <label>TPU 95A</label>
+
         </name>
         <GUID>19bab6a9-94ff-478b-b4a1-8157b74358d2</GUID>
         <version>12</version>
