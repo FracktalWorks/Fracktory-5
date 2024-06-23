@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Name It package.
+# 5axes <5axes@free.fr>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: Name It\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-01 13:30+0000\n"
+"PO-Revision-Date: 2023-03-01 14:31+0200\n"
+"Last-Translator: 5axes <5axes@free.fr>\n"
+"Language-Team: 5axes\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#: NameIt.py:194
+msgctxt "@item:inmenu"
+msgid "Name It !"
+msgstr "Name It !"
+
+#: NameIt.py:195 qml_qt6/NameItMenu.qml:19 qml_qt5/NameItMenu.qml:20
+msgctxt "@item:inmenu"
+msgid "Add Number"
+msgstr "Ajouter Nombre"
+
+#: NameIt.py:196 qml_qt6/NameItMenu.qml:24 qml_qt5/NameItMenu.qml:25
+msgctxt "@item:inmenu"
+msgid "Add Number From Part"
+msgstr "Ajouter Nombre Selon Pièce"
+
+#: NameIt.py:197 qml_qt6/NameItMenu.qml:29 qml_qt5/NameItMenu.qml:30
+msgctxt "@item:inmenu"
+msgid "Add Name"
+msgstr "Ajouter Nom"
+
+#: NameIt.py:198 qml_qt6/NameItMenu.qml:34 qml_qt5/NameItMenu.qml:35
+msgctxt "@item:inmenu"
+msgid "Add Recycling Symbol"
+msgstr "Ajouter Symbole Recyclage"
+
+#: NameIt.py:200 qml_qt6/NameItMenu.qml:39 qml_qt5/NameItMenu.qml:40
+msgctxt "@item:inmenu"
+msgid "Remove Identifier"
+msgstr "Supprimer Identificateur"
+
+#: NameIt.py:202 qml_qt6/NameItMenu.qml:45 qml_qt5/NameItMenu.qml:46
+msgctxt "@item:inmenu"
+msgid "Rename models"
+msgstr "Renommer modèles"
+
+#: NameIt.py:204 qml_qt6/NameItMenu.qml:51 qml_qt5/NameItMenu.qml:52
+msgctxt "@item:inmenu"
+msgid "Define Text Parameters"
+msgstr "Définir Paramètres de Texte"
+
+#: NameIt.py:205
+msgctxt "@item:inmenu"
+msgid "Plugin Parameters"
+msgstr "Paramètres du plugin"
+
+#: NameIt.py:207
+msgctxt "@item:inmenu"
+msgid "Help"
+msgstr "Aide"
+
+#: NameIt.py:225 NameIt.py:263
+msgctxt "@info:title"
+msgid "Name It !"
+msgstr "Name It !"
+
+#: NameIt.py:276
+msgctxt "@info:status"
+msgid "Please select a single model first"
+msgstr "Sélectionnez tout d'abord une pièce"
+
+#: NameIt.py:281 NameIt.py:723
+msgctxt "@info:status"
+msgid "Please select one or more models first"
+msgstr "Sélectionnez tout d'abord des pièces"
+
+#: NameIt.py:757 NameIt.py:768 NameIt.py:779
+msgctxt "@info:label"
+msgid "Info modification current profile '"
+msgstr "Information modification du profil actuel Paramètre '"
+
+#: NameIt.py:757 NameIt.py:768 NameIt.py:779
+msgctxt "@info:label"
+msgid ""
+"' parameter\n"
+"New value : False"
+msgstr ""
+"'\n"
+"Nouvelle Valeur : Faux"
+
+#: NameIt.py:758 NameIt.py:769 NameIt.py:780 NameIt.py:849 NameIt.py:856
+#: NameIt.py:936 NameIt.py:943
+msgctxt "@info:title"
+msgid "Warning ! Name It"
+msgstr "Attention ! Name It"
+
+#: NameIt.py:851 NameIt.py:853 NameIt.py:858 NameIt.py:860 NameIt.py:938
+#: NameIt.py:940 NameIt.py:945 NameIt.py:947
+msgctxt "@info:title"
+msgid "Info ! Name It"
+msgstr "Info ! Name It"
+
+#: qml_qt6/NameIt.qml:19 qml_qt5/NameIt.qml:19
+msgctxt "@title"
+msgid "Name It ! Parameters"
+msgstr "Name It ! Paramètres"
+
+#: qml_qt6/NameIt.qml:66 qml_qt5/NameIt.qml:120
+msgctxt "@label"
+msgid "Size :"
+msgstr "Taille :"
+
+#: qml_qt6/NameIt.qml:111 qml_qt5/NameIt.qml:180
+msgctxt "@label"
+msgid "Height :"
+msgstr "Hauteur : "
+
+#: qml_qt6/NameIt.qml:156 qml_qt5/NameIt.qml:240
+msgctxt "@label"
+msgid "Distance :"
+msgstr "Distance :"
+
+#: qml_qt6/NameIt.qml:200 qml_qt5/NameIt.qml:300
+msgctxt "@label"
+msgid "Kerning :"
+msgstr "Kerning :"
+
+#: qml_qt6/NameIt.qml:244 qml_qt5/NameIt.qml:360
+msgctxt "@label"
+msgid "Number Prefix :"
+msgstr "Préfix Nombre :"
+
+#: qml_qt6/NameIt.qml:286 qml_qt5/NameIt.qml:403
+msgctxt "@label"
+msgid "Number Suffix :"
+msgstr "Suffix Nombre :"
+
+#: qml_qt6/NameIt.qml:328 qml_qt5/NameIt.qml:446
+msgctxt "@label"
+msgid "Initial Layer Speed :"
+msgstr "Vitesse Initiale :"
+
+#: qml_qt6/NameIt.qml:370 qml_qt5/NameIt.qml:506
+msgctxt "@label"
+msgid "Font :"
+msgstr "Police :"
+
+#: qml_qt6/NameIt.qml:413
+msgctxt "@label"
+msgid "Location :"
+msgstr "Localisation :"
+
+#: qml_qt6/RenameDialog.qml:27 qml_qt5/RenameDialog.qml:26
+msgctxt "@title:window"
+msgid "Rename"
+msgstr "Renommer"
+
+#: qml_qt6/RenameDialog.qml:28 qml_qt5/RenameDialog.qml:27
+msgctxt "@info"
+msgid "Please provide a new name."
+msgstr "Définir un nouveau Nom."
+
+#: qml_qt6/RenameDialog.qml:66 qml_qt5/RenameDialog.qml:75
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr "Annuler"
+
+#: qml_qt6/RenameDialog.qml:72 qml_qt5/RenameDialog.qml:80
+msgctxt "@action:button"
+msgid "OK"
+msgstr "OK"
+
+#: qml_qt6/NameItMenu.qml:15 qml_qt5/NameItMenu.qml:16
+msgctxt "@title"
+msgid "Name It !"
+msgstr "Name It !"
+
+#: qml_qt6/SettingsPopup.qml:30 qml_qt5/SettingsPopup.qml:29
+msgctxt "@title"
+msgid "Name It plugin settings"
+msgstr "Paramètres du plugin Name It"
+
+#: qml_qt6/SettingsPopup.qml:37 qml_qt5/SettingsPopup.qml:36
+msgctxt "@label"
+msgid "Add Name It as context menu (restart Cura to apply change)"
+msgstr ""
+"Ajouter Name It comme menu contextuel (redémarrer Cura pour appliquer le "
+"changement)"
+
+#: qml_qt5/NameIt.qml:77
+msgctxt "@tooltip"
+msgid "Close this dialog box"
+msgstr "Fermer cette boîte de dialogue"
+
+#~ msgctxt "@info:title"
+#~ msgid "Name It!"
+#~ msgstr "Name It!"

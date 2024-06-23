@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.qmlc
+
+
+# Models
+models/mark.stl
+models/~$CDEFGHIJKLMNOPQRSTUVWXYZ.docx
+models/ABCDEFGHIJKLMNOPQRSTUVWXYZ.docx
+models/Arial Rounded MT/mark.stl
+*.tmp
+models/NameIt Rounded/mark.stl
+*.docx
