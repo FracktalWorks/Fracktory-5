@@ -59,7 +59,6 @@
         "cool_min_layer_time": { "value": 10 },
         "cool_min_layer_time_fan_speed_max": { "value": "cool_min_layer_time + 5" },
         "cool_min_speed": { "value": "round(speed_wall_0 * 3 / 4) if cool_lift_head else round(speed_wall_0 / 5)" },
-        "material_final_print_temperature":{ "maximum_value": "500" },
         "cool_min_temperature":
         {
             "maximum_value": "500",
@@ -107,6 +106,7 @@
         "material_break_temperature": { "maximum_value": "500" },
         "material_diameter": { "default_value": 1.75 },
         "material_extrusion_cool_down_speed": { "value": "0.5" },
+        "material_final_print_temperature": { "maximum_value": "500" },
         "material_flow": { "value": "95" },
         "material_flow_layer_0": { "value": "105" },
         "material_initial_print_temperature": { "maximum_value": "500" },
