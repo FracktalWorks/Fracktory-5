@@ -24,7 +24,7 @@ Generic ABS 1.75mm profile. The data in this file may not be correct for your sp
         <cost>2200</cost>
     </properties>
     <settings>
-        <setting key="print temperature">380</setting>
+        <setting key="print temperature">410</setting>
         <setting key="standby temperature">320</setting>
         <setting key="heated bed temperature">140</setting>
         <setting key="build volume temperature">80</setting>
@@ -33,7 +33,7 @@ Generic ABS 1.75mm profile. The data in this file may not be correct for your sp
         <cura:setting key="bridge_fan_speed">0</cura:setting>
         <cura:setting key="cool_fan_enabled">False</cura:setting>
         <cura:setting key="support_fan_enable">False</cura:setting>
-        <cura:setting key="brim_width">4</cura:setting>
+        <cura:setting key="brim_line_count">4</cura:setting>
         <cura:setting key="speed_print">15</cura:setting>
         <cura:setting key="retraction_combing">all</cura:setting>
         <cura:setting key="speed_slowdown_layers">0</cura:setting>
@@ -47,6 +47,9 @@ Generic ABS 1.75mm profile. The data in this file may not be correct for your sp
         <cura:setting key="speed_support_roof">15</cura:setting>
         <cura:setting key="speed_support_interface">15</cura:setting>
         <cura:setting key="skin_overlap">15</cura:setting>
+        <cura:setting key="material_flow">80</cura:setting>
+        <cura:setting key="material_flow_layer_0">80</cura:setting>
+
 
 
    </settings>
