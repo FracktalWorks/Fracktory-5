@@ -18,7 +18,7 @@
             "1": "base_fracktal_dual_extruder_1"
         },
         "preferred_quality_type": "normal",
-        "preferred_variant_name": "Model 0.6 mm",
+        "preferred_variant_name": "Model 0.4 mm",
         "variants_name": "Nozzle"
     },
     "overrides":
@@ -37,8 +37,8 @@
         "prime_tower_position_y": { "value": "20" },
         "prime_tower_size": { "value": "30" },
         "prime_tower_wipe_enabled": { "value": "False" },
-        "raft_interface_extruder_nr": { "value": "0" },
         "raft_airgap": { "value": "0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else 0.15 if machine_nozzle_size <= 0.25 else 0.25 if machine_nozzle_size <= 0.4 else 0.3 if machine_nozzle_size <= 0.6 else 0.35" },
+        "raft_interface_extruder_nr": { "value": "0" },
         "raft_surface_extruder_nr": { "value": "int(anyExtruderWithMaterial('material_is_support_material')) if support_enable and extruderValue(support_extruder_nr,'material_is_support_material') else raft_base_extruder_nr" },
         "speed_support_bottom": { "value": "speed_support_interface * 0.50 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else speed_support_interface" },
         "speed_support_infill": { "value": "speed_print * 0.80 if extruderValue(support_infill_extruder_nr,'material_is_support_material') else speed_print" },
