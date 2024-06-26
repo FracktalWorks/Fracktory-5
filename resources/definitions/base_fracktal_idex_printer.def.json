@@ -49,7 +49,7 @@
         "speed_wall": { "value": "round(speed_print * 0.60, 0)" },
         "speed_wall_0": { "value": "round(speed_wall * 0.75, 0)" },
         "speed_wall_x": { "value": "speed_wall" },
-        "switch_extruder_extra_prime_amount": { "value": "((3.14 * (1.75/2)**2 * switch_extruder_retraction_amount *(100/material_flow)) + retraction_extra_prime_amount)" },
+        "switch_extruder_extra_prime_amount": { "value": "retraction_extra_prime_amount" },
         "switch_extruder_retraction_amount": { "value": "retraction_amount" }
     },
     "settings":
