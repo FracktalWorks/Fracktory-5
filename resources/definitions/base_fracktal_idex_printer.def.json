@@ -12,13 +12,12 @@
         "has_materials": true,
         "has_variant_materials": true,
         "has_variants": true,
-        "preferred_variant_name": "Model 0.4 mm",
         "machine_extruder_trains":
         {
             "0": "base_fracktal_idex_extruder_0",
             "1": "base_fracktal_idex_extruder_1"
-        }
-        
+        },
+        "preferred_variant_name": "Model 0.4 mm"
     },
     "overrides":
     {
