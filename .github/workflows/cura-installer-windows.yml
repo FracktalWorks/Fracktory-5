@@ -84,7 +84,7 @@ jobs:
           ref: ${{ github.base_ref }}
 
       - name: Sync pip requirements
-        run: curl -O https://raw.githubusercontent.com/FracktalWorks/cura-workflows/main/.github/workflows/requirements-runner.txt
+        run: curl -O https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/.github/workflows/requirements-runner.txt
         working-directory: .github\workflows
 
       - name: Setup Python and pip
@@ -106,12 +106,12 @@ jobs:
 
       - name: Get Conan configuration
         run: |
-          conan config install https://github.com/FracktalWorks/conan-config.git
-          conan config install https://github.com/FracktalWorks/conan-config.git -a "-b runner/${{ runner.os }}/${{ runner.arch }}"
+          conan config install https://github.com/Ultimaker/conan-config.git
+          conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/${{ runner.os }}/${{ runner.arch }}"
 
       - name: Add Cura private Artifactory remote
         if: ${{ inputs.conan_internal }}
-        run: conan config install https://github.com/FracktalWorks/conan-config.git -a "-b runner/internal"
+        run: conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/internal"
       
       # - name: Clone fdm_materials from Fracktal Works repository
       #   run: |
@@ -165,8 +165,8 @@ jobs:
         run: |
           New-Item -ItemType Directory -Force -Path runner_scripts
           cd runner_scripts
-          curl -O https://raw.githubusercontent.com/FracktalWorks/cura-workflows/main/runner_scripts/cura_installer_filename.py
-          curl -O https://raw.githubusercontent.com/FracktalWorks/cura-workflows/main/runner_scripts/summarize_used_dependencies.py
+          curl -O https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/runner_scripts/cura_installer_filename.py
+          curl -O https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/runner_scripts/summarize_used_dependencies.py
 
       - name: Output the name file name and extension
         id: filename
