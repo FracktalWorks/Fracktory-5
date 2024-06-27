@@ -294,31 +294,31 @@ Following programs need to be installed for running from source on Windows:
 
 
 If you face issue to run below command
-     ````
+     ```
       .\venv\Scripts\activate.ps1
-     ````
+     ```
     Error is "cannot be loaded because running scripts is disabled on this system. For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170"
      Open power shell in administrator and run below cmd.
-     ````
+     ```
      Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
-     ````
+     ```
 
      Then Type Y and hit [Enter]. After this you should be able to activate venv.     
 
      in case of DLL issue try: https://github.com/Ultimaker/Cura/issues/17717
-      ````
+      ```
      $env:PYTHONPATH = 'C:\Users\Vijay\Documents\GitHub\Fracktory-5>\venv\Scripts'
      .\venv\Scripts\activate.ps1 
      echo $env:PYTHONPATH  
      python cura_app.py
 
-     ````
+     ```
 
      ## Settings latest verion for update checks:
 
      change values in `latest.json` file in `Fracktory-5` folder in the following format to have cura check for latest version available
 
-     ````
+     ```
      {
     "cura": {
         "Windows": {
@@ -340,7 +340,7 @@ If you face issue to run below command
     }
 } 
 
-````
+```
 
 
 ### Updating To latest Version of Ultimaker Cura:
@@ -354,3 +354,10 @@ If you face issue to run below command
 4. Update the version number in `latest.json` file in `Fracktory-5` folder in the following format to have cura check for latest version available
 5. Update guthub actions workflow with latest verion number
 6. change mster branch to this new version on Github website.
+
+
+
+-------------------------------------------------------------------------
+Running from source and compiling on PC:
+
+1. 
