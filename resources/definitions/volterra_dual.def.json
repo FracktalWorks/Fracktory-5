@@ -13,7 +13,7 @@
         "has_variants": true,
         "machine_variant_shortcode": "VD",
         "preferred_quality_type": "normal",
-        "preferred_variant_name": "Model 0.6 mm",
+        "preferred_variant_name": "Model 0.4 mm",
         "quality_definition": "base_fracktal_printer",
         "variants_name": "Nozzle"
     },
