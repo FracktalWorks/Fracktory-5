@@ -90,7 +90,9 @@ jobs:
           cache-dependency-path: .\Cura-workflows\.github\workflows\requirements-runner.txt
   
       - name: Install Python requirements and Create default Conan profile
-        run: pip install -r .\Cura-workflows\.github\workflows\requirements-runner.txt
+        run: |
+          conan remove "*" -f
+          pip install -r .\Cura-workflows\.github\workflows\requirements-runner.txt
 
       # - name: Setup pipeline caches
       #   run: |
@@ -101,7 +103,6 @@ jobs:
 
       - name: Get Conan configuration
         run: |
-          conan remove "*" -f
           conan config install https://github.com/Ultimaker/conan-config.git
           conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/${{ runner.os }}/${{ runner.arch }}"
 
