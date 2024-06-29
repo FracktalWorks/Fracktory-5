@@ -84,6 +84,7 @@ CuraEngine
 plugins/__init__.py
 
 venv/
+cura_inst
 build/
 dist/
 conaninfo.txt
