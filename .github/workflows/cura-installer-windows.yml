@@ -98,7 +98,6 @@ jobs:
 
       - name: Create default Conan profile
         run: |
-          conan remove "*" -f
           conan profile new default --detect --force
 
       - name: Get Conan configuration
