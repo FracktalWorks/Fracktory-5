@@ -136,7 +136,7 @@ jobs:
         
       - name: Create the Packages (Powershell)
         run: |
-          conan create . ${{ inputs.conan_args }} --build=missing --update tools.build:skip_test=True -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo -s arcus:build_type=RelWithDebInfo -s clipper:build_type=RelWithDebInfo
+          conan create . ${{ inputs.conan_args }} --build=missing --update -c tools.build:skip_test=True -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo -s arcus:build_type=RelWithDebInfo -s clipper:build_type=RelWithDebInfo
 
       - name: Set Environment variables for Cura (Powershell)
         run: |
