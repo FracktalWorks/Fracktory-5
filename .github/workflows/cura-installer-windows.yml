@@ -1,5 +1,5 @@
 name: Fracktory Windows Installer
-run-name: 5.7.0 for Windows-${{ inputs.architecture }} by @${{ github.actor }}
+run-name: 5.7.2 for Windows-${{ inputs.architecture }} by @${{ github.actor }}
 
 on:
   workflow_dispatch:
