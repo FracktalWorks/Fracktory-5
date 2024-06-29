@@ -76,26 +76,21 @@ jobs:
           fetch-depth: 1
           ref: ${{ github.head_ref }}
 
-      - name: Checkout repo PR
+      - name: Checkout Cura-workflows repo
         uses: actions/checkout@v4
-        if: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
         with:
-          fetch-depth: 1
-          ref: ${{ github.base_ref }}
-
-      - name: Sync pip requirements
-        run: curl -O https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/.github/workflows/requirements-runner.txt
-        working-directory: .github\workflows
+          repository: Ultimaker/Cura-workflows
+          path: Cura-workflows
 
       - name: Setup Python and pip
         uses: actions/setup-python@v4
         with:
-          python-version: 3.11.x
+          python-version: 3.11.7
           cache: pip
-          cache-dependency-path: .\.github\workflows\requirements-runner.txt
-
+          cache-dependency-path: .\Cura-workflows\.github\workflows\requirements-runner.txt
+  
       - name: Install Python requirements and Create default Conan profile
-        run: pip install -r .\.github\workflows\requirements-runner.txt
+        run: pip install -r .\Cura-workflows\.github\workflows\requirements-runner.txt
 
       # - name: Setup pipeline caches
       #   run: |
