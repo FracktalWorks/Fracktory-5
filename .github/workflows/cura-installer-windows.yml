@@ -76,35 +76,39 @@ jobs:
           fetch-depth: 1
           ref: ${{ github.head_ref }}
 
-      - name: Checkout Cura-workflows repo
+      - name: Checkout repo PR
         uses: actions/checkout@v4
+        if: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
         with:
-          repository: Ultimaker/Cura-workflows
-          path: Cura-workflows
+          fetch-depth: 1
+          ref: ${{ github.base_ref }}
+
+      - name: Sync pip requirements
+        run: curl -O https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/.github/workflows/requirements-runner.txt
+        working-directory: .github\workflows
 
       - name: Setup Python and pip
         uses: actions/setup-python@v4
         with:
           python-version: 3.11.7
           cache: pip
-          cache-dependency-path: .\Cura-workflows\.github\workflows\requirements-runner.txt
-  
+          cache-dependency-path: .\.github\workflows\requirements-runner.txt
+
       - name: Install Python requirements and Create default Conan profile
-        run: pip install -r .\Cura-workflows\.github\workflows\requirements-runner.txt
+        run: pip install -r .\.github\workflows\requirements-runner.txt
 
       # - name: Setup pipeline caches
       #   run: |
       #     New-Item -ItemType Directory -Force -Path C:\Users\runneradmin\.conan\downloads
 
       - name: Create default Conan profile
-        run: |
-          conan profile new default --detect --force
+        run: conan profile new default --detect --force
 
       - name: Get Conan configuration
         run: |
+          conan remove "*" -f
           conan config install https://github.com/Ultimaker/conan-config.git
           conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/${{ runner.os }}/${{ runner.arch }}"
-
       - name: Add Cura private Artifactory remote
         if: ${{ inputs.conan_internal }}
         run: conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/internal"
@@ -133,17 +137,14 @@ jobs:
       - name: Create the Packages (Powershell)
         run: |
           conan install . ${{ inputs.conan_args }} --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo -s arcus:build_type=RelWithDebInfo -s clipper:build_type=RelWithDebInfo
-
       - name: Set Environment variables for Cura (Powershell)
         run: |
           echo "${Env:WIX}\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           .\cura_inst\Scripts\activate_github_actions_env.ps1
           .\cura_inst\Scripts\activate_github_actions_version_env.ps1
-
       - name: Create the Cura dist
         run: |
           pyinstaller ./cura_inst/Fracktory.spec
-
       # - name: Setup Sentry CLI
       #   uses: mathieu-bour/setup-sentry-cli@v1
       #   with:
@@ -166,7 +167,6 @@ jobs:
           cd runner_scripts
           curl -O https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/runner_scripts/cura_installer_filename.py
           curl -O https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/runner_scripts/summarize_used_dependencies.py
-
       - name: Output the name file name and extension
         id: filename
         run: python runner_scripts/cura_installer_filename.py --os ${{ runner.os }} --arch ${{ inputs.architecture }} --enterprise ${{ inputs.enterprise }} --internal ${{ inputs.conan_internal }}
@@ -183,7 +183,6 @@ jobs:
           $encodedBytes = [System.Convert]::FromBase64String($env:PFX_CONTENT); 
           Set-Content $pfxPath -Value $encodedBytes -AsByteStream;
           echo "PFX_PATH=$pfxPath" >> $env:GITHUB_OUTPUT;
-
       - name: Create the Windows msi installer (Powershell)
         run: |
           python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\Fracktory "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
@@ -240,7 +239,6 @@ jobs:
           import os
           with open("run_info.sh", "w") as f:
               f.writelines(f'echo "CURA_VERSION_FULL={os.environ["CURA_VERSION_FULL"]}" >> $GITHUB_ENV\n')
-
       # NOTE: The extension is .sh, since this isn't going to build-environment, so not on the Win build image.
       - name: Upload the run info
         uses: actions/upload-artifact@v3
