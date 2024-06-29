@@ -90,16 +90,16 @@ jobs:
           cache-dependency-path: .\Cura-workflows\.github\workflows\requirements-runner.txt
   
       - name: Install Python requirements and Create default Conan profile
-        run: |
-          conan remove "*" -f
-          pip install -r .\Cura-workflows\.github\workflows\requirements-runner.txt
+        run: pip install -r .\Cura-workflows\.github\workflows\requirements-runner.txt
 
       # - name: Setup pipeline caches
       #   run: |
       #     New-Item -ItemType Directory -Force -Path C:\Users\runneradmin\.conan\downloads
 
       - name: Create default Conan profile
-        run: conan profile new default --detect --force
+        run: |
+          conan remove "*" -f
+          conan profile new default --detect --force
 
       - name: Get Conan configuration
         run: |
