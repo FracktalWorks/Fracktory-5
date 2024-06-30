@@ -88,9 +88,15 @@ jobs:
         working-directory: .github\workflows
 
 
-      - name: Install Visual Studio 17.8.4
+      - name: Download Custom Visual Studio Installer
         run: |
-          choco install visualstudio2019buildtools --version=17.8.4 --package-parameters "--includeRecommended --includeOptional"
+          Invoke-WebRequest -Uri https://your-server.com/path/to/specific/vs_buildtools_17.8.4.exe -OutFile vs_buildtools_17.8.4.exe
+  
+      - name: Install Visual Studio 2019 Build Tools
+        run: |
+          .\vs_buildtools_17.8.4.exe --quiet --wait --norestart --nocache `
+            --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended
+        shell: powershell
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
