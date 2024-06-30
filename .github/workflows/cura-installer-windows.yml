@@ -95,13 +95,24 @@ jobs:
       - name: Install Visual Studio 2019 Build Tools
         run: |
           .\vs_buildtools_17.8.4.exe --quiet --wait --norestart --nocache `
-            --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended
+            --installPath "C:\Users\runneradmin\VS2022" `
+            --add Microsoft.VisualStudio.Workload.VCTools `
+            --includeRecommended `
+            --includeOptional `
+            --installChannelId "VisualStudio.17.Release" `
+            --installChannelUri "https://aka.ms/vs/17/release/channel"
         shell: powershell
 
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v2
-        with:
-          vs-version: '17.8.4'
+      - name: Set up Visual Studio Environment
+        run: |
+          echo "C:\Users\runneradmin\VS2022\Common7\Tools" >> $GITHUB_PATH
+          echo "C:\Users\runneradmin\VS2022\VC\Auxiliary\Build" >> $GITHUB_PATH
+          echo "C:\Users\runneradmin\VS2022\MSBuild\Current\Bin" >> $GITHUB_PATH
+          echo "VSINSTALLDIR=C:\Users\runneradmin\VS2022" >> $GITHUB_ENV
+          echo "VisualStudioVersion=17.0" >> $GITHUB_ENV
+          echo "VSCMD_ARG_TGT_ARCH=x64" >> $GITHUB_ENV
+          echo "VSCMD_VER=17.0" >> $GITHUB_ENV
+        shell: bash
 
       - name: Echo $Env:GITHUB_ENV 
         run: echo $Env:GITHUB_ENV
