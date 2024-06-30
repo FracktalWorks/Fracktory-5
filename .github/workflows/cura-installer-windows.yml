@@ -88,10 +88,9 @@ jobs:
         working-directory: .github\workflows
 
 
-      - name: Set up Visual Studio 2019
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          vsversion : 17.8.4
+      - name: Install Visual Studio 17.8.4
+        run: |
+          choco install visualstudio2019buildtools --version=17.8.4 --package-parameters "--includeRecommended --includeOptional"
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
