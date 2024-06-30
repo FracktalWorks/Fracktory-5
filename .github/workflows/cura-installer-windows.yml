@@ -87,6 +87,12 @@ jobs:
         run: curl -O https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/.github/workflows/requirements-runner.txt
         working-directory: .github\workflows
 
+
+      - name: Set up Visual Studio 2019
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          vsversion : 17.8.4
+
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
         with:
