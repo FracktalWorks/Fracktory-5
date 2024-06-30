@@ -295,29 +295,24 @@ Following programs need to be installed for running from source on Windows:
 
 If you face issue to run below command
 
-     `.\venv\Scripts\activate.ps1`
-    Error is "cannot be loaded because running scripts is disabled on this system. For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170"
-     Open power shell in administrator and run below cmd.
+   `.\venv\Scripts\activate.ps1`  
 
-     `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine`
+   in case of DLL issue try: https://github.com/Ultimaker/Cura/issues/17717
 
-     Then Type Y and hit [Enter]. After this you should be able to activate venv.     
+   ```
+   $env:PYTHONPATH = 'C:\Users\Vijay\Documents\GitHub\Fracktory-5>\venv\Scripts'
+   .\venv\Scripts\activate.ps1 
+   echo $env:PYTHONPATH  
+   python cura_app.py
 
-     in case of DLL issue try: https://github.com/Ultimaker/Cura/issues/17717
+   ```
 
-      ```
-     $env:PYTHONPATH = 'C:\Users\Vijay\Documents\GitHub\Fracktory-5>\venv\Scripts'
-     .\venv\Scripts\activate.ps1 
-     echo $env:PYTHONPATH  
-     python cura_app.py
-     ```
+   ## Settings latest verion for update checks:
 
-     ## Settings latest verion for update checks:
+   change values in `latest.json` file in `Fracktory-5` folder in the following format to have cura check for latest version available
 
-     change values in `latest.json` file in `Fracktory-5` folder in the following format to have cura check for latest version available
-
-     ```
-     {
+   ```
+   {
     "cura": {
         "Windows": {
             "major": 5,
@@ -336,9 +331,9 @@ If you face issue to run below command
             "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
         }
     }
-} 
+   } 
 
-```
+   ```
 
 
 ### Updating To latest Version of Ultimaker Cura:
