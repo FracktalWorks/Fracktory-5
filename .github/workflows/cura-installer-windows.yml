@@ -92,6 +92,9 @@ jobs:
         with:
           vs-version: '17.8.4'
 
+      - name: Echo $Env:GITHUB_ENV 
+        run: echo $Env:GITHUB_ENV
+
       - name: Setup Python and pip
         uses: actions/setup-python@v4
         with:
