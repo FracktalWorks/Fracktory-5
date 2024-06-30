@@ -351,6 +351,11 @@ If you face issue to run below command
 
 
 -------------------------------------------------------------------------
-Running from source and compiling on PC:
+There may be issues with running newer build environment, Here are settings that have worked:
 
-1. 
+1. Visual Studio 17.8.4  [Main cause of pyArcus DLL issue when using actions and local build]
+2. Cmake 3.27.8
+3. Ninja 1.11.1
+4. Conan 1.60.2
+5. sip 6.8.3
+6. python 3.10.11
