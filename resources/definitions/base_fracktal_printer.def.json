@@ -136,7 +136,7 @@
         "raft_interface_extruder_nr": { "value": "raft_surface_extruder_nr" },
         "raft_interface_layers": { "value": 1 },
         "raft_interface_line_width": { "value": 0.7 },
-        "raft_interface_speed": { "value": 90 },
+        "raft_interface_speed": { "value": "speed_print * 0.9" },
         "raft_interface_thickness": { "value": 0.3 },
         "raft_interface_wall_count": { "value": "raft_wall_count" },
         "raft_margin": { "value": 1.2 },
@@ -158,7 +158,6 @@
         "retraction_prime_speed": { "value": "retraction_speed * 0.6" },
         "retraction_speed": { "value": "40" },
         "roofing_layer_count": { "value": "1" },
-        "skin_angles": { "value": "[135, 45]" },
         "skin_edge_support_thickness": { "value": "4 * layer_height if infill_sparse_density < 30 else 0" },
         "skin_material_flow_layer_0": { "value": "90" },
         "skin_monotonic": { "value": true },
@@ -171,17 +170,17 @@
         "speed_support_bottom": { "value": "speed_support_interface/1.5 if int(support_interface_extruder_nr) == 1 else speed_support_interface" },
         "speed_support_infill": { "value": "speed_print" },
         "speed_topbottom": { "value": "speed_wall" },
-        "speed_travel": { "value": "100" },
+        "speed_travel": { "value": "max(100,speed_print)" },
         "speed_travel_layer_0": { "value": "80" },
-        "speed_wall": { "value": "round(speed_print * 0.75, 0)" },
-        "speed_wall_0": { "value": "round(speed_wall * 0.80, 0)" },
+        "speed_wall": { "value": "min(round(speed_print * 0.75, 0),80)" },
+        "speed_wall_0": { "value": "min(round(speed_wall * 0.80, 0),60)" },
         "speed_wall_x": { "value": "speed_wall" },
         "support_brim_enable": { "value": true },
         "support_fan_enable": { "value": true },
-        "support_infill_angles": { "default_value": "[45]" },
+        "support_infill_angles": { "default_value": "[0]" },
         "support_infill_rate": { "value": "0 if support_structure == 'tree' else 60 if gradual_support_infill_steps != 0 else 15" },
         "support_initial_layer_line_distance": { "minimum_value_warning": "0 if support_structure == 'tree' else support_line_width" },
-        "support_interface_angles": { "default_value": "[45]" },
+        "support_interface_angles": { "default_value": "[0]" },
         "support_interface_density": { "value": "support_infill_rate if gradual_support_infill_steps != 0 else 60" },
         "support_interface_enable": { "value": true },
         "support_interface_height": { "value": "2 * layer_height" },
@@ -192,7 +191,7 @@
         "support_line_distance": { "minimum_value_warning": "0 if support_structure == 'tree' else support_line_width" },
         "support_material_flow": { "value": "0.9 * material_flow" },
         "support_offset": { "value": "machine_nozzle_size * 1.5" },
-        "support_pattern": { "value": "'lines'" },
+        "support_pattern": { "value": "'zigzag'" },
         "support_tower_diameter": { "value": "5" },
         "support_tower_maximum_supported_diameter": { "value": "support_tower_diameter" },
         "support_tower_roof_angle": { "value": "0 if support_interface_enable else 65" },
@@ -212,5 +211,32 @@
         "z_seam_relative": { "value": true },
         "z_seam_type": { "value": "'back'" },
         "zig_zaggify_infill": { "value": true }
+    },
+    "settings":
+    {
+        "experimental":
+        {
+            "children":
+            {
+                "bridge_over_support":
+                {
+                    "label": "Bridge Over Support",
+                    "description": "Enable bridge settings over support ",
+                    "type": "bool",
+                    "default_value": true,
+                    "resolve": "any(extruderValues('bridge_settings_enabled'))",
+                    "settable_per_mesh": true,
+                    "settable_per_extruder": false,
+                    "settable_per_meshgroup": false
+                }
+            }
+        }
+        
     }
 }
+
+
+
+
+
+
