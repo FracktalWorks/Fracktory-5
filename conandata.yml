@@ -1,7 +1,7 @@
 version: "5.7.2"
 requirements:
   - "uranium/5.7.2"
-  # - "curaengine/5.7.2"
+  - "curaengine/5.7.2"
   # - "cura_binary_data/5.7.2"
   # - "fdm_materials/5.7.2"
   - "curaengine_plugin_gradual_flow/0.1.0-beta.3"

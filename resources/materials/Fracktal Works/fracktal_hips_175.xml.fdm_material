@@ -29,10 +29,10 @@ Generic HIPS 1.75mm profile. The data in this file may not be correct for your s
 
         <!-- Define as soluble support material -->
         <cura:setting key="material_is_support_material">true</cura:setting>
-
-        <cura:setting key="bridge_fan_speed">0</cura:setting>
-        <cura:setting key="cool_fan_enabled">False</cura:setting>
-        <cura:setting key="support_fan_enable">False</cura:setting>
+        <cura:setting key="cool_fan_speed">0</cura:setting>
+        <cura:setting key="cool_fan_speed_max">30</cura:setting>
+        <cura:setting key="support_fan_enable">true</cura:setting>
+        <cura:setting key="support_supported_skin_fan_speed">30</cura:setting>
         <cura:setting key="brim_line_count">6</cura:setting>
         <cura:setting key="speed_print">60</cura:setting>
     </settings>

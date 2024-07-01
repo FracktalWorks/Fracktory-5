@@ -97,8 +97,8 @@ RecommendedSettingSection
         },
         RecommendedSettingItem
         {
-            settingName: catalog.i18nc("@action:label", "Soluble Support Optimisation")
-            tooltipText: catalog.i18nc("soluble_support_placement description", "Print all support structures with soluable support, or place soluable support only on interface to save on support material usage? Use 'Everywhere' if support will be placed in hard to reach areas of the model. This setting is only applicable for Soluble Support Materials and will no effect otherwise")
+            settingName: catalog.i18nc("@action:label", "Multi-Material Support Optimisation")
+            tooltipText: catalog.i18nc("multimaterial_support_optimisation description", "Print all support structures with soluable support, or place soluable support only on interface to save on support material usage? Use 'Everywhere' if support will be placed in hard to reach areas of the model. This setting is only applicable for Soluble Support Materials and will no effect otherwise")
             isCompressed: enableSupportRow.isCompressed
             enabled: Cura.ExtruderManager.enabledExtruderCount > 1
             visible: Cura.ExtruderManager.enabledExtruderCount > 1  
@@ -106,7 +106,7 @@ RecommendedSettingSection
             settingControl: Cura.SingleSettingComboBox
             {
                 width: parent.width
-                settingName: "soluble_support_placement"
+                settingName: "multimaterial_support_optimisation"
             }
         }
     ]

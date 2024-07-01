@@ -266,7 +266,6 @@ Following programs need to be installed for running from source on Windows:
 
 ## Installation
 1. In case you are using custom Cura Engine:
-   - Make sure cura engine is commited out from requirememts pf conandata.yaml
    - Install Cura Engine with the following steps:
       ```
       conan config install https://github.com/ultimaker/conan-config.git
@@ -275,9 +274,8 @@ Following programs need to be installed for running from source on Windows:
       cd CuraEngine
       conan create . curaengine/5.7.2@FracktalWorks/stable --build=missing --update
       ```
-2. Incase you are using CuraEngine from the Ultimaker source:
-   - Uncomment the version of cura engine to use in conandata.yaml
-3. Install Fracktory:
+
+2. Install Fracktory:
    ```
    conan config install https://github.com/ultimaker/conan-config.git
    conan profile new default --detect --force
