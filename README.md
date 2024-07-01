@@ -289,23 +289,38 @@ Following programs need to be installed for running from source on Windows:
      ```
 
 ## Installation
-- After cloning Cura in step 2. of the Cura Documentation, Clone Fraktory/Cura Installation
-- Follow step 3 onwards at https://github.com/Ultimaker/Cura/wiki/Running-Cura-from-Source
-
-
-If you face issue to run below command
-
-   `.\venv\Scripts\activate.ps1`  
-
-   in case of DLL issue try: https://github.com/Ultimaker/Cura/issues/17717
-
+1. In case you are using custom Cura Engine:
+   - Make sure cura engine is commited out from requirememts pf conandata.yaml
+   - Install Cura Engine with the following steps:
+      ```
+      conan config install https://github.com/ultimaker/conan-config.git
+      conan profile new default --detect --force
+      git clone https://github.com/FracktalWorks/CuraEngine.git
+      cd CuraEngine
+      conan create . curaengine/5.7.2@FracktalWorks/stable --build=missing --update
+      ```
+2. Incase you are using CuraEngine from the Ultimaker source:
+   - Uncomment the version of cura engine to use in conandata.yaml
+3. Install Fracktory:
    ```
-   $env:PYTHONPATH = 'C:\Users\Vijay\Documents\GitHub\Fracktory-5>\venv\Scripts'
-   .\venv\Scripts\activate.ps1 
-   echo $env:PYTHONPATH  
-   python cura_app.py
-
+   conan config install https://github.com/ultimaker/conan-config.git
+   conan profile new default --detect --force
+   https://github.com/FracktalWorks/Fracktory-5.git
+   cd Fracktory-5
+   # If using custom Curaengine:
+   conan install . --build=missing --update --require-override=curaengine/5.7.2@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
+   # If using Curaengine from Ultimaker source:
+   conan install . --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
    ```
+## Activate and run
+
+1. set environment part to python installed in the builds virtual environment:
+   `PS C:\Users\Vijay\Documents\GitHub\Fracktory-5> $env:PYTHONPATH = 'C:\Users\Vijay\Documents\GitHub\Fracktory-5\venv\Scripts'`
+2. Activate virtual environment:
+   `.\venv\Scripts\activate.ps1`
+3. Run:
+   `python cura_app.py`
+
 
    ## Settings latest verion for update checks:
 
@@ -339,14 +354,14 @@ If you face issue to run below command
 ### Updating To latest Version of Ultimaker Cura:
 
 1. On Github website, go to Main of Fracktory-5, and Fork Sync. 
-2. Pull the changes from the main branch of Fracktory-5 to your local of Main using github desktop.
+2. Pull the changes from the "main" branch of Fracktory-5 to your local  "Main" branch using github desktop.
 3. In the history navigate to the commit where the version was updated. right click and select "Create branch from commit"
 3. Create a new branch on Fracktory-5 with the new version number like "Fracktory-5.6.0"
 4. In github Desktop, switch to the new branch.
-5. Merge the previous branch version of Fracktory 5 into current branch and resolve conflicts if any.
+5. Merge the previous release branch version of Fracktory 5 into current branch and resolve conflicts if any.
 4. Update the version number in `latest.json` file in `Fracktory-5` folder in the following format to have cura check for latest version available
-5. Update guthub actions workflow with latest verion number
-6. change mster branch to this new version on Github website.
+5. Update guthub actions workflow with latest verion numbers
+6. change master branch to this new version on Github website.
 
 
 
