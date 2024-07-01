@@ -220,23 +220,16 @@
             {
                 "bridge_over_support":
                 {
-                    "label": "Bridge Over Support",
-                    "description": "Enable bridge settings over support ",
-                    "type": "bool",
                     "default_value": true,
+                    "description": "Enable bridge settings over support ",
+                    "label": "Bridge Over Support",
                     "resolve": "any(extruderValues('bridge_settings_enabled'))",
-                    "settable_per_mesh": true,
                     "settable_per_extruder": false,
-                    "settable_per_meshgroup": false
+                    "settable_per_mesh": true,
+                    "settable_per_meshgroup": false,
+                    "type": "bool"
                 }
             }
         }
-        
     }
 }
-
-
-
-
-
-
