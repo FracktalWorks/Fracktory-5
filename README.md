@@ -1,21 +1,3 @@
-<br>
-
-<div align = center>
-
-[![Badge Issues]][Issues]   
-[![Badge PullRequests]][PullRequests]   
-[![Badge Closed]][Closed]
-
-[![Badge Size]][#]   
-[![Badge License]][License]   
-[![Badge Contributors]][Contributors]
-
-[![Badge Test]][Test]   
-[![Badge Conan]][Conan]   
-[![Badge Downloads]][Downloads]
-<br>
-<br>
-
 ![Logo]
 
 # Fracktory
@@ -98,7 +80,7 @@
 [Button Report]: https://img.shields.io/badge/Report_Issues-C9284D?style=for-the-badge&logoColor=white&logo=Cliqz
 
 
-# Cura-Slicer-Development
+# Fracktory-Cura-Slicer-Development
 Compiling Cura from Source using documentation 
 
 ## Installing Requirements
