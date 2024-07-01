@@ -136,7 +136,7 @@
         "min_feature_size": { "value": "0.05" },
         "min_wall_line_width": { "value": "0.8 * machine_nozzle_size" },
         "minimum_interface_area": { "value": 10 },
-        "minimum_support_area": { "value": 2 },
+        "minimum_support_area": { "value": 4 },
         "optimize_wall_printing_order": { "value": true },
         "raft_airgap": { "value": "0.15 if machine_nozzle_size <= 0.25 else 0.25 if machine_nozzle_size <= 0.4 else 0.3 if machine_nozzle_size <= 0.6 else 0.35" },
         "raft_base_line_spacing": { "value": "2*raft_base_line_width" },
