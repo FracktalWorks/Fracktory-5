@@ -205,7 +205,7 @@
         "support_offset": { "value": "machine_nozzle_size * 1.5" },
         "support_pattern": { "value": "'zigzag'" },
         "support_skip_some_zags": { "value": "True if support_pattern== 'zigzag' else False" },
-        "support_skip_zag_per_mm": { "value": 5 },
+        "support_skip_zag_per_mm": { "value": 10 },
         "support_tower_diameter": { "value": "5" },
         "support_tower_maximum_supported_diameter": { "value": "support_tower_diameter" },
         "support_tower_roof_angle": { "value": "0 if support_interface_enable else 65" },
