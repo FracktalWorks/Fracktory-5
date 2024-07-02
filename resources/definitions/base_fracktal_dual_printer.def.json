@@ -50,7 +50,7 @@
         "support_interface_pattern": { "value": "'concentric' if extruderValue(support_interface_extruder_nr,'material_is_support_material') or multimaterial_support_optimisation != 'normal' else 'zigzag'" },
         "support_material_flow": { "value": "material_flow if extruderValue(support_extruder_nr,'material_is_support_material') or multimaterial_support_optimisation != 'normal' else 0.9 * material_flow" },
         "support_skip_some_zags": { "value": "False if extruderValue(support_extruder_nr,'material_is_support_material') else True if support_pattern == 'zigzag' else False" },
-        "support_wall_count": { "value": "1 if multimaterial_support_optimisation == 'soluble_wall' or support_structure == 'tree' else 0" },
+        "support_wall_count": { "value": "1 if multimaterial_support_optimisation == 'support_wall' or support_structure == 'tree' else 0" },
         "support_z_distance": { "value": "0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') or multimaterial_support_optimisation != 'normal' else min(0.2, layer_height) if support_structure != 'tree' else layer_height" },
         "switch_extruder_extra_prime_amount": { "value": "0.5" },
         "switch_extruder_prime_speed": { "value": "25" },
@@ -75,7 +75,7 @@
                         "breakaway_support": "Breakaway Support",
                         "interface_only": "Place only on Interface",
                         "normal": "Normal",
-                        "soluble_wall": "Wall Around Support"
+                        "support_wall": "Wall Around Support"
                     },
                     "settable_per_extruder": false,
                     "settable_per_mesh": true,
