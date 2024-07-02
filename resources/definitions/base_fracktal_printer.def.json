@@ -228,6 +228,60 @@
     },
     "settings":
     {
+        "material":
+        {
+            "children":
+            {
+                "max_speed_material_temp":
+                {
+                    "label": "Printing Temperature for high speed printing",
+                    "description": "The temperature used for printing.",
+                    "unit": "\u00b0C",
+                    "type": "float",
+                    "default_value": 210,
+                    "value": "default_material_print_temperature",
+                    "minimum_value": "-273.15",
+                    "minimum_value_warning": "0",
+                    "maximum_value_warning": "300",
+                    "maximum_value": "500",
+                    "enabled": "machine_nozzle_temp_enabled",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true
+                }
+            }
+
+        },
+        "speed":
+        {
+            "children":
+            {
+                "default_print_speed":
+                {
+                    "label": "Default Print Speed for Material",
+                    "description": "The speed at which printing happens.",
+                    "unit": "mm/s",
+                    "type": "float",
+                    "minimum_value": "0.1",
+                    "maximum_value_warning": "150",
+                    "maximum_value": "math.sqrt(machine_max_feedrate_x ** 2 + machine_max_feedrate_y ** 2)",
+                    "default_value": 60,
+                    "settable_per_mesh": true
+                },
+                "max_print_speed":
+                {
+                    "label": "Maximum Material Print Speed",
+                    "description": "The speed at which printing happens.",
+                    "unit": "mm/s",
+                    "type": "float",
+                    "minimum_value": "0.1",
+                    "maximum_value_warning": "200",
+                    "maximum_value": "math.sqrt(machine_max_feedrate_x ** 2 + machine_max_feedrate_y ** 2)",
+                    "default_value": 60,
+                    "settable_per_mesh": true
+                }
+            }
+            
+        },
         "experimental":
         {
             "children":

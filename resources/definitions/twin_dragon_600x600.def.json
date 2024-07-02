@@ -27,6 +27,9 @@
         "machine_depth": { "default_value": 600 },
         "machine_height": { "default_value": 400 },
         "machine_name": { "default_value": "Twin Dragon 600 x 600" },
-        "machine_width": { "default_value": 600 }
+        "machine_width": { "default_value": 600 },
+        "machine_max_feedrate_x": { "value": 300 },
+        "machine_max_feedrate_y": { "value": 300 }
+        
     }
 }
