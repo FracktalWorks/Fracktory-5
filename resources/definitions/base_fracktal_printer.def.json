@@ -180,7 +180,7 @@
         "speed_support_bottom": { "value": "speed_support_infill * 0.9" },
         "speed_support_infill": { "value": "speed_print" },
         "speed_support_interface": { "value": "speed_support_infill * 0.75" },
-        "speed_topbottom": { "value": "min(round(speed_print * 0.75, 0),100" },
+        "speed_topbottom": { "value": "min(round(speed_print * 0.75, 0),80" },
         "speed_travel": { "value": "max(100,speed_print)" },
         "speed_travel_layer_0": { "value": "80" },
         "speed_wall": { "value": "min(round(speed_print * 0.75, 0),80)" },
