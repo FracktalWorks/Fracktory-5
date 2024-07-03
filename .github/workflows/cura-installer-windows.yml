@@ -65,8 +65,10 @@ env:
   STAGING: False
 
 jobs:
-  cura-installer-create:
-    runs-on: ${{ inputs.operating_system }}
+  # cura-installer-create:
+  #   runs-on: ${{ inputs.operating_system }}
+  build:
+    runs-on: [self-hosted, VIJAYS-PRECISION]
 
     steps:
       - name: Checkout repo
