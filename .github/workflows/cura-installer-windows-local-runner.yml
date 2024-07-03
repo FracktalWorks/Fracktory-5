@@ -118,6 +118,7 @@ jobs:
       
       - name: Clone CuraEngine from Fracktal Works repository
         run: |
+          cd ..
           git clone https://github.com/FracktalWorks/CuraEngine.git
           cd CuraEngine
           conan create . curaengine/5.7.2@FracktalWorks/stable --build=missing --update
@@ -176,15 +177,15 @@ jobs:
       - name: Summarize the used dependencies
         run: python runner_scripts/summarize_used_dependencies.py --installer_filename ${{ inputs.installer_name }}
 
-      - name: Create PFX certificate from BASE64_PFX_CONTENT secret
-        id: create-pfx
-        env:
-          PFX_CONTENT: ${{ secrets.WIN_CERT_INSTALLER_CER }}
-        run: |
-          $pfxPath = Join-Path -Path $env:RUNNER_TEMP -ChildPath "cert.pfx"; 
-          $encodedBytes = [System.Convert]::FromBase64String($env:PFX_CONTENT); 
-          Set-Content $pfxPath -Value $encodedBytes -AsByteStream;
-          echo "PFX_PATH=$pfxPath" >> $env:GITHUB_OUTPUT;
+      # - name: Create PFX certificate from BASE64_PFX_CONTENT secret
+      #   id: create-pfx
+      #   env:
+      #     PFX_CONTENT: ${{ secrets.WIN_CERT_INSTALLER_CER }}
+      #   run: |
+      #     $pfxPath = Join-Path -Path $env:RUNNER_TEMP -ChildPath "cert.pfx"; 
+      #     $encodedBytes = [System.Convert]::FromBase64String($env:PFX_CONTENT); 
+      #     Set-Content $pfxPath -Value $encodedBytes -AsByteStream;
+      #     echo "PFX_PATH=$pfxPath" >> $env:GITHUB_OUTPUT;
 
       - name: Create the Windows msi installer (Powershell)
         run: |
