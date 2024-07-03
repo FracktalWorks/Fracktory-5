@@ -187,10 +187,10 @@ jobs:
       #     Set-Content $pfxPath -Value $encodedBytes -AsByteStream;
       #     echo "PFX_PATH=$pfxPath" >> $env:GITHUB_OUTPUT;
 
-      - name: Create the Windows msi installer (Powershell)
-        run: |
-          python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\Fracktory "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
-        working-directory: dist
+      # - name: Create the Windows msi installer (Powershell)
+      #   run: |
+      #     python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\Fracktory "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
+      #   working-directory: dist
 
       # - name: Sign the Windows msi installer (Powershell)
       #   env:
