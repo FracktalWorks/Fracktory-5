@@ -206,10 +206,10 @@ jobs:
       #     & "C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe" sign /f $Env:PFX_PATH /p "$Env:WIN_CERT_INSTALLER_CER_PASS" /fd SHA256 /t http://timestamp.digicert.com "${{ inputs.installer_name }}.msi"
       #   working-directory: dist
 
-      - name: Create the Windows exe installer (Powershell)
-        run: |
-          python ..\cura_inst\packaging\NSIS\create_windows_installer.py ../cura_inst . "${{inputs.installer_name}}.exe"
-        working-directory: dist
+      # - name: Create the Windows exe installer (Powershell)
+      #   run: |
+      #     python ..\cura_inst\packaging\NSIS\create_windows_installer.py ../cura_inst . "${{inputs.installer_name}}.exe"
+      #   working-directory: dist
 
       # - name: Sign the Windows exe installer (Powershell)
       #   env:
@@ -227,21 +227,21 @@ jobs:
       #   if: ${{ always() && ! inputs.conan_internal }}
       #   run: conan upload "*" -r cura --all -c
 
-      # - name: Upload the msi
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{inputs.installer_name}}-msi
-      #     path: |
-      #       dist/${{inputs.installer_name }}.msi
-      #     retention-days: 5
-
-      - name: Upload the exe
+      - name: Upload the msi
         uses: actions/upload-artifact@v3
         with:
-          name: ${{inputs.installer_name}}-exe
+          name: ${{inputs.installer_name}}-msi
           path: |
-            dist/${{inputs.installer_name }}.exe
+            dist/${{inputs.installer_name }}.msi
           retention-days: 5
+
+      # - name: Upload the exe
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ${{inputs.installer_name}}-exe
+      #     path: |
+      #       dist/${{inputs.installer_name }}.exe
+      #     retention-days: 5
 
       # NOTE: The extension is .sh, since this isn't going to build-environment, so not on the Win build image.
       - name: Write the run info
