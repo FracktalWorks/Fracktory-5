@@ -97,8 +97,8 @@ jobs:
           cache: pip
           cache-dependency-path: .\.github\workflows\requirements-runner.txt
 
-      # - name: Install Python requirements and Create default Conan profile
-      #   run: pip install -r .\.github\workflows\requirements-runner.txt
+      - name: Install Python requirements and Create default Conan profile
+        run: pip install -r .\.github\workflows\requirements-runner.txt
 
       # - name: Setup pipeline caches
       #   run: |
