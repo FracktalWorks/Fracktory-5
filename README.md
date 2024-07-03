@@ -341,3 +341,4 @@ There may be issues with running newer build environment, Here are settings that
 4. Conan 1.60.2
 5. sip 6.8.3
 6. python 3.10.11
+7. conan 1.60.2
