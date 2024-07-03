@@ -220,13 +220,13 @@ jobs:
       #   if: ${{ always() && ! inputs.conan_internal }}
       #   run: conan upload "*" -r cura --all -c
 
-      - name: Upload the msi
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{inputs.installer_name}}-msi
-          path: |
-            dist/${{inputs.installer_name }}.msi
-          retention-days: 5
+      # - name: Upload the msi
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ${{inputs.installer_name}}-msi
+      #     path: |
+      #       dist/${{inputs.installer_name }}.msi
+      #     retention-days: 5
 
       - name: Upload the exe
         uses: actions/upload-artifact@v3
