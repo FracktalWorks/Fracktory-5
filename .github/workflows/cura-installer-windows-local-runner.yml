@@ -177,20 +177,20 @@ jobs:
       - name: Summarize the used dependencies
         run: python runner_scripts/summarize_used_dependencies.py --installer_filename ${{ inputs.installer_name }}
 
-      # - name: Create PFX certificate from BASE64_PFX_CONTENT secret
-      #   id: create-pfx
-      #   env:
-      #     PFX_CONTENT: ${{ secrets.WIN_CERT_INSTALLER_CER }}
-      #   run: |
-      #     $pfxPath = Join-Path -Path $env:RUNNER_TEMP -ChildPath "cert.pfx"; 
-      #     $encodedBytes = [System.Convert]::FromBase64String($env:PFX_CONTENT); 
-      #     Set-Content $pfxPath -Value $encodedBytes -AsByteStream;
-      #     echo "PFX_PATH=$pfxPath" >> $env:GITHUB_OUTPUT;
+      - name: Create PFX certificate from BASE64_PFX_CONTENT secret
+        id: create-pfx
+        env:
+          PFX_CONTENT: ${{ secrets.WIN_CERT_INSTALLER_CER }}
+        run: |
+          $pfxPath = Join-Path -Path $env:RUNNER_TEMP -ChildPath "cert.pfx"; 
+          $encodedBytes = [System.Convert]::FromBase64String($env:PFX_CONTENT); 
+          Set-Content $pfxPath -Value $encodedBytes;
+          echo "PFX_PATH=$pfxPath" >> $env:GITHUB_OUTPUT;
 
-      # - name: Create the Windows msi installer (Powershell)
-      #   run: |
-      #     python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\Fracktory "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
-      #   working-directory: dist
+      - name: Create the Windows msi installer (Powershell)
+        run: |
+          python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\Fracktory "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
+        working-directory: dist
 
       # - name: Sign the Windows msi installer (Powershell)
       #   env:
@@ -220,13 +220,13 @@ jobs:
       #   if: ${{ always() && ! inputs.conan_internal }}
       #   run: conan upload "*" -r cura --all -c
 
-      # - name: Upload the msi
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{inputs.installer_name}}-msi
-      #     path: |
-      #       dist/${{inputs.installer_name }}.msi
-      #     retention-days: 5
+      - name: Upload the msi
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{inputs.installer_name}}-msi
+          path: |
+            dist/${{inputs.installer_name }}.msi
+          retention-days: 5
 
       - name: Upload the exe
         uses: actions/upload-artifact@v3
