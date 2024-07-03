@@ -1,12 +1,5 @@
-![Logo]
-
 # Fracktory
-
-*State-of-the-art slicer app to prepare* <br>
-*your 3D models for your 3D printer.*
-
-*With hundreds of settings & community-managed print profiles,* <br>
-*Fracktory is sure to lead your next project to a success.*
+based on Ultimaker Cura
 
 <br>
 <br>
@@ -342,7 +335,7 @@ Following programs need to be installed for running from source on Windows:
 -------------------------------------------------------------------------
 There may be issues with running newer build environment, Here are settings that have worked:
 
-1. Visual Studio 17.8.4  [Main cause of pyArcus DLL issue when using actions and local build]
+1. Visual Studio 17.8.4  [https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-history]
 2. Cmake 3.27.8
 3. Ninja 1.11.1
 4. Conan 1.60.2
