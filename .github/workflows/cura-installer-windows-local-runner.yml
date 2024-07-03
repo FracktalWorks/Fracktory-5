@@ -1,4 +1,4 @@
-name: Fracktory Windows Installer
+name: Fracktory Windows Installer Local Runner
 run-name: 5.7.2 for Windows-${{ inputs.architecture }} by @${{ github.actor }}
 
 on:
@@ -43,7 +43,7 @@ on:
       operating_system:
         description: 'OS'
         required: true
-        default: 'windows-2022'
+        default: 'Windows'
         type: string
 
       conan_internal:
