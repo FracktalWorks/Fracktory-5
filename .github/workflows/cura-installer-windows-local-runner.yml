@@ -78,12 +78,12 @@ jobs:
           fetch-depth: 1
           ref: ${{ github.head_ref }}
 
-      # - name: Checkout repo PR
-      #   uses: actions/checkout@v4
-      #   if: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
-      #   with:
-      #     fetch-depth: 1
-      #     ref: ${{ github.base_ref }}
+      - name: Checkout repo PR
+        uses: actions/checkout@v4
+        if: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
+        with:
+          fetch-depth: 1
+          ref: ${{ github.base_ref }}
 
       # - name: Sync pip requirements
       #   run: wget https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/.github/workflows/requirements-runner.txt
@@ -107,22 +107,22 @@ jobs:
       # - name: Create default Conan profile
       #   run: conan profile new default --detect --force
 
-      # - name: Get Conan configuration
-      #   run: |
-      #     $env:Path += ";C:\Program Files (x86)\NSIS"
-      #     conan config install https://github.com/Ultimaker/conan-config.git
-      #     conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/${{ runner.os }}/${{ runner.arch }}"
+      - name: Get Conan configuration
+        run: |
+          $env:Path += ";C:\Program Files (x86)\NSIS"
+          conan config install https://github.com/Ultimaker/conan-config.git
+          conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/${{ runner.os }}/${{ runner.arch }}"
 
-      # - name: Add Cura private Artifactory remote
-      #   if: ${{ inputs.conan_internal }}
-      #   run: conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/internal"
+      - name: Add Cura private Artifactory remote
+        if: ${{ inputs.conan_internal }}
+        run: conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/internal"
       
-      # - name: Clone CuraEngine from Fracktal Works repository
-      #   run: |
-      #     cd ..
-      #     git clone https://github.com/FracktalWorks/CuraEngine.git
-      #     cd CuraEngine
-      #     conan create . curaengine/5.7.2@FracktalWorks/stable --build=missing --update
+      - name: Clone CuraEngine from Fracktal Works repository
+        run: |
+          cd ..
+          git clone https://github.com/FracktalWorks/CuraEngine.git
+          cd CuraEngine
+          conan create . curaengine/5.7.2@FracktalWorks/stable --build=missing --update
 
       # - name: Cache Conan downloads
       #   uses: actions/cache@v3
@@ -137,15 +137,16 @@ jobs:
           echo $env:GITHUB_PATH
           echo $env:WIX
 
-      # - name: Create the Packages (Powershell)
-      #   run: |
-      #     conan create . local/test --build=missing --update -c tools.build:skip_test=True
-      #     conan install cura/5.7.2@local/test  ${{ inputs.conan_args }} --require-override=curaengine/5.7.2@FracktalWorks/stable --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo -s arcus:build_type=RelWithDebInfo -s clipper:build_type=RelWithDebInfo
+
+      - name: Create the Packages (Powershell)
+        run: |
+          conan create . local/test --build=missing --update -c tools.build:skip_test=True
+          conan install cura/5.7.2@local/test  ${{ inputs.conan_args }} --require-override=curaengine/5.7.2@FracktalWorks/stable --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo -s arcus:build_type=RelWithDebInfo -s clipper:build_type=RelWithDebInfo
 
 
       - name: Set Environment variables for Cura (Powershell)
         run: |
-          echo "${Env:WIX}\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          echo "C:\Program Files (x86)\WiX Toolset v3.14\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           .\cura_inst\Scripts\activate_github_actions_env.ps1
           .\cura_inst\Scripts\activate_github_actions_version_env.ps1
 
@@ -193,10 +194,10 @@ jobs:
           Set-Content $pfxPath -Value $encodedBytes;
           echo "PFX_PATH=$pfxPath" >> $env:GITHUB_OUTPUT;
 
-      # - name: Create the Windows msi installer (Powershell)
-      #   run: |
-      #     python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\Fracktory "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
-      #   working-directory: dist
+      - name: Create the Windows msi installer (Powershell)
+        run: |
+          python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\Fracktory "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
+        working-directory: dist
 
       # - name: Sign the Windows msi installer (Powershell)
       #   env:
