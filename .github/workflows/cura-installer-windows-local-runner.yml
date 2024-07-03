@@ -121,7 +121,6 @@ jobs:
           git clone https://github.com/FracktalWorks/CuraEngine.git
           cd CuraEngine
           conan create . curaengine/5.7.2@FracktalWorks/stable --build=missing --update
-          cd -
 
       # - name: Cache Conan downloads
       #   uses: actions/cache@v3
