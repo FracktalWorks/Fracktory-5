@@ -166,8 +166,8 @@ jobs:
         run: |
           New-Item -ItemType Directory -Force -Path runner_scripts
           cd runner_scripts
-          wget https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/runner_scripts/cura_installer_filename.py
-          wget https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/runner_scripts/summarize_used_dependencies.py
+          Invoke-WebRequest -URI https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/runner_scripts/cura_installer_filename.py -OutFile cura_installer_filename.py
+          Invoke-WebRequest -URI https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/runner_scripts/summarize_used_dependencies.py -OutFile summarize_used_dependencies.py
 
       - name: Output the name file name and extension
         id: filename
