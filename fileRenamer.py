@@ -34,7 +34,7 @@ def replace_substring_in_filename_multiroot():
             os.rename(path, newname)
             print(newname)
 
-def find_and_replace_in_files():
+def find_and_replace_in_files_matching_substring():
     """
     Finds and replaces a string in all files within a folder tree where the file name contains a specific substring.
 
@@ -65,4 +65,4 @@ def find_and_replace_in_files():
 
 if __name__ == "__main__":
 
-    replace_substring_in_files_single_root()
+    find_and_replace_in_files_matching_substring()
