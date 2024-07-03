@@ -109,6 +109,7 @@ jobs:
 
       - name: Get Conan configuration
         run: |
+          $env:Path += ";C:\Program Files (x86)\NSIS"
           conan config install https://github.com/Ultimaker/conan-config.git
           conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/${{ runner.os }}/${{ runner.arch }}"
 
@@ -130,6 +131,11 @@ jobs:
       #     key: ${{ runner.os }}-conan-downloads-${{ github.run_id }}
       #     restore-keys: |
       #       ${{ runner.os }}-conan-downloads-
+
+      - name: echo environment variables 
+        run: |
+          echo $env:GITHUB_PATH
+          echo $env:WIX
 
       - name: Create the Packages (Powershell)
         run: |

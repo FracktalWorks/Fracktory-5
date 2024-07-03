@@ -258,6 +258,9 @@ Following programs need to be installed for running from source on Windows:
      ```
 
 ## Installation
+
+remove older packages with `conan remove "*" -f`. delece .conan folders in Uers and C:/ or D:/
+
 1. In case you are using custom Cura Engine:
    - Install Cura Engine with the following steps:
       ```
