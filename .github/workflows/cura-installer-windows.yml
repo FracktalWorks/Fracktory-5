@@ -68,7 +68,7 @@ jobs:
   # cura-installer-create:
   #   runs-on: ${{ inputs.operating_system }}
   build:
-    runs-on: [self-hosted, VIJAYS-PRECISION]
+    runs-on: [self-hosted, Windows]
 
     steps:
       - name: Checkout repo
