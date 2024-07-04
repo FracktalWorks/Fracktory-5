@@ -86,7 +86,7 @@ jobs:
           ref: ${{ github.base_ref }}
 
       - name: Sync pip requirements
-        run: wget https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/.github/workflows/requirements-runner.txt
+        run: Invoke-WebRequest -URI https://raw.githubusercontent.com/Ultimaker/cura-workflows/main/.github/workflows/requirements-runner.txt -OutFile requirements-runner.txt
         working-directory: .github\workflows
 
 
