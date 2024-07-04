@@ -117,12 +117,13 @@ jobs:
         if: ${{ inputs.conan_internal }}
         run: conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/internal"
       
-      # - name: Clone fdm_materials from Fracktal Works repository
-      #   run: |
-      #     git clone https://github.com/FracktalWorks/CuraEngine.git
-      #     cd CuraEngine
-      #     conan create . curaengine/5.6.0@FracktalWorks/stable --build=missing --update
-      #     cd -
+      - name: Clone CuraEngine from Fracktal Works repository
+        run: |
+          cd ..
+          git clone https://github.com/FracktalWorks/CuraEngine.git
+          cd CuraEngine
+          conan create . curaengine/5.7.2@FracktalWorks/stable --build=missing --update
+
 
       - name: Cache Conan downloads
         uses: actions/cache@v3
