@@ -88,15 +88,6 @@ jobs:
         working-directory: .github\workflows
 
 
-      - name: Echo $Env:WIX 
-        run: |
-          echo $Env:WIX
-          cmake --version
-          ninja --version
-          python --version
-          conan --version
-          pip show sip
-
       - name: Setup Python and pip
         uses: actions/setup-python@v4
         with:
@@ -106,6 +97,15 @@ jobs:
 
       - name: Install Python requirements and Create default Conan profile
         run: pip install -r .\.github\workflows\requirements-runner.txt
+
+      - name: Echo $Env:WIX 
+        run: |
+          echo $Env:WIX
+          cmake --version
+          ninja --version
+          python --version
+          conan --version
+          pip show sip
 
       - name: Setup pipeline caches
         run: |
