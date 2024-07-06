@@ -89,7 +89,13 @@ jobs:
 
 
       - name: Echo $Env:WIX 
-        run: echo $Env:WIX
+        run: |
+          echo $Env:WIX
+          cmake --version
+          ninja --version
+          python --version
+          conan --version
+          pip show sip
 
       - name: Setup Python and pip
         uses: actions/setup-python@v4
