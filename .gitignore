@@ -103,3 +103,4 @@ curaengine_plugin_gradual_flow.exe
 /runner_scripts
 Fracktory.nsi
 fileassoc.nsh
+.github/workflows/requirements-runner.txt
