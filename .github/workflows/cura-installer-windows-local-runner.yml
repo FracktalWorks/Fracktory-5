@@ -119,7 +119,10 @@ jobs:
       - name: Clone CuraEngine from Fracktal Works repository
         run: |
           cd ..
-          rm -r CuraEngine
+          |
+          if [ -d "CuraEngine" ]; then
+            rm -rf CuraEngine
+          fi
           git clone https://github.com/FracktalWorks/CuraEngine.git
           cd CuraEngine
           conan create . curaengine/5.7.2@FracktalWorks/stable --build=missing --update
