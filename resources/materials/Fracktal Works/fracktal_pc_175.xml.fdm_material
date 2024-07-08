@@ -33,7 +33,7 @@ Generic PC 1.75mm profile. The data in this file may not be correct for your spe
         <cura:setting key="cool_fan_speed_max">30</cura:setting>
         <cura:setting key="support_fan_enable">true</cura:setting>
         <cura:setting key="support_supported_skin_fan_speed">30</cura:setting>
-        <cura:setting key="brim_line_count">4</cura:setting>
+        <cura:setting key="brim_line_count">10</cura:setting>
         <cura:setting key="speed_print">60</cura:setting>
 
 

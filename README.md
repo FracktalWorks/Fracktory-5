@@ -287,7 +287,7 @@ remove older packages with
 ## Activate and run
 
 1. set environment part to python installed in the builds virtual environment:
-   `PS C:\Users\Vijay\Documents\GitHub\Fracktory-5> $env:PYTHONPATH = 'C:\Users\Vijay\Documents\GitHub\Fracktory-5\venv\Scripts'`
+   `$env:PYTHONPATH = 'C:\Users\Vijay\Documents\GitHub\Fracktory-5\venv\Scripts'`
 2. Activate virtual environment:
    `.\venv\Scripts\activate.ps1`
 3. Run:
@@ -347,3 +347,5 @@ There may be issues with running newer build environment, Here are settings that
 5. sip 6.8.3
 6. python 3.10.11
 7. conan 1.60.2
+
+Make sure single instange of VKPG via VS code is only installed.
