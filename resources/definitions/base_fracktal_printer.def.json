@@ -175,9 +175,9 @@
         "skin_overlap": { "value": 25 },
         "skirt_brim_minimal_length": { "value": 150 },
         "small_skin_width": { "value": 4 },
-        "speed_layer_0": { "value": "min(30, round(speed_print * 0.5, 0))" },
+        "speed_layer_0": { "value": "min(20, round(speed_print * 0.4, 0))" },
         "speed_print": { "value": "80" },
-        "speed_support": { "value": "speed_print * 0.75 if support_structure == 'tree' else speed_print" },
+        "speed_support": { "value": "speed_print * 0.75 if support_structure == 'tree' and strengthen_tree_support == True else speed_print * 0.85 if support_structure == 'tree' and strengthen_tree_support == False else speed_print" },
         "speed_support_bottom": { "value": "speed_support_infill * 0.9" },
         "speed_support_infill": { "value": "speed_support" },
         "speed_support_interface": { "value": "speed_support_infill * 0.75" },
@@ -191,7 +191,7 @@
         "support_brim_line_count": { "value": "10 if support_structure == 'tree' else brim_line_count" },
         "support_fan_enable": { "value": true },
         "support_infill_angles": { "default_value": "[0]" },
-        "support_infill_rate": { "value": "0 if support_structure == 'tree' else 60 if gradual_support_infill_steps != 0 else 15" },
+        "support_infill_rate": { "value": "5 if strengthen_tree_support == True and support_structure == 'tree' else 0 if strengthen_tree_support == False and support_structure == 'tree' else 60 if gradual_support_infill_steps != 0 else 15" },
         "support_initial_layer_line_distance": { "minimum_value_warning": "0 if support_structure == 'tree' else support_line_width" },
         "support_interface_angles": { "default_value": "[0]" },
         "support_interface_density": { "value": "support_infill_rate if gradual_support_infill_steps != 0 else 60" },
@@ -201,12 +201,9 @@
         "support_interface_offset": { "value": "support_offset" },
         "support_interface_pattern": { "value": "'zigzag'" },
         "support_interface_wall_count": { "value": "1" },
-        "support_line_distance": { "minimum_value_warning": "0 if support_structure == 'tree' else support_line_width" },
-        "support_material_flow": { "value": "material_flow if support_structure == 'tree' else 0.9 * material_flow" },
+        "support_material_flow": { "value": "material_flow if support_structure == 'tree' and strengthen_tree_support == True else 0.9 * material_flow" },
         "support_offset": { "value": "machine_nozzle_size * 1.5" },
         "support_pattern": { "value": "'zigzag'" },
-        "support_skip_some_zags": { "value": "True if support_pattern== 'zigzag' else False" },
-        "support_skip_zag_per_mm": { "value": 10 },
         "support_tower_diameter": { "value": "5" },
         "support_tower_maximum_supported_diameter": { "value": "support_tower_diameter" },
         "support_tower_roof_angle": { "value": "0 if support_interface_enable else 65" },
@@ -218,6 +215,9 @@
         "support_xy_distance": { "value": "machine_nozzle_size * 2" },
         "support_xy_distance_overhang": { "value": "machine_nozzle_size" },
         "support_z_distance": { "value": "min(0.2, layer_height) if support_structure != 'tree' else layer_height" },
+        "support_skip_some_zags": { "value": "True if support_pattern== 'zigzag' else False" },
+        "support_skip_zag_per_mm": { "value": 10 },
+        "support_zag_skip_count": { "minimum_value": 0 },
         "top_bottom_thickness": { "value": "4 * layer_height if 4 * layer_height > 0.8 else 0.8" },
         "wall_0_wipe_dist": { "value": "2 * line_width" },
         "wall_thickness": { "value": "wall_line_width_0 + wall_line_width_x" },
@@ -246,6 +246,25 @@
                     "maximum_value_warning": "300",
                     "maximum_value": "500",
                     "enabled": "machine_nozzle_temp_enabled",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true
+                }
+            }
+
+        },
+        "support":
+        {
+            "children":
+            {
+                "strengthen_tree_support":
+                {
+                    "label": "Strengthen Tree Support",
+                    "description": "Increase strength of tree support because it breaks easily.",
+                    "type": "bool",
+                    "default_value": false,
+                    "value": false,
+                    "enabled": "support_enable and support_structure == 'tree'",
+                    "limit_to_extruder": "support_infill_extruder_nr",
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
                 }

@@ -29,14 +29,14 @@ Generic ABS 1.75mm profile. The data in this file may not be correct for your sp
         <setting key="heated bed temperature">100</setting>
         <setting key="build volume temperature">60</setting>
         <setting key="adhesion tendency">0</setting>
-        <setting key="surface energy">70</setting>
-
+        <setting key="surace energy">70</setting>
         <cura:setting key="cool_fan_speed">0</cura:setting>
         <cura:setting key="cool_fan_speed_max">30</cura:setting>
         <cura:setting key="support_fan_enable">true</cura:setting>
         <cura:setting key="support_supported_skin_fan_speed">30</cura:setting>
         <cura:setting key="brim_line_count">10</cura:setting>
         <cura:setting key="speed_print">60</cura:setting>
+        <cura:setting key="strengthen_tree_support">true</cura:setting>
 
 
 

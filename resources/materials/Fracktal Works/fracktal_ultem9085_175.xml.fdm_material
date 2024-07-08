@@ -51,6 +51,5 @@ Generic ABS 1.75mm profile. The data in this file may not be correct for your sp
         <cura:setting key="material_flow_layer_0">80</cura:setting>
 
 
-
    </settings>
 </fdmmaterial>
