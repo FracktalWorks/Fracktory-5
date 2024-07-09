@@ -172,7 +172,7 @@ class SpoonAntiWarping(Tool):
         # convert as float to avoid further issue
         self._Nb_Layer = int(self._preferences.getValue("spoon_anti_warping/nb_layer"))       
 
-        self._preferences.addPreference("spoon_anti_warping/direct_shape", False)
+        self._preferences.addPreference("spoon_anti_warping/direct_shape", True)
         # convert as bool to avoid further issue
         self._direct_shape = bool(self._preferences.getValue("spoon_anti_warping/direct_shape")) 
 

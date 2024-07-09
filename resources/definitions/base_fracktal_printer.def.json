@@ -209,7 +209,7 @@
         "support_tower_diameter": { "value": "5" },
         "support_tower_maximum_supported_diameter": { "value": "support_tower_diameter" },
         "support_tower_roof_angle": { "value": "0 if support_interface_enable else 65" },
-        "support_tree_branch_reach_limit": { "value": 50 },
+        "support_tree_branch_reach_limit": { "value": 35 },
         "support_tree_max_diameter": { "value": 50 },
         "support_tree_tip_diameter": { "value": 0.8 },
         "support_use_towers": { "value": "False" },
