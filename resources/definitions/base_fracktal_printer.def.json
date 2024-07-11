@@ -138,7 +138,7 @@
         "minimum_interface_area": { "value": 10 },
         "minimum_support_area": { "value": 4 },
         "optimize_wall_printing_order": { "value": true },
-        "raft_airgap": { "value": "0.15 if machine_nozzle_size <= 0.25 else 0.25 if machine_nozzle_size <= 0.4 else 0.3 if machine_nozzle_size <= 0.6 else 0.35" },
+        "raft_airgap": { "value": "0.1 if machine_nozzle_size <= 0.25 else 0.2 if machine_nozzle_size <= 0.4 else 0.25 if machine_nozzle_size <= 0.6 else 0.35" },
         "raft_base_line_spacing": { "value": "2*raft_base_line_width" },
         "raft_base_line_width": { "value": "machine_nozzle_size *2" },
         "raft_base_speed": { "value": "speed_layer_0 * 0.7" },
