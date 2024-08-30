@@ -12,7 +12,7 @@
         "has_materials": true,
         "has_variants": false,
         "has_machine_quality": false,
-        "preferred_material": "generic_pla",
+        "preferred_material": "fracktal_pla_175",
         "preferred_quality_type": "normal",
         "machine_extruder_trains": { "0": "fdmextruder" },
         "supports_usb_connection": true,

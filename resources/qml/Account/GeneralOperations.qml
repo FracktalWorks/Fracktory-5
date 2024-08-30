@@ -16,7 +16,7 @@ Column
     {
         id: title
         anchors.horizontalCenter: parent.horizontalCenter
-        text: catalog.i18nc("@label", "Sign in to the UltiMaker platform")
+        text: catalog.i18nc("@label", "Sign in to the Fracktal Knowledge Base")
         font: UM.Theme.getFont("large_bold")
     }
 
@@ -36,7 +36,7 @@ Column
         id: generalInformationPoints
         anchors.horizontalCenter: parent.horizontalCenter
         horizontalAlignment: Text.AlignLeft
-        text: catalog.i18nc("@text", "- Add material profiles and plug-ins from the Marketplace\n- Back-up and sync your material profiles and plug-ins\n- Share ideas and get help from 48,000+ users in the UltiMaker community")
+        text: catalog.i18nc("@text", "- Get help and tips on 3D Printing \n- Raise Support Tickets \n- Doccumentation & Guides")
         lineHeight: 1.4
         wrapMode: Text.NoWrap
     }
@@ -46,8 +46,8 @@ Column
         anchors.horizontalCenter: parent.horizontalCenter
         width: UM.Theme.getSize("account_button").width
         height: UM.Theme.getSize("account_button").height
-        text: catalog.i18nc("@button", "Sign in")
-        onClicked: Cura.API.account.login()
+        text: catalog.i18nc("@button", "Knowledge Base")
+        onClicked: Qt.openUrlExternally("https://care.fracktal.in/")
         fixedWidthMode: true
     }
 
@@ -55,7 +55,7 @@ Column
     {
         anchors.horizontalCenter: parent.horizontalCenter
         height: UM.Theme.getSize("account_button").height
-        text: catalog.i18nc("@button", "Create a free UltiMaker account")
-        onClicked: Qt.openUrlExternally("https://ultimaker.com/app/ultimaker-cura-account-sign-up?utm_source=cura&utm_medium=software&utm_campaign=menu-signup")
+        text: catalog.i18nc("@button", "Sign Up for Fracktal Works Knowledge Base")
+        onClicked: Qt.openUrlExternally("https://care.fracktal.in/portal/en/signup")
     }
 }

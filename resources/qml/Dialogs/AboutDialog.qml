@@ -175,7 +175,7 @@ UM.Dialog
                     {
                         //Do NOT add dependencies of our dependencies here, nor CI-dependencies!
                         //UltiMaker's own projects and forks.
-                        projectsModel.append({ name: "Cura", description: catalog.i18nc("@label Description for application component", "Graphical user interface"), license: "LGPLv3", url: "https://github.com/Ultimaker/Cura" });
+                        projectsModel.append({ name: "Cura", description: catalog.i18nc("@label Description for application component", "Graphical user interface"), license: "LGPLv3", url: "https://github.com/FracktalWorks/Fracktory-5" });
                         projectsModel.append({ name: "Uranium", description: catalog.i18nc("@label Description for application component", "Application framework"), license: "LGPLv3", url: "https://github.com/Ultimaker/Uranium" });
                         projectsModel.append({ name: "CuraEngine", description: catalog.i18nc("@label Description for application component", "G-code generator"), license: "AGPLv3", url: "https://github.com/Ultimaker/CuraEngine" });
                         projectsModel.append({ name: "libArcus", description: catalog.i18nc("@label Description for application component", "Interprocess communication library"), license: "LGPLv3", url: "https://github.com/Ultimaker/libArcus" });

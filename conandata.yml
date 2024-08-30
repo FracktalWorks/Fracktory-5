@@ -19,13 +19,13 @@ urls:
         cloud_account_api_root: "https://account.ultimaker.com"
         marketplace_root: "https://marketplace.ultimaker.com"
         digital_factory_url: "https://digitalfactory.ultimaker.com"
-        cura_latest_url: "https://software.ultimaker.com/latest.json"
+        cura_latest_url: "https://raw.githubusercontent.com/FracktalWorks/Fracktory-5/main/latest.json"
     staging:
         cloud_api_root: "https://api-staging.ultimaker.com"
         cloud_account_api_root: "https://account-staging.ultimaker.com"
         marketplace_root: "https://marketplace-staging.ultimaker.com"
         digital_factory_url: "https://digitalfactory-staging.ultimaker.com"
-        cura_latest_url: "https://software.ultimaker.com/latest.json"
+        cura_latest_url: "https://raw.githubusercontent.com/FracktalWorks/Fracktory-5/main/latest.json"
 pyinstaller:
     runinfo:
         entrypoint: "cura_app.py"
@@ -75,22 +75,22 @@ pyinstaller:
             package: "uranium"
             src: "site-packages/UM/Qt/qml/UM"
             dst: "PyQt6/Qt6/qml/UM"
-        cura_binary_data:
-            package: "cura_binary_data"
-            src: "resources/cura/resources"
-            dst: "share/cura/resources"
-        uranium_binary_data:
-            package: "cura_binary_data"
-            src: "resources/uranium/resources"
-            dst: "share/uranium/resources"
-        windows_binary_data:
-            package: "cura_binary_data"
-            src: "windows"
-            dst: "share/windows"
-        fdm_materials:
-            package: "fdm_materials"
-            src: "res/resources/materials"
-            dst: "share/cura/resources/materials"
+        # cura_binary_data:
+        #     package: "cura_binary_data"
+        #     src: "resources/cura/resources"
+        #     dst: "share/cura/resources"
+        # uranium_binary_data:
+        #     package: "cura_binary_data"
+        #     src: "resources/uranium/resources"
+        #     dst: "share/uranium/resources"
+        # windows_binary_data:
+        #     package: "cura_binary_data"
+        #     src: "windows"
+        #      dst: "share/windows"
+        # fdm_materials:
+        #     package: "fdm_materials"
+        #     src: "res/resources/materials"
+        #     dst: "share/cura/resources/materials"
         tcl:
             package: "tcl"
             src: "lib/tcl8.6"

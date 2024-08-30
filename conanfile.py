@@ -18,7 +18,7 @@ class CuraConan(ConanFile):
     name = "cura"
     license = "LGPL-3.0"
     author = "UltiMaker"
-    url = "https://github.com/Ultimaker/cura"
+    url = "github.com/FracktalWorks/Fracktory-5"
     description = "3D printer / slicing GUI built on top of the Uranium framework"
     topics = ("conan", "python", "pyqt6", "qt", "qml", "3d-printing", "slicer")
     build_policy = "missing"
@@ -43,7 +43,7 @@ class CuraConan(ConanFile):
         "staging": "False",
         "devtools": False,
         "cloud_api_version": "1",
-        "display_name": "UltiMaker Cura",
+        "display_name": "Fracktory",
         "cura_debug_mode": False,  # Not yet implemented
         "internal": "False",
         "enable_i18n": False,
@@ -275,13 +275,13 @@ class CuraConan(ConanFile):
         # Collect all dll's from PyQt6 and place them in the root
         binaries.extend([(f"{p}", ".") for p in Path(self._site_packages, "PyQt6", "Qt6").glob("**/*.dll")])
 
-        with open(os.path.join(self.recipe_folder, "UltiMaker-Cura.spec.jinja"), "r") as f:
+        with open(os.path.join(self.recipe_folder, "Fracktory.spec.jinja"), "r") as f:
             pyinstaller = Template(f.read())
 
         version = self.conf.get("user.cura:version", default = self.version, check_type = str)
         cura_version = Version(version)
 
-        with open(os.path.join(location, "UltiMaker-Cura.spec"), "w") as f:
+        with open(os.path.join(location, "Fracktory.spec"), "w") as f:
             f.write(pyinstaller.render(
                 name = str(self.options.display_name).replace(" ", "-"),
                 display_name = self._app_name,
@@ -330,10 +330,10 @@ class CuraConan(ConanFile):
         self.options["boost"].header_only = True
         if self.settings.os == "Linux":
             self.options["openssl"].shared = True
-        if self.conf.get("user.curaengine:sentry_url", "", check_type=str) != "":
-            self.options["curaengine"].enable_sentry = True
-            self.options["arcus"].enable_sentry = True
-            self.options["clipper"].enable_sentry = True
+        # if self.conf.get("user.curaengine:sentry_url", "", check_type=str) != "":
+        #     self.options["curaengine"].enable_sentry = True
+        #     self.options["arcus"].enable_sentry = True
+        #     self.options["clipper"].enable_sentry = True
 
     def validate(self):
         version = self.conf.get("user.cura:version", default = self.version, check_type = str)
@@ -390,7 +390,7 @@ class CuraConan(ConanFile):
             copy(self, "CuraEngine", curaengine.bindirs[0], self.source_folder, keep_path = False)
 
             # Copy the external plugins that we want to bundle with Cura
-            rmdir(self,str(self.source_path.joinpath("plugins", "CuraEngineGradualFlow")))
+            rmdir(self, str(self.source_path.joinpath("plugins", "CuraEngineGradualFlow")))
             curaengine_plugin_gradual_flow = self.dependencies["curaengine_plugin_gradual_flow"].cpp_info
             copy(self, "*", curaengine_plugin_gradual_flow.resdirs[0], str(self.source_path.joinpath("plugins", "CuraEngineGradualFlow")), keep_path = True)
             copy(self, "*", curaengine_plugin_gradual_flow.bindirs[0], self.source_folder, keep_path = False)
@@ -402,12 +402,12 @@ class CuraConan(ConanFile):
                 copy(self, "*", curaengine_plugin_gradual_flow.resdirs[0], str(self.source_path.joinpath("plugins", "NativeCADplugin")), keep_path = True)
                 copy(self, "bundled_*.json", curaengine_plugin_gradual_flow.resdirs[1], str(self.source_path.joinpath("resources", "bundled_packages")), keep_path = False)
 
-        # Copy resources of cura_binary_data
-        cura_binary_data = self.dependencies["cura_binary_data"].cpp_info
-        copy(self, "*", cura_binary_data.resdirs[0], str(self._share_dir.joinpath("cura")), keep_path = True)
-        copy(self, "*", cura_binary_data.resdirs[1], str(self._share_dir.joinpath("uranium")), keep_path = True)
-        if self.settings.os == "Windows":
-            copy(self, "*", cura_binary_data.resdirs[2], str(self._share_dir.joinpath("windows")), keep_path = True)
+        # # Copy resources of cura_binary_data
+        # cura_binary_datadependencies["cura_binary_data"].cpp_info
+        # copy(self, "*", cura_binary_data.resdirs[0], str(self._share_dir.joinpath("cura")), keep_path = True)
+        # copy(self, "*", cura_binary_data.resdirs[1], str(self._share_dir.joinpath("uranium")), keep_path = True)
+        # if self.settings.os == "Windows":
+        #     copy(self, "*", cura_binary_data.resdirs[2], str(self._share_dir.joinpath("windows")), keep_path = True)
 
         for dependency in self.dependencies.host.values():
             for bindir in dependency.cpp_info.bindirs:
@@ -417,10 +417,10 @@ class CuraConan(ConanFile):
                 copy(self, "*.pyi", libdir, str(self._site_packages), keep_path = False)
                 copy(self, "*.dylib", libdir, str(self._base_dir.joinpath("lib")), keep_path = False)
 
-        # Copy materials (flat)
-        rmdir(self, os.path.join(self.source_folder, "resources", "materials"))
-        fdm_materials = self.dependencies["fdm_materials"].cpp_info
-        copy(self, "*", fdm_materials.resdirs[0], self.source_folder)
+        # # Copy materials (flat)
+        # rmdir(self, os.path.join(self.source_folder, "resources", "materials"))
+        # fdm_materials = self.dependencies["fdm_materials"].cpp_info
+        # copy(self, "*", fdm_materials.resdirs[0], self.source_folder)
 
         # Copy internal resources
         if self._internal:
@@ -521,8 +521,8 @@ echo "CURA_APP_NAME={{ cura_app_name }}" >> ${{ env_prefix }}GITHUB_ENV
         rmdir(self, os.path.join(self.package_folder, self.cpp.package.resdirs[1], "CuraEngineGradualFlow"))
         rm(self, "bundled_*.json", os.path.join(self.package_folder, self.cpp.package.resdirs[0], "bundled_packages"), recursive = False)
 
-        # Remove the fdm_materials from the package
-        rmdir(self, os.path.join(self.package_folder, self.cpp.package.resdirs[0], "materials"))
+        # # Remove the fdm_materials from the package
+        # rmdir(self, os.path.join(self.package_folder, self.cpp.package.resdirs[0], "materials"))
 
         # Remove the cura_resources resources from the package
         rm(self, "conanfile.py", os.path.join(self.package_folder, self.cpp.package.resdirs[0]))

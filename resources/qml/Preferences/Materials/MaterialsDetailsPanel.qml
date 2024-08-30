@@ -47,6 +47,8 @@ Item
         materialProperties.adhesion_info = currentItem.adhesion_info || ""
         materialProperties.density = currentItem.density || 0.0
         materialProperties.diameter = currentItem.diameter || 0.0
+        materialProperties.weight = currentItem.weight || 0.0
+        materialProperties.cost = currentItem.cost || 0.0
         materialProperties.approximate_diameter = currentItem.approximate_diameter || "0"
     }
 

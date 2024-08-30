@@ -144,10 +144,12 @@ For an overview of the new features in the UltiMaker Factor 4, please watch <a h
 
 * New features and improvements:
 - Introduced the MethodX and MethodXL printers with their materials and the option to write to .makerbot
+- Support for widely used CAD files (Only for UltiMaker Professional or Excellence subscriptions using Cura Enterprise)
 - Prime tower base settings increase the stability of large prime towers; You can tune the Size, Height, and Slope to increase your prime tower's sturdiness
 - Introduced the setting for Raft Line Spacing, but for the prime tower
 - The Start and End gcodes now accept variables, and math including those variables
 - Updated the Support Z Distance to allow for more different values, no longer only multiple layerheights
+- Updated OpenSSL from version 1.1.1 to 3.2.0 to stay on top of the latest security benefits.
 
 * Bug fixes:
 - Fixed a crash for some linux users when trying to open the file menu
@@ -552,7 +554,7 @@ Restored and updated translations for 11 languages
 Online cloud printers are now grouped by type. You can slice with the ('abstract') printer type, and afterwards choose a specific printer to print with.
 
 * Support For 'Guest'-Type Accounts (In Digital Factory)
-Users with the ‘Guest’ role can prepare print jobs in Ultimaker Cura and send them to the printers via Digital Factory. These print jobs will not start until they are approved by a user with an 'Member' or 'Admin' role.
+Users with the ‘Guest’ role can prepare print jobs in Fracktory and send them to the printers via Digital Factory. These print jobs will not start until they are approved by a user with an 'Member' or 'Admin' role.
 
 * More Control Over Initial Layer Flow
 Three new settings: 'Initial Layer Outer Wall Flow', 'Initial Layer Inner Wall Flow', 'Initial Layer Bottom Flow', to better counteract the 'elephants foot' phenomenon.
@@ -700,19 +702,19 @@ Newly created project files will now store which packages they require from the 
 - Support is sometimes missing in detailed parts, where previous releases supported them properly.
 
 [5.0]
-<i><a href="https://youtu.be/kRj7pR4OkQA">Watch the launch event</a> to learn more about Ultimaker Cura 5.0.</i>
+<i><a href="https://youtu.be/kRj7pR4OkQA">Watch the launch event</a> to learn more about Fracktory 5.0.</i>
 
 * New slicing engine
-Following special beta releases to test the Arachne engine, we are pleased to announce our new slicing engine is here in Ultimaker Cura! This all-new engine uses variable line widths when preparing files for printing, meaning you can now print thin and intricate parts more accurately and with greater strength. 
+Following special beta releases to test the Arachne engine, we are pleased to announce our new slicing engine is here in Fracktory! This all-new engine uses variable line widths when preparing files for printing, meaning you can now print thin and intricate parts more accurately and with greater strength. 
 
-* Renewed the Ultimaker Cura Marketplace
-We have streamlined the workflow for accessing the Ultimaker Marketplace inside of Ultimaker Cura. The UI has been improved and it’s now easier and faster to find and install plugins and material profiles.
+* Renewed the Fracktory Marketplace
+We have streamlined the workflow for accessing the Ultimaker Marketplace inside of Fracktory. The UI has been improved and it’s now easier and faster to find and install plugins and material profiles.
 
 * Improved print profiles for Ultimaker printers
-The new slicing engine in Ultimaker Cura 5.0 has helped us to improve our print profiles. This means that users of Ultimaker printers can achieve speed increases of up to 20%.
+The new slicing engine in Fracktory 5.0 has helped us to improve our print profiles. This means that users of Ultimaker printers can achieve speed increases of up to 20%.
 
 * Upgrade from Qt5 to Qt6
-Ultimaker Cura 5.0 is now compatible with Apple M1.
+Fracktory 5.0 is now compatible with Apple M1.
 
 * Other new features and improvements:
 - New Cura icon
@@ -798,7 +800,7 @@ Ultimaker Cura 5.0 is now compatible with Apple M1.
 - Updated the Czech translation, contributed by sustmi
 - Updated some of the Simplified Chinese translation, contributed by iBral
 
-<i>From version 5.0 onwards - Ultimaker Cura is only supported on operating systems actively maintained by their software manufacturer or community. This means Windows 7 and MacOS 10.14 will no longer be supported. 
+<i>From version 5.0 onwards - Fracktory is only supported on operating systems actively maintained by their software manufacturer or community. This means Windows 7 and MacOS 10.14 will no longer be supported. 
 Ubuntu 18.04 is also no longer supported because of the update to Qt6.</i>
 
 [4.13.1]

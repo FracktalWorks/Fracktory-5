@@ -50,45 +50,45 @@ Popup
                     permissionsRequired: ["digital-factory.print-job.read"]
                 },
                 {
-                    displayName: "UltiMaker Marketplace", //Not translated, since it's a brand name.
+                    displayName: "Marketplace", //Not translated, since it's a brand name.
                     thumbnail: UM.Theme.getIcon("Shop", "high"),
-                    description: catalog.i18nc("@tooltip:button", "Extend UltiMaker Cura with plugins and material profiles."),
-                    link: "https://marketplace.ultimaker.com/?utm_source=cura&utm_medium=software&utm_campaign=switcher-marketplace-materials",
+                    description: catalog.i18nc("@tooltip:button", "Extend Fracktory with plugins and material profiles."),
+                    link: "https://fracktal.in",
                     permissionsRequired: []
                 },
                 {
-                    displayName: catalog.i18nc("@label:button", "Sponsor Cura"),
+                    displayName: catalog.i18nc("@label:button", "Sponsor Fracktory"),
                     thumbnail: UM.Theme.getIcon("Heart"),
                     description: catalog.i18nc("@tooltip:button", "Show your support for Cura with a donation."),
-                    link: "https://ultimaker.com/software/ultimaker-cura/sponsor/",
+                    link: "https://www.buymeacoffee.com/vjvarada",
                     permissionsRequired: []
                 },
                 {
-                    displayName: catalog.i18nc("@label:button", "UltiMaker support"),
+                    displayName: catalog.i18nc("@label:button", "Fracktal support"),
                     thumbnail: UM.Theme.getIcon("Help", "high"),
-                    description: catalog.i18nc("@tooltip:button", "Learn how to get started with UltiMaker Cura."),
-                    link: "https://support.ultimaker.com/?utm_source=cura&utm_medium=software&utm_campaign=switcher-support",
+                    description: catalog.i18nc("@tooltip:button", "Learn how to get started with Fracktory."),
+                    link: "https://care.fracktal.in/",
                     permissionsRequired: []
                 },
                 {
                     displayName: catalog.i18nc("@label:button", "Ask a question"),
                     thumbnail: UM.Theme.getIcon("Speak", "high"),
-                    description: catalog.i18nc("@tooltip:button", "Consult the UltiMaker Community."),
-                    link: "https://community.ultimaker.com/?utm_source=cura&utm_medium=software&utm_campaign=switcher-community",
+                    description: catalog.i18nc("@tooltip:button", "Consult the Fracktal Knowledge Base."),
+                    link: "https://care.fracktal.in/",
                     permissionsRequired: []
                 },
                 {
                     displayName: catalog.i18nc("@label:button", "Report a bug"),
                     thumbnail: UM.Theme.getIcon("Bug", "high"),
                     description: catalog.i18nc("@tooltip:button", "Let developers know that something is going wrong."),
-                    link: "https://github.com/Ultimaker/Cura/issues/new/choose",
+                    link: "https://github.com/FracktalWorks/Fracktory-5/issues/new/choose",
                     permissionsRequired: []
                 },
                 {
-                    displayName: "Ultimaker.com", //Not translated, since it's a URL.
+                    displayName: "Fracktal.in", //Not translated, since it's a URL.
                     thumbnail: UM.Theme.getIcon("Browser"),
-                    description: catalog.i18nc("@tooltip:button", "Visit the UltiMaker website."),
-                    link: "https://ultimaker.com/?utm_source=cura&utm_medium=software&utm_campaign=switcher-umwebsite",
+                    description: catalog.i18nc("@tooltip:button", "Visit the Fracktal  website."),
+                    link: "https://fracktal.in",
                     permissionsRequired: []
                 }
             ]

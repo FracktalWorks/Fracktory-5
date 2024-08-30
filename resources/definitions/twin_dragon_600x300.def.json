@@ -1,0 +1,34 @@
+{
+    "version": 2,
+    "name": "Twin Dragon 600 x 300",
+    "inherits": "base_fracktal_idex_printer",
+    "id": "twin_dragon_600x300",
+    "metadata":
+    {
+        "visible": true,
+        "manufacturer": "Twin Dragon",
+        "category": "IDEX Series",
+        "has_machine_materials": true,
+        "has_machine_quality": true,
+        "has_variants": true,
+        "machine_variant_shortcode": "TD",
+        "platform_offset": [
+            0,
+            0,
+            0
+        ],
+        "preferred_quality_type": "normal",
+        "preferred_variant_name": "Model 0.4 mm",
+        "quality_definition": "base_fracktal_printer",
+        "variants_name": "Nozzle"
+    },
+    "overrides":
+    {
+        "machine_depth": { "default_value": 300 },
+        "machine_height": { "default_value": 400 },
+        "machine_name": { "default_value": "Twin Dragon 600 x 300" },
+        "machine_width": { "default_value": 600 },
+        "machine_max_feedrate_x": { "value": 300 },
+        "machine_max_feedrate_y": { "value": 300 }
+    }
+}

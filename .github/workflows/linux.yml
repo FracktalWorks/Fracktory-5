@@ -41,7 +41,7 @@ on:
           - self-hosted-Ubuntu22-X64
 
 jobs:
-  linux-installer:
+  windows-installer:
     uses: ultimaker/cura-workflows/.github/workflows/cura-installer-linux.yml@main
     with:
       cura_conan_version: ${{ inputs.cura_conan_version }}
