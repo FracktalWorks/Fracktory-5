@@ -335,7 +335,7 @@ remove older packages with
 5. Delete all the unnecessary files that will create merge conflicts. Delete all printer profiles in intents, quality, definitions etc. Careful not to delete core files file fdmprinter, fdmextruder.
 6. Merge the previous release branch version of Fracktory 5 into current branch and resolve conflicts if any using github desktop & vscode source control.
 7. Update conandata.yaml with latest versioning
-8. Update the version number in `latest.json` file in `Fracktory-5` folder in the following format to have cura check for latest version available
+8. create `latest.json` file in `Fracktory-5` folder in "main" branch, copying from the latest Fracktory branch to have cura check for latest version available
 9. Update guthub actions workflow with latest verion numbers
 10. change master branch to this new version on Github website.
 11. Update Curaengine in the same way. 
