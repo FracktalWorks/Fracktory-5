@@ -2,7 +2,7 @@ version: "5.8.0"
 requirements:
   - "cura_resources/5.8.0"
   - "uranium/5.8.0"
-  # - "curaengine/5.8.0"
+  - "curaengine/5.8.0"
   # - "cura_binary_data/5.8.0"
   # - "fdm_materials/5.8.0-beta.1"
   - "curaengine_plugin_gradual_flow/0.1.0-beta.4"

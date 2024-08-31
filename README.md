@@ -259,7 +259,7 @@ Following programs need to be installed for running from source on Windows:
      conan --version
      ```
 
-## Installation
+## Installation/Compilation
 
 remove older packages with 
 `conan remove "*" -s -b -f`
@@ -272,7 +272,7 @@ remove older packages with
       conan profile new default --detect --force
       git clone https://github.com/FracktalWorks/CuraEngine.git
       cd CuraEngine
-      conan create . curaengine/5.7.2@FracktalWorks/stable --build=missing --update
+      conan create . curaengine/5.8.0@FracktalWorks/stable --build=missing --update
       ```
 
 2. Install Fracktory:
@@ -282,7 +282,7 @@ remove older packages with
    https://github.com/FracktalWorks/Fracktory-5.git
    cd Fracktory-5
    # If using custom Curaengine:
-   conan install . --build=missing --update --require-override=curaengine/5.7.2@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
+   conan install . --build=missing --update --require-override=curaengine/5.8.0@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
    # If using Curaengine from Ultimaker source:
    conan install . --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
    ```
@@ -336,11 +336,11 @@ remove older packages with
 6. Merge the previous release branch version of Fracktory 5 into current branch and resolve conflicts if any using github desktop & vscode source control.
 7. Update conandata.yaml with latest versioning
 8. create `latest.json` file in `Fracktory-5` folder in "main" branch, copying from the latest Fracktory branch to have cura check for latest version available
-9. Update guthub actions workflow with latest verion numbers
-10. change master branch to this new version on Github website.
+9. Update guthub actions workflow `cura-installer-windows.yml` with latest verion numbers for fracktory and Curaengine
+10. change default  branch to this new version on Github website for Fracktory and CuraEngine.
 11. Update Curaengine in the same way. 
 12. Fist compile latest version of curaengine as the latest version needed by conandata.yaml
-13. compile cura
+13. compile cura using above steps
 
 
 
@@ -348,7 +348,7 @@ remove older packages with
 -------------------------------------------------------------------------
 There may be issues with running newer build environment, Here are settings that have worked:
 
-1. Visual Studio 17.8.4  [https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-history]
+1. Visual Studio 17.9.5  [https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-history]
 2. Cmake 3.27.8
 3. Ninja 1.11.1
 4. Conan 1.60.2

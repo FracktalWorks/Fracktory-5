@@ -80,7 +80,7 @@
         "infill_pattern": { "value": "'zigzag' if infill_sparse_density > 80 else 'triangles'" },
         "infill_sparse_density": { "value": "20" },
         "infill_wipe_dist": { "value": "0 if infill_before_walls == True else wall_line_width_x / 4" },
-        "initial_bottom_layers": { "value": "3" },
+        "initial_bottom_layers": { "value": "3 if bottom_layers == 4 else bottom_layers" },
         "initial_layer_line_width_factor": { "value": 105 },
         "jerk_enabled": { "default_value": false },
         "jerk_print": { "default_value": 10 },
@@ -184,7 +184,7 @@
         "speed_topbottom": { "value": "min(round(speed_print * 0.8, 0),100)" },
         "speed_travel": { "value": "max(100,speed_print)" },
         "speed_travel_layer_0": { "value": "80" },
-        "speed_wall": { "value": "min(round(speed_print * 0.6, 0),100)" },
+        "speed_wall": { "value": "min(round(speed_print * 0.75, 0),100)" },
         "speed_wall_0": { "value": "min(round(speed_wall * 0.75, 0),80)" },
         "speed_wall_x": { "value": "speed_wall" },
         "support_brim_enable": { "value": true },
@@ -225,7 +225,10 @@
         "z_seam_position": { "value": "'backright'" },
         "z_seam_relative": { "value": true },
         "z_seam_type": { "value": "'back'" },
-        "zig_zaggify_infill": { "value": true }
+        "zig_zaggify_infill": { "value": true },
+        "z_seam_on_vertex" : { "value": true },
+        "seam_overhang_angle" : { "value": 40 },
+        "skirt_height" : { "value": 1 }
     },
     "settings":
     {
