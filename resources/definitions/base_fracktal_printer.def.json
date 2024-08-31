@@ -168,12 +168,14 @@
         "retraction_prime_speed": { "value": "retraction_speed * 0.6" },
         "retraction_speed": { "value": "40" },
         "roofing_layer_count": { "value": "1" },
+        "seam_overhang_angle": { "value": 40 },
         "skin_edge_support_thickness": { "value": "4 * layer_height if infill_sparse_density < 30 else 0" },
         "skin_material_flow_layer_0": { "value": "90" },
         "skin_monotonic": { "value": true },
         "skin_outline_count": { "value": "1" },
         "skin_overlap": { "value": 25 },
         "skirt_brim_minimal_length": { "value": 150 },
+        "skirt_height": { "value": 1 },
         "small_skin_width": { "value": 4 },
         "speed_layer_0": { "value": "min(25, round(speed_print * 0.4, 0))" },
         "speed_print": { "value": "80" },
@@ -222,13 +224,11 @@
         "wall_0_wipe_dist": { "value": "2 * line_width" },
         "wall_thickness": { "value": "wall_line_width_0 + wall_line_width_x" },
         "z_seam_corner": { "value": "'z_seam_corner_none'" },
+        "z_seam_on_vertex": { "value": true },
         "z_seam_position": { "value": "'backright'" },
         "z_seam_relative": { "value": true },
         "z_seam_type": { "value": "'back'" },
-        "zig_zaggify_infill": { "value": true },
-        "z_seam_on_vertex" : { "value": true },
-        "seam_overhang_angle" : { "value": 40 },
-        "skirt_height" : { "value": 1 }
+        "zig_zaggify_infill": { "value": true }
     },
     "settings":
     {
