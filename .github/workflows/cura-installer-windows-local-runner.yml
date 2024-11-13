@@ -1,5 +1,5 @@
 name: Fracktory Windows Installer Local Runner
-run-name: 5.7.2 for Windows-${{ inputs.architecture }} by @${{ github.actor }}
+run-name: 5.8.0 for Windows-${{ inputs.architecture }} by @${{ github.actor }}
 
 on:
   workflow_dispatch:
@@ -122,7 +122,7 @@ jobs:
           git clone https://github.com/FracktalWorks/CuraEngine.git
           cd CuraEngine
           git pull
-          conan create . curaengine/5.7.2@FracktalWorks/stable --build=missing --update
+          conan create . curaengine/5.8.0@FracktalWorks/stable --build=missing --update
 
       # - name: Cache Conan downloads
       #   uses: actions/cache@v3
@@ -140,8 +140,8 @@ jobs:
 
       - name: Create the Packages (Powershell)
         run: |
-          conan create . local/test --require-override=curaengine/5.7.2@FracktalWorks/stable --build=missing --update -c tools.build:skip_test=True
-          conan install cura/5.7.2@local/test  ${{ inputs.conan_args }} --require-override=curaengine/5.7.2@FracktalWorks/stable --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo -s arcus:build_type=RelWithDebInfo -s clipper:build_type=RelWithDebInfo
+          conan create . local/test --require-override=curaengine/5.8.0@FracktalWorks/stable --build=missing --update -c tools.build:skip_test=True
+          conan install cura/5.8.0@local/test  ${{ inputs.conan_args }} --require-override=curaengine/5.8.0@FracktalWorks/stable --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo -s arcus:build_type=RelWithDebInfo -s clipper:build_type=RelWithDebInfo
 
 
       - name: Set Environment variables for Cura (Powershell)
