@@ -467,11 +467,11 @@ class CuraConan(ConanFile):
         copy(self, "*", os.path.join(self.package_folder, self.cpp_info.resdirs[0]), str(self._share_dir.joinpath("cura", "resources")), keep_path = True)
         copy(self, "*", os.path.join(self.package_folder, self.cpp_info.resdirs[1]), str(self._share_dir.joinpath("cura", "plugins")), keep_path = True)
 
-        # Copy the cura_resources resources from the package
-        rm(self, "conanfile.py", os.path.join(self.package_folder, self.cpp.package.resdirs[0]))
-        cura_resources = self.dependencies["cura_resources"].cpp_info
-        for res_dir in cura_resources.resdirs:
-            copy(self, "*", res_dir, str(self._share_dir.joinpath("cura", "resources", Path(res_dir).name)), keep_path = True)
+        # # Copy the cura_resources resources from the package
+        # rm(self, "conanfile.py", os.path.join(self.package_folder, self.cpp.package.resdirs[0]))
+        # cura_resources = self.dependencies["cura_resources"].cpp_info
+        # for res_dir in cura_resources.resdirs:
+        #     copy(self, "*", res_dir, str(self._share_dir.joinpath("cura", "resources", Path(res_dir).name)), keep_path = True)
 
         # Copy resources of Uranium (keep folder structure)
         uranium = self.dependencies["uranium"].cpp_info
@@ -525,10 +525,10 @@ echo "CURA_APP_NAME={{ cura_app_name }}" >> ${{ env_prefix }}GITHUB_ENV
         # rmdir(self, os.path.join(self.package_folder, self.cpp.package.resdirs[0], "materials"))
 
         # Remove the cura_resources resources from the package
-        rm(self, "conanfile.py", os.path.join(self.package_folder, self.cpp.package.resdirs[0]))
-        cura_resources = self.dependencies["cura_resources"].cpp_info
-        for res_dir in cura_resources.resdirs:
-            rmdir(self, os.path.join(self.package_folder, self.cpp.package.resdirs[0], Path(res_dir).name))
+        # rm(self, "conanfile.py", os.path.join(self.package_folder, self.cpp.package.resdirs[0]))
+        # cura_resources = self.dependencies["cura_resources"].cpp_info
+        # for res_dir in cura_resources.resdirs:
+        #     rmdir(self, os.path.join(self.package_folder, self.cpp.package.resdirs[0], Path(res_dir).name))
 
     def package_info(self):
         self.user_info.pip_requirements = "requirements.txt"
