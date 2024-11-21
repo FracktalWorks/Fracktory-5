@@ -11,8 +11,8 @@ required_conan_version = ">=1.58.0 <2.0.0"
 class CuraResource(ConanFile):
     name = "cura_resources"
     license = ""
-    author = "Fracktory"
-    url = "https://github.com/FracktalWorks/Fracktory-5/"
+    author = "UltiMaker"
+    url = "https://github.com/Ultimaker/cura"
     description = "Cura Resources"
     topics = ("conan", "cura")
     settings = "os", "compiler", "build_type", "arch"
@@ -33,10 +33,9 @@ class CuraResource(ConanFile):
         update_conandata(self, {"version": self.version})
 
     def export_sources(self):
-        pass
-        # for shared_resources in self._shared_resources:
-        #     copy(self, pattern="*", src=os.path.join(self.recipe_folder, shared_resources),
-        #          dst=os.path.join(self.export_sources_folder, shared_resources))
+        for shared_resources in self._shared_resources:
+            copy(self, pattern="*", src=os.path.join(self.recipe_folder, shared_resources),
+                 dst=os.path.join(self.export_sources_folder, shared_resources))
 
     def validate(self):
         if Version(self.version) <= Version("4"):
@@ -47,9 +46,8 @@ class CuraResource(ConanFile):
         self.cpp.package.resdirs = [f"res/{res}" for res in self._shared_resources]
 
     def package(self):
-        pass
-        # copy(self, "*", os.path.join(self.export_sources_folder),
-        #      os.path.join(self.package_folder, "res"))
+        copy(self, "*", os.path.join(self.export_sources_folder),
+             os.path.join(self.package_folder, "res"))
 
     def package_info(self):
         self.cpp_info.includedirs = []
