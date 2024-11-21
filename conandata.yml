@@ -54,10 +54,10 @@ pyinstaller:
             package: "cura"
             src: "resources"
             dst: "share/cura/resources"
-        cura_shared_resources:
-            package: "cura_resources"
-            src: "res"
-            dst: "share/cura/resources"
+        # cura_shared_resources:
+        #     package: "cura_resources"
+        #     src: "res"
+        #     dst: "share/cura/resources"
         cura_private_data:
             package: "cura_private_data"
             src: "res"
