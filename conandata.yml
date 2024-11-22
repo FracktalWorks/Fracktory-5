@@ -1,6 +1,6 @@
 version: "5.8.0"
 requirements:
-  - "cura_resources/5.8.0"
+  # - "cura_resources/5.8.0"
   - "uranium/5.8.0"
   - "curaengine/5.8.0"
   # - "cura_binary_data/5.8.0"
@@ -50,10 +50,10 @@ pyinstaller:
           package: "native_cad_plugin"
           src: "res/bundled_packages"
           dst: "share/cura/resources/bundled_packages"
-        cura_resources:
-            package: "cura"
-            src: "resources"
-            dst: "share/cura/resources"
+        # cura_resources:
+        #     package: "cura"
+        #     src: "resources"
+        #     dst: "share/cura/resources"
         # cura_shared_resources:
         #     package: "cura_resources"
         #     src: "res"
