@@ -111,7 +111,7 @@ jobs:
           New-Item -ItemType Directory -Force -Path C:\Users\runneradmin\.conan\downloads
 
       - name: Create default Conan profile
-        run: conan profile detect
+        run: conan profile new default --detect --force
 
       - name: Get Conan configuration
         run: |
@@ -127,6 +127,7 @@ jobs:
           cd ..
           git clone https://github.com/FracktalWorks/CuraEngine.git
           cd CuraEngine
+          git pull
           conan create . curaengine/5.8.0@FracktalWorks/stable --build=missing --update
 
 
