@@ -1,0 +1,30 @@
+{
+    "version": 2,
+    "name": "Julia Pro Dual ABL",
+    "inherits": "base_fracktal_dual_printer",
+    "id": "julia_pro_dual",
+    "metadata":
+    {
+        "visible": true,
+        "manufacturer": "Julia Series",
+        "category": "Julia Pro Series",
+        "has_machine_materials": true,
+        "has_machine_quality": true,
+        "has_variants": true,
+        "machine_variant_shortcode": "PD",
+        "preferred_material": "fracktal_pla_175",
+        "preferred_quality_type": "normal",
+        "preferred_variant_name": "Model 0.6 mm",
+        "quality_definition": "base_fracktal_printer",
+        "variants_name": "Nozzle"
+    },
+    "overrides":
+    {
+        "machine_depth": { "default_value": 395 },
+        "machine_height": { "default_value": 400 },
+        "machine_name": { "default_value": "Julia Pro Dual" },
+        "machine_width": { "default_value": 370 },
+        "machine_max_feedrate_x": { "value": 80 },
+        "machine_max_feedrate_y": { "value": 80 }
+    }
+}

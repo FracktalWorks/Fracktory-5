@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Generic ABS 1.75mm profile. The data in this file may not be correct for your specific machine.
+-->
+<fdmmaterial xmlns="http://www.ultimaker.com/material" xmlns:cura="http://www.ultimaker.com/cura" version="1.3">
+    <metadata>
+        <name>
+            <brand>Fracktal Works</brand>
+            <material>ULTEM</material>
+            <color>Generic</color>
+            <label>ULTEM 9085</label>
+        </name>
+        <GUID>2780b345-577b-4a24-a2c5-12e6aae6e590</GUID>
+        <version>11</version>
+        <reference_material_id>abs</reference_material_id>
+        <color_code>#8cb219</color_code>
+        <description>Tough and durable. ABS is good for mechanical parts. It is impact resistant, dimensionally stable and handles temperatures up to 85ºC.</description>
+        <adhesion_info>No glue needed</adhesion_info>
+    </metadata>
+    <properties>
+        <density>1.1</density>
+        <diameter>1.75</diameter>
+        <weight>1000</weight>
+        <cost>2200</cost>
+    </properties>
+    <settings>
+        <setting key="print temperature">410</setting>
+        <setting key="standby temperature">320</setting>
+        <setting key="heated bed temperature">140</setting>
+        <setting key="build volume temperature">80</setting>
+        <setting key="adhesion tendency">0</setting>
+        <setting key="surface energy">70</setting>
+        <cura:setting key="bridge_fan_speed">0</cura:setting>
+        <cura:setting key="cool_fan_enabled">False</cura:setting>
+        <cura:setting key="support_fan_enable">False</cura:setting>
+        <cura:setting key="brim_line_count">10</cura:setting>
+        <cura:setting key="speed_print">10</cura:setting>
+        <cura:setting key="retraction_combing">all</cura:setting>
+        <cura:setting key="speed_slowdown_layers">0</cura:setting>
+        <cura:setting key="speed_layer_0">10</cura:setting>
+        <cura:setting key="speed_topbottom">10</cura:setting>
+        <cura:setting key="speed_wall">10</cura:setting>
+        <cura:setting key="speed_wall_0">10</cura:setting>
+        <cura:setting key="speed_wall_x">10</cura:setting>
+        <cura:setting key="speed_support_bottom">10</cura:setting>
+        <cura:setting key="speed_support_infill">10</cura:setting>
+        <cura:setting key="speed_support_roof">10</cura:setting>
+        <cura:setting key="speed_support_interface">10</cura:setting>
+        <cura:setting key="skin_overlap">10</cura:setting>
+        <cura:setting key="material_flow">80</cura:setting>
+        <cura:setting key="material_flow_layer_0">80</cura:setting>
+
+
+   </settings>
+</fdmmaterial>

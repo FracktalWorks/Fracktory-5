@@ -147,14 +147,14 @@ jobs:
           import os
           import datetime
           enterprise = "-Enterprise" if "${{ github.event.inputs.enterprise }}" == "true" else ""
-          linux = f"UltiMaker-Cura-{os.getenv('CURA_VERSION_FULL')}{enterprise}-linux-X64"
-          mac_x64_dmg = f"UltiMaker-Cura-{os.getenv('CURA_VERSION_FULL')}{enterprise}-macos-X64"
-          mac_x64_pkg = f"UltiMaker-Cura-{os.getenv('CURA_VERSION_FULL')}{enterprise}-macos-X64"
-          mac_arm_dmg = f"UltiMaker-Cura-{os.getenv('CURA_VERSION_FULL')}{enterprise}-macos-ARM64"
-          mac_arm_pkg = f"UltiMaker-Cura-{os.getenv('CURA_VERSION_FULL')}{enterprise}-macos-ARM64"
-          win_msi = installer_filename = f"UltiMaker-Cura-{os.getenv('CURA_VERSION_FULL')}{enterprise}-win64-X64"
-          win_exe = installer_filename = f"UltiMaker-Cura-{os.getenv('CURA_VERSION_FULL')}{enterprise}-win64-X64"
-          nightly_name = "UltiMaker-Cura-" + os.getenv('CURA_VERSION_FULL').split("+")[0]
+          linux = f"Fracktory-{os.getenv('CURA_VERSION_FULL')}{enterprise}-linux-X64"
+          mac_x64_dmg = f"Fracktory-{os.getenv('CURA_VERSION_FULL')}{enterprise}-macos-X64"
+          mac_x64_pkg = f"Fracktory-{os.getenv('CURA_VERSION_FULL')}{enterprise}-macos-X64"
+          mac_arm_dmg = f"Fracktory-{os.getenv('CURA_VERSION_FULL')}{enterprise}-macos-ARM64"
+          mac_arm_pkg = f"Fracktory-{os.getenv('CURA_VERSION_FULL')}{enterprise}-macos-ARM64"
+          win_msi = installer_filename = f"Fracktory-{os.getenv('CURA_VERSION_FULL')}{enterprise}-win64-X64"
+          win_exe = installer_filename = f"Fracktory-{os.getenv('CURA_VERSION_FULL')}{enterprise}-win64-X64"
+          nightly_name = "Fracktory-" + os.getenv('CURA_VERSION_FULL').split("+")[0]
           nightly_creation_time = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
           output_env = os.environ["GITHUB_OUTPUT"]
           content = ""

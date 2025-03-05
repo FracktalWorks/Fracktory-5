@@ -1,0 +1,111 @@
+{
+    "version": 2,
+    "name": "Fracktal Works IDEX Printer Base Description",
+    "inherits": "base_fracktal_dual_printer",
+    "metadata":
+    {
+        "visible": false,
+        "author": "Fracktal Works",
+        "manufacturer": "Fracktal Works",
+        "has_machine_materials": true,
+        "has_machine_quality": true,
+        "has_materials": true,
+        "has_variant_materials": true,
+        "has_variants": true,
+        "machine_extruder_trains":
+        {
+            "0": "base_fracktal_idex_extruder_0",
+            "1": "base_fracktal_idex_extruder_1"
+        },
+        "preferred_variant_name": "Model 0.4 mm"
+    },
+    "overrides":
+    {
+        "adhesion_extruder_nr": { "value": "0 if print_mode == 'dual' or print_mode == 'singleT0' else 1 if print_mode == 'singleT1' else int(defaultExtruderPosition()) if resolveOrValue('adhesion_type') == 'raft' else -1" },
+        "adhesion_type": { "value": "'brim' if print_mode == 'dual' or print_mode == 'singleT0' or print_mode == 'singleT1' else 'raft'" },
+        "gantry_height": { "value": "20" },
+        "machine_disallowed_areas": { "value": "[] if print_mode == 'dual' or print_mode == 'singleT0' or print_mode == 'singleT1' else [[[-(abs(machine_head_with_fans_polygon[0][0]) + abs(machine_head_with_fans_polygon[2][0])) / 2, machine_depth / 2], [-(abs(machine_head_with_fans_polygon[0][0]) + abs(machine_head_with_fans_polygon[2][0])) / 2, -machine_depth / 2], [machine_width / 2, -machine_depth / 2], [machine_width / 2, machine_depth / 2]]] if print_mode == 'mirror' else [[[0, machine_depth / 2], [0, -machine_depth / 2], [machine_width / 2, -machine_depth / 2], [machine_width / 2, machine_depth / 2]]]" },
+        "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\nSAVE_CONFIG \n" },
+        "machine_head_with_fans_polygon":
+        {
+            "default_value": [
+                [-32, 32],
+                [32, 32],
+                [32, -42],
+                [-32, -42]
+            ]
+        },
+        "machine_start_gcode": { "value": "';Machine Model: {machine_name}\\n;Sliced at: {day} {date} {time}\\n;Print mode: {print_mode} \\nM140 S{material_bed_temperature_layer_0} \\t;Heat build surface\\n' + (\"M104 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") + \"\\t;Heat extruder 1\\n\" +  'M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached \\n' + \"M109 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") +\"\\t;Heat extruder 1 and wait\\n\"  if  print_mode == \"singleT1\" else \"\")        +             (\"M104 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat extruder 0\\n\" + 'M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached \\n'+ \"M109 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") +\"\\t;Heat extruder 0 and wait\\n\"  if  print_mode == \"singleT0\" else \"\")    +       (\"M104 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat extruder 0\\n\" +  \"M104 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") + \"\\t;Heat extruder 1\\n\" +   'M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached \\n' + \"M109 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") +\"\\t;Heat extruder 0 and wait\\n\" + \"M109 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") +\"\\t;Heat extruder 1 and wait\\n\"  if  print_mode == \"dual\" else \"\")                                                                + (\"M104 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat extruder 1\\n\" if  print_mode == \"mirror\" or print_mode == \"duplication\"else \"\")+ (\"M104 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") +\"\\t;Heat extruder 0 \\n\" if  print_mode == \"mirror\" or print_mode == \"duplication\" else \"\") + ('M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached \\n' if  print_mode == \"mirror\" or print_mode == \"duplication\" else \"\") + (\"M109 T1 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") +\"\\t;Heat extruder 1 and wait\\n\" if print_mode == \"mirror\" or print_mode == \"duplication\" else \"\") + (\"M109 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat extruder 0 and wait\\n\" if  print_mode == \"mirror\" or print_mode == \"duplication\" else \"\") + 'G21 \\t\\t;metric values \\nG90 \\t\\t;absolute positioning \\nM107 \\t\\t;start with the fan off \\nG28 Z0 \\t\\t;move Z to min endstops \\nG28 X0 Y0 \\t;move X/Y to min endstops \\nG1 X0 Y0 Z5 F5000 \\t;safety Z axis movement\\n\\n{print_mode_gcode}\\nG4 P1\\nG4 P2\\nG4 P3\\n\\nG29  \\t;Auto Bed Level\\nM500  \\t;Save Bed Level\\n' + '\\n; Extrude purge line\\nG1 X0 Y0 F10000\\nG92 E0 ; reset extruder position\\nG0 Z0.2 F500 ; purge\\nG0 X15 E2.5 F500 ; purge\\nG92 E0 ; reset extruder position\\nG0 X25 E2.5 F650 ; purge\\nG92 E0 ; reset extruder position\\nG0 X35 E2.5 F800 ; purge\\nG0 X{35 + 3} Z{0.05} F{8000} ; wipe, move close to the bed\\nG0 X{35 + 3 * 2} Z0.2 F{8000} ; wipe, move quickly away from the bed\\nG1 X0 Y0 Z3 F5000 \\t;safety Z axis movement\\nG92 E0 ; zero the extruded length again\\n'" },
+        "material_bed_temp_prepend": { "value": false },
+        "material_print_temp_prepend": { "value": false },
+        "material_print_temp_wait": { "value": false },
+        "prime_tower_enable": { "value": "False" },
+        "retraction_hop_after_extruder_switch": { "value": false },
+        "speed_print": { "value": "100" },
+        "speed_roofing": { "value": "speed_wall" },
+        "speed_travel":
+        {
+            "maximum_value": "600",
+            "maximum_value_warning": "600",
+            "value": "max(150,speed_print)"
+        },
+        "speed_travel_layer_0": { "value": "100" },
+        "switch_extruder_extra_prime_amount": { "value": "retraction_extra_prime_amount" },
+        "switch_extruder_retraction_amount": { "value": "retraction_amount" }
+    },
+    "settings":
+    {
+        "dual":
+        {
+            "children":
+            {
+                "print_mode":
+                {
+                    "comments": "Fracktal Works Setting",
+                    "default_value": "singleT0",
+                    "description": "Choose the print mode",
+                    "enabled": true,
+                    "label": "Print Mode",
+                    "options":
+                    {
+                        "dual": "Dual",
+                        "duplication": "Duplication",
+                        "mirror": "Mirror",
+                        "singleT0": "Single 1",
+                        "singleT1": "Single 2"
+                    },
+                    "settable_per_extruder": false,
+                    "type": "enum"
+                },
+                "print_mode_gcode":
+                {
+                    "comments": "Fracktal Works setting",
+                    "default_value": "",
+                    "description": "GCode to enable selected print mode.",
+                    "enabled": false,
+                    "label": "Print Mode GCode",
+                    "settable_per_extruder": false,
+                    "type": "str",
+                    "value": "'T0' if print_mode == 'dual' else 'T0' if print_mode == 'singleT0' else 'T1' if print_mode == 'singleT1' else 'M605 S3 \\t;enable mirror mode' if print_mode == 'mirror' else 'M605 S2 \\t;enable duplication mode'"
+                }
+            }
+        },
+        "machine_settings":
+        {
+            "children":
+            {
+                "is_idex":
+                {
+                    "default_value": true,
+                    "description": "if the printer is IDEX, set to true",
+                    "enabled": false,
+                    "label": "IDEX Configuration",
+                    "settable_per_extruder": false,
+                    "settable_per_mesh": false,
+                    "settable_per_meshgroup": false,
+                    "type": "bool"
+                }
+            }
+        }
+    }
+}

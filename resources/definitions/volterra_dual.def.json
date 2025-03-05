@@ -1,0 +1,34 @@
+{
+    "version": 2,
+    "name": "Volterra 400",
+    "inherits": "base_fracktal_dual_printer",
+    "id": "volterra_dual",
+    "metadata":
+    {
+        "visible": true,
+        "manufacturer": "Volterra Series",
+        "category": "Volterra Series",
+        "has_machine_materials": true,
+        "has_machine_quality": true,
+        "has_variants": true,
+        "machine_variant_shortcode": "VD",
+        "preferred_quality_type": "normal",
+        "preferred_variant_name": "Model 0.4 mm",
+        "quality_definition": "base_fracktal_printer",
+        "variants_name": "Nozzle"
+    },
+    "overrides":
+    {
+        "default_material_print_temperature":
+        {
+            "maximum_value": "450",
+            "maximum_value_warning": "350"
+        },
+        "machine_depth": { "default_value": 400 },
+        "machine_height": { "default_value": 400 },
+        "machine_name": { "default_value": "Volterra 400" },
+        "machine_width": { "default_value": 400 },
+        "machine_max_feedrate_x": { "value": 150 },
+        "machine_max_feedrate_y": { "value": 150 }
+    }
+}

@@ -41,7 +41,7 @@ def build_pkg(dist_path: str, app_filename: str, component_filename: str, cura_v
     product_build_executable = os.environ.get("PRODUCT_BUILD_EXECUTABLE", "productbuild")
     codesign_identity = os.environ.get("CODESIGN_IDENTITY")
 
-    # This builds the component package that contains UltiMaker-Cura.app. This component package will be bundled in a distribution package.
+    # This builds the component package that contains Fracktory.app. This component package will be bundled in a distribution package.
     pkg_build_arguments = [
         pkg_build_executable,
         "--identifier", f"{ULTIMAKER_CURA_DOMAIN}_{cura_version}", # If we want to replace previous version automatically remove {cure_version}
@@ -73,7 +73,7 @@ def build_pkg(dist_path: str, app_filename: str, component_filename: str, cura_v
     installer_creation_arguments = [
         product_build_executable,
         "--distribution", Path(dist_path, "distribution.xml"),
-        "--package-path", dist_path,  # Where to find the component packages mentioned in distribution.xml (UltiMaker-Cura.pkg)
+        "--package-path", dist_path,  # Where to find the component packages mentioned in distribution.xml (Fracktory.pkg)
         Path(dist_path, installer_filename),
     ]
 
@@ -105,7 +105,7 @@ def notarize_file(dist_path: str, filename: str) -> None:
 def create_pkg_installer(filename: str,  dist_path: str, cura_version: str, app_name: str) -> None:
     """ Creates a pkg installer from {filename}.app called {filename}-Installer.pkg
 
-    The final package structure is UltiMaker-Cura-XXX-Installer.pkg[UltiMaker-Cura.pkg[UltiMaker-Cura.app]]. The outer
+    The final package structure is Fracktory-XXX-Installer.pkg[Fracktory.pkg[Fracktory.app]]. The outer
     pkg file is a distributable pkg (Installer). Inside the distributable pkg there is a component pkg. The component
     pkg contains the .app file that will be installed in the users Applications folder.
 
@@ -114,7 +114,7 @@ def create_pkg_installer(filename: str,  dist_path: str, cura_version: str, app_
     """
 
     filename_stem = Path(filename).stem
-    cura_component_package_name = f"{filename_stem}-Component.pkg"  # This is a component package that is nested inside the installer, it contains the UltiMaker-Cura.app file This is the app file that will end up in your applications folder
+    cura_component_package_name = f"{filename_stem}-Component.pkg"  # This is a component package that is nested inside the installer, it contains the Fracktory.app file This is the app file that will end up in your applications folder
 
     build_pkg(dist_path, app_name, cura_component_package_name, cura_version, filename)
 
@@ -124,7 +124,7 @@ def create_pkg_installer(filename: str,  dist_path: str, cura_version: str, app_
 
 
 def create_dmg(filename: str, dist_path: str, source_path: str, app_name: str) -> None:
-    """ Creates a dmg executable from UltiMaker-Cura.app named {filename}.dmg
+    """ Creates a dmg executable from Fracktory.app named {filename}.dmg
 
     @param filename: The name of the app file and the output dmg file without the extension
     @param dist_path: The location to read the app from and save the dmg to
@@ -143,7 +143,7 @@ if __name__ == "__main__":
     parser.add_argument("--source_path", required = True, type = str, help = "Path to Pyinstaller source folder")
     parser.add_argument("--dist_path", required = True, type = str, help = "Path to Pyinstaller dist folder")
     parser.add_argument("--cura_conan_version", required = True, type = str, help = "The version of cura")
-    parser.add_argument("--filename", required = True, type = str, help = "Filename of the pkg/dmg (e.g. 'UltiMaker-Cura-5.5.0-Macos-X64' or 'UltiMaker-Cura-5.5.0-beta.1-Macos-ARM64')")
+    parser.add_argument("--filename", required = True, type = str, help = "Filename of the pkg/dmg (e.g. 'Fracktory-5.5.0-Macos-X64' or 'Fracktory-5.5.0-beta.1-Macos-ARM64')")
     parser.add_argument("--build_pkg", action="store_true", default = False, help = "build the pkg")
     parser.add_argument("--build_dmg", action="store_true", default = True, help = "build the dmg")
     parser.add_argument("--app_name", required = True, type = str, help = "Filename of the .app that will be contained within the dmg/pkg")

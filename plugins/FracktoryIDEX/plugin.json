@@ -1,0 +1,7 @@
+{
+    "name": "FracktoryIDEX",
+    "author": "FracktoryIDEX",
+    "version": "1.0.0",
+    "description": "Enables IDEX settings for IDEX enabled printers",
+    "api": "8.0.0"
+}

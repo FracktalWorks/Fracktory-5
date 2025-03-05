@@ -1,0 +1,20 @@
+{
+    "cura": {
+        "Windows": {
+            "major": 5,
+            "minor": 8,
+            "revision": 0,
+            "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
+        }
+    },
+    "cura-beta": {
+        "Windows": {
+            "major": 5,
+            "minor": 5,
+            "revision": 0,
+            "postfix_type": "beta",
+            "postfix_version": 1,
+            "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
+        }
+    }
+} 

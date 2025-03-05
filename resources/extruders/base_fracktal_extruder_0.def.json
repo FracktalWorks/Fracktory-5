@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "name": "Extruder",
+    "inherits": "fdmextruder",
+    "id": "base_fracktal_extruder_0",
+    "metadata":
+    {
+        "machine": "base_fracktal_printer",
+        "position": "0",
+        "quality_definition": "base_fracktal_extruder_0"
+    },
+    "overrides":
+    {
+        "extruder_nr": { "default_value": 0 },
+        "machine_extruder_end_code": { "default_value": "" },
+        "machine_extruder_start_code": { "default_value": "" },
+        "machine_nozzle_offset_x": { "default_value": 0.0 },
+        "machine_nozzle_offset_y": { "default_value": 0.0 },
+        "material_diameter": { "default_value": 1.75 }
+    }
+}
