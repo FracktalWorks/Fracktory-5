@@ -111,7 +111,7 @@ jobs:
           New-Item -ItemType Directory -Force -Path C:\Users\runneradmin\.conan\downloads
 
       - name: Create default Conan profile
-        run: conan profile new default --detect
+        run: conan profile detect
 
       - name: Get Conan configuration
         run: |
@@ -228,7 +228,7 @@ jobs:
       #   run: conan upload "*" -r cura --all -c
 
       - name: Upload the msi
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{inputs.installer_name}}-msi
           path: |
@@ -236,7 +236,7 @@ jobs:
           retention-days: 5
 
       - name: Upload the exe
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{inputs.installer_name}}-exe
           path: |
@@ -253,7 +253,7 @@ jobs:
 
       # NOTE: The extension is .sh, since this isn't going to build-environment, so not on the Win build image.
       - name: Upload the run info
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: windows-run-info
           path: |
