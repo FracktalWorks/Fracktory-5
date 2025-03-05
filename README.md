@@ -339,7 +339,11 @@ remove older packages with
 
 ![alt text](docs/switch_to_main_desktop.png)
 
-3. In the history navigate to the commit where the version was updated. right click and select "Create branch from commit"
+3. In the history navigate to the commit where the version was updated, select the version of cura to update to. right click and select "Create branch from commit"
+
+
+
+
 3. Create a new branch on Fracktory-5 with the new version number like "Fracktory-5.6.0"
 4. In github Desktop, switch to the new branch.
 5. Delete all the unnecessary files that will create merge conflicts. Delete all printer profiles in intents, quality, definitions etc. Careful not to delete core files file fdmprinter, fdmextruder.
