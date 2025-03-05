@@ -327,13 +327,18 @@ remove older packages with
 
 ### Updating To latest Version of Ultimaker Cura:
 
-1. On Github website, go to "Main" branch of Fracktory-5, and Fork Sync with upsteam cura. This will update this branch with latest cura 
+1. On Github website, go to "Main" branch of Fracktory-5, and Fork Sync with upsteam cura. This will update this branch with latest cura.
 
-![alt text](docs/image.png)
+![alt text](docs/switch_to_main.png)
 
-![alt text](docs/image2.png)
+![alt text](docs/sync_fork.png)
+
+![alt text](docs/branch_not_behind.png)
 
 2. Pull the changes from the "main" branch of Fracktory-5 to your local  "Main" branch using github desktop.
+
+![alt text](docs/switch_to_main_desktop.png)
+
 3. In the history navigate to the commit where the version was updated. right click and select "Create branch from commit"
 3. Create a new branch on Fracktory-5 with the new version number like "Fracktory-5.6.0"
 4. In github Desktop, switch to the new branch.
