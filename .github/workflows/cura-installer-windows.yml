@@ -111,7 +111,7 @@ jobs:
           New-Item -ItemType Directory -Force -Path C:\Users\runneradmin\.conan\downloads
 
       - name: Create default Conan profile
-        run: conan profile new default --detect --force
+        run: conan profile detect
 
       - name: Get Conan configuration
         run: |
