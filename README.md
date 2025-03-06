@@ -125,10 +125,23 @@ Following programs need to be installed for running from source on Windows:
 
 
 7. **Install Conan**:
+
+For 5.9 and earlier:
+
+   - Install Conan version >=2.7.0 <3.0.0:
+     ```sh
+     pip install "conan>=1.58.0,<2.0.0"
+     ```
+
+For 5.10 and later:
+
    - Install Conan version >=2.7.0 <3.0.0:
      ```sh
      pip install "conan>=2.7.0,<3.0.0"
      ```
+
+
+
 
 Ensure all installed programs are available in the system PATH. You can verify this by running the following commands in a command prompt:
 ```sh
@@ -149,6 +162,7 @@ If any program is not available in the PATH, follow these steps to add it:
    - For CMake: `C:\Program Files\CMake\bin`
    - For Ninja: `C:\Program Files\Ninja`
 5. Click "OK" to close all windows.
+6. It may need you to restart the machine after a new installation for the program to show up in your PATH
 
 
 ## Installation/Compilation
@@ -157,24 +171,24 @@ remove older packages with
 `conan remove "*" -s -b -f`
 . delete .conan folders in Uers and C:/ or D:/
 
-1. In case you are using custom Cura Engine:
+1. In case you are using custom Cura Engine (Refer https://github.com/Ultimaker/CuraEngine/issues/2195 to fix conan error):
    - Install Cura Engine with the following steps:
-      ```
-      conan config install https://github.com/ultimaker/conan-config.git
+      ```sh
+      conan config install https://github.com/FracktalWorks/conan-config.git
       conan profile new default --detect --force
       git clone https://github.com/FracktalWorks/CuraEngine.git
       cd CuraEngine
-      conan create . curaengine/5.8.0@FracktalWorks/stable --build=missing --update
+      conan create . curaengine/5.9.1@FracktalWorks/stable --build=missing --update
       ```
 
-2. Install Fracktory:
+2. Install Fracktory ("Refer https://github.com/Ultimaker/CuraEngine/issues/2195 to fix conan error):
    ```
-   conan config install https://github.com/ultimaker/conan-config.git
-   conan profile new default --detect --force
+   conan config install https://github.com/FracktalWorks/conan-config.git
+   conan profile detect --force
    https://github.com/FracktalWorks/Fracktory-5.git
    cd Fracktory-5
    # If using custom Curaengine:
-   conan install . --build=missing --update --require-override=curaengine/5.8.0@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
+   conan install . --build=missing --update --require-override=curaengine/5.9.1@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
    # If using Curaengine from Ultimaker source:
    conan install . --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
    ```
@@ -305,9 +319,9 @@ After deleting only the core resource files are left:
 
 ![alt text](default_engine.png)
 
-12. Fist compile latest version of curaengine as the latest version needed by conandata.yaml
+12. Follow instruction in Installation/Compilation to compile Fracktory and CuraEngine again. The Build environment may need to be updated since the last update, so update as needed by referenceing [Running Cura From Source](https://github.com/Ultimaker/Cura/wiki/Running-Cura-from-Source)
 
-13. compile cura using above steps
+13. Github Actions may need to be updated to properly work. refer [Cura Windows Installer Workflow](https://github.com/Ultimaker/cura-workflows/blob/main/.github/workflows/cura-installer-windows.yml) and edit `\Fracktory-5\.github\workflows\cura-installer-windows.yml` accordingly.
 
 
 
