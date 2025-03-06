@@ -341,6 +341,8 @@ remove older packages with
 
 3. In the history navigate to the commit where the version was updated, select the version of cura to update to. right click and select "Create branch from commit"
 
+![alt text](navigate_history.png)
+
 
 
 
