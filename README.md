@@ -343,26 +343,61 @@ remove older packages with
 
 ![alt text](open_upstream_branch.png)
 
-5. Navigate to the commit history of that branch. find the commit that ahs the Tag we are looking for from step 3.
+5. Navigate to the commit history of that branch. find the commit that ahs the Tag we are looking for from step 3. Roght click and "create brach from commit"
 
 ![alt text](navigate_history.png)
 
 ![alt text](create_branch_from_commit.png)
 
-
 5. Create a new branch on Fracktory-5 with the new version number like "Fracktory-5.6.0"
 
 ![alt text](create_branch.png)
 
-4. In github Desktop, switch to the new branch.
-5. Delete all the unnecessary files that will create merge conflicts. Delete all printer profiles in intents, quality, definitions etc. Careful not to delete core files file fdmprinter, fdmextruder.
-6. Merge the previous release branch version of Fracktory 5 into current branch and resolve conflicts if any using github desktop & vscode source control.
-7. Update conandata.yaml with latest versioning
-8. create `latest.json` file in `Fracktory-5` folder in "main" branch, copying from the latest Fracktory branch to have cura check for latest version available
-9. Update guthub actions workflow `cura-installer-windows.yml` with latest verion numbers for fracktory and Curaengine
+6. In github Desktop, switch to the new branch as well as publish it to cloud.
+
+![alt text](switch_branch.png)
+
+![alt text](publish_branch.png)
+
+5. Delete all the unnecessary files that will create merge conflicts: Delete all 3rd party printer profiles in intents, quality, definitions and variants in the "resources" folder. Careful not to delete core files file fdmprinter, fdmextruder.
+
+This is what it might look like before deleting:
+![alt text](resources_old.png)
+
+After deleting only the core resource files are left:
+![alt text](resources_new.png)
+
+6. Merge the previous release branch version of Fracktory 5 into current branch. Squash and merge into a simple commit for simplicity. 
+
+![alt text](merge.png)
+
+![alt text](previous_branch.png)
+
+7. Resolve conflicts if any using github desktop & vscode source control.
+
+![alt text](resolve_github.png)
+
+![alt text](resolve_vscode.png)
+
+7. Update conandata.yaml with latest versioning from the "Current Change" i.e from the latest cura repo you just branched. but comment out the requirements like shown below to prevent the installer from overriding them
+
+![alt text](conan.png)
+
+
+8. update `latest.json` file in `Fracktory-5` folder, copying from the latest Fracktory version in the conandata.yaml to have cura check for latest version available
+
+![alt text](latest_json.png)
+
+9. Update guthub actions workflow `cura-installer-windows.yml` with latest verion numbers (like 5.9.1 in this case) for fracktory and Curaengine. You may need to deepdive into the installer in case github action, pyton version, conan etc. is updated upstream and the latest version needs updated build envoronment to compile. 
+
+![alt text](application_version.png)
+
 10. change default  branch to this new version on Github website for Fracktory and CuraEngine.
+
 11. Update Curaengine in the same way. 
+
 12. Fist compile latest version of curaengine as the latest version needed by conandata.yaml
+
 13. compile cura using above steps
 
 
