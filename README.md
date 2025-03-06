@@ -327,6 +327,10 @@ remove older packages with
 
 ### Updating To latest Version of Ultimaker Cura:
 
+0. Note: WHen cloning the repositories mentioned below into Github Desktop, ensure that you select "Contribute to Parent Project" and clone
+
+![alt text](parent_project.png)
+
 1. Go to the Ultimaker Cura repository: [UM Cura Repo](https://github.com/Ultimaker/Cura) and open the release you want to update the Fracktory Version to:
 
 ![alt text](cura_repo_version.png)
@@ -339,7 +343,7 @@ remove older packages with
 
 ![alt text](branch-tag.png)
 
-4. in Github Desktop, select the upsteam branch (since Fracktory is a fork of cura, you can open the cura branches directly) that we saw in step 3. in this case 5.9 or upstream/5.9
+4. in Github Desktop, select the upsteam branch (since Fracktory is a fork of cura, you can open the cura branches directly) that we saw in step 3. in this case 5.9 or upstream/5.9. iuf you dont see the branch, click "Fetch" to get latest changes upstream.
 
 ![alt text](open_upstream_branch.png)
 
@@ -392,20 +396,25 @@ After deleting only the core resource files are left:
 
 ![alt text](application_version.png)
 
-10. change default  branch to this new version on Github website for Fracktory and CuraEngine.
+10. change default branch to this new version on Github website : [Change Default Branch](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch)
 
-11. Update Curaengine in the same way. 
+![alt text](change_default.png)
+
+11. Update Curaengine in the same way, and change the default branch to latest. 
 
 ![alt text](cura_engine_upstream_branch.png)
 
 ![alt text](cura_engine_create_branch.png)
 
-In case you see "Detached Head" in github Desktop, just press "New Branch" button
-![alt text](detached_head.png)
+![alt text](name_engine.png)
 
-![alt text](cura_engine_branch_name.png)
+![alt text](engine_publish_branch.png)
 
+![alt text](engine_merge.png)
 
+![alt text](previous_engine.png)
+
+![alt text](default_engine.png)
 
 12. Fist compile latest version of curaengine as the latest version needed by conandata.yaml
 
