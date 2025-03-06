@@ -327,26 +327,33 @@ remove older packages with
 
 ### Updating To latest Version of Ultimaker Cura:
 
-1. On Github website, go to "Main" branch of Fracktory-5, and Fork Sync with upsteam cura. This will update this branch with latest cura.
+1. Go to the Ultimaker Cura repository: [UM Cura Repo](https://github.com/Ultimaker/Cura) and open the release you want to update the Fracktory Version to:
 
-![alt text](docs/switch_to_main.png)
+![alt text](cura_repo_version.png)
 
-![alt text](docs/sync_fork.png)
+2. Open the Commit associated with the release:
 
-![alt text](docs/branch_not_behind.png)
+![alt text](cura_release_commit.png)
 
-2. Pull the changes from the "main" branch of Fracktory-5 to your local  "Main" branch using github desktop.
+3. Note the the branch and tag associated with the commit. in the below case the branch is 5.9 and the tag is 5.9.1-RC3
 
-![alt text](docs/switch_to_main_desktop.png)
+![alt text](branch-tag.png)
 
-3. In the history navigate to the commit where the version was updated, select the version of cura to update to. right click and select "Create branch from commit"
+4. in Github Desktop, select the upsteam branch (since Fracktory is a fork of cura, you can open the cura branches directly) that we saw in step 3. in this case 5.9 or upstream/5.9
+
+![alt text](open_upstream_branch.png)
+
+5. Navigate to the commit history of that branch. find the commit that ahs the Tag we are looking for from step 3.
 
 ![alt text](navigate_history.png)
 
+![alt text](create_branch_from_commit.png)
 
 
+5. Create a new branch on Fracktory-5 with the new version number like "Fracktory-5.6.0"
 
-3. Create a new branch on Fracktory-5 with the new version number like "Fracktory-5.6.0"
+![alt text](create_branch.png)
+
 4. In github Desktop, switch to the new branch.
 5. Delete all the unnecessary files that will create merge conflicts. Delete all printer profiles in intents, quality, definitions etc. Careful not to delete core files file fdmprinter, fdmextruder.
 6. Merge the previous release branch version of Fracktory 5 into current branch and resolve conflicts if any using github desktop & vscode source control.
