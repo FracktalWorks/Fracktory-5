@@ -396,6 +396,17 @@ After deleting only the core resource files are left:
 
 11. Update Curaengine in the same way. 
 
+![alt text](cura_engine_upstream_branch.png)
+
+![alt text](cura_engine_create_branch.png)
+
+In case you see "Detached Head" in github Desktop, just press "New Branch" button
+![alt text](detached_head.png)
+
+![alt text](cura_engine_branch_name.png)
+
+
+
 12. Fist compile latest version of curaengine as the latest version needed by conandata.yaml
 
 13. compile cura using above steps
