@@ -236,88 +236,88 @@ remove older packages with
 
 1. Go to the Ultimaker Cura repository: [UM Cura Repo](https://github.com/Ultimaker/Cura) and open the release you want to update the Fracktory Version to:
 
-![alt text](cura_repo_version.png)
+![alt text](docs/cura_repo_version.png)
 
 2. Open the Commit associated with the release:
 
-![alt text](cura_release_commit.png)
+![alt text](docs/cura_release_commit.png)
 
 3. Note the the branch and tag associated with the commit. in the below case the branch is 5.9 and the tag is 5.9.1-RC3
 
-![alt text](branch-tag.png)
+![alt text](docs/branch-tag.png)
 
 4. in Github Desktop, select the upsteam branch (since Fracktory is a fork of cura, you can open the cura branches directly) that we saw in step 3. in this case 5.9 or upstream/5.9. iuf you dont see the branch, click "Fetch" to get latest changes upstream.
 
-![alt text](open_upstream_branch.png)
+![alt text](docs/open_upstream_branch.png)
 
 5. Navigate to the commit history of that branch. find the commit that ahs the Tag we are looking for from step 3. Roght click and "create brach from commit"
 
-![alt text](navigate_history.png)
+![alt text](docs/navigate_history.png)
 
-![alt text](create_branch_from_commit.png)
+![alt text](docs/create_branch_from_commit.png)
 
 5. Create a new branch on Fracktory-5 with the new version number like "Fracktory-5.6.0"
 
-![alt text](create_branch.png)
+![alt text](docs/create_branch.png)
 
 6. In github Desktop, switch to the new branch as well as publish it to cloud.
 
-![alt text](switch_branch.png)
+![alt text](docs/switch_branch.png)
 
-![alt text](publish_branch.png)
+![alt text](docs/publish_branch.png)
 
 5. Delete all the unnecessary files that will create merge conflicts: Delete all 3rd party printer profiles in intents, quality, definitions and variants in the "resources" folder. Careful not to delete core files file fdmprinter, fdmextruder.
 
 This is what it might look like before deleting:
-![alt text](resources_old.png)
+![alt text](docs/resources_old.png)
 
 After deleting only the core resource files are left:
-![alt text](resources_new.png)
+![alt text](docs/resources_new.png)
 
 6. Merge the previous release branch version of Fracktory 5 into current branch. Squash and merge into a simple commit for simplicity. 
 
-![alt text](merge.png)
+![alt text](docs/merge.png)
 
-![alt text](previous_branch.png)
+![alt text](docs/previous_branch.png)
 
 7. Resolve conflicts if any using github desktop & vscode source control.
 
-![alt text](resolve_github.png)
+![alt text](docs/resolve_github.png)
 
-![alt text](resolve_vscode.png)
+![alt text](docs/resolve_vscode.png)
 
 7. Update conandata.yaml with latest versioning from the "Current Change" i.e from the latest cura repo you just branched. but comment out the requirements like shown below to prevent the installer from overriding them
 
-![alt text](conan.png)
+![alt text](docs/conan.png)
 
 
 8. update `latest.json` file in `Fracktory-5` folder, copying from the latest Fracktory version in the conandata.yaml to have cura check for latest version available
 
-![alt text](latest_json.png)
+![alt text](docs/latest_json.png)
 
 9. Update guthub actions workflow `cura-installer-windows.yml` with latest verion numbers (like 5.9.1 in this case) for fracktory and Curaengine. You may need to deepdive into the installer in case github action, pyton version, conan etc. is updated upstream and the latest version needs updated build envoronment to compile. 
 
-![alt text](application_version.png)
+![alt text](docs/application_version.png)
 
 10. change default branch to this new version on Github website : [Change Default Branch](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch)
 
-![alt text](change_default.png)
+![alt text](docs/change_default.png)
 
 11. Update Curaengine in the same way, and change the default branch to latest. 
 
-![alt text](cura_engine_upstream_branch.png)
+![alt text](docs/cura_engine_upstream_branch.png)
 
-![alt text](cura_engine_create_branch.png)
+![alt text](docs/cura_engine_create_branch.png)
 
-![alt text](name_engine.png)
+![alt text](docs/name_engine.png)
 
-![alt text](engine_publish_branch.png)
+![alt text](docs/engine_publish_branch.png)
 
-![alt text](engine_merge.png)
+![alt text](docs/engine_merge.png)
 
-![alt text](previous_engine.png)
+![alt text](docs/previous_engine.png)
 
-![alt text](default_engine.png)
+![alt text](docs/default_engine.png)
 
 12. Follow instruction in Installation/Compilation to compile Fracktory and CuraEngine again. The Build environment may need to be updated since the last update, so update as needed by referenceing [Running Cura From Source](https://github.com/Ultimaker/Cura/wiki/Running-Cura-from-Source)
 
