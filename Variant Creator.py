@@ -5,9 +5,8 @@ import json
 definitions_folder = os.path.join("resources", "definitions")
 variants_folder = os.path.join("resources", "variants", "fracktalworks")
 
-def load_definition(file_name):
+def load_definition(file_path):
     """Load a JSON definition file."""
-    file_path = os.path.join(definitions_folder, file_name)
     if not os.path.exists(file_path):
         return None
     with open(file_path, "r") as file:
@@ -26,43 +25,26 @@ def is_dual_nozzle_printer(printer_definition_path):
         parent = current_file.get("inherits")
         if not parent:
             break
-        current_file = load_definition(f"{parent}.def.json")
+        parent_path = os.path.join(definitions_folder, f"{parent}.def.json")
+        current_file = load_definition(parent_path)
     
     return False
 
-def create_printer_definition():
-    # Get user input for the new printer
-    printer_name = input("Enter the name of the new printer (e.g., 'new_printer'): ").strip()
-    inherit_from = input("Enter the name of the printer to inherit from (e.g., 'base_fracktal_printer'): ").strip()
-
-    # Paths for the new definition and variant files
-    new_definition_path = os.path.join(definitions_folder, f"{printer_name}.def.json")
-    new_variant_folder = os.path.join(variants_folder, printer_name)
-    os.makedirs(new_variant_folder, exist_ok=True)
-
-    # Check if the inherited printer exists
-    inherit_path = os.path.join(definitions_folder, f"{inherit_from}.def.json")
-    if not os.path.exists(inherit_path):
-        print(f"Error: The printer '{inherit_from}' does not exist in the definitions folder.")
+def create_variants_for_printer(printer_definition_path):
+    """Create nozzle variants for an existing printer definition."""
+    # Load the printer definition
+    printer_definition = load_definition(printer_definition_path)
+    if not printer_definition:
+        print(f"Error: Printer definition not found at '{printer_definition_path}'.")
         return
 
     # Determine if the printer is a dual-nozzle printer
-    dual_nozzle = is_dual_nozzle_printer(inherit_path)
+    dual_nozzle = is_dual_nozzle_printer(printer_definition_path)
 
-    # Create the new printer definition
-    new_definition = {
-        "inherits": inherit_from,
-        "id": printer_name,
-        "name": printer_name.replace("_", " ").title(),
-        "version": "1.0",
-        "description": f"Definition for {printer_name.replace('_', ' ').title()}",
-        "settings": {}
-    }
-
-    # Write the new definition to a file
-    with open(new_definition_path, "w") as def_file:
-        json.dump(new_definition, def_file, indent=4)
-    print(f"Printer definition created at: {new_definition_path}")
+    # Extract printer name and create the variant folder
+    printer_name = os.path.splitext(os.path.basename(printer_definition_path))[0]
+    new_variant_folder = os.path.join(variants_folder, printer_name)
+    os.makedirs(new_variant_folder, exist_ok=True)
 
     # Ask the user for the range of nozzle sizes
     nozzle_sizes = input("Enter the nozzle sizes to include (comma-separated, e.g., '0.25,0.4,0.6,0.8,1.0'): ").strip()
@@ -120,4 +102,6 @@ skin_overlap = {skin_overlap}
         print(f"Nozzle variant created at: {variant_path}")
 
 if __name__ == "__main__":
-    create_printer_definition()
+    # Get the path to the printer definition from the user
+    printer_definition_path = input("Enter the path to the printer definition file: ").strip()
+    create_variants_for_printer(printer_definition_path)

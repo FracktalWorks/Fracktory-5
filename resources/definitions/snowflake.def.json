@@ -28,10 +28,10 @@
         "speed_roofing": { "value": "speed_wall" },
         "speed_travel":
         {
-            "maximum_value": "600",
-            "maximum_value_warning": "600",
-            "value": "max(150,speed_print)"
+            "maximum_value": "300",
+            "maximum_value_warning": "300",
+            "value": "max(200,speed_print)"
         },
-        "speed_travel_layer_0": { "value": "100" }
+        "speed_travel_layer_0": { "value": "80" }
     }
 }
