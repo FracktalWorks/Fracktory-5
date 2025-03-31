@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "Julia Advanced",
+    "name": "Julia Advanced / Julia 200",
     "inherits": "base_fracktal_printer",
     "id": "julia_advanced",
     "metadata":
