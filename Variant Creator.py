@@ -5,11 +5,30 @@ import json
 definitions_folder = os.path.join("resources", "definitions")
 variants_folder = os.path.join("resources", "variants", "fracktalworks")
 
+def load_definition(file_name):
+    """Load a JSON definition file."""
+    file_path = os.path.join(definitions_folder, file_name)
+    if not os.path.exists(file_path):
+        return None
+    with open(file_path, "r") as file:
+        return json.load(file)
+
 def is_dual_nozzle_printer(printer_definition_path):
-    """Check if the printer is a dual-nozzle printer based on its definition file."""
-    with open(printer_definition_path, "r") as file:
-        data = json.load(file)
-        return data.get("overrides", {}).get("machine_extruder_count", {}).get("default_value", 1) > 1
+    """Check if the printer is a dual-nozzle printer by resolving inheritance."""
+    current_file = load_definition(printer_definition_path)
+    while current_file:
+        # Check for machine_extruder_count in the current definition
+        machine_extruder_count = current_file.get("overrides", {}).get("machine_extruder_count", {}).get("default_value")
+        if machine_extruder_count:
+            return machine_extruder_count > 1
+
+        # Check inheritance
+        parent = current_file.get("inherits")
+        if not parent:
+            break
+        current_file = load_definition(f"{parent}.def.json")
+    
+    return False
 
 def create_printer_definition():
     # Get user input for the new printer
@@ -51,9 +70,14 @@ def create_printer_definition():
 
     # Ask for additional parameters if needed
     if dual_nozzle:
-        prime_tower_min_volume = input("Enter the prime tower minimum volume (e.g., '6') or leave blank to skip: ").strip()
+        print("This is a dual-nozzle printer.")
+        prime_tower_min_volume_formula = (
+            "=0.9*layer_height*3.14*(((prime_tower_size/2)**2)- (((prime_tower_size/2)-(line_width*2))**2)) "
+            "if extruder_nr == 0 else "
+            "0.75*layer_height*3.14*((((prime_tower_size/2)-(line_width*2))**2)- (((prime_tower_size/2)-(line_width*4))**2))"
+        )
     else:
-        prime_tower_min_volume = None
+        prime_tower_min_volume_formula = None
 
     # Create nozzle variants in .cfg format for each size
     for size in nozzle_sizes:
@@ -86,8 +110,8 @@ machine_nozzle_tip_outer_diameter = {nozzle_tip_outer_diameter}
 skin_overlap = {skin_overlap}
 """
         # Add prime_tower_min_volume if the printer is dual-nozzle
-        if dual_nozzle and prime_tower_min_volume:
-            variant_content += f"prime_tower_min_volume = {prime_tower_min_volume}\n"
+        if dual_nozzle and prime_tower_min_volume_formula:
+            variant_content += f"prime_tower_min_volume = {prime_tower_min_volume_formula}\n"
 
         # Write the variant file
         variant_path = os.path.join(new_variant_folder, variant_filename)
