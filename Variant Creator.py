@@ -30,6 +30,28 @@ def is_dual_nozzle_printer(printer_definition_path):
     
     return False
 
+def calculate_settings(nozzle_size, nozzle_type):
+    """Calculate settings based on the nozzle size and type."""
+    # Set layer_height_0 based on the nozzle size
+    if nozzle_size >= 0.4:
+        layer_height_0 = 0.3  # Fixed value for nozzle sizes 0.4 mm and above
+    else:
+        layer_height_0 = 0.2  # Fixed value for nozzle sizes below 0.4 mm
+
+    # Set machine_nozzle_tip_outer_diameter based on the nozzle size
+    if nozzle_size <= 0.6:
+        machine_nozzle_tip_outer_diameter = round(nozzle_size * 2.5, 2)
+    else:
+        machine_nozzle_tip_outer_diameter = 2  # Capped at 2 for nozzle sizes >= 0.8 mm
+
+    # Set skin_overlap based on the nozzle size
+    skin_overlap = max(2, int(20 - (nozzle_size * 18)))  # Decreases linearly, minimum value is 2
+
+    # Set machine_heat_zone_length based on the nozzle type
+    machine_heat_zone_length = 20 if nozzle_type == "volcano" else 12
+
+    return layer_height_0, machine_nozzle_tip_outer_diameter, skin_overlap, machine_heat_zone_length
+
 def create_variants_for_printer(printer_definition_path):
     """Create nozzle variants for an existing printer definition."""
     # Load the printer definition
@@ -38,17 +60,29 @@ def create_variants_for_printer(printer_definition_path):
         print(f"Error: Printer definition not found at '{printer_definition_path}'.")
         return
 
+    # Get the printer ID from the definition
+    printer_id = printer_definition.get("id")
+    if not printer_id:
+        print(f"Error: 'id' field not found in the printer definition at '{printer_definition_path}'.")
+        return
+
     # Determine if the printer is a dual-nozzle printer
     dual_nozzle = is_dual_nozzle_printer(printer_definition_path)
 
-    # Extract printer name and create the variant folder
-    printer_name = os.path.splitext(os.path.basename(printer_definition_path))[0]
-    new_variant_folder = os.path.join(variants_folder, printer_name)
+    # Format the folder name and create the variant folder
+    formatted_folder_name = printer_id.replace("_", " ").title().replace(" ", "")  # Capitalize and remove underscores
+    new_variant_folder = os.path.join(variants_folder, formatted_folder_name)
     os.makedirs(new_variant_folder, exist_ok=True)
 
-    # Ask the user for the range of nozzle sizes
-    nozzle_sizes = input("Enter the nozzle sizes to include (comma-separated, e.g., '0.25,0.4,0.6,0.8,1.0'): ").strip()
-    nozzle_sizes = [float(size.strip()) for size in nozzle_sizes.split(",")]
+    # Ask the user for the nozzle type
+    nozzle_type = input("Enter the nozzle type (regular or volcano): ").strip().lower()
+    if nozzle_type == "volcano":
+        nozzle_sizes = [0.4, 0.6, 0.8, 1.0]  # Volcano nozzle sizes
+    elif nozzle_type == "regular":
+        nozzle_sizes = [0.25, 0.4, 0.6]  # Regular nozzle sizes
+    else:
+        print("Invalid nozzle type. Please enter 'regular' or 'volcano'.")
+        return
 
     # Ask for additional parameters if needed
     if dual_nozzle:
@@ -63,15 +97,13 @@ def create_variants_for_printer(printer_definition_path):
 
     # Create nozzle variants in .cfg format for each size
     for size in nozzle_sizes:
-        # Calculate settings based on trends
-        layer_height_0 = round(size * (0.8 if size <= 0.3 else 0.75 if size <= 0.6 else 0.5), 2)
-        nozzle_tip_outer_diameter = round(size * (2.5 if size <= 0.4 else 2.0), 2)
-        skin_overlap = max(2, int(20 - (size * 18)))  # Decreases linearly with size, minimum value is 2
+        # Calculate settings based on the nozzle size and type
+        layer_height_0, machine_nozzle_tip_outer_diameter, skin_overlap, machine_heat_zone_length = calculate_settings(size, nozzle_type)
 
-        variant_filename = f"{printer_name}_model_{size:.1f}.inst.cfg"
+        variant_filename = f"{printer_id}_model_{size:g}.inst.cfg"  # Use :g to avoid trailing zeros
         variant_content = f"""[general]
-definition = {printer_name}
-name = Model {size:.1f} mm
+definition = {printer_id}
+name = Model {size:g} mm
 version = 4
 
 [metadata]
@@ -82,13 +114,13 @@ type = variant
 
 [values]
 layer_height_0 = {layer_height_0}
-machine_heat_zone_length = 20
+machine_heat_zone_length = {machine_heat_zone_length}
 machine_min_cool_heat_time_window = 120
 machine_nozzle_cool_down_speed = 1
 machine_nozzle_heat_up_speed = 0.5
-machine_nozzle_id = Model {size:.1f} mm
-machine_nozzle_size = {size:.1f}
-machine_nozzle_tip_outer_diameter = {nozzle_tip_outer_diameter}
+machine_nozzle_id = Model {size:g} mm
+machine_nozzle_size = {size:g}
+machine_nozzle_tip_outer_diameter = {machine_nozzle_tip_outer_diameter}
 skin_overlap = {skin_overlap}
 """
         # Add prime_tower_min_volume if the printer is dual-nozzle

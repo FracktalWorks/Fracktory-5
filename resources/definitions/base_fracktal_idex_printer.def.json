@@ -47,7 +47,7 @@
         {
             "maximum_value": "600",
             "maximum_value_warning": "600",
-            "value": "max(150,speed_print)"
+            "value": "max(200,speed_print)"
         },
         "speed_travel_layer_0": { "value": "100" },
         "switch_extruder_extra_prime_amount": { "value": "retraction_extra_prime_amount" },
