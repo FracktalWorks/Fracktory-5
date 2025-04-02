@@ -29,7 +29,7 @@
         "machine_max_feedrate_x": { "value": 300 },
         "machine_max_feedrate_y": { "value": 300 },
         "machine_name": { "default_value": "Twin Dragon 400" },
-        "machine_width": { "default_value": 400 },
+        "machine_width": { "default_value": 500 },
         "speed_print": { "value": "120" }
     }
 }
