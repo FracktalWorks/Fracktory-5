@@ -94,7 +94,8 @@ jobs:
         run: echo "C:\Windows\System32\WindowsPowerShell\v1.0" >> $GITHUB_PATH
 
       
-      
+      - name: Verify Python is available
+        run: python --version
       
 
       - name: Setup Python and pip
