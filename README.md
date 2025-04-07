@@ -174,23 +174,32 @@ remove older packages with
 1. In case you are using custom Cura Engine (Refer https://github.com/Ultimaker/CuraEngine/issues/2195 to fix conan error):
    - Install Cura Engine with the following steps:
       ```sh
-      conan config install https://github.com/FracktalWorks/conan-config.git
-      conan profile new default --detect --force
-      git clone https://github.com/FracktalWorks/CuraEngine.git
-      cd CuraEngine
-      conan create . curaengine/5.9.1@FracktalWorks/stable --build=missing --update
+         git clone https://github.com/ultimaker/conan-config.git
+         cd conan-config
+         git checkout 3226488623c642b40ca7ce3f62d3f33de046d11e
+         cd ..
+         conan config install ./conan-config
+         conan remote remove cura-private
+         git clone https://github.com/FracktalWorks/CuraEngine.git
+         conan remove --locks
+         cd CuraEngine
+         conan create . curaengine/5.9.1@FracktalWorks/stable --build=missing --update
       ```
 
 2. Install Fracktory ("Refer https://github.com/Ultimaker/CuraEngine/issues/2195 to fix conan error):
-   ```
-   conan config install https://github.com/FracktalWorks/conan-config.git
-   conan profile detect --force
-   https://github.com/FracktalWorks/Fracktory-5.git
-   cd Fracktory-5
-   # If using custom Curaengine:
-   conan install . --build=missing --update --require-override=curaengine/5.9.1@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
-   # If using Curaengine from Ultimaker source:
-   conan install . --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
+   ```sh
+      git clone https://github.com/ultimaker/conan-config.git
+      cd conan-config
+      git checkout 3226488623c642b40ca7ce3f62d3f33de046d11e
+      cd ..
+      conan config install ./conan-config
+      conan remote remove cura-private
+      git clone https://github.com/FracktalWorks/Fracktory-5.git
+      cd Fracktory-5
+      # If using custom Curaengine:
+      conan install . --build=missing --update --require-override=curaengine/5.9.1@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
+      # If using Curaengine from Ultimaker source:
+      conan install . --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
    ```
 ## Activate and run
 
