@@ -1,4 +1,4 @@
-name: Fracktory Windows Installer
+name: Fracktory Windows Installer Local Runner
 run-name: ${{ inputs.version }} for Windows-${{ inputs.architecture }} by @${{ github.actor }}
 
 on:
