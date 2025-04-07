@@ -70,7 +70,8 @@ def create_variants_for_printer(printer_definition_path):
     dual_nozzle = is_dual_nozzle_printer(printer_definition_path)
 
     # Format the folder name and create the variant folder
-    formatted_folder_name = printer_id.replace("_", " ").title().replace(" ", "")  # Capitalize and remove underscores
+    definition_file_name = os.path.basename(printer_definition_path).replace(".def.json", "")
+    formatted_folder_name = " ".join(word.capitalize() for word in definition_file_name.split("_"))  # Capitalize and add spaces
     new_variant_folder = os.path.join(variants_folder, formatted_folder_name)
     os.makedirs(new_variant_folder, exist_ok=True)
 
