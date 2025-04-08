@@ -347,3 +347,32 @@ There may be issues with running newer build environment, Here are settings that
 7. conan 1.60.2
 
 Make sure single instange of VKPG via VS code is only installed.
+
+
+## Prerequisites for Local Runner
+
+To run the local runner for building the Fracktory installer, ensure the following prerequisites are met:
+
+### 1. **Operating System**
+- Windows 10 or higher
+
+### 2. **Required Tools**
+- **Python**: Version 3.12 or higher
+  - Ensure Python is added to the system PATH.
+  - Upgrade `pip` to the latest version:
+    ```sh
+    python -m pip install --upgrade pip
+    ```
+- **Conan**: Version 1.65.0
+  ```sh
+  pip install conan==1.65.0
+  ```
+- **CMake**: Version 3.23 or higher
+  - Download from [CMake.org](https://cmake.org/download/).
+  - Add CMake to the system PATH.
+- **WiX Toolset**: Version 3.14
+  - Download and install from [WiX Toolset](https://wixtoolset.org/releases/).
+  - Add the WiX `bin` folder to the system PATH.
+- **NSIS (Nullsoft Scriptable Install System)**: Latest version
+  - Download and install from [NSIS](https://nsis.sourceforge.io/Download).
+  - Add the NSIS installation folder to the system PATH.
