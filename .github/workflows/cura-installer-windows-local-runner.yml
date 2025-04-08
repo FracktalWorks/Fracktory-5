@@ -197,30 +197,28 @@ jobs:
         run: |
           $env:NSIS_PATH = "C:\Program Files (x86)\NSIS"
           $env:Path += ";$env:NSIS_PATH"
-          python cura_inst\packaging\NSIS\create_windows_installer.py cura_inst dist "Fracktory.exe"
+          python cura_inst\packaging\NSIS\create_windows_installer.py cura_inst dist "Fracktory-${{ inputs.version }}.exe"
         working-directory: ${{ github.workspace }}
 
       - name: Build MSI Installer
         run: |
           $env:WIX_PATH = "C:\Program Files (x86)\WiX Toolset v3.14\bin"
           $env:Path += ";$env:WIX_PATH"
-          python cura_inst\packaging\msi\create_windows_msi.py cura_inst dist\Fracktory "Fracktory.msi" "Fracktory"
+          python cura_inst\packaging\msi\create_windows_msi.py cura_inst dist\Fracktory "Fracktory-${{ inputs.version }}.msi" "Fracktory"
         working-directory: ${{ github.workspace }}
-
 
       - name: Upload EXE Installer
         uses: actions/upload-artifact@v4
         with:
-          name: Fracktory-Installer-EXE
-          path: "**/*.exe"
+          name: Fracktory-Installer-EXE-${{ inputs.version }}
+          path: "**/Fracktory-${{ inputs.version }}.exe"
           retention-days: 5
-
 
       - name: Upload the MSI
         uses: actions/upload-artifact@v4
         with:
-          name: Fracktory-Installer
-          path: "**/*.msi"
+          name: Fracktory-Installer-MSI-${{ inputs.version }}
+          path: "**/Fracktory-${{ inputs.version }}.msi"
           retention-days: 5
 
       
