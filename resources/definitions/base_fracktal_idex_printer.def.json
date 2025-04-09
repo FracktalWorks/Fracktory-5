@@ -20,9 +20,7 @@
         "preferred_variant_name": "Model 0.4 mm"
     },
     "overrides":
-    {        
-        "prime_tower_position_x": { "value": "prime_tower_size + 100" },
-        "prime_tower_position_y": { "value": "20" },
+    {
         "adhesion_extruder_nr": { "value": "0 if print_mode == 'dual' or print_mode == 'singleT0' else 1 if print_mode == 'singleT1' else int(defaultExtruderPosition()) if resolveOrValue('adhesion_type') == 'raft' else -1" },
         "adhesion_type": { "value": "'brim' if print_mode == 'dual' or print_mode == 'singleT0' or print_mode == 'singleT1' else 'raft'" },
         "gantry_height": { "value": "20" },
@@ -42,6 +40,8 @@
         "material_print_temp_prepend": { "value": false },
         "material_print_temp_wait": { "value": false },
         "prime_tower_enable": { "value": "False" },
+        "prime_tower_position_x": { "value": "prime_tower_size + 100" },
+        "prime_tower_position_y": { "value": "20" },
         "retraction_hop_after_extruder_switch": { "value": false },
         "speed_print": { "value": "100" },
         "speed_roofing": { "value": "speed_wall" },
