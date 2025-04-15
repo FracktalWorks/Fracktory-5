@@ -26,12 +26,12 @@
     {
         "machine_depth": { "default_value": 300 },
         "machine_height": { "default_value": 400 },
-        "machine_name": { "default_value": "Twin Dragon 600 x 300" },
-        "machine_width": { "default_value": 600 },
         "machine_max_feedrate_x": { "value": 300 },
         "machine_max_feedrate_y": { "value": 300 },
+        "machine_name": { "default_value": "Twin Dragon 600 x 300" },
+        "machine_width": { "default_value": 600 },
         "speed_print": { "value": "100" },
         "speed_roofing": { "value": "speed_wall" },
-        "speed_travel": {"value": "max(150,speed_print)"}
+        "speed_travel": { "value": "max(150,speed_print)" }
     }
 }
