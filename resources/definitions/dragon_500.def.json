@@ -1,17 +1,17 @@
 {
     "version": 2,
-    "name": "Twin Dragon 400",
-    "inherits": "base_fracktal_idex_printer",
-    "id": "twin_dragon_400",
+    "name": "Dragon 500",
+    "inherits": "base_fracktal_printer",
+    "id": "dragon_500",
     "metadata":
     {
         "visible": true,
-        "manufacturer": "Twin Dragon",
-        "category": "IDEX Series",
+        "manufacturer": "Dragon Series",
+        "category": "Dragon",
         "has_machine_materials": true,
         "has_machine_quality": true,
         "has_variants": true,
-        "machine_variant_shortcode": "TD",
+        "machine_variant_shortcode": "D500",
         "platform_offset": [
             0,
             0,
@@ -26,9 +26,17 @@
     {
         "machine_depth": { "default_value": 400 },
         "machine_height": { "default_value": 400 },
-        "machine_max_feedrate_x": { "value": 300 },
+        "machine_max_feedrate_x": { "value": 600 },
         "machine_max_feedrate_y": { "value": 300 },
-        "machine_name": { "default_value": "Twin Dragon 400" },
-        "machine_width": { "default_value": 500 }
+        "machine_name": { "default_value": "Dragon 500" },
+        "machine_width": { "default_value": 510 },
+        "speed_print": { "value": "150" },
+        "speed_roofing": { "value": "speed_wall" },
+        "speed_travel":
+        {
+            "maximum_value": "600",
+            "maximum_value_warning": "600",
+            "value": "max(300,speed_print)"
+        }
     }
 }

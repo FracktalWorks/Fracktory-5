@@ -1,3 +1,9 @@
+"""
+Variant Creator - A utility script for Fracktory-5 that generates printer nozzle variants.
+Creates .cfg files for different nozzle sizes (regular and volcano) based on a printer definition.
+Automatically calculates optimal settings for each nozzle variant and handles both single and dual-nozzle printers.
+"""
+
 import os
 import json
 

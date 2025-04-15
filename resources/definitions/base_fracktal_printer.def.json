@@ -19,7 +19,7 @@
             0,
             0
         ],
-        "post_processing_scripts": "[CreateThumbnail]\\n\\n",
+        "post_processing_scripts": "[CreateThumbnail]\\\nwidth = 128\\\nheight = 128\\\n\\\n[DiagonalZHop]\\\nextruder_nb = 1\\\n\\\n",
         "preferred_material": "fracktal_plapluss_175",
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.4 mm",

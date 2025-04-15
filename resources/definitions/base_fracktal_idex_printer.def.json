@@ -43,7 +43,7 @@
         "material_print_temp_wait": { "value": false },
         "prime_tower_enable": { "value": "False" },
         "retraction_hop_after_extruder_switch": { "value": false },
-        "speed_print": { "value": "100" },
+        "speed_print": { "value": "120" },
         "speed_roofing": { "value": "speed_wall" },
         "speed_travel":
         {
