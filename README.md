@@ -376,3 +376,8 @@ To run the local runner for building the Fracktory installer, ensure the followi
 - **NSIS (Nullsoft Scriptable Install System)**: Latest version
   - Download and install from [NSIS](https://nsis.sourceforge.io/Download).
   - Add the NSIS installation folder to the system PATH.
+
+  ## Start Github Self hosted runne:
+
+  - Navigate to  actions-runner location
+  - `./run.cmd`
