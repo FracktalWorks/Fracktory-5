@@ -226,7 +226,8 @@
         "z_seam_corner": { "value": "'z_seam_corner_none'" },
         "z_seam_on_vertex": { "value": true },
         "z_seam_type": { "value": "'shortest'" },
-        "zig_zaggify_infill": { "value": true }
+        "zig_zaggify_infill": { "value": true },
+        "support_structure": { "value": "'tree'" }
     },
     "settings":
     {
