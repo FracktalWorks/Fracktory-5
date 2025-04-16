@@ -33,6 +33,8 @@ Generic PLA 1.75mm profile. The data in this file may not be correct for your sp
         <setting key="surface energy">100</setting>
         <cura:setting key="cool_fan_speed">100</cura:setting>
         <cura:setting key="cool_fan_speed_max">100</cura:setting>
+        <cura:setting key="high_speed_material_temp">215</cura:setting>
+
 
         <machine>
             <machine_identifier manufacturer="Snowflake" product="snowflake" />

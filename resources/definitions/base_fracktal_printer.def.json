@@ -218,7 +218,7 @@
         "support_wall_count": { "value": "1 if support_structure == 'tree' else 0" },
         "support_xy_distance": { "value": "machine_nozzle_size * 2" },
         "support_xy_distance_overhang": { "value": "machine_nozzle_size" },
-        "support_z_distance": { "value": "min(0.2, layer_height) if support_structure != 'tree' else layer_height" },
+        "support_z_distance": { "value": "min(0.2, layer_height)" },
         "support_zag_skip_count": { "minimum_value": 0 },
         "top_bottom_thickness": { "value": "4 * layer_height if 4 * layer_height > 0.8 else 0.8" },
         "wall_0_wipe_dist": { "value": "2 * line_width" },
@@ -251,10 +251,10 @@
         {
             "children":
             {
-                "max_speed_material_temp":
+                "high_speed_material_temp":
                 {
                     "default_value": 210,
-                    "description": "The temperature used for printing.",
+                    "description": "The temperature used for printing at high speeds.",
                     "enabled": "machine_nozzle_temp_enabled",
                     "label": "Printing Temperature for high speed printing",
                     "maximum_value": "500",
