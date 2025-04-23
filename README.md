@@ -204,7 +204,7 @@ remove older packages with
 ## Activate and run
 
 1. set environment part to python installed in the builds virtual environment:
-   `$env:PYTHONPATH = 'C:\Users\Vijay\Documents\GitHub\Fracktory-5\venv\Scripts'`
+   `$env:PYTHONPATH = 'C:\Users\VijayRaghavVarada\Documents\GitHub\Fracktory-5\venv\Scripts'`
 2. Activate virtual environment:
    `.\venv\Scripts\activate.ps1`
 3. Run:
@@ -381,3 +381,90 @@ To run the local runner for building the Fracktory installer, ensure the followi
 
   - Navigate to  actions-runner location
   - `./run.cmd`
+
+## Guide to Managing Printer Profiles and Settings
+
+### Adding New Printer Definitions
+
+When adding a new printer to Fracktory, follow these steps:
+
+1. **Create the printer definition file first**:
+   - Create a new `.def.json` file in the `resources/definitions` folder
+   - Base it on existing definitions (e.g., `base_fracktal_printer.def.json`)
+   - Define printer-specific parameters like build volume, extruder count, etc.
+
+2. **Generate nozzle variants automatically**:
+   - Use the provided `Variant Creator.py` script to generate appropriate nozzle variants
+   - Run the script and provide the path to your printer definition file:
+   - Follow the prompts to specify nozzle type (regular or volcano)
+   - The script will automatically create properly configured variants in the correct folder
+
+### Adding New Materials
+
+To add new materials or duplicate existing ones:
+
+1. **Use the resourcesRenamerUtility.py script**:
+- Choose option 1 to rename files
+- Provide the path to an existing material folder (e.g., `resources/intent/base_fracktal_printer/PLA`)
+- Enter the old material name to replace (e.g., "PLA")
+- Enter the new material name (e.g., "TPU")
+
+2. **Update material properties**:
+- Use option 2 in the resourcesRenamerUtility.py script to find and replace text within files
+- Update parameters like temperature, cooling, etc. to match the new material's requirements
+
+### Managing Custom Settings
+
+When adding custom settings to Fracktory:
+
+1. **For customer-facing settings used in material profiles**:
+- **Important**: Add these settings to the `fdmprinter.def.json` definition file
+- Adding them only to `base_fracktal_printer.def.json` will not work correctly
+- Material profiles reference the base fdmprinter definitions
+
+2. **For internal settings used by quality profiles and intent profiles**:
+- These can be added to the `base_fracktal_printer.def.json` definition
+- Any printer that inherits from this base definition will receive these settings
+
+3. **Setting structure**:
+- Add the setting definition to the appropriate category
+- Include metadata like label, description, type, and default value
+- Example:
+```json
+"custom_cooling_fan_speed": {
+  "label": "Custom Fan Speed",
+  "description": "Custom cooling fan speed for specific materials",
+  "type": "float",
+  "default_value": 100,
+  "unit": "%"
+}
+```
+
+### Available Custom Settings
+
+#### `strengthen_tree_support`
+
+- **Description**: This setting enables or disables the strengthening of tree supports.
+- **Location**: Found in the `fdmprinter.def.json` file.
+- **Effect**: When enabled, it increases the strength of tree supports, making them more robust during the printing process.
+
+#### `visual_print_speed`
+
+- **Description**: Defines the default print speed that provides optimal quality for a specific material.
+- **Location**: Found in the `fdmprinter.def.json` file under the speed category.
+- **Effect**: Sets the baseline printing speed for material profiles, optimized for best quality results.
+- **Default**: 60 mm/s
+
+#### `high_print_speed`
+
+- **Description**: Defines the maximum speed at which a material can be printed.
+- **Location**: Found in the `fdmprinter.def.json` file under the speed category.
+- **Effect**: Establishes the upper speed limit for material profiles, useful for faster printing modes.
+- **Default**: 60 mm/s
+
+#### `high_speed_material_temp`
+
+- **Description**: Defines the temperature used for printing at higher speeds.
+- **Location**: Found in the `fdmprinter.def.json` file under the material category.
+- **Effect**: Automatically increases the print temperature for high-speed printing to ensure proper material flow.
+- **Default**: Default material print temperature + 5°C

@@ -2457,6 +2457,21 @@
             "type": "category",
             "children":
             {
+                "high_speed_material_temp":
+                {
+                    "default_value": "default_material_print_temperature + 5",
+                    "description": "The temperature used for printing at higher speed profiles.",
+                    "enabled": "machine_nozzle_temp_enabled",
+                    "label": "Printing Temperature for high speed printing",
+                    "maximum_value": "500",
+                    "maximum_value_warning": "300",
+                    "minimum_value": "-273.15",
+                    "minimum_value_warning": "0",
+                    "settable_per_extruder": true,
+                    "settable_per_mesh": false,
+                    "type": "float",
+                    "unit": "\u00b0C"                
+                },
                 "default_material_print_temperature":
                 {
                     "label": "Default Printing Temperature",
@@ -3232,6 +3247,30 @@
             "type": "category",
             "children":
             {
+                                "visual_print_speed":
+                {
+                    "default_value": "60",
+                    "description": "The speed at which printing will result in best quality.",
+                    "label": "Default Print Speed for Material",
+                    "maximum_value": "math.sqrt(machine_max_feedrate_x ** 2 + machine_max_feedrate_y ** 2)",
+                    "maximum_value_warning": "150",
+                    "minimum_value": "0.1",
+                    "settable_per_mesh": true,
+                    "type": "float",
+                    "unit": "mm/s"
+                },
+                "high_print_speed":
+                {
+                    "default_value": "60",
+                    "description": "highest possible speed printing can happen.",
+                    "label": "Maximum Material Print Speed",
+                    "maximum_value": "math.sqrt(machine_max_feedrate_x ** 2 + machine_max_feedrate_y ** 2)",
+                    "maximum_value_warning": "200",
+                    "minimum_value": "0.1",
+                    "settable_per_mesh": true,
+                    "type": "float",
+                    "unit": "mm/s"
+                },
                 "speed_print":
                 {
                     "label": "Print Speed",
@@ -4753,6 +4792,17 @@
             "description": "Support",
             "children":
             {
+                "strengthen_tree_support": {
+                    "default_value": false,
+                    "description": "Increase strength of tree support because it breaks easily.",
+                    "enabled": "support_enable and support_structure == 'tree'",
+                    "label": "Strengthen Tree Support",
+                    "limit_to_extruder": "support_infill_extruder_nr",
+                    "settable_per_extruder": true,
+                    "settable_per_mesh": false,
+                    "type": "bool",
+                    "value": false
+                },
                 "support_enable":
                 {
                     "label": "Generate Support",
