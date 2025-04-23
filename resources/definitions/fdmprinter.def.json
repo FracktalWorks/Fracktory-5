@@ -2470,7 +2470,7 @@
                     "settable_per_extruder": true,
                     "settable_per_mesh": false,
                     "type": "float",
-                    "unit": "\u00b0C"                
+                    "unit": "\u00b0C"
                 },
                 "default_material_print_temperature":
                 {
@@ -3247,7 +3247,7 @@
             "type": "category",
             "children":
             {
-                                "visual_print_speed":
+                "visual_print_speed":
                 {
                     "default_value": "60",
                     "description": "The speed at which printing will result in best quality.",
@@ -4792,7 +4792,8 @@
             "description": "Support",
             "children":
             {
-                "strengthen_tree_support": {
+                "strengthen_tree_support":
+                {
                     "default_value": false,
                     "description": "Increase strength of tree support because it breaks easily.",
                     "enabled": "support_enable and support_structure == 'tree'",
