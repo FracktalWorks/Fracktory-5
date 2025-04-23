@@ -35,5 +35,7 @@ Generic HIPS 1.75mm profile. The data in this file may not be correct for your s
         <cura:setting key="support_supported_skin_fan_speed">30</cura:setting>
         <cura:setting key="brim_line_count">10</cura:setting>
         <cura:setting key="speed_print">60</cura:setting>
+        <cura:setting key="strengthen_tree_support">true</cura:setting>
+
     </settings>
 </fdmmaterial>
