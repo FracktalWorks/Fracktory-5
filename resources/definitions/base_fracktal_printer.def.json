@@ -72,6 +72,8 @@
             "value": "min([material_final_print_temperature, material_initial_print_temperature, material_print_temperature - 15])"
         },
         "default_material_print_temperature": { "maximum_value": "500" },
+        "gradual_flow_discretisation_step_size": { "value": 0.2 },
+        "gradual_flow_enabled": { "value": true },
         "gradual_support_infill_step_height": { "value": "4 * layer_height" },
         "gradual_support_infill_steps": { "value": "2 if support_interface_enable and support_structure != 'tree' else 0" },
         "group_outer_walls": { "value": false },
@@ -129,6 +131,7 @@
             "maximum_value": "500",
             "value": "175"
         },
+        "max_flow_acceleration": { "value": "0.5 if machine_nozzle_size <= 0.25 else 1.0 if machine_nozzle_size <= 0.4 else 1.5 if machine_nozzle_size <= 0.6 else 2.0" },
         "meshfix_maximum_deviation": { "value": "0.02" },
         "meshfix_maximum_resolution": { "value": "0.5" },
         "meshfix_union_all": { "value": false },
@@ -227,10 +230,7 @@
         "z_seam_corner": { "value": "'z_seam_corner_none'" },
         "z_seam_on_vertex": { "value": true },
         "z_seam_type": { "value": "'shortest'" },
-        "zig_zaggify_infill": { "value": true },
-        "gradual_flow_discretisation_step_size": { "value": 0.2 },
-        "gradual_flow_enabled": { "value": true },
-        "max_flow_acceleration": { "value": "0.5 if machine_nozzle_size <= 0.25 else 1.0 if machine_nozzle_size <= 0.4 else 1.5 if machine_nozzle_size <= 0.6 else 2.0" }
+        "zig_zaggify_infill": { "value": true }
     },
     "settings":
     {
