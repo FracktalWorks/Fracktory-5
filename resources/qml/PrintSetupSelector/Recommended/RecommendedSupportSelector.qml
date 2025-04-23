@@ -81,24 +81,24 @@ RecommendedSettingSection
                 }
             }
         },
-        RecommendedSettingItem
-        {
-            settingName: catalog.i18nc("@action:label", "Placement")
-            tooltipText: catalog.i18nc("support_type description", "Adjusts the placement of the support structures. The placement can be set to touching build plate or everywhere. When set to everywhere the support structures will also be printed on the model.")
-            isCompressed: enableSupportRow.isCompressed
+        // RecommendedSettingItem
+        // {
+        //     settingName: catalog.i18nc("@action:label", "Placement")
+        //     tooltipText: catalog.i18nc("support_type description", "Adjusts the placement of the support structures. The placement can be set to touching build plate or everywhere. When set to everywhere the support structures will also be printed on the model.")
+        //     isCompressed: enableSupportRow.isCompressed
 
-            settingControl: Cura.SingleSettingComboBox
-            {
-                width: parent.width
-                settingName: "support_type"
-                updateAllExtruders: true
-                defaultExtruderIndex: supportExtruderProvider.properties.value
-            }
-        },
+        //     settingControl: Cura.SingleSettingComboBox
+        //     {
+        //         width: parent.width
+        //         settingName: "support_type"
+        //         updateAllExtruders: true
+        //         defaultExtruderIndex: supportExtruderProvider.properties.value
+        //     }
+        // },
         RecommendedSettingItem
         {
-            settingName: catalog.i18nc("@action:label", "Multi-Material Support Optimisation")
-            tooltipText: catalog.i18nc("multimaterial_support_optimisation description", "Print all support structures with soluable support, or place soluable support only on interface to save on support material usage? Use 'Everywhere' if support will be placed in hard to reach areas of the model. This setting is only applicable for Soluble Support Materials and will no effect otherwise")
+            settingName: catalog.i18nc("@action:label", "Multi-Material Support Placement")
+            tooltipText: catalog.i18nc("multimaterial_support_optimisation description", "Print all support structures with multi-material support, or place only on interface to save on support material usage? Use 'Everywhere' if support will be placed in hard to reach areas of the model.")
             isCompressed: enableSupportRow.isCompressed
             enabled: Cura.ExtruderManager.enabledExtruderCount > 1
             visible: Cura.ExtruderManager.enabledExtruderCount > 1  
