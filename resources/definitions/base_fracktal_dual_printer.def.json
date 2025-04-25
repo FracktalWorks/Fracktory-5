@@ -75,7 +75,7 @@
                     "options":
                     {
                         "interface_only": "Place only on Interface",
-                        "normal": "Eveywhere"                    
+                        "normal": "Eveywhere"
                     },
                     "settable_per_extruder": false,
                     "settable_per_mesh": true,
