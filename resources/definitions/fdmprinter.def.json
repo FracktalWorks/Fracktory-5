@@ -2459,13 +2459,13 @@
             {
                 "high_speed_material_temp":
                 {
-                    "default_value": "default_material_print_temperature + 5",
+                    "default_value": 210,
                     "description": "The temperature used for printing at higher speed profiles.",
                     "enabled": "machine_nozzle_temp_enabled",
                     "label": "Printing Temperature for high speed printing",
                     "maximum_value": "500",
                     "maximum_value_warning": "300",
-                    "minimum_value": "-273.15",
+                    "minimum_value": "0",
                     "minimum_value_warning": "0",
                     "settable_per_extruder": true,
                     "settable_per_mesh": false,
@@ -3249,9 +3249,9 @@
             {
                 "visual_print_speed":
                 {
-                    "default_value": "60",
+                    "default_value": 60,
                     "description": "The speed at which printing will result in best quality.",
-                    "label": "Default Print Speed for Material",
+                    "label": "Speed at which printing will result in best Visual quality.",
                     "maximum_value": "math.sqrt(machine_max_feedrate_x ** 2 + machine_max_feedrate_y ** 2)",
                     "maximum_value_warning": "150",
                     "minimum_value": "0.1",
@@ -3261,7 +3261,7 @@
                 },
                 "high_print_speed":
                 {
-                    "default_value": "60",
+                    "default_value": 60,
                     "description": "highest possible speed printing can happen.",
                     "label": "Maximum Material Print Speed",
                     "maximum_value": "math.sqrt(machine_max_feedrate_x ** 2 + machine_max_feedrate_y ** 2)",
