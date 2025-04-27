@@ -1,7 +1,7 @@
 # Script Configuration
 $PYTHON_VERSION = "3.11.7"
 $CONAN_VERSION = "1.65.0"
-$CURA_VERSION = "5.9.1"
+$CURA_VERSION = "5.9.2"
 $WORKSPACE_DIR = $PSScriptRoot
 
 # Function to check if a command exists

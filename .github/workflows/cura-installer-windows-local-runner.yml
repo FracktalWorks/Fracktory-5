@@ -6,7 +6,7 @@ on:
     inputs:
       version:
         description: 'Version of the application'
-        default: '5.9.1'
+        default: '5.9.2'
         required: true
         type: string
 
@@ -147,7 +147,7 @@ jobs:
           cd CuraEngine
           git pull
           conan remove --locks
-          conan create . curaengine/5.9.1@FracktalWorks/stable --build=missing --update
+          conan create . curaengine/5.9.2@FracktalWorks/stable --build=missing --update
       
 
 

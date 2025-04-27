@@ -183,7 +183,7 @@ remove older packages with
          git clone https://github.com/FracktalWorks/CuraEngine.git
          conan remove --locks
          cd CuraEngine
-         conan create . curaengine/5.9.1@FracktalWorks/stable --build=missing --update
+         conan create . curaengine/5.9.2@FracktalWorks/stable --build=missing --update
       ```
 
 2. Install Fracktory ("Refer https://github.com/Ultimaker/CuraEngine/issues/2195 to fix conan error):
