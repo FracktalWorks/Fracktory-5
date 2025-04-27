@@ -42,6 +42,7 @@
         "prime_tower_enable": { "value": "True if print_mode == 'dual' else False" },
         "prime_tower_position_x": { "value": "(machine_width / 2) - (prime_tower_size / 2)" },
         "prime_tower_position_y": { "value": "20" },
+        "retraction_extra_prime_amount": { "value": "0.025 if machine_nozzle_size <= 0.25 else 0.05 if machine_nozzle_size <= 0.4 else 0.1 if machine_nozzle_size <= 0.6 else 0.15" },
         "retraction_hop_after_extruder_switch": { "value": false },
         "speed_print": { "value": "120" },
         "speed_roofing": { "value": "speed_wall" },
@@ -53,8 +54,7 @@
         },
         "speed_travel_layer_0": { "value": "100" },
         "switch_extruder_extra_prime_amount": { "value": "retraction_extra_prime_amount" },
-        "switch_extruder_retraction_amount": { "value": "retraction_amount" },
-        "retraction_extra_prime_amount": { "value": "0.025 if machine_nozzle_size <= 0.25 else 0.05 if machine_nozzle_size <= 0.4 else 0.1 if machine_nozzle_size <= 0.6 else 0.15" }
+        "switch_extruder_retraction_amount": { "value": "retraction_amount" }
     },
     "settings":
     {
