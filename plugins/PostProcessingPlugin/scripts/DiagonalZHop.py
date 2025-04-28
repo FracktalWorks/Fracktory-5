@@ -5,7 +5,7 @@ DiagonalZHop for 3D prints.
 Diagonal Z Hop
 
 Author: 5axes
-Version: 0.1
+Version: 0.2
 
 Note : https://github.com/Ultimaker/Cura/issues/15583
 """
@@ -21,7 +21,7 @@ from UM.i18n import i18nCatalog
 
 catalog = i18nCatalog("cura")
 
-__version__ = '0.1'
+__version__ = '0.2'
        
 class DiagonalZHop(Script):
     def getSettingDataString(self):
@@ -74,22 +74,35 @@ class DiagonalZHop(Script):
             Message(catalog.i18nc("@message", "Mode Z Hop must be activated !"), title = catalog.i18nc("@info:title", "Post Processing")).show()
             return data
             
-        In_Zhop = False
+        current_z = 0.0
         for layer_index, layer in enumerate(data):
             lines = layer.split("\n")
             
             for line_index, currentLine in enumerate(lines):
-                    
-                # Zhop G1
-                if currentLine.startswith("G1") and "Z" in currentLine and not "X" in currentLine and not "Y" in currentLine and not In_Zhop :
-                    In_Zhop = True
-                    lines[line_index] = ";" + currentLine + " ; Modified by DiagonalZhop"
-                else :
-                    if currentLine.startswith("G1") and "Z" in currentLine and not "X" in currentLine and not "Y" in currentLine :
-                        In_Zhop = False
+                # Track current Z position using regex to extract Z value
+                if currentLine.startswith("G0") or currentLine.startswith("G1"):
+                    z_match = re.search(r"Z(\d+\.?\d*)", currentLine)
+                    if z_match:
+                        new_z = float(z_match.group(1))
+                        
+                # Detect Z hop movements (G1 commands that only move in Z direction)
+                if currentLine.startswith("G1") and "Z" in currentLine and not "X" in currentLine and not "Y" in currentLine:
+                    z_match = re.search(r"Z(\d+\.?\d*)", currentLine)
+                    if z_match:
+                        new_z = float(z_match.group(1))
+                        # Only comment out upward Z movements (actual hops)
+                        if new_z > current_z:
+                            lines[line_index] = ";" + currentLine + " ; Modified by DiagonalZhop"
+                        current_z = new_z
+                
+                # Also track Z position from normal movement commands
+                elif (currentLine.startswith("G0") or currentLine.startswith("G1")) and "Z" in currentLine:
+                    z_match = re.search(r"Z(\d+\.?\d*)", currentLine)
+                    if z_match:
+                        current_z = float(z_match.group(1))
 
                 #
-                # end of analyse
+                # end of analysis
                 #
 
             final_lines = "\n".join(lines)
