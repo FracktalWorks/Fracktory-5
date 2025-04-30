@@ -131,7 +131,7 @@
             "maximum_value": "500",
             "value": "175"
         },
-        "max_flow_acceleration": { "value": "0.5 if machine_nozzle_size <= 0.25 else 1.0 if machine_nozzle_size <= 0.4 else 1.5 if machine_nozzle_size <= 0.6 else 2.0" },
+        "max_flow_acceleration": { "value": "0.4 if machine_nozzle_size <= 0.25 else 0.8 if machine_nozzle_size <= 0.4 else 1 if machine_nozzle_size <= 0.6 else 2.0" },
         "meshfix_maximum_deviation": { "value": "0.02" },
         "meshfix_maximum_resolution": { "value": "0.5" },
         "meshfix_union_all": { "value": false },
@@ -162,7 +162,7 @@
         "retraction_combing_max_distance": { "value": "machine_nozzle_size * 5" },
         "retraction_count_max": { "value": "int(15 * retraction_extrusion_window)" },
         "retraction_enable": { "value": true },
-        "retraction_extra_prime_amount": { "value": "0.05 if machine_nozzle_size <= 0.25 else 0.08 if machine_nozzle_size <= 0.4 else 0.15 if machine_nozzle_size <= 0.6 else 0.2" },
+        "retraction_extra_prime_amount": { "value": "0.05 if machine_nozzle_size <= 0.25 else 0.08 if machine_nozzle_size <= 0.4 else 0.12 if machine_nozzle_size <= 0.6 else 0.16" },
         "retraction_extrusion_window": { "value": "retraction_amount" },
         "retraction_hop": { "value": "layer_height" },
         "retraction_hop_enabled": { "value": true },
