@@ -47,7 +47,6 @@ class SupportInterfaceFanSpeedOveride(Script):
         in_support_interface = False
         last_fan_speed_gcode = None
 
-
         for layer_index, layer in enumerate(data):
             lines = layer.split("\n")
             output_lines = []
@@ -67,8 +66,10 @@ class SupportInterfaceFanSpeedOveride(Script):
                     output_lines.append(custom_fan_speed_gcode)
                     continue
 
-                # Detect end of support interface (any TYPE marker except SUPPORT-INTERFACE)
-                if in_support_interface and (type_marker or mesh_marker in line) and (support_interface_marker not in line):
+                # Detect end of support interface (any TYPE marker except SUPPORT-INTERFACE, or a MESH marker)
+                if in_support_interface and (
+                    ((type_marker in line) and (support_interface_marker not in line)) or (mesh_marker in line)
+                ):
                     in_support_interface = False
                     if last_fan_speed_gcode:
                         output_lines.append(f"; Restore previous fan speed after support interface")

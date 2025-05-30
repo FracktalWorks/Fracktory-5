@@ -24,11 +24,11 @@
         "machine_max_feedrate_y": { "value": 350 },
         "machine_name": { "default_value": "Snowflake" },
         "machine_width": { "default_value": 200 },
-        "speed_print": { "value": "150" },
+        "speed_print": { "value": "100" },
         "speed_roofing": { "value": "speed_wall" },
         "speed_travel":
         {
-            "maximum_value": "300",
+            "maximum_value": "150",
             "maximum_value_warning": "300",
             "value": "max(200,speed_print)"
         },
