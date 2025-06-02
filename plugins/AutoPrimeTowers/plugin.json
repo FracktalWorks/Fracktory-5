@@ -1,0 +1,8 @@
+{
+    "name": "Auto Prime Towers",
+    "author": "Vijay Raghav Varada",
+    "version": "1.0.0",
+    "description": "Automatically sets the prime tower size and location based on the print.",
+    "api": 8,
+    "supported_sdk_versions": ["8.9.0", "8.10.0"]
+}

@@ -1,8 +1,8 @@
-version: "5.9.2"
+version: "5.9.5"
 requirements:
   # - "cura_resources/5.9.1"
   - "uranium/5.9.1"
-  - "curaengine/5.9.1"
+  - "curaengine/5.9.2"
   # - "cura_binary_data/5.9.1"
   # - "fdm_materials/5.9.1"
   - "dulcificum/0.2.1"
