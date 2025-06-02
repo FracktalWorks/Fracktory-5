@@ -71,7 +71,7 @@ env:
   STAGING: False
 jobs:
   cura-installer-create_locally:
-    runs-on: [self-hosted, INGENUITY]
+    runs-on: [self-hosted, Windows]
 
     steps:
       - name: Checkout repo
