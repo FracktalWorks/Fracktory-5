@@ -147,7 +147,7 @@ jobs:
           cd CuraEngine
           git pull
           conan remove --locks
-          conan create . curaengine/5.9.2@FracktalWorks/stable --build=missing --update
+          conan create . curaengine/${{ inputs.version }}@FracktalWorks/stable --build=missing --update
       
 
 
