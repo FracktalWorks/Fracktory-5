@@ -19,7 +19,7 @@
         "machine_max_feedrate_y": { "value": 200 },
         "machine_name": { "default_value": "Julia 200" },
         "machine_width": { "default_value": 200 },
-        "speed_print": { "value": "100" },
+        "speed_print": { "value": "80" },
         "speed_roofing": { "value": "speed_wall" },
         "speed_travel":
         {

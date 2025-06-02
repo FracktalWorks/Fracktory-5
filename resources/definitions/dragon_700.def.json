@@ -30,7 +30,7 @@
         "machine_max_feedrate_y": { "value": 300 },
         "machine_name": { "default_value": "Dragon 700" },
         "machine_width": { "default_value": 710 },
-        "speed_print": { "value": "150" },
+        "speed_print": { "value": "120" },
         "speed_roofing": { "value": "speed_wall" },
         "speed_travel":
         {
