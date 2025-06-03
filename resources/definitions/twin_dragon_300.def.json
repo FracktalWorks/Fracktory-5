@@ -34,7 +34,7 @@
         {
             "maximum_value": "600",
             "maximum_value_warning": "600",
-            "value": "max(500,speed_print)"
+            "value": "max(350,speed_print)"
         }
     }
 }
