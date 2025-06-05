@@ -206,7 +206,7 @@
         "support_interface_offset": { "value": "support_offset" },
         "support_interface_pattern": { "value": "'zigzag'" },
         "support_interface_wall_count": { "value": "1" },
-        "support_material_flow": { "value": "material_flow if support_structure == 'tree' and strengthen_tree_support == True else 0.9 * material_flow" },
+        "support_material_flow": { "value": "material_flow if support_structure == 'tree' and strengthen_tree_support == True else 0.95 * material_flow" },
         "support_offset": { "value": "machine_nozzle_size * 2" },
         "support_pattern": { "value": "'zigzag'" },
         "support_skip_some_zags": { "value": "True if support_pattern== 'zigzag' else False" },

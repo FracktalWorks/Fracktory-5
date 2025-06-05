@@ -36,6 +36,7 @@ from .Controllers.RetractTowerController import RetractTowerController
 from .Controllers.SpeedTowerController import SpeedTowerController
 from .Controllers.TempTowerController import TempTowerController
 from .Controllers.PressureAdvanceTowerController import PressureAdvanceTowerController
+from .Controllers.RingingTowerController import RingingTowerController
 
 # not sure it's necessar i18n could be store in a different place ?
 Resources.addSearchPath(
@@ -50,7 +51,7 @@ if catalog.hasTranslationLoaded():
 class AutoTowersGenerator(QObject, Extension):
 
     # Add additional controller classes to this list
-    _controllerClasses = [BedLevelPatternController, FanTowerController, FlowTowerController, RetractTowerController, SpeedTowerController, TempTowerController, PressureAdvanceTowerController]
+    _controllerClasses = [BedLevelPatternController, FanTowerController, FlowTowerController, RetractTowerController, SpeedTowerController, TempTowerController, PressureAdvanceTowerController, RingingTowerController]
 
 
 

@@ -150,7 +150,7 @@ class AutoPrimeTowersPlugin(Extension):
             base_height = min_base_height + (global_height - z_min) * (max_base_height - min_base_height) / (z_max - z_min)
         # base_size: 5-15mm
         min_base_size = 5
-        max_base_size = 15
+        max_base_size = 20
         if global_height <= z_min:
             base_size = min_base_size
         elif global_height >= z_max:

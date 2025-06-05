@@ -83,13 +83,7 @@ class PressureAdvanceTowerModel(ModelBase):
         self.startKStrChanged.emit()
     @pyqtProperty(str, notify=startKStrChanged, fset=setStartKStr)
     def startKStr(self)->str:
-        if self.presetSelected:
-            return self.presetStartKStr
-        else:
-            return self._startKStr
-    @pyqtProperty(float, notify=startKStrChanged)
-    def startK(self)->float:
-        return float(self.startKStr)
+        return self._startKStr
 
     # The amount to change K between tower sections
     _kChangeStr = '0.02'
@@ -99,13 +93,7 @@ class PressureAdvanceTowerModel(ModelBase):
         self.kChangeStrChanged.emit()
     @pyqtProperty(str, notify=kChangeStrChanged, fset=setKChangeStr)
     def kChangeStr(self)->str:
-        if self.presetSelected:
-            return self.presetKChangeStr
-        else:
-            return self._kChangeStr
-    @pyqtProperty(float, notify=kChangeStrChanged)
-    def kChange(self)->float:
-        return float(self.kChangeStr)
+        return self._kChangeStr
 
     # The label to add to the tower
     _towerLabel = 'K'

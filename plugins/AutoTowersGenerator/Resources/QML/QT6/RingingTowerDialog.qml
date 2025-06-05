@@ -6,7 +6,7 @@ import Cura 1.7 as Cura
 
 UM.Dialog {
     id: dialog
-    title: qsTr("Pressure Advance Tower")
+    title: qsTr("Ringing Tower")
     minimumWidth: screenScaleFactor * 445
     minimumHeight: (screenScaleFactor * contents.childrenRect.height) + (2 * UM.Theme.getSize('default_margin').height) + UM.Theme.getSize('button').height
     maximumHeight: minimumHeight
@@ -19,11 +19,8 @@ UM.Dialog {
         width: dialog.width - 2 * UM.Theme.getSize('default_margin').width
         spacing: UM.Theme.getSize('default_margin').width
 
-        // Sub-heading for instructions
         UM.Label {
-            text: qsTr("How to calculate Pressure Advance:
-Measure the part height at the desired K value.
-pressure_advance = <Starting Factor> + <measured_height> x <Factor Step> ")
+            text: qsTr("How to use the Ringing Tower:\nThe frequency will sweep from the start to end value. Inspect the print to determine the optimal input shaping frequency.")
             wrapMode: Text.WordWrap
             font.bold: true
             font.pixelSize: UM.Theme.getSize('default_font_size').height * 1.05
@@ -40,26 +37,33 @@ pressure_advance = <Starting Factor> + <measured_height> x <Factor Step> ")
             Layout.alignment: Qt.AlignTop
 
             UM.Label {
-                text: qsTr("Starting Pressure Advance Factor (K)")
+                text: qsTr("Start Frequency (Hz)")
             }
             Cura.TextField {
                 Layout.preferredWidth: numberInputWidth
                 validator: RegularExpressionValidator { regularExpression: /[0-9]*(\.[0-9]+)?/ }
-                text: dataModel.startKStr
+                text: dataModel.startFStr
                 onTextChanged: {
-                    if (dataModel.startKStr !== text) dataModel.startKStr = text
+                    if (dataModel.startFStr !== text) dataModel.startFStr = text
                 }
             }
             UM.Label {
-                text: qsTr("Pressure Advance Factor Step (K per mm)")
+                text: qsTr("End Frequency (Hz)")
             }
             Cura.TextField {
                 Layout.preferredWidth: numberInputWidth
                 validator: RegularExpressionValidator { regularExpression: /[0-9]*(\.[0-9]+)?/ }
-                text: dataModel.kChangeStr
+                text: dataModel.endFStr
                 onTextChanged: {
-                    if (dataModel.kChangeStr !== text) dataModel.kChangeStr = text
+                    if (dataModel.endFStr !== text) dataModel.endFStr = text
                 }
+            }
+            UM.Label {
+                text: qsTr("G-code Type")
+            }
+            UM.Label {
+                text: qsTr("M593 (ZV Input Shaping)")
+                color: "#888"
             }
         }
     }
