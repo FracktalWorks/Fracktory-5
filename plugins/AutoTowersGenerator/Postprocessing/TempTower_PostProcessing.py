@@ -21,6 +21,7 @@
 __version__ = '3.2'
 
 from UM.Logger import Logger
+import re
 
 from . import PostProcessingCommon as Common
 
@@ -49,6 +50,41 @@ def execute(gcode, base_height:float, section_height:float, initial_layer_height
     gcode[0] += f'{Common.comment_prefix} Temperature change = {temp_change} C\n'
     gcode[0] += f'{Common.comment_prefix} Enable LCD messages = {enable_lcd_messages}\n'
     gcode[0] += f'{Common.comment_prefix} Advanced Gcode comments = {enable_advanced_gcode_comments}\n'
+
+    # Always operate on gcode[0] as a single string, like the Pressure Advance script
+    gcode_lines = gcode[0].splitlines(keepends=True)
+
+    # Use LayerEnumerate to robustly modify the actual lines, like the Pressure Advance script
+    m104_count = 0
+    m109_found = False
+    m104_pattern = re.compile(r'^(M104\s+)(S[0-9.]+)(.*)$')
+    m109_pattern = re.compile(r'^(M109\s+)(S[0-9.]+)(.*)$')
+    # Track which lines have already been replaced to avoid double-replacement in the same clump
+    replaced_m104_indices = set()
+    replaced_m109_index = None
+    for line_index, line, lines, _ in Common.LayerEnumerate(gcode, base_height, section_height, initial_layer_height, layer_height, enable_advanced_gcode_comments):
+        # Only replace if this line hasn't already been replaced in this clump
+        if m104_count < 2 and line_index not in replaced_m104_indices:
+            match = m104_pattern.match(line.strip())
+            if match:
+                comment = f' {Common.comment_prefix} Set to starting temperature {start_temp} by Temp Tower post-processing'
+                new_line = f'{match.group(1)}S{start_temp}{match.group(3)}{comment}\n'
+                lines[line_index] = new_line
+                replaced_m104_indices.add(line_index)
+                m104_count += 1
+        if not m109_found and replaced_m109_index is None:
+            match = m109_pattern.match(line.strip())
+            if match:
+                comment = f' {Common.comment_prefix} Set to starting temperature {start_temp} by Temp Tower post-processing'
+                new_line = f'{match.group(1)}S{start_temp}{match.group(3)}{comment}\n'
+                lines[line_index] = new_line
+                replaced_m109_index = line_index
+                m109_found = True
+        if m104_count == 3 and m109_found:
+            break
+
+    # Join lines back into a single string and assign to gcode[0]
+    gcode[0] = ''.join(gcode_lines)
 
     # Start at the selected starting temperature
     current_temp = start_temp - temp_change # The current temp will be incremented when the first section is encountered
