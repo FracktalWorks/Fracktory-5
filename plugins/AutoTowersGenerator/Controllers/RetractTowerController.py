@@ -33,7 +33,7 @@ class RetractTowerController(ControllerBase):
         'layer_height': (ControllerBase.ContainerId.GLOBAL_CONTAINER_STACK, None),
         'retraction_enable': (ControllerBase.ContainerId.ACTIVE_EXTRUDER_STACK, True),
         'meshfix_union_all_remove_holes': (ControllerBase.ContainerId.ACTIVE_EXTRUDER_STACK, False),
-        'cool_min_temperature': (ControllerBase.ContainerId.ACTIVE_EXTRUDER_STACK, 0),
+        'cool_min_layer_time': (ControllerBase.ContainerId.ACTIVE_EXTRUDER_STACK, 0),
 
     }
 

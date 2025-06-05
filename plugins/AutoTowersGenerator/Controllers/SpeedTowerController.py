@@ -31,7 +31,7 @@ class SpeedTowerController(ControllerBase):
         'adaptive_layer_height_enabled': (ControllerBase.ContainerId.GLOBAL_CONTAINER_STACK, False),
         'layer_height': (ControllerBase.ContainerId.GLOBAL_CONTAINER_STACK, None),
         'support_enable': (ControllerBase.ContainerId.GLOBAL_CONTAINER_STACK, False),
-        'cool_min_temperature': (ControllerBase.ContainerId.ACTIVE_EXTRUDER_STACK, 0),
+        'cool_min_layer_time': (ControllerBase.ContainerId.ACTIVE_EXTRUDER_STACK, 0),
 
     }
 
