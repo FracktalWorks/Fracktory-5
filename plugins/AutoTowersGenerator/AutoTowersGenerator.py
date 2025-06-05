@@ -35,6 +35,7 @@ from .Controllers.FlowTowerController import FlowTowerController
 from .Controllers.RetractTowerController import RetractTowerController
 from .Controllers.SpeedTowerController import SpeedTowerController
 from .Controllers.TempTowerController import TempTowerController
+from .Controllers.PressureAdvanceTowerController import PressureAdvanceTowerController
 
 # not sure it's necessar i18n could be store in a different place ?
 Resources.addSearchPath(
@@ -49,7 +50,7 @@ if catalog.hasTranslationLoaded():
 class AutoTowersGenerator(QObject, Extension):
 
     # Add additional controller classes to this list
-    _controllerClasses = [BedLevelPatternController, FanTowerController, FlowTowerController, RetractTowerController, SpeedTowerController, TempTowerController]
+    _controllerClasses = [BedLevelPatternController, FanTowerController, FlowTowerController, RetractTowerController, SpeedTowerController, TempTowerController, PressureAdvanceTowerController]
 
 
 
@@ -636,4 +637,3 @@ class AutoTowersGenerator(QObject, Extension):
         except IndexError:
             # This will be thrown if there is no gcode available
             pass
-        

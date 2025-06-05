@@ -1,0 +1,31 @@
+{
+    "parameterSets": {
+        "Pressure Advance Tower - Default": {
+            "Base_Height": "0.84",
+            "Column_Label": "K",
+            "Column_Label_Height_Multiplier": "0.3",
+            "Ending_Value": "0.10",
+            "Font": "Arial:style=Bold",
+            "Iota": "0.001",
+            "Label_Sections": "true",
+            "Orient_for_Screenshot": "false",
+            "Preview_Quality_Value": "24",
+            "Render_Quality_Value": "24",
+            "Screenshot_Vpd": "140",
+            "Screenshot_Vpf": "22.5",
+            "Screenshot_Vpr": "[75, 0, 300]",
+            "Screenshot_Vpt": "[0, 0, 15]",
+            "Section_Height": "8.4",
+            "Section_Label_Height_Multiplier": "0.3",
+            "Section_Label_Prefix": "",
+            "Section_Label_Suffix": "",
+            "Starting_Value": "0.00",
+            "Tower_Label": "K",
+            "Tower_Label_Height_Multiplier": "0.6",
+            "Tower_Width_Multiplier": "5",
+            "Value_Change": "0.02",
+            "Wall_Thickness": "0.6"
+        }
+    },
+    "fileFormatVersion": "1"
+}

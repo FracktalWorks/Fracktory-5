@@ -29,6 +29,8 @@ class TempTowerModel(ModelBase):
         {'name': catalog.i18nc("@model", "Temperature Tower - PLA") , 'filename': 'Temperature Tower - PLA.stl', 'start temp': '220', 'temp change': '-5'},
         {'name': catalog.i18nc("@model", "Temperature Tower - PLA+") , 'filename': 'Temperature Tower - PLA+.stl', 'start temp': '230', 'temp change': '-5'},
         {'name': catalog.i18nc("@model", "Temperature Tower - TPU") , 'filename': 'Temperature Tower - TPU.stl', 'start temp': '230', 'temp change': '-5'},
+        {'name': catalog.i18nc("@model", "Temperature Tower - PEEK") , 'filename': 'Temperature Tower - PEEK.stl', 'start temp': '400', 'temp change': '-5'},
+        {'name': catalog.i18nc("@model", "Temperature Tower - ULTEM") , 'filename': 'Temperature Tower - ULTEM.stl', 'start temp': '390', 'temp change': '-5'},
     ]
 
 
