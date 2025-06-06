@@ -36,7 +36,6 @@
         "prime_tower_brim_enable": { "value": "True" },
         "prime_tower_enable": { "value": "True" },
         "prime_tower_flow": { "value": 100 },
-        "prime_tower_max_bridging_distance": { "value": "10" },
         "prime_tower_position_x": { "value": "prime_tower_size + 20" },
         "prime_tower_position_y": { "value": "20" },
         "prime_tower_size": { "value": "30" },
