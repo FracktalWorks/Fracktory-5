@@ -28,11 +28,11 @@
         "machine_height": { "default_value": 400 },
         "machine_max_feedrate_x": { "value": 600 },
         "machine_max_feedrate_y": { "value": 300 },
+        "machine_max_print_speed": { "value": "140" },
         "machine_name": { "default_value": "Dragon 500" },
+        "machine_visual_print_speed": { "value": "80" },
         "machine_width": { "default_value": 510 },
         "speed_print": { "value": "120" },
-        "machine_visual_print_speed": { "value": "80" },
-        "machine_max_print_speed": { "value": "140" },
         "speed_roofing": { "value": "speed_wall" },
         "speed_travel":
         {
