@@ -44,7 +44,6 @@
         "prime_tower_position_y": { "value": "20" },
         "retraction_extra_prime_amount": { "value": "0.025 if machine_nozzle_size <= 0.25 else 0.05 if machine_nozzle_size <= 0.4 else 0.1 if machine_nozzle_size <= 0.6 else 0.15" },
         "retraction_hop_after_extruder_switch": { "value": false },
-        "speed_print": { "value": "120" },
         "speed_roofing": { "value": "speed_wall" },
         "speed_travel":
         {

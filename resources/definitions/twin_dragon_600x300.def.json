@@ -31,6 +31,8 @@
         "machine_name": { "default_value": "Twin Dragon 600 x 300" },
         "machine_width": { "default_value": 600 },
         "speed_print": { "value": "100" },
+        "machine_visual_print_speed": { "value": "60" },
+        "machine_max_print_speed": { "value": "120" },
         "speed_roofing": { "value": "speed_wall" },
         "speed_travel": { "value": "max(150,speed_print)" }
     }

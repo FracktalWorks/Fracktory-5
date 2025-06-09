@@ -51,7 +51,8 @@ if catalog.hasTranslationLoaded():
 class AutoTowersGenerator(QObject, Extension):
 
     # Add additional controller classes to this list
-    _controllerClasses = [BedLevelPatternController, FanTowerController, FlowTowerController, RetractTowerController, SpeedTowerController, TempTowerController, PressureAdvanceTowerController, RingingTowerController]
+    #_controllerClasses = [BedLevelPatternController, FanTowerController, FlowTowerController, RetractTowerController, SpeedTowerController, TempTowerController, PressureAdvanceTowerController, RingingTowerController]
+    _controllerClasses = [FlowTowerController, RetractTowerController, SpeedTowerController, TempTowerController]
 
 
 
