@@ -413,6 +413,35 @@ To add new materials or duplicate existing ones:
 - Use option 2 in the resourcesRenamerUtility.py script to find and replace text within files
 - Update parameters like temperature, cooling, etc. to match the new material's requirements
 
+### Adding New Materials and Intents
+
+When adding a new material to Fracktory, follow these steps to ensure both the material and its intent profiles are set up correctly:
+
+1. **Add the Material File:**
+   - Place your new material XML file in `resources/materials/Fracktal Works/`.
+   - Fill in all required metadata, properties, and settings (e.g., print temperature, bed temperature, cooling, etc.).
+   - Set a reasonable default for `speed_print` in the material file (e.g., 60).
+
+2. **Create Intents for the Material:**
+   - In `resources/intent/base_fracktal_printer/<MaterialName>/Model <NozzleSize>/`, create intent files for each profile (engineering, visual, quick, etc.) and nozzle size (e.g., 0.4, 0.6).
+   - Use existing materials (like ABS, Nylon, PC) as templates for structure and naming.
+   - For engineering intents, set only `material_print_temperature`, `infill_sparse_density`, and `wall_thickness` as per the established pattern.
+   - For visual and quick intents, set `speed_print` to the correct max for the material and nozzle (e.g., 100 for 0.4mm, 80 for 0.6mm for engineering materials), and adjust `material_print_temperature` as needed.
+
+3. **Set Speed and Temperature:**
+   - Ensure `speed_print` in intents matches the material's recommended max for each nozzle size and profile type.
+   - For engineering profiles, do not set `speed_print` (only temperature and strength settings). (so it takes it from internts (TBD))
+   - For visual/quick, use the correct speed and temperature logic as established in the project.
+
+4. **Consistency:**
+   - Always follow the structure and logic of existing intents for similar materials.
+   - Double-check that all new intents and material files are consistent with project standards for speed, temperature, and other key settings.
+
+5. **TBD: **
+   - Set up flow minitated speeds in Quality Settings and Intents
+
+This process ensures new materials are fully integrated and behave as expected in Fracktory.
+
 ### Managing Custom Settings
 
 When adding custom settings to Fracktory:
@@ -448,23 +477,18 @@ When adding custom settings to Fracktory:
 - **Location**: Found in the `fdmprinter.def.json` file.
 - **Effect**: When enabled, it increases the strength of tree supports, making them more robust during the printing process.
 
-#### `visual_print_speed`
+#### `machine_max_print_speed`
 
-- **Description**: Defines the default print speed that provides optimal quality for a specific material.
-- **Location**: Found in the `fdmprinter.def.json` file under the speed category.
-- **Effect**: Sets the baseline printing speed for material profiles, optimized for best quality results.
-- **Default**: 60 mm/s
+- **Description**: Sets the maximum allowable print speed for the machine. This acts as a hard upper limit for print speed, regardless of material or profile settings.
+- **Location**: Defined in the `fdmprinter.def.json` file under the speed category. Used in Intents
+- **Effect**: Ensures that no print job exceeds this speed, providing a safety and quality constraint for all profiles and materials.
+- **Default**: 150 mm/s (or as set per machine definition)
 
-#### `high_print_speed`
+#### `machine_visual_print_speed`
 
-- **Description**: Defines the maximum speed at which a material can be printed.
-- **Location**: Found in the `fdmprinter.def.json` file under the speed category.
-- **Effect**: Establishes the upper speed limit for material profiles, useful for faster printing modes.
-- **Default**: 60 mm/s
+- **Description**: Defines the recommended print speed for high-quality (visual) prints on the machine, regardless of material.
+- **Location**: Defined in the `fdmprinter.def.json` file under the speed category.  Used in Intents
+- **Effect**: Used as a baseline for visual/quality profiles to ensure optimal surface finish and detail.
+- **Default**: 60 mm/s (or as set per machine definition)
 
-#### `high_speed_material_temp`
 
-- **Description**: Defines the temperature used for printing at higher speeds.
-- **Location**: Found in the `fdmprinter.def.json` file under the material category.
-- **Effect**: Automatically increases the print temperature for high-speed printing to ensure proper material flow.
-- **Default**: Default material print temperature + 5°C

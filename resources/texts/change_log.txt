@@ -1,7 +1,7 @@
 [5.9.6]
 * New features and improvements:
 
-- Added Calibration Towers and sharpes
+- Added Calibration Towers and shapes
 - Prime Towers are sized and places dynamically
 - Speed settings for some machines were changed for performance and reliability
 - Added Mesh checking and fixing tools

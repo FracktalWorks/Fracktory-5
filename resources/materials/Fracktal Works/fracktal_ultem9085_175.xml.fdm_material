@@ -23,6 +23,10 @@ Generic ABS 1.75mm profile. The data in this file may not be correct for your sp
         <weight>1000</weight>
         <cost>2200</cost>
     </properties>
+<!--
+If print speed is critical to the material printing, like if printing too fast will cause warping etc, then set the maximum print speed here that will be used for Balanced and Engineering intents. in the intents then set the print speed to be the maximum print speed for the material per nozzle size.
+If the material is not speed critical, then leave this out to go the max machine speed.
+-->
     <settings>
         <setting key="print temperature">410</setting>
         <setting key="standby temperature">320</setting>

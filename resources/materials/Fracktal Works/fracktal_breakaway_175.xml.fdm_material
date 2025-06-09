@@ -21,6 +21,10 @@ Generic HIPS 1.75mm profile. The data in this file may not be correct for your s
         <weight>500</weight>
         <cost>4000</cost>
     </properties>
+<!--
+If print speed is critical to the material printing, like if printing too fast will cause warping etc, then set the maximum print speed here that will be used for Balanced and Engineering intents. in the intents then set the print speed to be the maximum print speed for the material per nozzle size.
+If the material is not speed critical, then leave this out to go the max machine speed.
+-->
     <settings>
         <!-- print settings -->
         <setting key="print temperature">240</setting>
