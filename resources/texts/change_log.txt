@@ -1,11 +1,11 @@
-[5.9.5]
+[5.9.6]
 * New features and improvements:
 
 - Added Calibration Towers and sharpes
 - Prime Towers are sized and places dynamically
 - Speed settings for some machines were changed for performance and reliability
-- Added Linear Advance Setting
 - Added Mesh checking and fixing tools
+- Updated Intent Speeds
 
 [5.9.1]
 
