@@ -480,6 +480,7 @@ When adding custom settings to Fracktory:
 #### `machine_max_print_speed`
 
 - **Description**: Sets the maximum allowable print speed for the machine. This acts as a hard upper limit for print speed, regardless of material or profile settings.
+- **Location**: Defined in the `fdmprinter.def.json` file under the speed category. Used in Intents
 - **Effect**: Ensures that no print job exceeds this speed, providing a safety and quality constraint for all profiles and materials.
 - **Default**: 150 mm/s (or as set per machine definition)
 
