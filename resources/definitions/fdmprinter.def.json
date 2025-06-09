@@ -2457,7 +2457,6 @@
             "type": "category",
             "children":
             {
-
                 "default_material_print_temperature":
                 {
                     "label": "Default Printing Temperature",

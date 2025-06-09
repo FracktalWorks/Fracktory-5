@@ -28,11 +28,11 @@
         "machine_height": { "default_value": 400 },
         "machine_max_feedrate_x": { "value": 300 },
         "machine_max_feedrate_y": { "value": 300 },
+        "machine_max_print_speed": { "value": "120" },
         "machine_name": { "default_value": "Twin Dragon 600" },
+        "machine_visual_print_speed": { "value": "60" },
         "machine_width": { "default_value": 700 },
         "speed_print": { "value": "100" },
-        "machine_visual_print_speed": { "value": "60" },
-        "machine_max_print_speed": { "value": "120" },
         "speed_travel":
         {
             "maximum_value": "600",
