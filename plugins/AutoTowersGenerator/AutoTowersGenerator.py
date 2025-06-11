@@ -126,9 +126,13 @@ class AutoTowersGenerator(QObject, Extension):
 
     @cached_property
     def _pluginSettingsFilePath(self)->str:
-        ''' Returns the path to the plugin settings file '''
-
-        return os.path.join(self._pluginDir, 'pluginSettings.json')
+        ''' Returns the path to the plugin settings file using Cura/Fracktory user preferences directory '''
+        from UM.Resources import Resources
+        import os
+        settings_dir = os.path.join(Resources.getStoragePath(Resources.Preferences), "plugins")
+        settings_dir = os.path.join(settings_dir, "AutoTowersGenerator")
+        os.makedirs(settings_dir, exist_ok=True)
+        return os.path.join(settings_dir, 'pluginSettings.json')
 
 
 

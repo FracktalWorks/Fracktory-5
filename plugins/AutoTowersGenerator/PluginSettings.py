@@ -1,4 +1,5 @@
 import json
+import os
 
 
 
@@ -27,6 +28,8 @@ class PluginSettings():
 
     
     def SaveToFile(self, filepath)->None:
+        # Ensure the directory exists before saving
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
         with open(filepath, 'w') as settingsFile:
             json.dump(self._settingsDictionary, settingsFile)
 

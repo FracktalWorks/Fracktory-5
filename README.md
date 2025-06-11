@@ -430,7 +430,7 @@ When adding a new material to Fracktory, follow these steps to ensure both the m
 
 3. **Set Speed and Temperature:**
    - Ensure `speed_print` in intents matches the material's recommended max for each nozzle size and profile type.
-   - For engineering profiles, do not set `speed_print` (only temperature and strength settings). (so it takes it from internts (TBD))
+   - For engineering profiles, do not set `speed_print` (only temperature and strength settings). (so it takes it from Material Settings itself (TBD))
    - For visual/quick, use the correct speed and temperature logic as established in the project.
 
 4. **Consistency:**
@@ -438,7 +438,7 @@ When adding a new material to Fracktory, follow these steps to ensure both the m
    - Double-check that all new intents and material files are consistent with project standards for speed, temperature, and other key settings.
 
 5. **TBD: **
-   - Set up flow minitated speeds in Quality Settings and Intents
+   - Set up flow limited as per nozzles sizes speeds in Quality Settings instead.
 
 This process ensures new materials are fully integrated and behave as expected in Fracktory.
 
@@ -491,4 +491,7 @@ When adding custom settings to Fracktory:
 - **Effect**: Used as a baseline for visual/quality profiles to ensure optimal surface finish and detail.
 - **Default**: 60 mm/s (or as set per machine definition)
 
-
+#### Setting Print Speeds:
+-> in "Materials" you set the value of speed_print, which will determine the speed at which engineering and balanced intent speeds will be set
+-> in "Intents" you can increase/reduce this speed for Visual and Quick. You can use the machine_max_print_speed and machine_visual_print_speed for refereence
+-> in "Quality" ideally set up a "maximum_material_print_speed" for larger size nozzles to ensure you are not extruding more than the nozzle is capable to extrude. In interns you can use this value instead of a constant like currently (TBD)
