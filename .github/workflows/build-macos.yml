@@ -2,10 +2,10 @@ name: Build macOS Installer
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ mac_test ]
     tags: [ 'v*' ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ mac_test ]
 
 jobs:
   build-macos:
