@@ -42,12 +42,15 @@ jobs:
         
     - name: Build application with Conan
       run: |
-        conan install . --build=missing \
+        cd /Users/runner/work/Fracktory-5/Fracktory-5
+        mkdir build
+        cd build
+        conan install .. --build=missing \
           -s compiler=apple-clang \
           -s compiler.version=14.0 \
           -s compiler.libcxx=libc++ \
           -s build_type=Release
-        conan build .
+        conan build ..
 
     - name: Create macOS installer
       run: |
