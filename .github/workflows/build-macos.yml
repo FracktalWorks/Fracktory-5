@@ -1,71 +1,369 @@
-name: Build macOS Installer
+name: Fracktory macOS Installer Local Runner
+run-name: ${{ inputs.version }} for macOS-${{ inputs.architecture }} by @${{ github.actor }}
 
 on:
   push:
-    branches: [ mac_test ]
-    tags: [ 'v*' ]
-  pull_request:
-    branches: [ mac_test ]
+    branches:
+      - mac_test
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version of the application'
+        default: '5.9.2'
+        required: true
+        type: string
+
+      installer_name:
+        description: 'Name of the .dmg and .pkg'
+        default: 'Fracktory_setup'
+        required: false
+        type: string
+
+      app_name:
+        description: 'Name of the Application in the installer'
+        default: 'Fracktory'
+        required: false
+        type: string
+
+      conan_args:
+        description: '5.6 Conan args: eq.: --require-override'
+        default: ''
+        required: false
+        type: string
+
+      enterprise:
+        description: 'Build Cura as an Enterprise edition'
+        default: false
+        required: true
+        type: boolean
+
+      staging:
+        description: 'Use staging API'
+        default: false
+        required: true
+        type: boolean
+
+      architecture:
+        description: 'Architecture'
+        required: true
+        default: 'arm64'
+        type: string
+
+      operating_system:
+        description: 'OS'
+        required: true
+        default: 'macos-latest'
+        type: string
+
+      conan_internal:
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+env:
+  # CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_USER }}
+  # CONAN_PASSWORD: ${{ secrets.CONAN_PASS }}
+  CURA_CONAN_VERSION: cura/latest@ultimaker/testing
+  MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
+  MACOS_CERT_PASS: ${{ secrets.MACOS_CERT_PASS }}
+  MACOS_NOTARIZATION_APPLE_ID: ${{ secrets.MACOS_NOTARIZATION_APPLE_ID }}
+  MACOS_NOTARIZATION_TEAM_ID: ${{ secrets.MACOS_NOTARIZATION_TEAM_ID }}
+  MACOS_NOTARIZATION_PASSWORD: ${{ secrets.MACOS_NOTARIZATION_PASSWORD }}
+  ENTERPRISE: False
+  STAGING: False
 
 jobs:
-  build-macos:
-    runs-on: macos-latest
+  cura-installer-create_locally:
+    runs-on: [self-hosted, macOS, ${{ inputs.architecture }}]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+        with:
+          fetch-depth: 1
+          ref: ${{ github.head_ref }}
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
+      - name: Checkout repo PR
+        uses: actions/checkout@v4
+        if: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
+        with:
+          fetch-depth: 1
+          ref: ${{ github.base_ref }}
 
-    - name: Install system dependencies
-      run: |
-        brew install cmake ninja create-dmg
+      - name: Set default values for push trigger
+        run: |
+          echo "VERSION=${{ inputs.version || '5.9.2' }}" >> $GITHUB_ENV
+          echo "INSTALLER_NAME=${{ inputs.installer_name || 'Fracktory_setup' }}" >> $GITHUB_ENV
+          echo "APP_NAME=${{ inputs.app_name || 'Fracktory' }}" >> $GITHUB_ENV
+          echo "CONAN_ARGS=${{ inputs.conan_args || '' }}" >> $GITHUB_ENV
+          echo "ENTERPRISE=${{ inputs.enterprise || 'false' }}" >> $GITHUB_ENV
+          echo "STAGING=${{ inputs.staging || 'false' }}" >> $GITHUB_ENV
+          echo "ARCHITECTURE=${{ inputs.architecture || 'arm64' }}" >> $GITHUB_ENV
+          echo "CONAN_INTERNAL=${{ inputs.conan_internal || 'false' }}" >> $GITHUB_ENV
 
-    - name: Install Python dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install conan==1.60.2
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Setup Python and pip
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11.7
+          cache: pip
+          cache-dependency-path: .github/workflows/requirements-runner.txt
 
-    - name: Add Conan remotes
-      run: |
-        conan remote add ultimaker-public https://ultimaker.jfrog.io/artifactory/api/conan/ultimaker-public-conan || true
+      - name: Install Python requirements
+        run: pip install -r .github/workflows/requirements-runner.txt
 
-    - name: Debug working directory and list files
-      run: |
-        pwd
-        ls -lah
-        cat conanfile.py || echo "conanfile.py not found!"
-        
-    - name: Build application with Conan
-      run: |
-        cd /Users/runner/work/Fracktory-5/Fracktory-5
-        mkdir build
-        cd build
-        conan install .. --build=missing \
-          -s compiler=apple-clang \
-          -s compiler.version=14.0 \
-          -s compiler.libcxx=libc++ \
-          -s build_type=Release
-        conan build ..
+      - name: Install system dependencies
+        run: |
+          brew install cmake pkg-config
+          echo "CMAKE: $(which cmake)"
+          echo "PKG_CONFIG: $(which pkg-config)"
 
-    - name: Create macOS installer
-      run: |
-        VERSION="5.5.0"  # Replace with your version
-        python packaging/macOS/build_macos.py \
-          --source_path . \
-          --dist_path build \
-          --cura_conan_version ${VERSION} \
-          --filename "Fracktory-${VERSION}-macOS" \
-          --app_name "Fracktory" \
-          --build_dmg
+      - name: Verify tools
+        run: |
+          cmake --version
+          python --version
+          conan --version
+          pip show sip
 
-    - name: Upload macOS installer
-      uses: actions/upload-artifact@v4
-      with:
-        name: Fracktory-macOS-Installer
-        path: build/*.dmg
-        retention-days: 30
+      - name: Setup pipeline caches
+        run: |
+          mkdir -p ~/.conan/downloads
+
+      - name: Install Conan and dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install conan==1.65.0
+          git clone https://github.com/ultimaker/conan-config.git
+          cd conan-config
+          git checkout 3226488623c642b40ca7ce3f62d3f33de046d11e
+          cd ..
+          conan config install ./conan-config
+          conan remote remove cura-private || true
+
+      - name: Clone and setup CuraEngine
+        run: |
+          git clone https://github.com/FracktalWorks/CuraEngine.git
+          cd CuraEngine
+          git pull
+          conan remove --locks
+          conan create . curaengine/${{ env.VERSION }}@FracktalWorks/stable --build=missing --update
+
+      - name: Cache Conan downloads
+        uses: actions/cache@v3
+        with:
+          path: ~/.conan/downloads
+          key: ${{ runner.os }}-conan-downloads-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-conan-downloads-
+
+      - name: Create the Packages
+        run: |
+          conan create . local/test --build=missing --update -c tools.build:skip_test=True
+          conan install cura/${{ env.VERSION }}@local/test ${{ env.CONAN_ARGS }} --require-override=curaengine/${{ env.VERSION }}@FracktalWorks/stable --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo -s arcus:build_type=RelWithDebInfo -s clipper:build_type=RelWithDebInfo
+
+      - name: Set Environment variables for Cura
+        run: |
+          source ./cura_inst/bin/activate_github_actions_env.sh
+          source ./cura_inst/bin/activate_github_actions_version_env.sh
+
+      - name: Create the Cura dist
+        run: |
+          source ./cura_inst/bin/activate
+          pyinstaller ./cura_inst/Fracktory.spec
+
+      - name: Get installer helper scripts
+        run: |
+          mkdir -p runner_scripts
+          curl -o "runner_scripts/cura_installer_filename.py" "https://raw.githubusercontent.com/Ultimaker/cura-workflows/CURA-12400_legal_fix/runner_scripts/cura_installer_filename.py"
+          curl -o "runner_scripts/summarize_used_dependencies.py" "https://raw.githubusercontent.com/Ultimaker/cura-workflows/CURA-12400_legal_fix/runner_scripts/summarize_used_dependencies.py"
+
+      - name: Output the installer file name and extension
+        id: filename
+        run: python runner_scripts/cura_installer_filename.py --os ${{ runner.os }} --arch ${{ env.ARCHITECTURE }} --enterprise ${{ env.ENTERPRISE }} --internal ${{ env.CONAN_INTERNAL }}
+
+      - name: Summarize the used dependencies
+        run: python runner_scripts/summarize_used_dependencies.py --installer_filename ${{ env.INSTALLER_NAME }}
+
+      - name: Import Code Signing Certificate
+        if: env.MACOS_CERT_P12 != ''
+        run: |
+          # Create temporary keychain
+          security create-keychain -p temp_password build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p temp_password build.keychain
+          
+          # Import certificate
+          echo "$MACOS_CERT_P12" | base64 --decode > certificate.p12
+          security import certificate.p12 -k build.keychain -P "$MACOS_CERT_PASS" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k temp_password build.keychain
+          
+          # List available signing identities
+          security find-identity -v -p codesigning
+
+      - name: Create macOS App Bundle
+        run: |
+          source ./cura_inst/bin/activate
+          
+          # Create the .app bundle structure
+          mkdir -p "dist/Fracktory.app/Contents/MacOS"
+          mkdir -p "dist/Fracktory.app/Contents/Resources"
+          
+          # Copy the executable
+          cp -r dist/Fracktory/* "dist/Fracktory.app/Contents/MacOS/"
+          
+          # Create Info.plist
+          cat > "dist/Fracktory.app/Contents/Info.plist" << EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>CFBundleDisplayName</key>
+              <string>Fracktory</string>
+              <key>CFBundleExecutable</key>
+              <string>Fracktory</string>
+              <key>CFBundleIdentifier</key>
+              <string>com.fracktory.fracktory</string>
+              <key>CFBundleInfoDictionaryVersion</key>
+              <string>6.0</string>
+              <key>CFBundleName</key>
+              <string>Fracktory</string>
+              <key>CFBundlePackageType</key>
+              <string>APPL</string>
+              <key>CFBundleShortVersionString</key>
+              <string>${{ env.VERSION }}</string>
+              <key>CFBundleVersion</key>
+              <string>${{ env.VERSION }}</string>
+              <key>LSMinimumSystemVersion</key>
+              <string>10.15</string>
+              <key>NSHighResolutionCapable</key>
+              <true/>
+          </dict>
+          </plist>
+          EOF
+
+      - name: Sign macOS App Bundle
+        if: env.MACOS_CERT_P12 != ''
+        run: |
+          # Sign the app bundle
+          codesign --deep --force --verify --verbose --sign "Developer ID Application" "dist/Fracktory.app"
+          
+          # Verify the signature
+          codesign --verify --verbose "dist/Fracktory.app"
+
+      - name: Create DMG Installer
+        run: |
+          # Install create-dmg if not available
+          if ! command -v create-dmg &> /dev/null; then
+            brew install create-dmg
+          fi
+          
+          # Create DMG
+          create-dmg \
+            --volname "Fracktory ${{ env.VERSION }}" \
+            --volicon "cura_inst/packaging/dmg/Fracktory.icns" \
+            --window-pos 200 120 \
+            --window-size 800 450 \
+            --icon-size 100 \
+            --icon "Fracktory.app" 200 190 \
+            --hide-extension "Fracktory.app" \
+            --app-drop-link 600 185 \
+            --hdiutil-quiet \
+            "Fracktory-${{ env.VERSION }}.dmg" \
+            "dist/Fracktory.app"
+
+      - name: Sign DMG
+        if: env.MACOS_CERT_P12 != ''
+        run: |
+          codesign --force --sign "Developer ID Application" "Fracktory-${{ env.VERSION }}.dmg"
+
+      - name: Notarize DMG
+        if: env.MACOS_CERT_P12 != '' && env.MACOS_NOTARIZATION_APPLE_ID != ''
+        run: |
+          # Submit for notarization
+          xcrun notarytool submit "Fracktory-${{ env.VERSION }}.dmg" \
+            --apple-id "$MACOS_NOTARIZATION_APPLE_ID" \
+            --team-id "$MACOS_NOTARIZATION_TEAM_ID" \
+            --password "$MACOS_NOTARIZATION_PASSWORD" \
+            --wait
+          
+          # Staple the notarization
+          xcrun stapler staple "Fracktory-${{ env.VERSION }}.dmg"
+
+      - name: Create PKG Installer (Alternative)
+        run: |
+          # Create a component package
+          pkgbuild --root "dist/Fracktory.app" \
+                   --identifier "com.fracktory.fracktory" \
+                   --version "${{ env.VERSION }}" \
+                   --install-location "/Applications/Fracktory.app" \
+                   "Fracktory-component.pkg"
+          
+          # Create distribution XML
+          cat > "distribution.xml" << EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <installer-gui-script minSpecVersion="1">
+              <title>Fracktory ${{ env.VERSION }}</title>
+              <organization>com.fracktory</organization>
+              <domains enable_localSystem="true"/>
+              <options customize="never" require-scripts="false"/>
+              <pkg-ref id="com.fracktory.fracktory"/>
+              <choices-outline>
+                  <line choice="default">
+                      <line choice="com.fracktory.fracktory"/>
+                  </line>
+              </choices-outline>
+              <choice id="default"/>
+              <choice id="com.fracktory.fracktory" visible="false">
+                  <pkg-ref id="com.fracktory.fracktory"/>
+              </choice>
+              <pkg-ref id="com.fracktory.fracktory" version="${{ env.VERSION }}" onConclusion="none">Fracktory-component.pkg</pkg-ref>
+          </installer-gui-script>
+          EOF
+          
+          # Create the final package
+          productbuild --distribution "distribution.xml" \
+                       --package-path . \
+                       "Fracktory-${{ env.VERSION }}.pkg"
+
+      - name: Sign PKG
+        if: env.MACOS_CERT_P12 != ''
+        run: |
+          productsign --sign "Developer ID Installer" "Fracktory-${{ env.VERSION }}.pkg" "Fracktory-${{ env.VERSION }}-signed.pkg"
+          mv "Fracktory-${{ env.VERSION }}-signed.pkg" "Fracktory-${{ env.VERSION }}.pkg"
+
+      - name: Upload DMG Installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Fracktory-Installer-DMG-${{ env.VERSION }}
+          path: "Fracktory-${{ env.VERSION }}.dmg"
+          retention-days: 5
+
+      - name: Upload PKG Installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Fracktory-Installer-PKG-${{ env.VERSION }}
+          path: "Fracktory-${{ env.VERSION }}.pkg"
+          retention-days: 5
+
+      - name: Cleanup certificates
+        if: always() && env.MACOS_CERT_P12 != ''
+        run: |
+          security delete-keychain build.keychain || true
+          rm -f certificate.p12
+
+      - name: Write the run info
+        shell: python
+        run: |
+          import os
+          with open("run_info.sh", "w") as f:
+              f.writelines(f'echo "CURA_VERSION_FULL={os.environ.get("CURA_VERSION_FULL", os.environ.get("VERSION", "5.9.2"))}" >> $GITHUB_ENV\n')
+
+      - name: Upload the run info
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-run-info
+          path: run_info.sh
+          retention-days: 5
