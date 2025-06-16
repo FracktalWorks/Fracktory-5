@@ -1,60 +1,66 @@
-name: MacOS Installer
-run-name: ${{ inputs.fracktory_conan_version || 'Commit Triggered Build' }} by @${{ github.actor }}
+name: Build macOS Installer
 
 on:
-  workflow_dispatch:
-    inputs:
-      fracktory_conan_version:
-        description: 'Fracktory Conan Version'
-        default: 'fracktory/latest@fracktal/testing'
-        required: true
-        type: string
-
-      conan_args:
-        description: 'Conan args: e.g.: --require-override'
-        default: ''
-        required: false
-        type: string
-
-      enterprise:
-        description: 'Build Fracktory as an Enterprise edition'
-        default: false
-        required: true
-        type: boolean
-
-      staging:
-        description: 'Use staging API'
-        default: false
-        required: true
-        type: boolean
-
-      architecture:
-        description: 'Architecture'
-        required: true
-        default: 'ARM64'
-        type: choice
-        options:
-          - X64
-          - ARM64
-
-      operating_system:
-        description: 'OS'
-        required: true
-        default: 'self-hosted-ARM64'
-        type: choice
-        options:
-          - self-hosted-X64
-          - self-hosted-ARM64
-          - macos-12
+  push:
+    branches: [ mac_test ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ mac_test ]
 
 jobs:
-  macos-installer:
-    uses: FracktalWorks/Fracktory-5/.github/workflows/fracktory-installer-macos.yml@main
-    with:
-      cura_conan_version: ${{ inputs.fracktory_conan_version || 'fracktory/latest@fracktal/testing' }}
-      conan_args: ${{ inputs.conan_args || '' }}
-      enterprise: ${{ inputs.enterprise || false }}
-      staging: ${{ inputs.staging || false }}
-      architecture: ${{ inputs.architecture || 'ARM64' }}
-      operating_system: ${{ inputs.operating_system || 'macos-12' }}
-    secrets: inherit
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install system dependencies
+      run: |
+        brew install cmake ninja create-dmg
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install conan==1.60.2
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Add Conan remotes
+      run: |
+        conan remote add ultimaker-public https://ultimaker.jfrog.io/artifactory/api/conan/ultimaker-public-conan || true
+    - name: Debug working directory and list files
+      run: |
+        pwd
+        ls -lah
+        cat conanfile.py || echo "conanfile.py not found!"
+        
+    - name: Build application with Conan
+      run: |
+        cd /Users/runner/work/Fracktory-5/Fracktory-5
+        mkdir build
+        cd build
+        conan install .. --build=missing \
+          -s compiler=apple-clang \
+          -s compiler.version=14.0 \
+          -s compiler.libcxx=libc++ \
+          -s build_type=Release
+        conan build ..
+    - name: Create macOS installer
+      run: |
+        VERSION="5.5.0"  # Replace with your version
+        python packaging/macOS/build_macos.py \
+          --source_path . \
+          --dist_path build \
+          --cura_conan_version ${VERSION} \
+          --filename "Fracktory-${VERSION}-macOS" \
+          --app_name "Fracktory" \
+          --build_dmg
+    - name: Upload macOS installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: Fracktory-macOS-Installer
+        path: build/*.dmg
+        retention-days: 30
