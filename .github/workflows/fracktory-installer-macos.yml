@@ -1,5 +1,5 @@
 name: MacOS Installer
-run-name: ${{ inputs.fracktory_conan_version }} by @${{ github.actor }}
+run-name: ${{ inputs.fracktory_conan_version || 'Commit Triggered Build' }} by @${{ github.actor }}
 
 on:
   workflow_dispatch:
@@ -47,15 +47,18 @@ on:
           - self-hosted-ARM64
           - macos-12
 
+  push:
+    branches:
+      - mac_test
+
 jobs:
   macos-installer:
-    # ⚠️ Make sure you create this workflow file in your repo (see below)
     uses: FracktalWorks/Fracktory-5/.github/workflows/fracktory-installer-macos.yml@main
     with:
-      cura_conan_version: ${{ inputs.fracktory_conan_version }}
-      conan_args: ${{ inputs.conan_args }}
-      enterprise: ${{ inputs.enterprise }}
-      staging: ${{ inputs.staging }}
-      architecture: ${{ inputs.architecture }}
-      operating_system: ${{ inputs.operating_system }}
+      cura_conan_version: ${{ inputs.fracktory_conan_version || 'fracktory/latest@fracktal/testing' }}
+      conan_args: ${{ inputs.conan_args || '' }}
+      enterprise: ${{ inputs.enterprise || false }}
+      staging: ${{ inputs.staging || false }}
+      architecture: ${{ inputs.architecture || 'ARM64' }}
+      operating_system: ${{ inputs.operating_system || 'macos-12' }}
     secrets: inherit
