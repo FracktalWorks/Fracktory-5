@@ -47,10 +47,6 @@ on:
           - self-hosted-ARM64
           - macos-12
 
-  push:
-    branches:
-      - mac_test
-
 jobs:
   macos-installer:
     uses: FracktalWorks/Fracktory-5/.github/workflows/fracktory-installer-macos.yml@main
