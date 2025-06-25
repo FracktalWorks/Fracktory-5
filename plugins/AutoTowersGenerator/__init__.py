@@ -1,7 +1,7 @@
-from . import AutoTowersGenerator
+from . import AutoTowersGenerator as MaterialCalibration
 
 def getMetaData():
     return {}
 
 def register(app):
-    return { 'extension' : AutoTowersGenerator.AutoTowersGenerator() }
+    return { 'extension' : MaterialCalibration.MaterialCalibration() }

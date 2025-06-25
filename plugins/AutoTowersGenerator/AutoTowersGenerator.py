@@ -31,28 +31,28 @@ from .OpenScadJob import OpenScadJob
 
 from .Controllers.BedLevelPatternContoller import BedLevelPatternController
 from .Controllers.FanTowerController import FanTowerController
-from .Controllers.FlowTowerController import FlowTowerController
 from .Controllers.RetractTowerController import RetractTowerController
 from .Controllers.SpeedTowerController import SpeedTowerController
 from .Controllers.TempTowerController import TempTowerController
 from .Controllers.PressureAdvanceTowerController import PressureAdvanceTowerController
 from .Controllers.RingingTowerController import RingingTowerController
+from .Controllers.FlowCubeController import FlowCubeController
 
 # not sure it's necessar i18n could be store in a different place ?
 Resources.addSearchPath(
     os.path.join(os.path.abspath(os.path.dirname(__file__)),'Resources')
 )  # Plugin translation file import
 
-catalog = i18nCatalog("autotowers")
+catalog = i18nCatalog("materialcalibration")
 
 if catalog.hasTranslationLoaded():
-    Logger.log("i", "Auto Towers Generator Plugin translation loaded!")
+    Logger.log("i", "Material Calibration Plugin translation loaded!")
 
-class AutoTowersGenerator(QObject, Extension):
+class MaterialCalibration(QObject, Extension):
 
     # Add additional controller classes to this list
     #_controllerClasses = [BedLevelPatternController, FanTowerController, FlowTowerController, RetractTowerController, SpeedTowerController, TempTowerController, PressureAdvanceTowerController, RingingTowerController]
-    _controllerClasses = [FlowTowerController, RetractTowerController, SpeedTowerController, TempTowerController]
+    _controllerClasses = [FanTowerController,RetractTowerController, SpeedTowerController, TempTowerController, FlowCubeController]
 
 
 
@@ -315,7 +315,7 @@ class AutoTowersGenerator(QObject, Extension):
 
     def _initializeMenu(self)->None:
         # Add a menu for this plugin
-        self.setMenuName(catalog.i18nc("@menu", "Auto Towers"))
+        self.setMenuName(catalog.i18nc("@menu", "Material Calibration"))
 
         # Add menu entries for each tower controller
         for controllerClass in self._controllerClasses:
