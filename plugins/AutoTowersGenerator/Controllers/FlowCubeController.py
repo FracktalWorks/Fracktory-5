@@ -9,6 +9,7 @@ from UM.i18n import i18nCatalog
 from UM.Resources import Resources
 from .ControllerBase import ControllerBase
 from ..Models.ModelBase import ModelBase
+from UM.Application import Application
 
 Resources.addSearchPath(
     os.path.join(os.path.join(os.path.abspath(os.path.dirname(__file__)),'..'),'Resources')
@@ -27,6 +28,7 @@ class FlowCubeController(ControllerBase):
         'layer_height': (ControllerBase.ContainerId.GLOBAL_CONTAINER_STACK, 0.2),
         'top_thickness': (ControllerBase.ContainerId.ACTIVE_EXTRUDER_STACK, 0),
         'bottom_thickness': (ControllerBase.ContainerId.ACTIVE_EXTRUDER_STACK, 0.3),
+        'line_width': (ControllerBase.ContainerId.GLOBAL_CONTAINER_STACK, None),  # Set dynamically in checkPrintSettings
     }
 
     def __init__(self, guiDir, stlDir, loadStlCallback, generateStlCallback, pluginName):
@@ -53,3 +55,10 @@ class FlowCubeController(ControllerBase):
     def dialogRejected(self):
         if self._dialog:
             self._dialog.close()
+
+    def checkPrintSettings(self, correctPrintSettings = False):
+        # Dynamically set line_width to 1.2 * machine_nozzle_size
+        nozzle_size = Application.getInstance().getGlobalContainerStack().getProperty('machine_nozzle_size', 'value')
+        if nozzle_size is not None:
+            self._criticalPropertiesTable['line_width'] = (ControllerBase.ContainerId.GLOBAL_CONTAINER_STACK, 1.2 * nozzle_size)
+        return super().checkPrintSettings(correctPrintSettings)
