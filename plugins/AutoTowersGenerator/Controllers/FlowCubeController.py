@@ -10,6 +10,7 @@ from UM.Resources import Resources
 from .ControllerBase import ControllerBase
 from ..Models.ModelBase import ModelBase
 from UM.Application import Application
+from ..Postprocessing import FlowCube_PostProcessing
 
 Resources.addSearchPath(
     os.path.join(os.path.join(os.path.abspath(os.path.dirname(__file__)),'..'),'Resources')
@@ -47,7 +48,7 @@ class FlowCubeController(ControllerBase):
     def dialogAccepted(self):
         # Just drop the STL on the bed, no post-processing
         stl_path = os.path.join(self._dataModel._stlDir, 'Flow Cube.stl')
-        self._loadStlCallback(self, 'Flow Cube', stl_path, None)
+        self._loadStlCallback(self, 'Flow Cube', stl_path, self.postProcess)
         if self._dialog:
             self._dialog.close()
 
@@ -62,3 +63,6 @@ class FlowCubeController(ControllerBase):
         if nozzle_size is not None:
             self._criticalPropertiesTable['line_width'] = (ControllerBase.ContainerId.GLOBAL_CONTAINER_STACK, 1.2 * nozzle_size)
         return super().checkPrintSettings(correctPrintSettings)
+
+    def postProcess(self, gcode, *args, **kwargs):
+        return FlowCube_PostProcessing.execute(gcode)

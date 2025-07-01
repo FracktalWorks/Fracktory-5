@@ -19,7 +19,7 @@ UM.Dialog {
         spacing: UM.Theme.getSize('default_margin').width
 
         UM.Label {
-            text: qsTr("How to use the Flow Cube:\n\n1. Print the Flow Cube.\n2. Measure the wall thickness of the printed cube with calipers.\n3. Calculate the correct line width using the formula:\n\n    New Line Width = (Measured Wall Thickness / Expected Wall Thickness) * Current Line Width\n\n4. Update your slicer settings with the new line width if needed. Note that the line width used for printing the calibration part is 1.2 * Nozzle Size")
+            text: qsTr("How to use the Flow Cube:\n\n1. Print the Flow Cube.\n2. Measure the wall thickness of the printed cube with calipers.\n3. Calculate the correct flow rate using the formula:\n\n    New Flow Rate = (Current Flow Rate * Intended Wall Thickness) / Measured Wall Thickness\n\n4. Update your slicer settings with the new flow rate if needed.")
             wrapMode: Text.WordWrap
             font.bold: true
             font.pixelSize: UM.Theme.getSize('default_font_size').height * 1.05
