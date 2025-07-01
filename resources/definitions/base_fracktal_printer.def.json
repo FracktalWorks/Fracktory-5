@@ -226,7 +226,7 @@
         "support_tree_tip_diameter": { "value": 0.8 },
         "support_tree_top_rate": { "value": 20 },
         "support_use_towers": { "value": "False" },
-        "support_wall_count": { "value": "2 if strengthen_tree_support == True and support_structure == 'tree' else 1 if strengthen_tree_support == False and support_structure == 'tree' else 0" },
+        "support_wall_count": { "value": "2 if support_structure == 'tree' and strengthen_tree_support else 1 if support_structure == 'tree' else 0" },
         "support_xy_distance": { "value": "machine_nozzle_size * 1.7" },
         "support_xy_distance_overhang": { "value": "machine_nozzle_size / 2" },
         "support_z_distance": { "value": "min(0.2, layer_height)" },
