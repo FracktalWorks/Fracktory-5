@@ -1,0 +1,44 @@
+{
+    "version": 2,
+    "name": "Dragon 500",
+    "inherits": "base_fracktal_printer",
+    "id": "dragon_500",
+    "metadata":
+    {
+        "visible": true,
+        "manufacturer": "Dragon Series",
+        "category": "Dragon",
+        "has_machine_materials": true,
+        "has_machine_quality": true,
+        "has_variants": true,
+        "machine_variant_shortcode": "D500",
+        "platform_offset": [
+            0,
+            0,
+            0
+        ],
+        "preferred_quality_type": "normal",
+        "preferred_variant_name": "Model 0.4 mm",
+        "quality_definition": "base_fracktal_printer",
+        "variants_name": "Nozzle"
+    },
+    "overrides":
+    {
+        "machine_depth": { "default_value": 400 },
+        "machine_height": { "default_value": 400 },
+        "machine_max_feedrate_x": { "value": 600 },
+        "machine_max_feedrate_y": { "value": 300 },
+        "machine_max_print_speed": { "value": "140" },
+        "machine_name": { "default_value": "Dragon 500" },
+        "machine_visual_print_speed": { "value": "80" },
+        "machine_width": { "default_value": 510 },
+        "speed_print": { "value": "120" },
+        "speed_roofing": { "value": "speed_wall" },
+        "speed_travel":
+        {
+            "maximum_value": "600",
+            "maximum_value_warning": "600",
+            "value": "max(350,speed_print)"
+        }
+    }
+}

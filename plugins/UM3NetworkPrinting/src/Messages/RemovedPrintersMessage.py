@@ -40,7 +40,7 @@ class RemovedPrintersMessage(Message):
                                                  name=self.i18n_catalog.i18nc("@action:button",
                                                                               "Keep printer configurations"),
                                                  icon="",
-                                                 description="Keep cloud printers in Ultimaker Cura when not connected to your account.",
+                                                 description="Keep cloud printers in Fracktory when not connected to your account.",
                                                  button_align=Message.ActionButtonAlignment.ALIGN_RIGHT)
         self.addAction("remove_printers_action",
                                                  name=self.i18n_catalog.i18nc("@action:button", "Remove printers"),

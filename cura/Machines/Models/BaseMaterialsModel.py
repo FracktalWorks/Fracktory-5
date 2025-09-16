@@ -204,6 +204,8 @@ class BaseMaterialsModel(ListModel):
             "color_code":           metadata.get("color_code", ""),
             "density":              metadata.get("properties", {}).get("density", ""),
             "diameter":             metadata.get("properties", {}).get("diameter", ""),
+            "weight":               metadata.get("properties", {}).get("weight", ""),
+            "cost":                 metadata.get("properties", {}).get("cost", ""),
             "approximate_diameter": metadata["approximate_diameter"],
             "adhesion_info":        metadata["adhesion_info"],
             "is_read_only":         self._container_registry.isReadOnly(metadata["id"]),

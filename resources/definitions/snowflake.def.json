@@ -1,0 +1,39 @@
+{
+    "version": 2,
+    "name": "Snowflake",
+    "inherits": "base_fracktal_printer",
+    "id": "snowflake",
+    "metadata":
+    {
+        "visible": true,
+        "manufacturer": "Snowflake",
+        "category": "Julia Series",
+        "machine_variant_shortcode": "SF",
+        "platform_offset": [
+            0,
+            0,
+            0
+        ],
+        "quality_definition": "base_fracktal_printer"
+    },
+    "overrides":
+    {
+        "machine_depth": { "default_value": 200 },
+        "machine_height": { "default_value": 200 },
+        "machine_max_feedrate_x": { "value": 350 },
+        "machine_max_feedrate_y": { "value": 350 },
+        "machine_max_print_speed": { "value": "100" },
+        "machine_name": { "default_value": "Snowflake" },
+        "machine_visual_print_speed": { "value": "60" },
+        "machine_width": { "default_value": 200 },
+        "speed_print": { "value": "80" },
+        "speed_roofing": { "value": "speed_wall" },
+        "speed_travel":
+        {
+            "maximum_value": "300",
+            "maximum_value_warning": "300",
+            "value": "max(120,speed_print)"
+        },
+        "speed_travel_layer_0": { "value": "80" }
+    }
+}

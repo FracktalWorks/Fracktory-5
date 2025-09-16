@@ -1,0 +1,34 @@
+{
+    "version": 2,
+    "name": "Julia 250",
+    "inherits": "base_fracktal_printer",
+    "id": "julia_250",
+    "metadata":
+    {
+        "visible": true,
+        "manufacturer": "New Julia Series",
+        "category": "New Julia Series",
+        "machine_variant_shortcode": "J250",
+        "quality_definition": "base_fracktal_printer"
+    },
+    "overrides":
+    {
+        "machine_depth": { "default_value": 250 },
+        "machine_height": { "default_value": 300 },
+        "machine_max_feedrate_x": { "value": 200 },
+        "machine_max_feedrate_y": { "value": 200 },
+        "machine_max_print_speed": { "value": "80" },
+        "machine_name": { "default_value": "Julia 250" },
+        "machine_visual_print_speed": { "value": "40" },
+        "machine_width": { "default_value": 250 },
+        "speed_print": { "value": "60" },
+        "speed_roofing": { "value": "speed_wall" },
+        "speed_travel":
+        {
+            "maximum_value": "200",
+            "maximum_value_warning": "200",
+            "value": "max(120,speed_print)"
+        },
+        "speed_travel_layer_0": { "value": "80" }
+    }
+}

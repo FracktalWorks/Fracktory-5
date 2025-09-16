@@ -110,7 +110,7 @@ class CrashHandler:
         layout = QVBoxLayout(dialog)
 
         label = QLabel()
-        label.setText(catalog.i18nc("@label crash message", """<p><b>Oops, UltiMaker Cura has encountered something that doesn't seem right.</p></b>
+        label.setText(catalog.i18nc("@label crash message", """<p><b>Oops, Fracktory has encountered something that doesn't seem right.</p></b>
                     <p>We encountered an unrecoverable error during start up. It was possibly caused by some incorrect configuration files. We suggest to backup and reset your configuration.</p>
                     <p>Backups can be found in the configuration folder.</p>
                     <p>Please send us this Crash Report to fix the problem.</p>
@@ -187,7 +187,7 @@ class CrashHandler:
 
     def _messageWidget(self):
         label = QLabel()
-        label.setText(catalog.i18nc("@label crash message", """<p><b>A fatal error has occurred in Cura. Please send us this Crash Report to fix the problem</p></b>
+        label.setText(catalog.i18nc("@label crash message", """<p><b>A fatal error has occurred in Fracktory. Please send us this Crash Report to fix the problem</p></b>
             <p>Please use the "Send report" button to post a bug report automatically to our servers</p>
         """))
 

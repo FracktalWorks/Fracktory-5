@@ -1,0 +1,35 @@
+{
+    "version": 2,
+    "name": "Julia Pro Single ABL",
+    "inherits": "base_fracktal_printer",
+    "id": "julia_pro_single",
+    "metadata":
+    {
+        "visible": true,
+        "manufacturer": "Julia Series",
+        "category": "Julia Pro Series",
+        "has_machine_materials": true,
+        "has_machine_quality": true,
+        "has_variants": true,
+        "machine_variant_shortcode": "PS",
+        "platform_offset": [
+            0,
+            0,
+            0
+        ],
+        "preferred_material": "fracktal_pla_175",
+        "preferred_quality_type": "normal",
+        "preferred_variant_name": "Model 0.6 mm",
+        "quality_definition": "base_fracktal_printer",
+        "variants_name": "Nozzle"
+    },
+    "overrides":
+    {
+        "machine_depth": { "default_value": 400 },
+        "machine_height": { "default_value": 400 },
+        "machine_name": { "default_value": "Julia Pro Single" },
+        "machine_width": { "default_value": 400 },
+        "machine_max_feedrate_x": { "value": 100 },
+        "machine_max_feedrate_y": { "value": 100 }
+    }
+}

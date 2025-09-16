@@ -19,16 +19,16 @@ def generate_nsi(source_path: str, dist_path: str, filename: str, version: str):
     dist_loc = Path(os.getcwd(), dist_path)
     source_loc = Path(os.getcwd(), source_path)
     instdir = Path("$INSTDIR")
-    dist_paths = [p.relative_to(dist_loc.joinpath("UltiMaker-Cura")) for p in sorted(dist_loc.joinpath("UltiMaker-Cura").rglob("*")) if p.is_file()]
+    dist_paths = [p.relative_to(dist_loc.joinpath("Fracktory")) for p in sorted(dist_loc.joinpath("Fracktory").rglob("*")) if p.is_file()]
     parsed_version = semver.Version.parse(version)
     mapped_out_paths = {}
     for dist_path in dist_paths:
         if "__pycache__" not in dist_path.parts:
             out_path = instdir.joinpath(dist_path).parent
             if out_path not in mapped_out_paths:
-                mapped_out_paths[out_path] = [(dist_loc.joinpath("UltiMaker-Cura", dist_path), instdir.joinpath(dist_path))]
+                mapped_out_paths[out_path] = [(dist_loc.joinpath("Fracktory", dist_path), instdir.joinpath(dist_path))]
             else:
-                mapped_out_paths[out_path].append((dist_loc.joinpath("UltiMaker-Cura", dist_path), instdir.joinpath(dist_path)))
+                mapped_out_paths[out_path].append((dist_loc.joinpath("Fracktory", dist_path), instdir.joinpath(dist_path)))
 
     rmdir_paths = set()
     for rmdir_f in mapped_out_paths.values():
@@ -38,20 +38,20 @@ def generate_nsi(source_path: str, dist_path: str, filename: str, version: str):
 
     rmdir_paths = sorted(list(rmdir_paths), reverse = True)[:-2]  # Removes the `.` and `..` from the list
 
-    jinja_template_path = Path(source_loc.joinpath("packaging", "NSIS", "Ultimaker-Cura.nsi.jinja"))
+    jinja_template_path = Path(source_loc.joinpath("packaging", "NSIS", "Fracktory.nsi.jinja"))
     with open(jinja_template_path, "r") as f:
         template = Template(f.read())
 
 
     nsis_content = template.render(
-        app_name = f"UltiMaker Cura {version}",
-        main_app = "UltiMaker-Cura.exe",
+        app_name = f"Fracktory {version}",
+        main_app = "Fracktory.exe",
         version = version,
         version_major = str(parsed_version.major),
         version_minor = str(parsed_version.minor),
         version_patch = str(parsed_version.patch),
-        company = "UltiMaker",
-        web_site = "https://ultimaker.com",
+        company = "Fracktal",
+        web_site = "https://fracktal.in",
         year = datetime.now().year,
         cura_license_file = str(source_loc.joinpath("packaging", "cura_license.txt")),
         compression_method = "LZMA",  # ZLIB, BZIP2 or LZMA
@@ -62,7 +62,7 @@ def generate_nsi(source_path: str, dist_path: str, filename: str, version: str):
         destination = filename
     )
 
-    with open(dist_loc.joinpath("UltiMaker-Cura.nsi"), "w") as f:
+    with open(dist_loc.joinpath("Fracktory.nsi"), "w") as f:
         f.write(nsis_content)
 
     shutil.copy(source_loc.joinpath("packaging", "NSIS", "fileassoc.nsh"), dist_loc.joinpath("fileassoc.nsh"))
@@ -70,16 +70,16 @@ def generate_nsi(source_path: str, dist_path: str, filename: str, version: str):
 
 def build(dist_path: str):
     dist_loc = Path(os.getcwd(), dist_path)
-    command = ["makensis", "/V2", "/P4", str(dist_loc.joinpath("UltiMaker-Cura.nsi"))]
+    command = ["makensis", "/V2", "/P4", str(dist_loc.joinpath("Fracktory.nsi"))]
     subprocess.run(command)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description = "Create Windows exe installer of Cura.")
-    parser.add_argument("--source_path", type=str, help="Path to Conan install Cura folder.")
+    parser = argparse.ArgumentParser(description = "Create Windows exe installer of Fracktory.")
+    parser.add_argument("--source_path", type=str, help="Path to Conan install Fracktory folder.")
     parser.add_argument("--dist_path", type=str, help="Path to Pyinstaller dist folder")
-    parser.add_argument("--filename", type=str, help="Filename of the exe (e.g. 'UltiMaker-Cura-5.1.0-beta-Windows-X64.exe')")
-    parser.add_argument("--version", type=str, help="The full cura version, e.g. 5.9.0-beta.1+24132")
+    parser.add_argument("--filename", type=str, help="Filename of the exe (e.g. 'Fracktory-5.1.0-beta-Windows-X64.exe')")
+    parser.add_argument("--version", type=str, help="The full Fracktory version, e.g. 5.9.0-beta.1+24132")
     args = parser.parse_args()
     generate_nsi(args.source_path, args.dist_path, args.filename, args.version)
     build(args.dist_path)

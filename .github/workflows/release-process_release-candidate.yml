@@ -32,7 +32,7 @@ jobs:
 
   freeze-packages-versions:
     name: Freeze packges versions
-    uses: Ultimaker/Cura-workflows/.github/workflows/cura-set-packages-versions.yml@main
+    uses: Ultimaker/Cura-workflows/.github/workflows/cura-set-packages-versions.yml@CURA-12400_legal_fix
     needs: [parse-version]
     with:
       cura_version: ${{ inputs.cura_version }}

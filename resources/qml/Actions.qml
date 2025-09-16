@@ -86,10 +86,18 @@ Item
 
     UM.I18nCatalog{id: catalog; name: "cura"}
 
+
+    Action
+    {
+        id: showTroubleShootingAction
+        onTriggered: Qt.openUrlExternally("https://care.fracktal.in")
+        text: catalog.i18nc("@action:inmenu", "Show Online Troubleshooting")
+    }
+
     Action
     {
         id: openSponsershipPageAction
-        onTriggered: Qt.openUrlExternally("https://ultimaker.com/software/ultimaker-cura/sponsor/")
+        onTriggered: Qt.openUrlExternally("https://fracktal.in")
         text: catalog.i18nc("@action:inmenu", "Sponsor Cura")
     }
 
@@ -196,7 +204,7 @@ Item
         //For more information, see:
         //- https://doc.qt.io/qt-5/macos-issues.html#menu-bar
         //- https://doc.qt.io/qt-5/qmenubar.html#qmenubar-as-a-global-menu-bar
-        text: (Qt.platform.os == "osx") ? "Configure Cura..." : catalog.i18nc("@action:inmenu", "Configure Cura...")
+        text: (Qt.platform.os == "osx") ? "Configure Fracktory..." : catalog.i18nc("@action:inmenu", "Configure Fracktory...")
         icon.name: "configure"
         // on MacOS it us customary to assign the ctrl+, hotkey to open a general settings menu
         shortcut: (Qt.platform.os == "osx") ? "Ctrl+," : ""
@@ -277,7 +285,7 @@ Item
         id: reportBugAction
         text: catalog.i18nc("@action:inmenu menubar:help", "Report a &Bug")
         icon.name: "tools-report-bug"
-        onTriggered: CuraActions.openBugReportPage()
+        onTriggered: Qt.openUrlExternally("https://care.fracktal.in/")
     }
 
     Action
@@ -304,7 +312,7 @@ Item
     Action
     {
         id: deleteSelectionAction
-        text: catalog.i18nc("@action:inmenu menubar:edit", "Delete Selected")
+        text: catalog.i18nc("@action:inmenu menubar:edit", "Delete Selected", UM.Selection.selectionCount)
         enabled: UM.Controller.toolsEnabled && UM.Selection.hasSelection
         icon.name: "edit-delete"
         shortcut: StandardKey.Delete | "Backspace"
@@ -314,7 +322,7 @@ Item
     Action
     {
         id: centerSelectionAction
-        text: catalog.i18nc("@action:inmenu menubar:edit", "Center Selected")
+        text: catalog.i18nc("@action:inmenu menubar:edit", "Center Selected", UM.Selection.selectionCount)
         enabled: UM.Controller.toolsEnabled && UM.Selection.hasSelection
         icon.name: "align-vertical-center"
         onTriggered: CuraActions.centerSelection()
@@ -350,7 +358,7 @@ Item
     Action
     {
         id: multiplySelectionAction
-        text: catalog.i18nc("@action:inmenu menubar:edit", "Multiply Selected")
+        text: catalog.i18nc("@action:inmenu menubar:edit", "Multiply Selected", UM.Selection.selectionCount)
         enabled: UM.Controller.toolsEnabled && UM.Selection.hasSelection
         icon.name: "edit-duplicate"
         shortcut: "Ctrl+M"
