@@ -19,6 +19,7 @@
 - **[Security Policy](SECURITY.md)** - Reporting security vulnerabilities
 
 ### 🔧 Additional Resources
+- **[Printer Profile Management](#printer-profile-management)** - Understanding Cura's configuration system and adding printers/materials
 - **[Printer Linter](printer-linter/README.md)** - Tool for validating printer definition files
 - **[Internationalization](resources/i18n/README.md)** - Translation and localization information
 - **Plugin Documentation** - Individual plugin READMEs in the `plugins/` directory
@@ -328,7 +329,54 @@ All three should match for proper version management.
 
 ---
 
-## 🖨️ Printer Profile Management
+## Printer Profile Management
+
+
+### 📚 Understanding Cura's Configuration System
+
+Fracktory uses Cura's container stack system for managing printer configurations. All configuration files are located in the `resources/` folder and work together to create a complete printing profile.
+
+#### 🏗️ Container Stack Architecture
+
+Cura organizes settings using a hierarchical **container stack** system (based on [Ultimaker's Container Stack documentation](https://github.com/Ultimaker/Cura/wiki/Container-Stacks)):
+
+```
+7. USER OVERRIDES          ← Temporary user changes in UI
+6. QUALITY PROFILE         ← resources/quality/ (layer height, speed)  
+5. INTENT PROFILE          ← resources/intent/ (engineering, visual, quick)
+4. MATERIAL PROFILE        ← resources/materials/ (temperature, flow)
+3. VARIANT PROFILE         ← resources/variants/ (nozzle size, type)
+2. EXTRUDER DEFINITION     ← resources/extruders/ (extruder properties)
+1. MACHINE DEFINITION      ← resources/definitions/ (printer specs)
+```
+
+#### 📁 Resource Folder Structure
+
+| Folder | Purpose | Examples |
+|--------|---------|----------|
+| **`definitions/`** | Base printer specifications | `base_fracktal_printer.def.json`, `julia_2022_advanced.def.json` |
+| **`extruders/`** | Extruder configurations | `base_fracktal_extruder_0.def.json` |
+| **`variants/`** | Nozzle specifications | `0.4mm_nozzle.inst.cfg`, `0.6mm_volcano.inst.cfg` |
+| **`materials/`** | Material properties | `PLA.xml.fdm_material`, `ABS.xml.fdm_material` |
+| **`intent/`** | Print intent profiles | `engineering/`, `visual/`, `quick/` |
+| **`quality/`** | Layer height & speed | `0.2mm.inst.cfg`, `0.4mm_draft.inst.cfg` |
+
+#### ⚙️ How Settings Override Each Other
+
+Settings flow **upward** through the stack. Higher layers override lower layers:
+
+1. **Machine Definition** → Sets base capabilities (max temp, build volume)
+2. **Extruder Definition** → Defines extruder-specific settings  
+3. **Variant (Nozzle)** → Overrides for specific nozzle sizes
+4. **Material** → Temperature, flow, cooling settings
+5. **Intent** → Speed/quality balance (engineering vs visual)
+6. **Quality** → Layer height and related speed adjustments
+7. **User Overrides** → Manual changes in the UI
+
+**Example:** A `0.6mm nozzle` variant might override the base `layer_height` from 0.2mm to 0.3mm, then a `draft quality` profile might further increase it to 0.4mm.
+
+For detailed information, see [Ultimaker's Profiles & Settings documentation](https://github.com/Ultimaker/Cura/wiki/Profiles-&-Settings).
+
 
 ### 🔧 Adding New Printers
 
