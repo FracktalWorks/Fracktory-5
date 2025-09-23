@@ -30,16 +30,20 @@ Additionally, you'll need installer creation tools:
 
 **⚠️ Important:** Perform all git clone operations in a separate workspace folder (e.g., `C:\Workspace`) to avoid cloning repositories inside the Fracktory repository.
 
-### Step 1: Setup Conan Environment
+### Step 1: Setup Conan Environment *(Optional if already completed)*
+
+> **💡 Skip if Already Set Up:** If you've already followed the main README's "Building from Source" section and have Conan installed and working, you can skip this step.
+
 First, set up Conan with the exact configuration from the GitHub Actions:
 
 ```powershell
-# Install Conan
-python -m pip install --upgrade pip setuptools wheel
-pip install conan==1.65.0
+# Install Conan 
+pip install "conan>=1.58.0,<2.0.0"
 ```
 
-### Step 2: Setup Conan Configuration
+### Step 2: Setup Conan Configuration *(Optional if already completed)*
+
+> **💡 Skip if Already Configured:** If you've already set up Conan configuration while building from source, you can skip this step and proceed directly to Step 3.
 
 **Option 1: If conan-config folder doesn't exist (first time):**
 ```powershell
@@ -58,6 +62,8 @@ conan remote remove cura-private
 ### Step 3: Build CuraEngine
 Clone and build the CuraEngine dependency:
 
+> **💡 Skip Cloning if Already Built:** If you already have CuraEngine built from following the main README's development setup, you can skip the cloning steps below and proceed directly to the "Run Conan Create Process" section using your existing CuraEngine directory.
+
 **Option 1: If CuraEngine folder doesn't exist (first time):**
 ```powershell
 # Ensure you're in your workspace folder (NOT inside Fracktory-5)
@@ -68,9 +74,6 @@ git clone https://github.com/FracktalWorks/CuraEngine.git
 cd CuraEngine
 git checkout Engine-5.9.1
 git pull
-conan remove --locks
-conan create . curaengine/5.9.1@FracktalWorks/stable --build=missing --update
-cd ..
 ```
 
 **Option 2: If CuraEngine folder already exists:**
@@ -79,6 +82,11 @@ cd ..
 cd C:\Workspace\CuraEngine  # or your CuraEngine location
 git checkout Engine-5.9.1
 git pull
+```
+
+**Run Conan Create Process:**
+```powershell
+# From within your CuraEngine directory
 conan remove --locks
 conan create . curaengine/5.9.1@FracktalWorks/stable --build=missing --update
 cd ..
@@ -86,6 +94,8 @@ cd ..
 
 ### Step 4: Create Installer Packages
 Navigate to the Fracktory-5 repository and run the complete Conan build process that creates `cura_inst` folder:
+
+> **💡 Skip Cloning if Already Set Up:** If you already have a working development environment and can run Fracktory from source, you can skip the cloning steps below and proceed directly to the "Then run the Conan install process" section using your existing Fracktory-5 directory.
 
 **Option 1: If Fracktory-5 repository doesn't exist (first time):**
 ```powershell

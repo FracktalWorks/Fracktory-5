@@ -4,6 +4,7 @@
 ## 📚 Documentation
 
 ### 🔧 Build and Installation Guides
+- **[Prerequisites](#prerequisites)** - Required tools and software for building Fracktory
 - **[Building from Source](#building-from-source)** - Instructions for compiling Fracktory from source code
 - **[Creating Installers](#creating-installers)** - Quick guide to building MSI and EXE installers  
 - **[Version Management](#version-management)** - How to update version numbers for new releases
@@ -26,7 +27,7 @@
 
 ## 🚀 Development Setup
 
-### 📋 Prerequisites
+## Prerequisites
 
 The following programs are required for building Fracktory from source on Windows (based on [Ultimaker Cura requirements](https://github.com/Ultimaker/Cura/wiki/Getting-Started)):
 
