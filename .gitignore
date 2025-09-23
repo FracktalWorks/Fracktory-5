@@ -84,6 +84,7 @@ CuraEngine
 plugins/__init__.py
 
 venv/
+venv_old/
 cura_inst
 build/
 dist/
@@ -104,3 +105,20 @@ curaengine_plugin_gradual_flow.exe
 Fracktory.nsi
 fileassoc.nsh
 .github/workflows/requirements-runner.txt
+
+# Installer build artifacts
+# WiX MSI build files
+*.wxs
+*.wixobj
+*.wixpdb
+ExcludeComponents.xslt
+HeatFile.wxs
+build_msi/
+*.msi
+
+# NSIS installer files
+*.exe
+*.nsi
+
+# PyInstaller build artifacts
+*.spec

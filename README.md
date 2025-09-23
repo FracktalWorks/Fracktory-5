@@ -1,81 +1,34 @@
 # Fracktory
-based on Ultimaker Cura
+*A 3D printing slicer based on Ultimaker Cura, customized for FracktalWorks 3D printers*
 
-**Contribute Printer Profiles?** -- Please [look here](https://github.com/Ultimaker/Cura/wiki/Adding-new-machine-profiles-to-Cura) first. <br>
-**Contribute Translations?** -- Please [look here](https://github.com/Ultimaker/Cura/wiki/Translating-Cura) first.
+## 📚 Documentation
 
-<br>
+### 🔧 Build and Installation Guides
+- **[Building from Source](#building-from-source)** - Instructions for compiling Fracktory from source code
+- **[Creating Installers](#creating-installers)** - Quick guide to building MSI and EXE installers  
+- **[Version Management](#version-management)** - How to update version numbers for new releases
 
-[![Button Building]][Building]   
-[![Button Plugins]][Plugins]   
-[![Button Machines]][Machines]
+### 📋 Detailed Guides
+- **[Installer Guide](docs/INSTALLER_GUIDE.md)** - Complete step-by-step instructions for creating MSI and EXE installers
+- **[Update Guide](docs/UPDATING.md)** - Instructions for updating Fracktory from the latest Cura fork changes
+- **[CI/CD Setup Guide](docs/CICD_SETUP.md)** - GitHub Actions and self-hosted runner configuration
 
-[![Button Report]][Report]   
-[![Button Settings]][Settings]   
-[![Button Localize]][Localize]
+### 📄 Project Information
+- **[Contributing Guidelines](CONTRIBUTING.md)** - How to contribute to the Fracktory project
+- **[Security Policy](SECURITY.md)** - Reporting security vulnerabilities
 
-<br>
-<br>
+### 🔧 Additional Resources
+- **[Printer Linter](printer-linter/README.md)** - Tool for validating printer definition files
+- **[Internationalization](resources/i18n/README.md)** - Translation and localization information
+- **Plugin Documentation** - Individual plugin READMEs in the `plugins/` directory
 
-</div>
+---
 
-<br>
+## 🚀 Development Setup
 
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Ultimaker/Cura/badge)](https://api.securityscorecards.dev/projects/github.com/Ultimaker/Cura)
+### 📋 Prerequisites
 
-<br>
-
-<!----------------------------------------------------------------------------->
-
-[Contributors]: https://github.com/Ultimaker/Cura/graphs/contributors
-[PullRequests]: https://github.com/Ultimaker/Cura/pulls
-[Machines]: https://github.com/Ultimaker/Cura/wiki/Adding-new-machine-profiles-to-Cura
-[Building]: https://github.com/Ultimaker/Cura/wiki/Getting-Started
-[Localize]: https://github.com/Ultimaker/Cura/wiki/Translating-Cura
-[Settings]: https://github.com/Ultimaker/Cura/wiki/Profiles-&-Settings
-[Plugins]: https://github.com/Ultimaker/Cura/wiki/Plugins-And-Packages
-[Closed]: https://github.com/Ultimaker/Cura/issues?q=is%3Aissue+is%3Aclosed
-[Issues]: https://github.com/Ultimaker/Cura/issues
-[Conan]: https://github.com/Ultimaker/Cura/actions/workflows/conan-package.yml
-[Test]: https://github.com/Ultimaker/Cura/actions/workflows/unit-test.yml
-[Downloads]: https://github.com/Ultimaker/Cura/releases/latest
-
-[License]: LICENSE
-[Report]: docs/Report.md
-[Logo]: resources/images/cura-icon.png
-[#]: #
-
-
-<!---------------------------------[ Badges ]---------------------------------->
-
-[Badge Contributors]: https://img.shields.io/github/contributors/ultimaker/cura?style=for-the-badge&logoColor=white&labelColor=db5e8a&color=ab4a6c&logo=GitHub
-[Badge PullRequests]: https://img.shields.io/github/issues-pr/ultimaker/cura?style=for-the-badge&logoColor=white&labelColor=bb9f3e&color=937d31&logo=GitExtensions
-[Badge License]: https://img.shields.io/badge/License-LGPL3-336887.svg?style=for-the-badge&labelColor=458cb5&logoColor=white&logo=GNU
-[Badge Closed]: https://img.shields.io/github/issues-closed/ultimaker/cura?style=for-the-badge&logoColor=white&labelColor=629944&color=446a30&logo=AddThis
-[Badge Issues]: https://img.shields.io/github/issues/ultimaker/cura?style=for-the-badge&logoColor=white&labelColor=c34360&color=933349&logo=AdBlock
-[Badge Conan]: https://img.shields.io/github/actions/workflow/status/Ultimaker/Cura/conan-package.yml?branch=main&style=for-the-badge&logoColor=white&labelColor=6185aa&color=4c6987&logo=Conan&label=Conan%20Package
-[Badge Test]: https://img.shields.io/github/actions/workflow/status/Ultimaker/Cura/unit-test.yml?branch=main&style=for-the-badge&logoColor=white&labelColor=4a999d&color=346c6e&logo=Codacy&label=Unit%20Test
-[Badge Size]: https://img.shields.io/github/repo-size/ultimaker/cura?style=for-the-badge&logoColor=white&labelColor=715a97&color=584674&logo=GoogleAnalytics
-[Badge Downloads]: https://img.shields.io/github/downloads-pre/Ultimaker/Cura/latest/total?style=for-the-badge
-
-
-<!---------------------------------[ Buttons ]--------------------------------->
-
-[Button Localize]: https://img.shields.io/badge/Help_Localize-e2467d?style=for-the-badge&logoColor=white&logo=GoogleTranslate
-[Button Machines]: https://img.shields.io/badge/Adding_Printers-yellow?style=for-the-badge&logoColor=white&logo=CloudFoundry
-[Button Settings]: https://img.shields.io/badge/Configuration-00979D?style=for-the-badge&logoColor=white&logo=CodeReview
-[Button Building]: https://img.shields.io/badge/Building_Cura-blue?style=for-the-badge&logoColor=white&logo=GitBook
-[Button Plugins]: https://img.shields.io/badge/Plugin_Usage-569A31?style=for-the-badge&logoColor=white&logo=ROS
-[Button Report]: https://img.shields.io/badge/Report_Issues-C9284D?style=for-the-badge&logoColor=white&logo=Cliqz
-
-
-# Fracktory-Cura-Slicer-Development
-Compiling Cura from Source using documentation 
-
-## Installing Requirements
-installing the requriemrts mentioned in https://github.com/Ultimaker/Cura/wiki/Getting-Started
-
-Following programs need to be installed for running from source on Windows:
+The following programs are required for building Fracktory from source on Windows (based on [Ultimaker Cura requirements](https://github.com/Ultimaker/Cura/wiki/Getting-Started)):
 
 - Windows 10 or higher
 - Visual Studio with MSVC 2022 or higher
@@ -86,17 +39,30 @@ Following programs need to be installed for running from source on Windows:
 - Ninja 1.10 or higher
 - Conan >=2.7.0 <3.0.0
 
+#### ✅ Tested Build Environment
 
-#### IMPORTANT NOTE: Install there using Powershell. Use the native powershell, not x86 version
-#### Check https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/ to know how to add programs to PATH
+The following specific versions have been tested and work reliably:
 
+| Tool | Tested Version | Download Link |
+|------|----------------|---------------|
+| **Visual Studio** | 17.9.5 | [Release History](https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-history) \| [Direct Download](https://download.visualstudio.microsoft.com/download/pr/1afa33fc-e800-4714-9e19-31b928ea2572/3d4f9e70b122e7f94f7c10b4c84cf6f487a44ed40f9f281fba64df0bb55bc2cd/vs_Professional.exe) |
+| **Python** | 3.10.11 | [Python Downloads](https://www.python.org/downloads/) |
+| **CMake** | 3.27.8 | [CMake Downloads](https://cmake.org/download/) |
+| **Ninja** | 1.11.1 | [Ninja Releases](https://github.com/ninja-build/ninja/releases) |
+| **Conan** | 1.60.2 | `pip install conan==1.60.2` |
+| **sip** | 6.8.3 | `pip install sip==6.8.3` |
 
-## Installation Steps
+> **Important Notes:**
+> - Use native PowerShell for installation, not the x86 version
+> - Ensure only a single instance of VCPKG via VS Code is installed to avoid conflicts
+> - See [this guide](https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/) for adding programs to PATH
+
+### ⚙️ Installation Guide
 
 1. **Install Windows 10 or higher**: Ensure you are running Windows 10 or a later version.
 
 2. **Install Visual Studio**:
-   - Download and install Visual Studio 2022 or higher from [visualstudio.microsoft.com](https://visualstudio.microsoft.com/).
+   - Download and install Visual Studio 2022 17.9.5 from above link in the table
    - During installation, select the "Desktop development with C++" workload.
    - Ensure Visual Studio is added to the system PATH.
 
@@ -106,45 +72,34 @@ Following programs need to be installed for running from source on Windows:
 
 4. **Install Python Packages**:
    - Install `sip` version 6.5.1:
-     ```sh
+     ```powershell
      pip install sip==6.5.1
      ```
-   5. **Install CMake**:
-      - Download and install CMake 3.23 or higher from [cmake.org](https://cmake.org/download/). Make sure to select the appropriate installer for your system (e.g., Windows x64 Installer).
-      - Ensure CMake is added to the system PATH during installation.
 
-   6. **Install Ninja**:
-      - Download Ninja 1.10 or higher from [ninja-build.org](https://github.com/ninja-build/ninja/releases).
-      - Extract the downloaded zip file to a folder, for example, `C:\Ninja`.
-      - Add the Ninja folder to the system PATH:
-        1. Open the Start Menu, search for "Environment Variables", and select "Edit the system environment variables".
-        2. In the System Properties window, click on the "Environment Variables" button.
-        3. In the Environment Variables window, find the "Path" variable in the "System variables" section and select it. Click "Edit".
-        4. In the Edit Environment Variable window, click "New" and add the path to the Ninja folder, e.g., `C:\Ninja`.
-        5. Click "OK" to close all windows.
+5. **Install CMake**:
+   - Download and install CMake 3.23 or higher from [cmake.org](https://cmake.org/download/). Make sure to select the appropriate installer for your system (e.g., Windows x64 Installer).
+   - Ensure CMake is added to the system PATH during installation.
 
+6. **Install Ninja**:
+   - Download Ninja 1.10 or higher from [ninja-build.org](https://github.com/ninja-build/ninja/releases).
+   - Extract the downloaded zip file to a folder, for example, `C:\Ninja`.
+   - Add the Ninja folder to the system PATH:
+     1. Open the Start Menu, search for "Environment Variables", and select "Edit the system environment variables".
+     2. In the System Properties window, click on the "Environment Variables" button.
+     3. In the Environment Variables window, find the "Path" variable in the "System variables" section and select it. Click "Edit".
+     4. In the Edit Environment Variable window, click "New" and add the path to the Ninja folder, e.g., `C:\Ninja`.
+     5. Click "OK" to close all windows.
 
 7. **Install Conan**:
-
-For 5.9 and earlier:
-
-   - Install Conan version >=2.7.0 <3.0.0:
-     ```sh
+   - **For Fracktory 5.9 and earlier:**
+     ```powershell
      pip install "conan>=1.58.0,<2.0.0"
      ```
 
-For 5.10 and later:
+### ✅ Verification
 
-   - Install Conan version >=2.7.0 <3.0.0:
-     ```sh
-     pip install "conan>=2.7.0,<3.0.0"
-     ```
-
-
-
-
-Ensure all installed programs are available in the system PATH. You can verify this by running the following commands in a command prompt:
-```sh
+Ensure all installed programs are available in the system PATH by running these commands in PowerShell:
+```powershell
 python --version
 pip show sip
 cmake --version
@@ -162,303 +117,286 @@ If any program is not available in the PATH, follow these steps to add it:
    - For CMake: `C:\Program Files\CMake\bin`
    - For Ninja: `C:\Program Files\Ninja`
 5. Click "OK" to close all windows.
-6. It may need you to restart the machine after a new installation for the program to show up in your PATH
+6. You may need to restart your computer after installation for programs to appear in your PATH.
 
+## Building from Source
 
-## Installation/Compilation
+**⚠️ Important:** Perform all git clone operations in a separate workspace folder (e.g., `C:\Workspace`) to avoid cloning repositories inside the Fracktory repository.
 
-remove older packages with 
-`conan remove "*" -s -b -f`
-. delete .conan folders in Uers and C:/ or D:/
+### Step 1: Clean Previous Builds
 
-1. In case you are using custom Cura Engine (Refer https://github.com/Ultimaker/CuraEngine/issues/2195 to fix conan error):
-   - Install Cura Engine with the following steps:
-      ```sh
-         git clone https://github.com/ultimaker/conan-config.git
-         cd conan-config
-         git checkout 3226488623c642b40ca7ce3f62d3f33de046d11e
-         cd ..
-         conan config install ./conan-config
-         conan remote remove cura-private
-         git clone https://github.com/FracktalWorks/CuraEngine.git
-         conan remove --locks
-         cd CuraEngine
-         conan create . curaengine/5.9.2@FracktalWorks/stable --build=missing --update
-      ```
+Remove older Conan packages and cache folders:
 
-2. Install Fracktory ("Refer https://github.com/Ultimaker/CuraEngine/issues/2195 to fix conan error):
-   ```sh
-      git clone https://github.com/ultimaker/conan-config.git
-      cd conan-config
-      git checkout 3226488623c642b40ca7ce3f62d3f33de046d11e
-      cd ..
-      conan config install ./conan-config
-      conan remote remove cura-private
-      git clone https://github.com/FracktalWorks/Fracktory-5.git
-      cd Fracktory-5
-      # If using custom Curaengine:
-      conan install . --build=missing --update --require-override=curaengine/5.9.1@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
-      # If using Curaengine from Ultimaker source:
-      conan install . --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
+```powershell
+conan remove "*" -s -b -f
+```
+
+Delete `.conan` folders in your user directory and system drives (C:/ or D:/).
+
+### Step 2: Setup Conan Configuration
+
+**Option 1: If conan-config folder doesn't exist (first time):**
+```powershell
+# Navigate to your workspace folder (NOT inside Fracktory-5)
+cd C:\Workspace  # or your preferred workspace location
+
+# Clone and setup Conan config
+git clone https://github.com/ultimaker/conan-config.git
+cd conan-config
+git checkout 3226488623c642b40ca7ce3f62d3f33de046d11e
+cd ..
+conan config install ./conan-config
+conan remote remove cura-private
+```
+
+### Step 3: Build Custom CuraEngine (Optional)
+
+If using a custom CuraEngine (see [troubleshooting guide](https://github.com/Ultimaker/CuraEngine/issues/2195) for Conan errors):
+
+**Option 1: If CuraEngine folder doesn't exist (first time):**
+```powershell
+# Ensure you're in your workspace folder (NOT inside Fracktory-5)
+cd C:\Workspace  # or your preferred workspace location
+
+# Clone FracktalWorks CuraEngine
+git clone https://github.com/FracktalWorks/CuraEngine.git
+cd CuraEngine
+git checkout Engine-5.9.1
+conan remove --locks
+conan create . curaengine/5.9.1@FracktalWorks/stable --build=missing --update
+cd ..
+```
+
+**Option 2: If CuraEngine folder already exists:**
+```powershell
+# Navigate to existing CuraEngine folder
+cd C:\Workspace\CuraEngine  # or your CuraEngine location
+git checkout Engine-5.9.1
+git pull
+conan remove --locks
+conan create . curaengine/5.9.1@FracktalWorks/stable --build=missing --update
+cd ..
+```
+
+### Step 4: Clone and Build Fracktory
+
+**Option 1: If Fracktory-5 repository doesn't exist (first time):**
+```powershell
+# Ensure you're in your workspace folder
+cd C:\Workspace  # or your preferred workspace location
+
+# Clone Fracktory-5 repository
+git clone https://github.com/FracktalWorks/Fracktory-5.git
+cd Fracktory-5
+git checkout Fracktory-5.9
+
+# Build with custom CuraEngine:
+conan install . --build=missing --update --require-override=curaengine/5.9.1@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
+
+# OR build with Ultimaker's CuraEngine:
+# conan install . --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
+```
+
+**Option 2: If Fracktory-5 repository already exists:**
+```powershell
+# Navigate to existing Fracktory-5 folder
+cd C:\Workspace\Fracktory-5  # or your Fracktory-5 location
+git checkout Fracktory-5.9
+git pull
+
+# Build with custom CuraEngine:
+conan install . --build=missing --update --require-override=curaengine/5.9.1@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
+
+# OR build with Ultimaker's CuraEngine:
+# conan install . --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
+```
+### 🚀 Running Fracktory
+
+1. Navigate to the Fracktory-5 directory:
+   ```powershell
+   cd C:\Workspace\Fracktory-5  # or your Fracktory-5 location
    ```
-## Activate and run
 
-1. set environment part to python installed in the builds virtual environment:
-   `$env:PYTHONPATH = 'C:\Users\VijayRaghavVarada\Documents\GitHub\Fracktory-5\venv\Scripts'`
-2. Activate virtual environment:
-   `.\venv\Scripts\activate.ps1`
-3. Run:
-   `python cura_app.py`
-
-
-   ## Settings latest verion for update checks:
-
-   change values in `latest.json` file in `Fracktory-5` folder in the following format to have cura check for latest version available
-
+2. Set the Python environment path (replace with your actual Fracktory-5 directory path):
+   ```powershell
+   $env:PYTHONPATH = 'C:\Workspace\Fracktory-5\venv\Scripts'  # or your Fracktory-5 location
    ```
-   {
-    "cura": {
-        "Windows": {
-            "major": 5,
-            "minor": 6,
-            "revision": 0,
-            "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
-        }
-    },
-    "cura-beta": {
-        "Windows": {
-            "major": 5,
-            "minor": 6,
-            "revision": 0,
-            "postfix_type": "beta",
-            "postfix_version": 1,
-            "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
-        }
+
+3. Activate the virtual environment:
+   ```powershell
+   .\venv\Scripts\activate.ps1
+   ```
+
+4. Run Fracktory:
+   ```powershell
+   python cura_app.py
+   ```
+
+## Creating Installers
+
+Once you can successfully run Fracktory from source, you can create MSI and EXE installers for distribution.
+
+### 📋 Prerequisites
+- **Successfully built and running Fracktory** (completed steps above)
+- **NSIS** (for .exe installers) - [Download here](https://nsis.sourceforge.io/Download)
+- **WiX Toolset v3.14** (for .msi installers) - [Download here](https://wixtoolset.org/releases/)
+
+### 🔄 Process Overview
+Creating installers involves additional steps beyond building from source:
+1. Install installer tools (NSIS/WiX)
+2. Create `cura_inst` environment with Conan
+3. Generate local environment scripts
+4. Build PyInstaller executable
+5. Create installer packages
+
+### 📁 What You Get
+- **`dist\Fracktory\Fracktory.exe`** - Standalone executable  
+- **`dist\Fracktory-{version}.exe`** - NSIS installer (if NSIS available)
+- **`dist\Fracktory-{version}.msi`** - MSI installer (if WiX available)
+
+*Version is automatically detected from `conandata.yml` (currently 5.9.9)*
+
+📋 **For complete step-by-step instructions, see [INSTALLER_GUIDE.md](docs/INSTALLER_GUIDE.md)**
+
+> **Note:** Installer creation requires a different Conan build process than building from source. The installer guide provides the complete workflow including tool installation, environment setup, and installer generation.
+
+## Version Management
+
+### Changing Cura Version
+
+⚠️ **Important:** Always update version numbers in both files before creating installers to ensure version consistency.
+
+#### Step 1: Update Conan Package Version
+
+Modify the `conandata.yml` file in the root directory to set the new version:
+
+```yaml
+version: "5.9.10"  # Update this to your new version
+sources:
+  "5.9.10":  # Update this key to match the version above
+    url: "https://github.com/FracktalWorks/Fracktory-5/archive/refs/tags/v5.9.10.tar.gz"
+    strip_root: true
+```
+
+**Key Points:**
+- The `version` field sets the Conan package version used in installers
+- The sources key must match the version number exactly
+- This version appears in installer filenames (e.g., `Fracktory-5.9.10.exe`)
+
+#### Step 2: Update Version for Update Checks
+
+Modify the `latest.json` file in the `Fracktory-5` folder to configure automatic update notifications:
+
+```json
+{
+  "cura": {
+    "Windows": {
+      "major": 5,
+      "minor": 9,
+      "revision": 10,
+      "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
     }
-   } 
-
-   ```
-
-
-### Updating To latest Version of Ultimaker Cura:
-
-
-1. Go to the Ultimaker Cura repository: [UM Cura Repo](https://github.com/Ultimaker/Cura) and open the release you want to update the Fracktory Version to:
-
-![alt text](docs/cura_repo_version.png)
-
-2. Open the Commit associated with the release:
-
-![alt text](docs/cura_release_commit.png)
-
-3. Note the the branch and tag associated with the commit. in the below case the branch is 5.9 and the tag is 5.9.1-RC3
-
-![alt text](docs/branch-tag.png)
-
-4. in Github Desktop, select the upsteam branch (since Fracktory is a fork of cura, you can open the cura branches directly) that we saw in step 3. in this case 5.9 or upstream/5.9. iuf you dont see the branch, click "Fetch" to get latest changes upstream.
-
-![alt text](docs/open_upstream_branch.png)
-
-5. Navigate to the commit history of that branch. find the commit that ahs the Tag we are looking for from step 3. Roght click and "create brach from commit"
-
-![alt text](docs/navigate_history.png)
-
-![alt text](docs/create_branch_from_commit.png)
-
-5. Create a new branch on Fracktory-5 with the new version number like "Fracktory-5.6.0"
-
-![alt text](docs/create_branch.png)
-
-6. In github Desktop, switch to the new branch as well as publish it to cloud.
-
-![alt text](docs/switch_branch.png)
-
-![alt text](docs/publish_branch.png)
-
-5. Delete all the unnecessary files that will create merge conflicts: Delete all 3rd party printer profiles in intents, quality, definitions and variants in the "resources" folder. Careful not to delete core files file fdmprinter, fdmextruder.
-
-This is what it might look like before deleting:
-![alt text](docs/resources_old.png)
-
-After deleting only the core resource files are left:
-![alt text](docs/resources_new.png)
-
-6. Merge the previous release branch version of Fracktory 5 into current branch. Squash and merge into a simple commit for simplicity. 
-
-![alt text](docs/merge.png)
-
-![alt text](docs/previous_branch.png)
-
-7. Resolve conflicts if any using github desktop & vscode source control.
-
-![alt text](docs/resolve_github.png)
-
-![alt text](docs/resolve_vscode.png)
-
-7. Update conandata.yaml with latest versioning from the "Current Change" i.e from the latest cura repo you just branched. but comment out the requirements like shown below to prevent the installer from overriding them
-
-![alt text](docs/conan.png)
-
-
-8. update `latest.json` file in `Fracktory-5` folder, copying from the latest Fracktory version in the conandata.yaml to have cura check for latest version available
-
-![alt text](docs/latest_json.png)
-
-9. Update guthub actions workflow `cura-installer-windows.yml` with latest verion numbers (like 5.9.1 in this case) for fracktory and Curaengine. You may need to deepdive into the installer in case github action, pyton version, conan etc. is updated upstream and the latest version needs updated build envoronment to compile. 
-
-![alt text](docs/application_version.png)
-
-10. change default branch to this new version on Github website : [Change Default Branch](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch)
-
-![alt text](docs/change_default.png)
-
-11. Update Curaengine in the same way, and change the default branch to latest. 
-
-![alt text](docs/cura_engine_upstream_branch.png)
-
-![alt text](docs/cura_engine_create_branch.png)
-
-![alt text](docs/name_engine.png)
-
-![alt text](docs/engine_publish_branch.png)
-
-![alt text](docs/engine_merge.png)
-
-![alt text](docs/previous_engine.png)
-
-![alt text](docs/default_engine.png)
-
-12. Follow instruction in Installation/Compilation to compile Fracktory and CuraEngine again. The Build environment may need to be updated since the last update, so update as needed by referenceing [Running Cura From Source](https://github.com/Ultimaker/Cura/wiki/Running-Cura-from-Source)
-
-13. Github Actions may need to be updated to properly work. refer [Cura Windows Installer Workflow](https://github.com/Ultimaker/cura-workflows/blob/main/.github/workflows/cura-installer-windows.yml) and edit `\Fracktory-5\.github\workflows\cura-installer-windows.yml` accordingly.
-
-
-
-
--------------------------------------------------------------------------
-There may be issues with running newer build environment, Here are settings that have worked:
-
-1. Visual Studio 17.9.5  [https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-history]
-2. Cmake 3.27.8
-3. Ninja 1.11.1
-4. Conan 1.60.2
-5. sip 6.8.3
-6. python 3.10.11
-7. conan 1.60.2
-
-Make sure single instange of VKPG via VS code is only installed.
-
-
-## Prerequisites for Local Runner
-
-To run the local runner for building the Fracktory installer, ensure the following prerequisites are met:
-
-### 1. **Operating System**
-- Windows 10 or higher
-
-### 2. **Required Tools**
-- **Python**: Version 3.12 or higher
-  - Ensure Python is added to the system PATH.
-  - Upgrade `pip` to the latest version:
-    ```sh
-    python -m pip install --upgrade pip
-    ```
-- **Conan**: Version 1.65.0
-  ```sh
-  pip install conan==1.65.0
-  ```
-- **CMake**: Version 3.23 or higher
-  - Download from [CMake.org](https://cmake.org/download/).
-  - Add CMake to the system PATH.
-- **WiX Toolset**: Version 3.14
-  - Download and install from [WiX Toolset](https://wixtoolset.org/releases/).
-  - Add the WiX `bin` folder to the system PATH.
-- **NSIS (Nullsoft Scriptable Install System)**: Latest version
-  - Download and install from [NSIS](https://nsis.sourceforge.io/Download).
-  - Add the NSIS installation folder to the system PATH.
-
-  ## Start Github Self hosted runne:
-
-  - Navigate to  actions-runner location
-  - `./run.cmd`
-
-## Guide to Managing Printer Profiles and Settings
-
-### Adding New Printer Definitions
-
-When adding a new printer to Fracktory, follow these steps:
-
-1. **Create the printer definition file first**:
-   - Create a new `.def.json` file in the `resources/definitions` folder
-   - Base it on existing definitions (e.g., `base_fracktal_printer.def.json`)
-   - Define printer-specific parameters like build volume, extruder count, etc.
-
-2. **Generate nozzle variants automatically**:
-   - Use the provided `Variant Creator.py` script to generate appropriate nozzle variants
-   - Run the script and provide the path to your printer definition file:
-   - Follow the prompts to specify nozzle type (regular or volcano)
-   - The script will automatically create properly configured variants in the correct folder
-
-### Adding New Materials
-
-To add new materials or duplicate existing ones:
-
-1. **Use the resourcesRenamerUtility.py script**:
-- Choose option 1 to rename files
-- Provide the path to an existing material folder (e.g., `resources/intent/base_fracktal_printer/PLA`)
-- Enter the old material name to replace (e.g., "PLA")
-- Enter the new material name (e.g., "TPU")
-
-2. **Update material properties**:
-- Use option 2 in the resourcesRenamerUtility.py script to find and replace text within files
-- Update parameters like temperature, cooling, etc. to match the new material's requirements
-
-### Adding New Materials and Intents
-
-When adding a new material to Fracktory, follow these steps to ensure both the material and its intent profiles are set up correctly:
-
-1. **Add the Material File:**
-   - Place your new material XML file in `resources/materials/Fracktal Works/`.
-   - Fill in all required metadata, properties, and settings (e.g., print temperature, bed temperature, cooling, etc.).
-   - Set a reasonable default for `speed_print` in the material file (e.g., 60).
-
-2. **Create Intents for the Material:**
-   - In `resources/intent/base_fracktal_printer/<MaterialName>/Model <NozzleSize>/`, create intent files for each profile (engineering, visual, quick, etc.) and nozzle size (e.g., 0.4, 0.6).
-   - Use existing materials (like ABS, Nylon, PC) as templates for structure and naming.
-   - For engineering intents, set only `material_print_temperature`, `infill_sparse_density`, and `wall_thickness` as per the established pattern.
-   - For visual and quick intents, set `speed_print` to the correct max for the material and nozzle (e.g., 100 for 0.4mm, 80 for 0.6mm for engineering materials), and adjust `material_print_temperature` as needed.
-
-3. **Set Speed and Temperature:**
-   - Ensure `speed_print` in intents matches the material's recommended max for each nozzle size and profile type.
-   - For engineering profiles, do not set `speed_print` (only temperature and strength settings). (so it takes it from Material Settings itself (TBD))
-   - For visual/quick, use the correct speed and temperature logic as established in the project.
-
-4. **Consistency:**
-   - Always follow the structure and logic of existing intents for similar materials.
-   - Double-check that all new intents and material files are consistent with project standards for speed, temperature, and other key settings.
-
-5. **TBD: **
-   - Set up flow limited as per nozzles sizes speeds in Quality Settings instead.
+  },
+  "cura-beta": {
+    "Windows": {
+      "major": 5,
+      "minor": 9,
+      "revision": 10,
+      "postfix_type": "beta",
+      "postfix_version": 1,
+      "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
+    }
+  }
+}
+```
+
+**Key Points:**
+- The `major.minor.revision` should match your `conandata.yml` version
+- Users will be notified when a higher version is available at the URL
+- Beta versions include `postfix_type` and `postfix_version` fields
+
+#### ✅ Version Consistency Check
+
+Before creating installers, verify version consistency:
+
+1. **Check conandata.yml version:** `5.9.10`
+2. **Check latest.json version:** `5.9.10` (major: 5, minor: 9, revision: 10)
+3. **Generated installer names:** `Fracktory-5.9.10.exe` and `Fracktory-5.9.10.msi`
+
+All three should match for proper version management.
+
+---
+
+## 🖨️ Printer Profile Management
+
+### 🔧 Adding New Printers
+
+#### Step 1: Create Printer Definition
+1. Create a new `.def.json` file in `resources/definitions/`
+2. Base it on existing definitions (e.g., `base_fracktal_printer.def.json`)
+3. Define printer-specific parameters:
+   - Build volume
+   - Extruder count
+   - Machine-specific settings
+
+#### Step 2: Generate Nozzle Variants
+1. Use the `Variant Creator.py` script to automatically generate nozzle variants
+2. Provide the path to your printer definition file
+3. Specify nozzle type (regular or volcano)
+4. The script creates properly configured variants in the correct folder
+
+### 🧪 Adding New Materials
+
+#### 🚀 Quick Material Duplication
+Use the `resourcesRenamerUtility.py` script for efficient material management:
+
+1. **Rename files** (Option 1):
+   - Provide path to existing material folder (e.g., `resources/intent/base_fracktal_printer/PLA`)
+   - Enter old material name (e.g., "PLA")
+   - Enter new material name (e.g., "TPU")
+
+2. **Update properties** (Option 2):
+   - Find and replace text within files
+   - Update temperature, cooling, and other material-specific parameters
+
+#### 📋 Complete Material Setup
+
+For comprehensive material integration:
+
+##### 1. Material File Creation
+- Place new material XML in `resources/materials/Fracktal Works/`
+- Include all metadata: temperatures, cooling, properties
+- Set reasonable default `speed_print` (e.g., 60 mm/s)
+
+##### 2. Intent Profile Creation
+- Create profiles in `resources/intent/base_fracktal_printer/<MaterialName>/Model <NozzleSize>/`
+- Generate intents for each profile type (engineering, visual, quick) and nozzle size
+- Use existing materials (ABS, Nylon, PC) as templates
+
+##### 3. Profile Configuration
+| Profile Type | Settings | Speed Configuration |
+|--------------|----------|-------------------|
+| **Engineering** | `material_print_temperature`, `infill_sparse_density`, `wall_thickness` | Inherit from material |
+| **Visual/Quick** | Temperature adjustments + speed limits | Set max speed per nozzle (e.g., 100mm/s for 0.4mm, 80mm/s for 0.6mm) |
+
+##### 4. Consistency Guidelines
+- Follow existing material structure and naming
+- Ensure speed/temperature logic matches project standards
+- **TODO**: Implement flow limiting per nozzle size in Quality Settings
 
 This process ensures new materials are fully integrated and behave as expected in Fracktory.
 
-### Managing Custom Settings
+### ⚙️ Custom Settings Management
 
-When adding custom settings to Fracktory:
+#### 📍 Setting Location Rules
 
-1. **For customer-facing settings used in material profiles**:
-- **Important**: Add these settings to the `fdmprinter.def.json` definition file
-- Adding them only to `base_fracktal_printer.def.json` will not work correctly
-- Material profiles reference the base fdmprinter definitions
+| Setting Type | Location | Reason |
+|--------------|----------|--------|
+| **Customer-facing** (used in material profiles) | `fdmprinter.def.json` | Material profiles reference base fdmprinter definitions |
+| **Internal** (used by quality/intent profiles) | `base_fracktal_printer.def.json` | Inherited by all printers using this base |
 
-2. **For internal settings used by quality profiles and intent profiles**:
-- These can be added to the `base_fracktal_printer.def.json` definition
-- Any printer that inherits from this base definition will receive these settings
+#### 📝 Setting Structure Example
 
-3. **Setting structure**:
-- Add the setting definition to the appropriate category
-- Include metadata like label, description, type, and default value
-- Example:
 ```json
 "custom_cooling_fan_speed": {
   "label": "Custom Fan Speed",
@@ -469,29 +407,21 @@ When adding custom settings to Fracktory:
 }
 ```
 
-### Available Custom Settings
+#### 🔧 Available Custom Settings
 
-#### `strengthen_tree_support`
+##### Core Custom Settings
 
-- **Description**: This setting enables or disables the strengthening of tree supports.
-- **Location**: Found in the `fdmprinter.def.json` file.
-- **Effect**: When enabled, it increases the strength of tree supports, making them more robust during the printing process.
+| Setting | Location | Description | Default |
+|---------|----------|-------------|---------|
+| `strengthen_tree_support` | `fdmprinter.def.json` | Enables/disables tree support strengthening | - |
+| `machine_max_print_speed` | `fdmprinter.def.json` (speed category) | Hard upper limit for print speed | 150 mm/s |
+| `machine_visual_print_speed` | `fdmprinter.def.json` (speed category) | Recommended speed for visual quality | 60 mm/s |
 
-#### `machine_max_print_speed`
+##### 🏃‍♂️ Print Speed Configuration Hierarchy
 
-- **Description**: Sets the maximum allowable print speed for the machine. This acts as a hard upper limit for print speed, regardless of material or profile settings.
-- **Location**: Defined in the `fdmprinter.def.json` file under the speed category. Used in Intents
-- **Effect**: Ensures that no print job exceeds this speed, providing a safety and quality constraint for all profiles and materials.
-- **Default**: 150 mm/s (or as set per machine definition)
+1. **Materials**: Set base `speed_print` value for engineering/balanced intents
+2. **Intents**: Modify speed for Visual/Quick profiles using machine speed references
+3. **Quality**: Set `maximum_material_print_speed` for larger nozzles to prevent over-extrusion
 
-#### `machine_visual_print_speed`
+> **TODO**: Implement flow limiting per nozzle size in Quality settings instead of hardcoded values in intents.
 
-- **Description**: Defines the recommended print speed for high-quality (visual) prints on the machine, regardless of material.
-- **Location**: Defined in the `fdmprinter.def.json` file under the speed category.  Used in Intents
-- **Effect**: Used as a baseline for visual/quality profiles to ensure optimal surface finish and detail.
-- **Default**: 60 mm/s (or as set per machine definition)
-
-#### Setting Print Speeds:
--> in "Materials" you set the value of speed_print, which will determine the speed at which engineering and balanced intent speeds will be set
--> in "Intents" you can increase/reduce this speed for Visual and Quick. You can use the machine_max_print_speed and machine_visual_print_speed for refereence
--> in "Quality" ideally set up a "maximum_material_print_speed" for larger size nozzles to ensure you are not extruding more than the nozzle is capable to extrude. In interns you can use this value instead of a constant like currently (TBD)
