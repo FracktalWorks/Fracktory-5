@@ -1,0 +1,35 @@
+{
+    "version": 2,
+    "name": "Volterra 300 ALF",
+    "inherits": "base_fracktal_printer",
+    "id": "volterra_300_alf",
+    "metadata":
+    {
+        "visible": true,
+        "manufacturer": "Volterra ALF Series",
+        "category": "Volterra ALF Series",
+        "has_machine_materials": true,
+        "has_machine_quality": true,
+        "has_variants": true,
+        "machine_variant_shortcode": "V3A",
+        "preferred_quality_type": "normal",
+        "preferred_variant_name": "Model 0.4 mm",
+        "quality_definition": "base_fracktal_printer",
+        "variants_name": "Nozzle"
+    },
+    "overrides":
+    {
+        "default_material_print_temperature":
+        {
+            "maximum_value": "450",
+            "maximum_value_warning": "350"
+        },
+        "machine_depth": { "default_value": 300 },
+        "machine_height": { "default_value": 400 },
+        "machine_name": { "default_value": "Volterra 300 ALF" },
+        "machine_width": { "default_value": 300 },
+        "machine_max_feedrate_x": { "value": 150 },
+        "machine_max_feedrate_y": { "value": 150 },
+        "speed_layer_0": { "value": "min(25, round(speed_print * 0.3, 0))" }
+    }
+}

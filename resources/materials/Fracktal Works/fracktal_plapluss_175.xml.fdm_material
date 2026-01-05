@@ -45,6 +45,10 @@ If the material is not speed critical, then leave this out to go the max machine
             <setting key="heated bed temperature">70</setting>
         </machine>
 
+        <machine>
+            <machine_identifier manufacturer="Volterra ALF Series" product="volterra_300_alf" />
+            <setting key="heated bed temperature">40</setting>
+        </machine>
 
     </settings>
 </fdmmaterial>

@@ -63,8 +63,11 @@ If the material is not speed critical, then leave this out to go the max machine
         <cura:setting key="cool_fan_speed_max">100</cura:setting>
         <cura:setting key="brim_line_count">0</cura:setting>
 
+        <machine>
+            <machine_identifier manufacturer="Volterra ALF Series" product="volterra_300_alf" />
+            <setting key="heated bed temperature">25</setting>
+        </machine>
 
-        
      </settings>
 
 </fdmmaterial>

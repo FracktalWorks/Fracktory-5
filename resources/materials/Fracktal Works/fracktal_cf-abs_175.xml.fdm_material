@@ -40,8 +40,10 @@ If the material is not speed critical, then leave this out to go the max machine
         <cura:setting key="brim_line_count">8</cura:setting>
         <cura:setting key="speed_print">60</cura:setting>
 
-
-
+        <machine>
+            <machine_identifier manufacturer="Volterra ALF Series" product="volterra_300_alf" />
+            <setting key="heated bed temperature">80</setting>
+        </machine>
 
     </settings>
 </fdmmaterial>
