@@ -53,6 +53,12 @@ If the material is not speed critical, then leave this out to go the max machine
         <cura:setting key="skin_overlap">10</cura:setting>
         <cura:setting key="cool_min_layer_time">15</cura:setting>
 
+        <machine>
+            <machine_identifier manufacturer="Volterra ALF Series" product="volterra_300_alf" />
+            <setting key="build volume temperature">0</setting>
+            <cura:setting key="ring_heater_enable">True</cura:setting>
+            <cura:setting key="ring_heater_power">20</cura:setting>
+        </machine>
 
    </settings>
 </fdmmaterial>

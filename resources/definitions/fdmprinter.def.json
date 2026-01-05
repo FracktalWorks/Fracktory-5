@@ -247,6 +247,16 @@
                     "settable_per_extruder": false,
                     "settable_per_meshgroup": false
                 },
+                "machine_ring_heater":
+                {
+                    "label": "Has Ring Heater",
+                    "description": "Whether the machine has a ring heater for localized heating around the print area. Uses M143 to set power (0-255) and M144 to turn off.",
+                    "default_value": false,
+                    "type": "bool",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": false,
+                    "settable_per_meshgroup": false
+                },
                 "machine_always_write_active_tool":
                 {
                     "label": "Always Write Active Tool",
@@ -2617,6 +2627,32 @@
                     "settable_per_mesh": false,
                     "settable_per_extruder": false,
                     "settable_per_meshgroup": false
+                },
+                "ring_heater_enable":
+                {
+                    "label": "Enable Ring Heater",
+                    "description": "Enables the ring heater during printing. The ring heater provides additional localized heating around the print area for improved layer adhesion with high-temperature materials.",
+                    "type": "bool",
+                    "default_value": false,
+                    "resolve": "any(extruderValues('ring_heater_enable'))",
+                    "enabled": "machine_ring_heater",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true
+                },
+                "ring_heater_power":
+                {
+                    "label": "Ring Heater Power",
+                    "description": "The power level of the ring heater as a percentage. This controls the intensity of the localized heating. The value is converted to 0-255 scale for the M143 command.",
+                    "unit": "%",
+                    "type": "float",
+                    "default_value": 0,
+                    "value": "0 if not ring_heater_enable else 50",
+                    "resolve": "max(extruderValues('ring_heater_power'))",
+                    "minimum_value": "0",
+                    "maximum_value": "100",
+                    "enabled": "machine_ring_heater and ring_heater_enable",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true
                 },
                 "material_adhesion_tendency":
                 {

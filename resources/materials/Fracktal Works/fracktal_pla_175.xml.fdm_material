@@ -49,6 +49,8 @@ If the material is not speed critical, then leave this out to go the max machine
         <machine>
             <machine_identifier manufacturer="Volterra ALF Series" product="volterra_300_alf" />
             <setting key="heated bed temperature">40</setting>
+            <setting key="build volume temperature">0</setting>
+            <cura:setting key="ring_heater_enable">False</cura:setting>
         </machine>
 
     </settings>
