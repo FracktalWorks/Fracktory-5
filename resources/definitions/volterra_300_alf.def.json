@@ -26,10 +26,10 @@
         },
         "machine_depth": { "default_value": 300 },
         "machine_height": { "default_value": 400 },
-        "machine_name": { "default_value": "Volterra 300 ALF" },
-        "machine_width": { "default_value": 300 },
         "machine_max_feedrate_x": { "value": 150 },
         "machine_max_feedrate_y": { "value": 150 },
+        "machine_name": { "default_value": "Volterra 300 ALF" },
+        "machine_width": { "default_value": 300 },
         "speed_layer_0": { "value": "min(25, round(speed_print * 0.3, 0))" }
     }
 }
