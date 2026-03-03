@@ -1,4 +1,4 @@
-version: "5.9.11"
+version: "5.9.12"
 requirements:
   # - "cura_resources/5.9.1"
   - "uranium/5.9.1"

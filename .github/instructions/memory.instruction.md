@@ -5,7 +5,7 @@ applyTo: '**'
 # Fracktory-5 Agent Memory
 
 ## Project Overview
-- **Fracktory-5**: Cura fork (v5.9.11) by Fracktal Works for their 3D printers
+- **Fracktory-5**: Cura fork (v5.9.12) by Fracktal Works for their 3D printers
 - **Repository**: `C:\Users\VijayRaghavVarada\Documents\Github\Fracktory-5`
 - **Branch**: Fracktory-5.9
 
