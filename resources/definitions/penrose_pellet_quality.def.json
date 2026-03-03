@@ -1,0 +1,14 @@
+{
+    "version": 2,
+    "name": "Penrose Pellet Quality Base",
+    "inherits": "fdmprinter",
+    "metadata": {
+        "author": "Fracktal Works",
+        "file_formats": "text/x-gcode",
+        "has_machine_quality": true,
+        "has_variants": true,
+        "variants_name": "Nozzle",
+        "visible": false
+    },
+    "overrides": {}
+}

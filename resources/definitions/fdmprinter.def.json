@@ -257,6 +257,16 @@
                     "settable_per_extruder": false,
                     "settable_per_meshgroup": false
                 },
+                "machine_barrel_heater":
+                {
+                    "label": "Has Barrel Heater",
+                    "description": "Whether the machine has a barrel heater for pre-melting pellets in a pellet extruder. Uses M104/M109 with H0/H1 heater index parameters.",
+                    "default_value": false,
+                    "type": "bool",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": false,
+                    "settable_per_meshgroup": false
+                },
                 "machine_always_write_active_tool":
                 {
                     "label": "Always Write Active Tool",
@@ -2651,6 +2661,53 @@
                     "minimum_value": "0",
                     "maximum_value": "100",
                     "enabled": "machine_ring_heater and ring_heater_enable",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true
+                },
+                "default_material_barrel_temperature":
+                {
+                    "label": "Default Barrel Temperature",
+                    "description": "The default temperature of the pellet extruder barrel heater. This should be the \"base\" barrel temperature of a material. All other barrel temperatures should use offsets based on this value.",
+                    "unit": "\u00b0C",
+                    "type": "float",
+                    "default_value": 0,
+                    "minimum_value": "-273.15",
+                    "minimum_value_warning": "0",
+                    "maximum_value_warning": "400",
+                    "maximum_value": "480",
+                    "enabled": false,
+                    "settable_per_extruder": true,
+                    "settable_per_mesh": false
+                },
+                "material_barrel_temperature":
+                {
+                    "label": "Barrel Temperature",
+                    "description": "The temperature of the pellet extruder barrel heater. This secondary heater pre-melts pellets before they reach the nozzle. Should be above the glass transition temperature of the material.",
+                    "unit": "\u00b0C",
+                    "type": "float",
+                    "default_value": 0,
+                    "value": "default_material_barrel_temperature",
+                    "minimum_value": "-273.15",
+                    "minimum_value_warning": "0",
+                    "maximum_value_warning": "400",
+                    "maximum_value": "480",
+                    "enabled": "machine_barrel_heater",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true
+                },
+                "material_barrel_temperature_layer_0":
+                {
+                    "label": "Barrel Temperature Initial Layer",
+                    "description": "The temperature of the pellet extruder barrel heater during the first layer.",
+                    "unit": "\u00b0C",
+                    "type": "float",
+                    "default_value": 0,
+                    "value": "material_barrel_temperature",
+                    "minimum_value": "-273.15",
+                    "minimum_value_warning": "0",
+                    "maximum_value_warning": "400",
+                    "maximum_value": "480",
+                    "enabled": "machine_barrel_heater",
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
                 },

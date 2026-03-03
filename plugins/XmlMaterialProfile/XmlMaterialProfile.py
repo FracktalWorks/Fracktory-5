@@ -1156,6 +1156,7 @@ class XmlMaterialProfile(InstanceContainer):
         "adhesion tendency": "material_adhesion_tendency",
         "surface energy": "material_surface_energy",
         "build volume temperature": "build_volume_temperature",
+        "barrel temperature": "default_material_barrel_temperature",
         "anti ooze retract position": "material_anti_ooze_retracted_position",
         "anti ooze retract speed": "material_anti_ooze_retraction_speed",
         "break preparation position": "material_break_preparation_retracted_position",

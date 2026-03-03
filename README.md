@@ -20,6 +20,8 @@
 
 ### 🔧 Additional Resources
 - **[Printer Profile Management](#printer-profile-management)** - Understanding Cura's configuration system and adding printers/materials
+- **[AI Agent Guide](docs/agents.md)** - Comprehensive guide for AI agents on creating/editing printer profiles, start/end gcode, temperature settings, and barrel heater integration
+- **[Start GCode Generator](#start-gcode-generator)** - Reusable script for generating start/end gcode expressions
 - **[Printer Linter](printer-linter/README.md)** - Tool for validating printer definition files
 - **[Internationalization](resources/i18n/README.md)** - Translation and localization information
 - **Plugin Documentation** - Individual plugin READMEs in the `plugins/` directory
@@ -394,6 +396,21 @@ For detailed information, see [Ultimaker's Profiles & Settings documentation](ht
 3. Specify nozzle type (regular or volcano)
 4. The script creates properly configured variants in the correct folder
 
+#### Step 3: Generate Start/End GCode (for IDEX or printers with barrel heaters)
+Use the `scripts/generate_start_gcode.py` script to generate correctly formatted gcode expressions:
+```powershell
+# For IDEX with barrel heater (pellet extruder):
+python scripts/generate_start_gcode.py --type idex --barrel --pellet --name "My Printer"
+
+# For single extruder with barrel heater:
+python scripts/generate_start_gcode.py --type single --barrel --pellet --name "My Printer"
+
+# Write directly to definition file:
+python scripts/generate_start_gcode.py --printer penrose_600_idex --write resources/definitions/penrose_600_idex.def.json
+```
+
+> **For AI Agents**: See [docs/agents.md](docs/agents.md) for comprehensive guidance on printer creation, temperature settings, gcode expression patterns, and common pitfalls.
+
 ### 🧪 Adding New Materials
 
 #### 🚀 Quick Material Duplication
@@ -473,4 +490,49 @@ This process ensures new materials are fully integrated and behave as expected i
 3. **Quality**: Set `maximum_material_print_speed` for larger nozzles to prevent over-extrusion
 
 > **TODO**: Implement flow limiting per nozzle size in Quality settings instead of hardcoded values in intents.
+
+---
+
+### 🔧 Start GCode Generator
+
+The `scripts/generate_start_gcode.py` script generates properly formatted `machine_start_gcode` and `machine_end_gcode` values for printer definition files. It supports:
+
+- **Single extruder** and **IDEX** printer types
+- **Filament** and **pellet** extruder purge sequences
+- **Barrel heater** temperature commands (M104 H/M109 H)
+- All 5 IDEX print modes (Single 1, Single 2, Dual, Mirror, Duplication)
+- Python expression validation (`ast.parse`)
+- Direct write to `.def.json` files
+
+#### Usage Examples
+
+```powershell
+# Show available presets and options:
+python scripts/generate_start_gcode.py --help
+
+# Generate for a known printer preset:
+python scripts/generate_start_gcode.py --printer penrose_600_idex
+
+# Custom IDEX with barrel heater:
+python scripts/generate_start_gcode.py --type idex --barrel --pellet --name "My IDEX Printer"
+
+# Write directly to definition file:
+python scripts/generate_start_gcode.py --printer penrose_600_idex \
+    --write resources/definitions/penrose_600_idex.def.json
+
+# Validate existing definition:
+python scripts/generate_start_gcode.py --validate-only \
+    --write resources/definitions/penrose_600_idex.def.json
+```
+
+#### Available Presets
+
+| Preset | Type | Barrel | Extruder | Description |
+|--------|------|--------|----------|-------------|
+| `penrose_600_idex` | IDEX | ✅ | Pellet | Penrose 600 IDEX pellet extruder |
+| `penrose_600` | Single | ✅ | Pellet | Penrose 600 pellet extruder |
+| `base_idex_filament` | IDEX | ❌ | Filament | Generic IDEX filament printer |
+| `base_single_filament` | Single | ❌ | Filament | Generic single filament printer |
+
+To add new presets, edit the `PRESETS` dictionary in `scripts/generate_start_gcode.py`.
 
