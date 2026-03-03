@@ -12,6 +12,7 @@
         "has_materials": true,
         "has_variant_materials": false,
         "has_variants": true,
+        "exclude_materials": ["_175", "generic_"],
         "machine_variant_shortcode": "PE",
         "platform_offset": [
             0,
@@ -19,7 +20,7 @@
             0
         ],
         "preferred_quality_type": "pellet_030",
-        "preferred_material": "fracktal_pla_175",
+        "preferred_material": "fracktal_pla_pellet",
         "preferred_variant_name": "Pellet 0.6 mm",
         "quality_definition": "penrose_pellet_quality",
         "variants_name": "Nozzle",
@@ -92,10 +93,10 @@
             "default_value": 1.75
         },
         "retraction_enable": {
-            "value": false
+            "value": true
         },
         "retraction_amount": {
-            "value": "0"
+            "value": "2"
         },
         "retraction_hop_enabled": {
             "value": false
@@ -103,17 +104,41 @@
         "retraction_combing": {
             "value": "'all'"
         },
+        "retraction_speed": {
+            "value": "50"
+        },
+        "retraction_combing_max_distance": {
+            "value": "0"
+        },
         "cool_fan_speed": {
             "value": "100"
         },
         "cool_fan_speed_0": {
             "value": "0"
         },
+        "cool_min_layer_time": {
+            "value": "10"
+        },
+        "cool_min_speed": {
+            "value": "max(15, round(speed_print * 0.25))"
+        },
         "material_flow": {
             "value": "100"
         },
         "material_flow_layer_0": {
             "value": "100"
+        },
+        "coasting_enable": {
+            "value": true
+        },
+        "coasting_volume": {
+            "value": "round(machine_nozzle_size ** 3 * 1.5, 3)"
+        },
+        "coasting_speed": {
+            "value": "80"
+        },
+        "coasting_min_volume": {
+            "value": "round(coasting_volume * 10, 2)"
         },
         "machine_heated_bed": {
             "default_value": true
@@ -154,6 +179,15 @@
         "speed_layer_0": {
             "value": "min(20, round(speed_print * 0.35, 0))"
         },
+        "speed_wall": {
+            "value": "min(round(speed_print * 0.9, 0), 150)"
+        },
+        "speed_wall_0": {
+            "value": "min(round(speed_wall * 0.85, 0), 120)"
+        },
+        "speed_topbottom": {
+            "value": "min(round(speed_print * 0.9, 0), 150)"
+        },
         "adhesion_type": {
             "default_value": "brim"
         },
@@ -171,6 +205,42 @@
         },
         "retraction_prime_speed": {
             "value": "retraction_retract_speed"
+        },
+        "bridge_wall_coast": {
+            "value": "100"
+        },
+        "bridge_wall_material_flow": {
+            "value": "round(material_flow * 0.80)"
+        },
+        "bridge_skin_material_flow": {
+            "value": "round(material_flow * 0.80)"
+        },
+        "travel_avoid_supports": {
+            "value": true
+        },
+        "travel_avoid_distance": {
+            "value": "machine_nozzle_size * 1.5"
+        },
+        "z_seam_corner": {
+            "value": "'z_seam_corner_inner'"
+        },
+        "wall_0_wipe_dist": {
+            "value": "machine_nozzle_size * 2"
+        },
+        "max_flow_acceleration": {
+            "value": "0.5 if machine_nozzle_size <= 0.6 else 0.75 if machine_nozzle_size <= 1.0 else 1.0 if machine_nozzle_size <= 2.0 else 1.5"
+        },
+        "meshfix_maximum_deviation": {
+            "value": "max(0.02, machine_nozzle_size * 0.04)"
+        },
+        "meshfix_maximum_resolution": {
+            "value": "max(0.5, machine_nozzle_size * 0.8)"
+        },
+        "prime_tower_size": {
+            "value": "40"
+        },
+        "switch_extruder_extra_prime_amount": {
+            "value": "machine_nozzle_size * 3"
         },
         "machine_barrel_heater": {
             "default_value": true
