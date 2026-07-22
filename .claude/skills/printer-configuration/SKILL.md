@@ -1,0 +1,134 @@
+---
+name: printer-configuration
+description: Fleet-wide runbook for configuring Fracktal printers in Fracktory-5 — printers, settings, nozzle variants, quality profiles, materials, intents, and how settings surface in the frontend UI. Use when editing anything under resources/ (definitions, extruders, variants, quality, materials, intent, setting_visibility) for any printer (Julia, Dragon, Twin Dragon, Volterra, Snowflake, Penrose pellet), or when adding/changing a setting and verifying how it displays.
+---
+
+# Printer Configuration (all Fracktal printers)
+
+Internal skill. Deep reference: `docs/agents.md` (read the relevant section
+before editing). This is the operational path.
+
+## Architecture in 30 seconds
+
+- Inheritance: `fdmprinter` → `base_fracktal_printer` (single) →
+  `base_fracktal_dual_printer` → `base_fracktal_idex_printer`; leaf printer
+  defs are thin (build volume, feedrates, names). Bases carry the tuning
+  philosophy. Override as close to the leaf as possible.
+- Two quality namespaces: `base_fracktal_printer` (all filament printers,
+  variants "Model X.X mm", global types micro/high/normal/low/coarse/…)
+  and `penrose_pellet_quality` (Penrose 600 + IDEX, variants "Pellet X.X mm",
+  types `pellet_020`…`pellet_240`).
+- Value resolution per stack (cura/Settings/CuraContainerStack.py:406):
+  User → QualityChanges → Intent → Quality → Material → Variant →
+  DefinitionChanges → Definition. `resolve` collapses per-extruder values on
+  the global stack (GlobalStack.getProperty); `limit_to_extruder` redirects;
+  non-`settable_per_extruder` settings delegate extruder→global.
+
+## Where does the change go?
+
+| Change | Home |
+|---|---|
+| One machine, all nozzles/materials | `resources/definitions/<printer>.def.json` `overrides` |
+| Whole family (all filament / all IDEX) | the matching `base_fracktal_*.def.json` |
+| Per-nozzle (nozzle size, flow limit, heat-zone, first-layer height) | `resources/variants/fracktalworks/<Printer>/*.inst.cfg` `[values]` |
+| Per-material (temps, cooling, density) | `resources/materials/<brand>/*.xml.fdm_material` |
+| Per-quality layer height (global) or per-material tweak (stub) | `resources/quality/<namespace>/…` |
+| Engineering/Visual/Draft picks (Recommended mode) | `resources/intent/base_fracktal_printer/…` (filament only) |
+| New user-facing setting | `fdmprinter.def.json` (+ XML map in `plugins/XmlMaterialProfile/XmlMaterialProfile.py` if material-settable); family-internal settings may live in a base def (`bridge_over_support`, `print_mode`) |
+| Which settings are visible by default | `resources/setting_visibility/{basic,advanced,expert}.cfg` |
+
+## Hard rules (violations fail silently)
+
+1. `"value"` = evaluated Python expression; `"default_value"` = literal,
+   NEVER evaluated (Uranium SettingDefinition: value is Function,
+   default_value is Any). A formula in `default_value` is dead code.
+   Known instance: `material_barrel_temperature` in both Penrose defs.
+2. Constraint fields (`maximum_value` etc.) are expression strings: `"480"`.
+3. Quality-stub metadata must match exactly: `definition` = the
+   `quality_definition`, `variant` = variant `name` field, `material` =
+   material `base_file`. Any mismatch → Cura silently shows ALL global
+   quality types. Global profiles need `global_quality = True`.
+4. One `quality_type` = one global `layer_height`; per-nozzle layer heights =
+   different quality-type subsets (stubs), never different heights per nozzle.
+5. `exclude_materials` is substring matching on material id (`_175`,
+   `generic_`). Only the Penrose defs use it today — new pellet-adjacent
+   materials must avoid the excluded substrings; new filament printers
+   should consider excluding `_pellet`.
+6. IDEX `machine_start_gcode` is a `"value"` expression branching on
+   `print_mode`; single-extruder uses `"default_value"` plain string.
+   Regenerate via `python scripts/generate_start_gcode.py --printer <id>
+   --write <def>`; never hand-edit the expression. Nozzle waits (`M109 T<n>`)
+   and barrel waits (`M109 H<n>`) must stay paired per head.
+7. Per-extruder-capable temperature settings need
+   `"settable_per_extruder": true`; shared display values need a `resolve`.
+8. `machine_extruder_trains` ids must equal extruder filenames minus
+   `.def.json`.
+9. New `.inst.cfg` files: `setting_version = 23` (matches the shipped fleet;
+   app is 24 and auto-upgrades on load — don't mix versions).
+10. Pellet printers: coasting is the ooze strategy (retraction ≤ 2 mm,
+    `retraction_combing_max_distance = 0`); scale geometry settings with
+    `machine_nozzle_size`.
+
+## How a setting reaches the UI (for "why isn't it showing?")
+
+1. Definition nesting decides its category: a custom setting appears under
+   the category it's nested in within the `settings` block (e.g.
+   `print_mode` under `dual`).
+2. `enabled` expression gates the row (evaluated live —
+   `resources/qml/Settings/SettingView.qml:231`); e.g. barrel settings show
+   only when `machine_barrel_heater` is true.
+3. Visibility preset gates it next: the setting key must be in
+   `general/visible_settings` (fed by `resources/setting_visibility/*.cfg`
+   via `SettingVisibilityPresetsModel`) unless the user searched or picked
+   "All".
+4. Widget = setting `type` (SettingView.qml:245): float/int/str→TextField,
+   enum→ComboBox, bool→CheckBox, extruder→extruder selector.
+5. Warning/error colors come from `minimum/maximum_value[_warning]` via
+   Uranium `Validator.py` → orange (warning) / red (error) in
+   `SettingTextField.qml`.
+6. Recommended mode is hand-built QML
+   (`resources/qml/PrintSetupSelector/Recommended/*`) bound to specific keys
+   (`infill_sparse_density`, `support_enable`, `adhesion_type`, intents via
+   `ActiveIntentQualitiesModel`); Custom mode embeds the full SettingView.
+7. Dropdown menus (quality/material/nozzle) come from
+   `cura/Machines/Models/*` keyed on container metadata — quality dropdown =
+   `QualityProfilesDropDownMenuModel` (quality_type), nozzle =
+   `NozzleModel` (hardware_type=nozzle variants), materials =
+   `MaterialBrandsModel`/`BaseMaterialsModel` (brand/material/GUID).
+8. IDEX print modes also surface as a toolbar Tool
+   (`plugins/FracktoryIDEX/tools/print_modes/PrintModesPanel.qml`);
+   `machine_disallowed_areas` in the IDEX base draws per-mode keep-out zones
+   on the build plate.
+
+## Verify (after every change)
+
+1. `python printer-linter/src/terminal.py "<changed files>" --diagnose`
+   AND `venv/Scripts/python .claude/skills/printer-configuration/verify_definitions_load.py`
+   (loads every definition through the real Uranium loader — catches
+   silently-dropped overrides, e.g. whitespace-damaged keys, which the static
+   linter misses).
+2. Metadata changes (quality/variant/material): launch the app; the quality
+   dropdown must show the correct filtered subset per nozzle+material
+   (all-types-shown = metadata key mismatch). Check the material menu has no
+   pollution across filament/pellet families.
+3. G-code changes: slice and inspect start/end blocks (IDEX: all five print
+   modes — singleT0, singleT1, dual, mirror, duplication).
+4. New settings: confirm category placement, visibility preset membership,
+   widget type, and warning/error bounds in the UI.
+5. DOX pass: update `resources/AGENTS.md` / `docs/agents.md` if a contract
+   moved.
+
+## Known open issues (fleet)
+
+- Shipped profiles are `setting_version = 23` vs app 24 (auto-upgraded each
+  load); intent files often have doubled `.inst.inst.cfg` extensions (still
+  load). Fix only as a deliberate fleet-wide pass.
+- Follow-up candidate: a printer-linter diagnostic for override keys that
+  don't match any known setting (the static-analysis version of
+  `verify_definitions_load.py`) — new rules belong in `printer-linter/`.
+
+Fixed 2026-07-23 (in-app verification still pending): barrel-temp formula
+moved `default_value`→`value` in both Penrose defs; `_pellet` added to
+`exclude_materials` in `base_fracktal_printer` (inherited fleet-wide, Penrose
+overrides keep their own list); `fracktal_cf-petg_175` filename space removed;
+`support_xy_distance ` trailing-space key fixed in the dual base.

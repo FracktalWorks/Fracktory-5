@@ -87,12 +87,18 @@ This is because these values are treated as Python expressions by Cura and may r
 fdmprinter.def.json (root - all settings defined here)
   -> base_fracktal_printer.def.json (single extruder Fracktal base)
        -> penrose_600.def.json (specific printer)
-       -> julia_2022_advanced.def.json (specific printer)
-  -> base_fracktal_dual_printer.def.json (dual extruder base)
-       -> base_fracktal_idex_printer.def.json (IDEX base)
-            -> penrose_600_idex.def.json (specific IDEX printer)
-            -> julia_2022_pro_dual_idex.def.json (specific IDEX printer)
+       -> julia_advanced.def.json, dragon_400.def.json, ... (specific printers)
+       -> base_fracktal_dual_printer.def.json (dual extruder base)
+            -> julia_pro_dual.def.json, twin_dragon_*.def.json, volterra_dual.def.json
+            -> base_fracktal_idex_printer.def.json (IDEX base)
+                 -> penrose_600_idex.def.json (specific IDEX printer)
 ```
+
+Note: `base_fracktal_dual_printer` inherits `base_fracktal_printer` (verified
+in the file), so single-extruder base settings and metadata (e.g.
+`exclude_materials`) flow to dual and IDEX machines too. Definition metadata
+inheritance is per-key: a child key replaces the parent's value wholesale
+(no list merging).
 
 **Rule**: Override settings as close to the leaf (specific printer) as possible. Only add settings to `fdmprinter.def.json` if they are customer-facing and used in material profiles. Use base definitions for shared internal settings.
 

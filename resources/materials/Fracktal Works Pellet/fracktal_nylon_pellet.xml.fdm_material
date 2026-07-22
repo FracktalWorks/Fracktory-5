@@ -23,6 +23,7 @@ Nylon Pellet profile for pellet extrusion printers.
     </properties>
     <settings>
         <setting key="print temperature">260</setting>
+        <setting key="barrel temperature">190</setting>
         <setting key="standby temperature">175</setting>
         <setting key="heated bed temperature">90</setting>
         <setting key="build volume temperature">60</setting>

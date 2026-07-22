@@ -56,7 +56,7 @@
         "support_skip_some_zags": { "value": "False if extruderValue(support_extruder_nr,'material_is_support_material') else True if support_pattern == 'zigzag' else False" },
         "support_tree_rest_preference": { "value": "'graceful' if extruderValue(support_interface_extruder_nr,'material_is_support_material') else 'buildplate'" },
         "support_tree_top_rate": { "value": "30 if extruderValue(support_interface_extruder_nr,'material_is_support_material') else 20" },
-        "support_xy_distance ": { "value": "machine_nozzle_size * 3 if extruderValue(support_interface_extruder_nr,'material_is_support_material') or multimaterial_support_optimisation != 'normal' else machine_nozzle_size * 2" },
+        "support_xy_distance": { "value": "machine_nozzle_size * 3 if extruderValue(support_interface_extruder_nr,'material_is_support_material') or multimaterial_support_optimisation != 'normal' else machine_nozzle_size * 2" },
         "support_xy_distance_overhang": { "value": "0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') and multimaterial_support_optimisation == 'normal' else machine_nozzle_size / 2 " },
         "support_z_distance": { "value": "0 if extruderValue(support_interface_extruder_nr,'material_is_support_material') or multimaterial_support_optimisation != 'normal' else min(0.2, layer_height)" },
         "switch_extruder_extra_prime_amount": { "value": "0.5" },

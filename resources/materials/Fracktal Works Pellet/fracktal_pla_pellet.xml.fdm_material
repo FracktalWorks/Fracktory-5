@@ -23,6 +23,7 @@ PLA Pellet profile for pellet extrusion printers.
     </properties>
     <settings>
         <setting key="print temperature">190</setting>
+        <setting key="barrel temperature">180</setting>
         <setting key="standby temperature">175</setting>
         <setting key="heated bed temperature">60</setting>
         <setting key="build volume temperature">30</setting>
@@ -31,5 +32,6 @@ PLA Pellet profile for pellet extrusion printers.
         <setting key="surface energy">100</setting>
         <cura:setting key="cool_fan_speed">100</cura:setting>
         <cura:setting key="cool_fan_speed_max">100</cura:setting>
+        <cura:setting key="brim_line_count">3</cura:setting>
     </settings>
 </fdmmaterial>

@@ -28,9 +28,10 @@
             0,
             0
         ],
+        "post_processing_scripts": "[DiagonalZHop]\\\nextruder_nb = 1\\\n\\\n[CreateThumbnail]\\\nwidth = 128\\\nheight = 128\\\n\\\n[MixHopper]\\\nextrusion_interval = 2000.0\\\nmix_gcode = MIX_HOPPER\\\n\\\n",
         "preferred_material": "fracktal_pla_pellet",
         "preferred_quality_type": "pellet_030",
-        "preferred_variant_name": "Pellet 0.6 mm",
+        "preferred_variant_name": "Pellet 1.5 mm",
         "quality_definition": "penrose_pellet_quality",
         "variants_name": "Nozzle"
     },
@@ -40,7 +41,7 @@
         "bridge_skin_material_flow": { "value": "round(material_flow * 0.80)" },
         "bridge_wall_coast": { "value": "100" },
         "bridge_wall_material_flow": { "value": "round(material_flow * 0.80)" },
-        "brim_line_count": { "value": "8" },
+        "brim_line_count": { "value": "6" },
         "coasting_enable": { "value": true },
         "coasting_min_volume": { "value": "round(coasting_volume * 10, 2)" },
         "coasting_speed": { "value": "80" },
@@ -57,6 +58,15 @@
         "machine_acceleration": { "value": 2500 },
         "machine_barrel_heater": { "default_value": true },
         "machine_depth": { "default_value": 600 },
+        "machine_head_with_fans_polygon":
+        {
+            "default_value": [
+                [-25, 50],
+                [25, 50],
+                [25, -50],
+                [-25, -50]
+            ]
+        },
         "machine_end_gcode": { "default_value": ";--- Penrose 600 IDEX Pellet Extruder End GCode ---\nM104 T0 S0 ;nozzle 0 heater off\nM104 T1 S0 ;nozzle 1 heater off\nM104 H0 S0 ;barrel heater 0 off\nM104 H1 S0 ;barrel heater 1 off\nM140 S0 ;heated bed heater off\nG91 ;relative positioning\nG1 Z+0.5 E-2 F3000 ;move Z up a bit and retract slightly\nG28 X0 Y0 ;move X/Y to home\nM84 ;steppers off\nM107 ;fan off\nG90 ;absolute positioning\n" },
         "machine_heated_bed": { "default_value": true },
         "machine_height": { "default_value": 625 },
@@ -64,7 +74,7 @@
         "machine_max_acceleration_x": { "value": 2500 },
         "machine_max_acceleration_y": { "value": 2500 },
         "machine_max_acceleration_z": { "value": 100 },
-        "machine_max_feedrate_e": { "value": 25 },
+        "machine_max_feedrate_e": { "value": 50 },
         "machine_max_feedrate_x": { "value": 600 },
         "machine_max_feedrate_y": { "value": 600 },
         "machine_max_feedrate_z": { "value": 20 },
@@ -72,14 +82,14 @@
         "machine_max_jerk_z": { "value": 0.4 },
         "machine_max_print_speed": { "value": "150" },
         "machine_name": { "default_value": "Penrose 600 IDEX" },
-        "machine_nozzle_size": { "default_value": 0.6 },
-        "machine_start_gcode": { "value": "';Machine Model: {machine_name}\\n;Nozzle Size: T0 ' + str(extruderValue(0, 'machine_nozzle_size')) + ' T1 ' + str(extruderValue(1, 'machine_nozzle_size')) + '\\n;Sliced at: {day} {date} {time}\\n;Print mode: {print_mode}\\n;--- Penrose 600 IDEX Pellet Extruder Start GCode ---\\nM140 S{material_bed_temperature_layer_0} \\t;Heat build surface\\n' + (\"M104 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") + \"\\t;Heat nozzle 1\\n\" + \"M104 H1 S{material_barrel_temperature_layer_0, 1}\\t;Heat barrel 1\\n\" + \"M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached\\n\" + \"M109 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") + \"\\t;Wait for nozzle 1\\n\" + \"M109 H1 S{material_barrel_temperature_layer_0, 1}\\t;Wait for barrel 1\\n\" if print_mode == 'singleT1' else '') + (\"M104 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat nozzle 0\\n\" + \"M104 H0 S{material_barrel_temperature_layer_0, 0}\\t;Heat barrel 0\\n\" + \"M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached\\n\" + \"M109 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Wait for nozzle 0\\n\" + \"M109 H0 S{material_barrel_temperature_layer_0, 0}\\t;Wait for barrel 0\\n\" if print_mode == 'singleT0' else '') + (\"M104 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat nozzle 0\\n\" + \"M104 H0 S{material_barrel_temperature_layer_0, 0}\\t;Heat barrel 0\\n\" + \"M104 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") + \"\\t;Heat nozzle 1\\n\" + \"M104 H1 S{material_barrel_temperature_layer_0, 1}\\t;Heat barrel 1\\n\" + \"M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached\\n\" + \"M109 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Wait for nozzle 0\\n\" + \"M109 H0 S{material_barrel_temperature_layer_0, 0}\\t;Wait for barrel 0\\n\" + \"M109 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") + \"\\t;Wait for nozzle 1\\n\" + \"M109 H1 S{material_barrel_temperature_layer_0, 1}\\t;Wait for barrel 1\\n\" if print_mode == 'dual' else '') + (\"M104 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat nozzle 0\\n\" + \"M104 H0 S{material_barrel_temperature_layer_0, 0}\\t;Heat barrel 0\\n\" + \"M104 T1 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat nozzle 1\\n\" + \"M104 H1 S{material_barrel_temperature_layer_0, 0}\\t;Heat barrel 1\\n\" + \"M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached\\n\" + \"M109 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Wait for nozzle 0\\n\" + \"M109 H0 S{material_barrel_temperature_layer_0, 0}\\t;Wait for barrel 0\\n\" + \"M109 T1 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Wait for nozzle 1\\n\" + \"M109 H1 S{material_barrel_temperature_layer_0, 0}\\t;Wait for barrel 1\\n\" if print_mode == 'mirror' or print_mode == 'duplication' else '') + 'G21 \\t\\t;metric values\\nG90 \\t\\t;absolute positioning\\nM107 \\t\\t;start with the fan off\\nG28 Z0 \\t\\t;move Z to min endstops\\nG28 X0 Y0 \\t;move X/Y to min endstops\\nG1 X0 Y0 Z5 F5000 \\t;safety Z axis movement\\n\\nG29 \\t;Auto Bed Level\\nM500 \\t;Save Bed Level\\n' + (\"\\n; --- T0 Pellet Purge (off-bed X=-20 Y=-5) ---\\nT0\\nG0 X-20 Y-5 Z5 F10000\\t;Move to T0 purge position\\nG0 Z3 F500\\t;Lower to purge height\\nG92 E0\\t;Reset extruder\\nG1 Y25 E150 F300\\t;Phase 1: Slow prime (150mm)\\nG1 Y55 E350 F500\\t;Phase 2: Medium purge (200mm)\\nG1 Y95 E650 F800\\t;Phase 3: Fast purge (300mm)\\nG1 Y135 E1000 F1000\\t;Phase 4: Full speed (350mm)\\nG92 E0\\t;Reset extruder\\nG0 Z5 F500\\t;Raise Z\\n\" if print_mode != 'singleT1' else \"\") + (\"\\n; --- T1 Pellet Purge (off-bed X=620 Y=-5) ---\\nT1\\nG0 X620 Y-5 Z5 F10000\\t;Move to T1 purge position\\nG0 Z3 F500\\t;Lower to purge height\\nG92 E0\\t;Reset extruder\\nG1 Y25 E150 F300\\t;Phase 1: Slow prime (150mm)\\nG1 Y55 E350 F500\\t;Phase 2: Medium purge (200mm)\\nG1 Y95 E650 F800\\t;Phase 3: Fast purge (300mm)\\nG1 Y135 E1000 F1000\\t;Phase 4: Full speed (350mm)\\nG92 E0\\t;Reset extruder\\nG0 Z5 F500\\t;Raise Z\\n\" if print_mode != 'singleT0' else \"\") + (\"T0\\n\" if print_mode != 'singleT1' else \"\") + '\\n{print_mode_gcode}\\nG4 P1\\nG4 P2\\nG4 P3\\n\\nG1 X0 Y0 Z5 F5000\\t;Move to start position\\nG92 E0\\t;zero the extruded length\\n'" },
+        "machine_nozzle_size": { "default_value": 1.5 },
+        "machine_start_gcode": { "value": "';Machine Model: {machine_name}\\n;Nozzle Size: T0 ' + str(extruderValue(0, 'machine_nozzle_size')) + ' T1 ' + str(extruderValue(1, 'machine_nozzle_size')) + '\\n;Sliced at: {day} {date} {time}\\n;Print mode: {print_mode}\\n;--- Penrose 600 IDEX Pellet Extruder Start GCode ---\\nM140 S{material_bed_temperature_layer_0} \\t;Heat build surface\\n' + (\"M104 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") + \"\\t;Heat nozzle 1\\n\" + \"M104 H1 S{material_barrel_temperature_layer_0, 1}\\t;Heat barrel 1\\n\" + \"M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached\\n\" + \"M109 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") + \"\\t;Wait for nozzle 1\\n\" + \"M109 H1 S{material_barrel_temperature_layer_0, 1}\\t;Wait for barrel 1\\n\" if print_mode == 'singleT1' else '') + (\"M104 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat nozzle 0\\n\" + \"M104 H0 S{material_barrel_temperature_layer_0, 0}\\t;Heat barrel 0\\n\" + \"M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached\\n\" + \"M109 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Wait for nozzle 0\\n\" + \"M109 H0 S{material_barrel_temperature_layer_0, 0}\\t;Wait for barrel 0\\n\" if print_mode == 'singleT0' else '') + (\"M104 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat nozzle 0\\n\" + \"M104 H0 S{material_barrel_temperature_layer_0, 0}\\t;Heat barrel 0\\n\" + \"M104 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") + \"\\t;Heat nozzle 1\\n\" + \"M104 H1 S{material_barrel_temperature_layer_0, 1}\\t;Heat barrel 1\\n\" + \"M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached\\n\" + \"M109 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Wait for nozzle 0\\n\" + \"M109 H0 S{material_barrel_temperature_layer_0, 0}\\t;Wait for barrel 0\\n\" + \"M109 T1 \" + (\"S{material_print_temperature, 1}\" if extruderValue(1, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 1}\") + \"\\t;Wait for nozzle 1\\n\" + \"M109 H1 S{material_barrel_temperature_layer_0, 1}\\t;Wait for barrel 1\\n\" if print_mode == 'dual' else '') + (\"M104 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat nozzle 0\\n\" + \"M104 H0 S{material_barrel_temperature_layer_0, 0}\\t;Heat barrel 0\\n\" + \"M104 T1 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Heat nozzle 1\\n\" + \"M104 H1 S{material_barrel_temperature_layer_0, 0}\\t;Heat barrel 1\\n\" + \"M190 S{material_bed_temperature_layer_0} \\t;Wait until bed temperature reached\\n\" + \"M109 T0 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Wait for nozzle 0\\n\" + \"M109 H0 S{material_barrel_temperature_layer_0, 0}\\t;Wait for barrel 0\\n\" + \"M109 T1 \" + (\"S{material_print_temperature, 0}\" if extruderValue(0, 'material_print_temperature_layer_0') == 0 else \"S{material_print_temperature_layer_0, 0}\") + \"\\t;Wait for nozzle 1\\n\" + \"M109 H1 S{material_barrel_temperature_layer_0, 0}\\t;Wait for barrel 1\\n\" if print_mode == 'mirror' or print_mode == 'duplication' else '') + 'G21 \\t\\t;metric values\\nG90 \\t\\t;absolute positioning\\nM107 \\t\\t;start with the fan off\\nG28 Z0 \\t\\t;move Z to min endstops\\nG28 X0 Y0 \\t;move X/Y to min endstops\\nG1 X0 Y0 Z5 F5000 \\t;safety Z axis movement\\n\\nG29 \\t;Auto Bed Level\\nM500 \\t;Save Bed Level\\n' + (\"\\n; --- T0 Pellet Purge (off-bed X=-20 Y=-5) ---\\nT0\\nG0 X-20 Y-5 Z5 F10000\\t;Move to T0 purge position\\nG0 Z3 F500\\t;Lower to purge height\\nG92 E0\\t;Reset extruder\\nG1 E500 F500\\t;Purge 500mm\\nG1 E1000 F1000\\t;Purge 500mm\\nG92 E0\\t;Reset extruder\\nG0 Z5 F500\\t;Raise Z\\n\" if print_mode != 'singleT1' else \"\") + (\"\\n; --- T1 Pellet Purge (off-bed X=620 Y=-5) ---\\nT1\\nG0 X620 Y-5 Z5 F10000\\t;Move to T1 purge position\\nG0 Z3 F500\\t;Lower to purge height\\nG92 E0\\t;Reset extruder\\nG1 E500 F500\\t;Purge 500mm\\nG1 E1000 F1000\\t;Purge 500mm\\nG92 E0\\t;Reset extruder\\nG0 Z5 F500\\t;Raise Z\\n\" if print_mode != 'singleT0' else \"\") + (\"T0\\n\" if print_mode != 'singleT1' else \"\") + '\\n{print_mode_gcode}\\nG4 P1\\nG4 P2\\nG4 P3\\n\\nG1 X0 Y0 Z5 F5000\\t;Move to start position\\nG92 E0\\t;zero the extruded length\\n'" },
         "machine_visual_print_speed": { "value": "80" },
         "machine_width": { "default_value": 600 },
         "material_barrel_temperature":
         {
             "enabled": true,
-            "value": "default_material_barrel_temperature if default_material_barrel_temperature > 0 else max(round(material_print_temperature * 0.7), 120)"
+            "value": "default_material_barrel_temperature if default_material_barrel_temperature > 0 else max(round(material_print_temperature * 0.95), 120)"
         },
         "material_barrel_temperature_layer_0": { "enabled": true },
         "material_bed_temp_prepend": { "value": false },
@@ -93,15 +103,15 @@
         "meshfix_maximum_resolution": { "value": "max(0.5, machine_nozzle_size * 0.8)" },
         "prime_tower_enable": { "value": "True if print_mode == 'dual' else False" },
         "prime_tower_size": { "value": "40" },
-        "retraction_amount": { "value": "2" },
+        "retraction_amount": { "value": "1.5" },
         "retraction_combing": { "value": "'all'" },
         "retraction_combing_max_distance": { "value": "0" },
         "retraction_enable": { "value": true },
-        "retraction_hop_enabled": { "value": false },
-        "retraction_prime_speed": { "value": "retraction_retract_speed" },
-        "retraction_speed": { "value": "50" },
-        "speed_layer_0": { "value": "min(20, round(speed_print * 0.35, 0))" },
-        "speed_print": { "value": "80" },
+        "retraction_hop_enabled": { "value": true },
+        "retraction_prime_speed": { "value": "30" },
+        "retraction_speed": { "value": "30" },
+        "speed_layer_0": { "value": "min(speed_print, 30)" },
+        "speed_print": { "value": "min(80, int(max_volumetric_flow_rate / (layer_height * line_width))) if max_volumetric_flow_rate > 0 else 60" },
         "speed_topbottom": { "value": "min(round(speed_print * 0.9, 0), 150)" },
         "speed_travel":
         {

@@ -23,6 +23,7 @@ ABS Pellet profile for pellet extrusion printers.
     </properties>
     <settings>
         <setting key="print temperature">240</setting>
+        <setting key="barrel temperature">170</setting>
         <setting key="standby temperature">200</setting>
         <setting key="heated bed temperature">100</setting>
         <setting key="build volume temperature">60</setting>

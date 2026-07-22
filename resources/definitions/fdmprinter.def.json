@@ -2951,6 +2951,18 @@
                     "default_value": 0.940860215,
                     "enabled": false
                 },
+                "max_volumetric_flow_rate":
+                {
+                    "label": "Maximum Volumetric Flow Rate",
+                    "description": "The maximum volumetric flow rate the hotend can handle reliably, in cubic millimeters per second. This depends on the nozzle size, hotend design, and material. The print speed will be limited to not exceed this flow rate.",
+                    "unit": "mm\u00b3/s",
+                    "type": "float",
+                    "default_value": 0,
+                    "minimum_value": "0",
+                    "maximum_value_warning": "300",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true
+                },
                 "material_flow":
                 {
                     "label": "Flow",
