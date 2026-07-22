@@ -50,10 +50,19 @@ before editing). This is the operational path.
    quality types. Global profiles need `global_quality = True`.
 4. One `quality_type` = one global `layer_height`; per-nozzle layer heights =
    different quality-type subsets (stubs), never different heights per nozzle.
-5. `exclude_materials` is substring matching on material id (`_175`,
-   `generic_`). Only the Penrose defs use it today — new pellet-adjacent
-   materials must avoid the excluded substrings; new filament printers
-   should consider excluding `_pellet`.
+5. `exclude_materials` is substring matching on material id, applied at
+   material-tree build time in `cura/Machines/VariantNode.py:63,134` (excluded
+   materials never enter the tree, so they can't appear in menus OR be loaded
+   from a saved config — Cura falls back to a same-class material). Filament
+   printers exclude `_pellet` (inherited from `base_fracktal_printer`); pellet
+   (Penrose) printers exclude `["_175", "generic_"]` (their own per-key
+   override). This is what keeps filament out of pellet machines and pellets
+   out of filament machines — verify with
+   `verify_material_segregation.py` after any material or `exclude_materials`
+   change. New materials MUST carry the class-marking substring in their id
+   (`_pellet` for pellet, `_175` for filament) or the guard can't see them.
+   The physical pellet discriminator is `machine_barrel_heater` (an override,
+   not metadata).
 6. IDEX `machine_start_gcode` is a `"value"` expression branching on
    `print_mode`; single-extruder uses `"default_value"` plain string.
    Regenerate via `python scripts/generate_start_gcode.py --printer <id>
@@ -107,6 +116,10 @@ before editing). This is the operational path.
    (loads every definition through the real Uranium loader — catches
    silently-dropped overrides, e.g. whitespace-damaged keys, which the static
    linter misses).
+   After any material or `exclude_materials` change also run
+   `venv/Scripts/python .claude/skills/printer-configuration/verify_material_segregation.py`
+   (proves no printer admits a wrong-class material and every printer boots a
+   same-class material).
 2. Metadata changes (quality/variant/material): launch the app; the quality
    dropdown must show the correct filtered subset per nozzle+material
    (all-types-shown = metadata key mismatch). Check the material menu has no
