@@ -102,6 +102,45 @@ inheritance is per-key: a child key replaces the parent's value wholesale
 
 **Rule**: Override settings as close to the leaf (specific printer) as possible. Only add settings to `fdmprinter.def.json` if they are customer-facing and used in material profiles. Use base definitions for shared internal settings.
 
+### Dual-mode printers (pellet OR filament) — use a definition PAIR
+
+A physical printer that can run **either** a pellet head **or** a filament
+head (whether swapped manually or by parking one IDEX carriage) cannot be one
+Cura machine that toggles modes: `exclude_materials`, `quality_definition`,
+and `machine_barrel_heater` are all fixed per definition at load
+(`machine_barrel_heater` is `settable_per_extruder: false`, so a variant can't
+flip it). Toggling would break material segregation.
+
+Model each such product as a **pair of single-extruder definitions**, one per
+mode, over shared hidden bases:
+
+```
+base_penrose_pellet.def.json (hidden; pellet slicing philosophy, inherits base_fracktal_printer)
+  -> penrose_600_swappable_pellet.def.json          (visible)
+  -> penrose_600_idex_choosable_pellet.def.json     (visible)
+base_fracktal_printer.def.json
+  -> penrose_600_swappable_fdm.def.json             (visible; filament tuning free)
+  -> penrose_600_idex_choosable_fdm.def.json        (visible)
+```
+
+- The pellet leaves keep `exclude_materials: ["_175","generic_"]` +
+  `quality_definition: penrose_pellet_quality`; the filament leaves inherit
+  `exclude_materials: ["_pellet"]` + set `quality_definition:
+  base_fracktal_printer`. Segregation then holds per entry (verify with
+  `.claude/skills/printer-configuration/verify_material_segregation.py`).
+- **Quality is reused, not duplicated**: stubs key on `variant` name +
+  `material`, not on the machine id, so new variants named `Pellet X.X mm` /
+  `Model X.X mm` reuse the existing `penrose_pellet_quality` /
+  `base_fracktal_printer` stubs. Zero new quality files.
+- The user "switches mode" by selecting the matching machine in Cura's
+  printer list.
+- IDEX-choosable leaves are modeled single-extruder (one active head); the
+  idle carriage parks via firmware on tool select. The g-code tool index
+  (pellet=T0 left, filament=T1 right), park coordinates, and nozzle offsets
+  are hardware-specific and must be validated on the machine — the filament
+  leaf currently inherits the generic single-filament start g-code (T0
+  context) and needs a T1-selecting start block confirmed against firmware.
+
 ---
 
 ## Creating a New Printer

@@ -1,0 +1,101 @@
+{
+    "version": 2,
+    "name": "Base Penrose Pellet Definition",
+    "inherits": "base_fracktal_printer",
+    "metadata":
+    {
+        "visible": false,
+        "author": "Fracktal Works",
+        "manufacturer": "Penrose Series",
+        "category": "Penrose Series",
+        "exclude_materials": [
+            "_175",
+            "generic_"
+        ],
+        "has_machine_materials": false,
+        "has_machine_quality": true,
+        "has_materials": true,
+        "has_variant_materials": false,
+        "has_variants": true,
+        "preferred_material": "fracktal_pla_pellet",
+        "preferred_quality_type": "pellet_030",
+        "preferred_variant_name": "Pellet 1.5 mm",
+        "quality_definition": "penrose_pellet_quality",
+        "variants_name": "Nozzle"
+    },
+    "overrides":
+    {
+        "machine_nozzle_size": { "default_value": 1.5 },
+        "material_diameter": { "default_value": 1.75 },
+
+        "speed_print": { "value": "min(80, int(max_volumetric_flow_rate / (layer_height * line_width))) if max_volumetric_flow_rate > 0 else 60" },
+        "speed_travel":
+        {
+            "maximum_value": "600",
+            "maximum_value_warning": "600",
+            "value": "max(250, speed_print)"
+        },
+        "speed_topbottom": { "value": "min(round(speed_print * 0.9, 0), 150)" },
+        "speed_wall": { "value": "min(round(speed_print * 0.9, 0), 150)" },
+        "speed_wall_0": { "value": "min(round(speed_wall * 0.85, 0), 120)" },
+        "speed_layer_0": { "value": "min(speed_print, 30)" },
+
+        "retraction_enable": { "value": true },
+        "retraction_amount": { "value": "1.5" },
+        "retraction_speed": { "value": "30" },
+        "retraction_prime_speed": { "value": "30" },
+        "retraction_hop_enabled": { "value": true },
+        "retraction_combing": { "value": "'all'" },
+        "retraction_combing_max_distance": { "value": "0" },
+
+        "cool_fan_speed": { "value": "100" },
+        "cool_fan_speed_0": { "value": "0" },
+        "cool_min_layer_time": { "value": "10" },
+        "cool_min_speed": { "value": "max(15, round(speed_print * 0.25))" },
+
+        "material_flow": { "value": "100" },
+        "material_flow_layer_0": { "value": "100" },
+
+        "machine_heated_bed": { "default_value": true },
+        "machine_barrel_heater": { "default_value": true },
+
+        "material_barrel_temperature": { "value": "default_material_barrel_temperature if default_material_barrel_temperature > 0 else max(round(material_print_temperature * 0.95), 120)", "enabled": true },
+        "material_barrel_temperature_layer_0": { "enabled": true },
+
+        "material_bed_temp_prepend": { "value": false },
+        "material_print_temp_prepend": { "value": false },
+        "material_print_temp_wait": { "value": false },
+
+        "bridge_skin_material_flow": { "value": "round(material_flow * 0.80)" },
+        "bridge_wall_coast": { "value": "100" },
+        "bridge_wall_material_flow": { "value": "round(material_flow * 0.80)" },
+
+        "coasting_enable": { "value": true },
+        "coasting_volume": { "value": "round(machine_nozzle_size ** 3 * 1.5, 3)" },
+        "coasting_min_volume": { "value": "round(coasting_volume * 10, 2)" },
+        "coasting_speed": { "value": "80" },
+
+        "max_flow_acceleration": { "value": "0.5 if machine_nozzle_size <= 0.6 else 0.75 if machine_nozzle_size <= 1.0 else 1.0 if machine_nozzle_size <= 2.0 else 1.5" },
+        "meshfix_maximum_deviation": { "value": "max(0.02, machine_nozzle_size * 0.04)" },
+        "meshfix_maximum_resolution": { "value": "max(0.5, machine_nozzle_size * 0.8)" },
+
+        "line_width": { "value": "round(machine_nozzle_size * 1.0, 2)" },
+        "wall_line_width_0": { "value": "round(machine_nozzle_size * 0.95, 2)" },
+        "initial_layer_line_width_factor": { "value": 110 },
+
+        "layer_height": { "value": "0.4" },
+        "layer_height_0": { "value": "0.5" },
+
+        "infill_sparse_density": { "value": "15" },
+
+        "adhesion_type": { "default_value": "brim" },
+        "brim_line_count": { "value": "6" },
+
+        "travel_avoid_distance": { "value": "machine_nozzle_size * 1.5" },
+        "travel_avoid_supports": { "value": true },
+        "wall_0_wipe_dist": { "value": "machine_nozzle_size * 2" },
+        "z_seam_corner": { "value": "'z_seam_corner_inner'" },
+
+        "support_structure": { "value": "'tree'" }
+    }
+}

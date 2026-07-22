@@ -1,0 +1,54 @@
+{
+    "version": 2,
+    "name": "Penrose 600 IDEX Choosable (Filament)",
+    "inherits": "base_fracktal_printer",
+    "id": "penrose_600_idex_choosable_fdm",
+    "metadata":
+    {
+        "visible": true,
+        "manufacturer": "Penrose Series",
+        "category": "Penrose Series",
+        "has_machine_materials": false,
+        "has_machine_quality": true,
+        "has_materials": true,
+        "has_variant_materials": false,
+        "has_variants": true,
+        "machine_extruder_trains": { "0": "penrose_600_idex_choosable_fdm_extruder_0" },
+        "machine_variant_shortcode": "FE",
+        "platform_offset": [
+            0,
+            0,
+            0
+        ],
+        "preferred_material": "fracktal_pla_175",
+        "preferred_quality_type": "normal",
+        "preferred_variant_name": "Model 0.4 mm",
+        "quality_definition": "base_fracktal_printer",
+        "variants_name": "Nozzle"
+    },
+    "overrides":
+    {
+        "machine_name": { "default_value": "Penrose 600 IDEX Choosable (Filament)" },
+        "machine_width": { "default_value": 600 },
+        "machine_depth": { "default_value": 600 },
+        "machine_height": { "default_value": 625 },
+        "machine_extruder_count": { "default_value": 1 },
+
+        "machine_acceleration": { "value": 2500 },
+        "machine_max_acceleration_e": { "value": 400 },
+        "machine_max_acceleration_x": { "value": 2500 },
+        "machine_max_acceleration_y": { "value": 2500 },
+        "machine_max_acceleration_z": { "value": 100 },
+        "machine_max_feedrate_e": { "value": 50 },
+        "machine_max_feedrate_x": { "value": 600 },
+        "machine_max_feedrate_y": { "value": 600 },
+        "machine_max_feedrate_z": { "value": 20 },
+        "machine_max_jerk_xy": { "value": 4 },
+        "machine_max_jerk_z": { "value": 0.4 },
+        "machine_max_print_speed": { "value": "150" },
+        "machine_visual_print_speed": { "value": "80" },
+
+        "machine_nozzle_size": { "default_value": 0.4 },
+        "material_diameter": { "default_value": 1.75 }
+    }
+}
