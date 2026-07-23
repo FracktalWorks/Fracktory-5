@@ -96,6 +96,13 @@ class PrinterConfig:
     park_purge: bool = False
     idex_frame: bool = False
 
+    # center_purge: draw the on-bed purge line centered on the bed front
+    # (X centered on machine_width/2 at Y0) instead of starting at the X0
+    # corner. Emitted as {machine_width / 2 +- offset} replacement tags so the
+    # line stays centered even if the definition's bed size changes. Avoids
+    # edge/side complications (clips, docks, off-glass zones).
+    center_purge: bool = False
+
     # Purge parameters (for pellet extruders)
     purge_height: float = 0.4
     purge_stages: list = field(default_factory=lambda: [
@@ -338,6 +345,20 @@ def _build_idex_pellet_purge(tool_nr: int, config) -> str:
     lines.append(f"G0 Z{_fnum(tz)} F500\\t;Raise Z")
 
     return "\\n".join(lines) + "\\n"
+
+
+def _center_x_tag(offset: float) -> str:
+    """
+    Replacement tag for an X coordinate relative to the bed center.
+
+    Returns e.g. "{machine_width / 2 - 17.5}", "{machine_width / 2 + 12.5}"
+    or "{machine_width / 2}". Evaluated by Cura's GcodeStartEndFormatter at
+    slice time, so the purge line stays centered whatever the bed width is.
+    """
+    if offset == 0:
+        return "{machine_width / 2}"
+    sign = "+" if offset > 0 else "-"
+    return f"{{machine_width / 2 {sign} {_fnum(abs(offset))}}}"
 
 
 def _build_park_purge_single(config: "PrinterConfig") -> list:
@@ -605,7 +626,24 @@ def build_start_gcode_single(config: PrinterConfig) -> str:
 
     lines.append("M82 ;set extruder to absolute mode")
     lines.append("M107 ;start with the fan off")
-    if not config.park_purge:
+
+    # On-bed purge geometry (also needed for the pre-purge travel move)
+    on_bed_stages = (config.purge_stages if config.extruder_type == ExtruderType.PELLET
+                     else config.filament_purge_stages)
+    purge_length = sum(s["distance"] for s in on_bed_stages)
+
+    if config.park_purge:
+        pass  # park purge block below handles its own travel
+    elif config.center_purge and config.include_purge:
+        # IDEX-frame single-mode definitions must select their tool before
+        # any travel (heaters were already addressed via T<n> commands).
+        if config.idex_frame:
+            lines.append(f"T{config.tool_index} ;select tool {config.tool_index}")
+        lines.append(
+            f"G1 X{_center_x_tag(-purge_length / 2)} Y0 Z15.0 F5000"
+            " ;move to purge start (front center of bed)"
+        )
+    else:
         lines.append("G1 X0 Y0 Z15.0 F5000 ;move the platform down 15mm")
 
     # Purge sequence
@@ -617,10 +655,9 @@ def build_start_gcode_single(config: PrinterConfig) -> str:
         lines.append("")
         if config.extruder_type == ExtruderType.PELLET:
             lines.append("; Pellet extruder purge sequence")
-            stages = config.purge_stages
         else:
             lines.append("; Extrude purge line")
-            stages = config.filament_purge_stages
+        stages = on_bed_stages
 
         lines.append("G92 E0 ;reset extruder position")
         lines.append(f"G0 Z{config.purge_height} F500 ;move to purge height")
@@ -628,12 +665,20 @@ def build_start_gcode_single(config: PrinterConfig) -> str:
         cumulative_x = 0
         for i, stage in enumerate(stages):
             speed_label = ["slow", "medium", "fast"][min(i, 2)]
-            lines.append(f"G0 X{cumulative_x + stage['distance']} E{stage['extrude']} F{stage['speed']} ;{speed_label} purge")
+            end = cumulative_x + stage["distance"]
+            x_str = _center_x_tag(end - purge_length / 2) if config.center_purge else str(end)
+            lines.append(f"G0 X{x_str} E{stage['extrude']} F{stage['speed']} ;{speed_label} purge")
             lines.append("G92 E0 ;reset extruder position")
-            cumulative_x += stage["distance"]
+            cumulative_x = end
 
-        lines.append(f"G0 X{{{cumulative_x} + {config.wipe_offset}}} Z{{{config.wipe_height}}} F{{8000}} ;wipe move close to bed")
-        lines.append(f"G0 X{{{cumulative_x} + {config.wipe_offset * 2}}} Z{config.purge_height} F{{8000}} ;wipe move away from bed")
+        if config.center_purge:
+            wipe_1 = _center_x_tag(purge_length / 2 + config.wipe_offset)
+            wipe_2 = _center_x_tag(purge_length / 2 + config.wipe_offset * 2)
+            lines.append(f"G0 X{wipe_1} Z{{{config.wipe_height}}} F{{8000}} ;wipe move close to bed")
+            lines.append(f"G0 X{wipe_2} Z{config.purge_height} F{{8000}} ;wipe move away from bed")
+        else:
+            lines.append(f"G0 X{{{cumulative_x} + {config.wipe_offset}}} Z{{{config.wipe_height}}} F{{8000}} ;wipe move close to bed")
+            lines.append(f"G0 X{{{cumulative_x} + {config.wipe_offset * 2}}} Z{config.purge_height} F{{8000}} ;wipe move away from bed")
 
     lines.append("")
     lines.append("G92 E0 ;zero the extruded length")
@@ -913,6 +958,7 @@ PRESETS = {
         include_bed_leveling=True,
         include_purge=True,
         include_melody=True,
+        center_purge=True,
     ),
     "penrose_600_swappable_fdm": PrinterConfig(
         name="Penrose 600 Swappable (Filament)",
@@ -925,6 +971,7 @@ PRESETS = {
         include_bed_leveling=True,
         include_purge=True,
         include_melody=True,
+        center_purge=True,
     ),
     "penrose_600_idex_choosable_pellet": PrinterConfig(
         name="Penrose 600 IDEX Choosable (Pellet)",
@@ -938,8 +985,8 @@ PRESETS = {
         include_purge=True,
         include_melody=False,
         tool_index=0,
-        park_purge=True,
         idex_frame=True,
+        center_purge=True,
     ),
     "penrose_600_idex_choosable_fdm": PrinterConfig(
         name="Penrose 600 IDEX Choosable (Filament)",
@@ -953,8 +1000,8 @@ PRESETS = {
         include_purge=True,
         include_melody=False,
         tool_index=1,
-        park_purge=True,
         idex_frame=True,
+        center_purge=True,
     ),
 }
 

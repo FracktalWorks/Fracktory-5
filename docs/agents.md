@@ -138,10 +138,13 @@ base_fracktal_printer.def.json
   idle carriage parks via firmware on tool select. Their g-code is generated
   by `scripts/generate_start_gcode.py` presets using the single-mode fields
   `tool_index` (0=left pellet, 1=right filament — drives `M104/M109 T<n>`,
-  `H<n>`, and tool select), `park_purge` (off-bed purge at the tool's park
-  side, same mechanics/positions as the dual-IDEX purge), and `idex_frame`
-  (IDEX homing; end g-code switches off BOTH nozzles plus the frame's H0
-  barrel defensively, homes X/Y only). Each choosable leaf also carries the
+  `H<n>`, and tool select), `center_purge` (on-bed purge line centered on the
+  bed front — emitted as `{machine_width / 2 +- offset}` slice-time tags so
+  it stays centered if the bed size changes; avoids side/dock complications),
+  and `idex_frame` (IDEX homing; end g-code switches off BOTH nozzles plus
+  the frame's H0 barrel defensively, homes X/Y only). All four dual-mode
+  Penrose leaves use `center_purge`; the older `park_purge` field (off-bed
+  purge at the tool's park side) remains available but unused by presets. Each choosable leaf also carries the
   static `machine_disallowed_areas` strip for the side its carriage cannot
   reach (pellet/T0 blocks the right strip, filament/T1 the left strip —
   copied from the IDEX base's singleT0/singleT1 branches). Filament process
