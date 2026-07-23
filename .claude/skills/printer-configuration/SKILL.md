@@ -128,6 +128,12 @@ before editing). This is the operational path.
    invalid boot combos, and on UTF-8 BOMs in .inst.cfg files, which break
    the stdlib-configparser version-upgrade path even though FastConfigParser
    tolerates them).
+   When a new machine claims parity with a reference machine ("works like a
+   Dragon"), run
+   `python .claude/skills/printer-configuration/diff_definition_settings.py <new_id> <reference_id>`
+   — it diffs the inheritance-merged overrides so every setting delta is an
+   explicit list you must be able to explain (frame kinematics vs process
+   settings vs cosmetics).
 2. Metadata changes (quality/variant/material): launch the app; the quality
    dropdown must show the correct filtered subset per nozzle+material
    (all-types-shown = metadata key mismatch). Check the material menu has no
