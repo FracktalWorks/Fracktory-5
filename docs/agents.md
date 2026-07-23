@@ -135,11 +135,21 @@ base_fracktal_printer.def.json
 - The user "switches mode" by selecting the matching machine in Cura's
   printer list.
 - IDEX-choosable leaves are modeled single-extruder (one active head); the
-  idle carriage parks via firmware on tool select. The g-code tool index
-  (pellet=T0 left, filament=T1 right), park coordinates, and nozzle offsets
-  are hardware-specific and must be validated on the machine — the filament
-  leaf currently inherits the generic single-filament start g-code (T0
-  context) and needs a T1-selecting start block confirmed against firmware.
+  idle carriage parks via firmware on tool select. Their g-code is generated
+  by `scripts/generate_start_gcode.py` presets using the single-mode fields
+  `tool_index` (0=left pellet, 1=right filament — drives `M104/M109 T<n>`,
+  `H<n>`, and tool select), `park_purge` (off-bed purge at the tool's park
+  side, same mechanics/positions as the dual-IDEX purge), and `idex_frame`
+  (IDEX homing; end g-code switches off BOTH nozzles plus the frame's H0
+  barrel defensively, homes X/Y only). Each choosable leaf also carries the
+  static `machine_disallowed_areas` strip for the side its carriage cannot
+  reach (pellet/T0 blocks the right strip, filament/T1 the left strip —
+  copied from the IDEX base's singleT0/singleT1 branches). Filament process
+  settings on the fdm leaves come from Twin Dragon 600 (speed_print 100,
+  travel max(250,·), print-speed cap 120); frame kinematics stay Penrose.
+- Verify with the three skill companions (definitions-load, material
+  segregation, quality coverage) — see
+  `.claude/skills/printer-configuration/`.
 
 ---
 

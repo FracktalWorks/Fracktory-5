@@ -18,7 +18,7 @@
         "has_variant_materials": false,
         "has_variants": true,
         "preferred_material": "fracktal_pla_pellet",
-        "preferred_quality_type": "pellet_030",
+        "preferred_quality_type": "pellet_060",
         "preferred_variant_name": "Pellet 1.5 mm",
         "quality_definition": "penrose_pellet_quality",
         "variants_name": "Nozzle"

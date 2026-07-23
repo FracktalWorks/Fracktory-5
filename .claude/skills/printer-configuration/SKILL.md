@@ -120,6 +120,14 @@ before editing). This is the operational path.
    `venv/Scripts/python .claude/skills/printer-configuration/verify_material_segregation.py`
    (proves no printer admits a wrong-class material and every printer boots a
    same-class material).
+   After any quality/variant/material change also run
+   `venv/Scripts/python .claude/skills/printer-configuration/verify_quality_coverage.py`
+   (statically mirrors MaterialNode._loadAll's fallback chain — exact stub →
+   brand+type → type → GUID → global — and FAILS on any printer×variant×
+   material permutation that lands on the unfiltered global fallback, on
+   invalid boot combos, and on UTF-8 BOMs in .inst.cfg files, which break
+   the stdlib-configparser version-upgrade path even though FastConfigParser
+   tolerates them).
 2. Metadata changes (quality/variant/material): launch the app; the quality
    dropdown must show the correct filtered subset per nozzle+material
    (all-types-shown = metadata key mismatch). Check the material menu has no
@@ -139,9 +147,20 @@ before editing). This is the operational path.
 - Follow-up candidate: a printer-linter diagnostic for override keys that
   don't match any known setting (the static-analysis version of
   `verify_definitions_load.py`) — new rules belong in `printer-linter/`.
+- Generic ASA/CPE materials are excluded fleet-wide (no quality stubs ever
+  existed for them, so they showed unfiltered quality lists). Reverse by
+  removing `generic_asa`/`generic_cpe` from `base_fracktal_printer`
+  `exclude_materials` AND adding proper stub sets.
 
 Fixed 2026-07-23 (in-app verification still pending): barrel-temp formula
 moved `default_value`→`value` in both Penrose defs; `_pellet` added to
 `exclude_materials` in `base_fracktal_printer` (inherited fleet-wide, Penrose
 overrides keep their own list); `fracktal_cf-petg_175` filename space removed;
-`support_xy_distance ` trailing-space key fixed in the dual base.
+`support_xy_distance ` trailing-space key fixed in the dual base; UTF-8 BOMs
+stripped from 25 pellet quality files (FastConfigParser tolerated them but the
+stdlib-configparser version-upgrade path did not); stray `2` line removed from
+the 0.8 mm breakaway-high stub; `volterra_300_alf` 1.0 variant renamed
+`Model 1 mm`→`Model 1.0 mm` to match stubs (saved configs with the old name
+fall back to the preferred variant once); pellet printers'
+`preferred_quality_type` corrected `pellet_030`→`pellet_060` (0.3 mm has no
+stub for the default Pellet 1.5 mm nozzle, so boot quality was arbitrary).

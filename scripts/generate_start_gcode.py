@@ -82,6 +82,20 @@ class PrinterConfig:
     include_purge: bool = True
     include_melody: bool = False  # End-of-print melody
 
+    # Single-mode tool binding — for one-head-at-a-time definitions that live
+    # on an IDEX frame (e.g. Penrose 600 IDEX Choosable, where the idle
+    # carriage parks and only one head prints).
+    # tool_index: firmware tool this definition drives (0=left, 1=right).
+    #             Heater commands (M104/M109 T<n>, H<n>) and tool select use it.
+    # park_purge: purge off-bed at the tool's park side (same mechanics and
+    #             positions as the dual-IDEX purge) instead of an on-bed line.
+    # idex_frame: physical frame is IDEX — end gcode switches off BOTH nozzle
+    #             heaters (plus the frame's H0 barrel defensively) and homes
+    #             X/Y only, like the dual-IDEX end gcode.
+    tool_index: int = 0
+    park_purge: bool = False
+    idex_frame: bool = False
+
     # Purge parameters (for pellet extruders)
     purge_height: float = 0.4
     purge_stages: list = field(default_factory=lambda: [
@@ -119,6 +133,14 @@ class PrinterConfig:
     ])  # Total: 1000mm extrusion over 140mm Y travel
     idex_purge_z: float = 3.0         # Z height during off-bed purge
     idex_purge_travel_z: float = 5.0  # Z height for travel moves around purge
+
+    # Off-bed park purge stages for a FILAMENT head on an IDEX frame
+    # (filament needs a short prime, not the 1000mm pellet barrel purge)
+    idex_filament_purge_stages: list = field(default_factory=lambda: [
+        {"y_travel": 15, "extrude": 5, "speed": 300},   # slow prime
+        {"y_travel": 15, "extrude": 5, "speed": 500},   # medium purge
+        {"y_travel": 10, "extrude": 5, "speed": 800},   # fast purge
+    ])
 
 
 # ---------------------------------------------------------------------------
@@ -318,6 +340,58 @@ def _build_idex_pellet_purge(tool_nr: int, config) -> str:
     return "\\n".join(lines) + "\\n"
 
 
+def _build_park_purge_single(config: "PrinterConfig") -> list:
+    """
+    Off-bed park-side purge for a single-mode definition on an IDEX frame.
+
+    Same mechanics and positions as _build_idex_pellet_purge (select the tool,
+    Y-sweep extrusion at the tool's park side, off the bed edge), but emitted
+    as plain gcode lines for a "default_value" string rather than as an
+    escaped Python-expression fragment. Pellet heads use the full barrel
+    purge stages; filament heads use the short prime stages.
+
+    Returns:
+        list: plain gcode lines
+    """
+    t = config.tool_index
+    if t == 0:
+        px, py = config.idex_purge_t0_x, config.idex_purge_t0_y
+    else:
+        px, py = config.idex_purge_t1_x, config.idex_purge_t1_y
+
+    if config.extruder_type == ExtruderType.PELLET:
+        stages = config.idex_pellet_purge_stages
+        what = "Pellet"
+    else:
+        stages = config.idex_filament_purge_stages
+        what = "Filament"
+    pz = config.idex_purge_z
+    tz = config.idex_purge_travel_z
+    speed_labels = ["Slow prime", "Medium purge", "Fast purge", "Full speed"]
+
+    lines = []
+    lines.append(f"; --- T{t} {what} Purge (off-bed X={_fnum(px)} Y={_fnum(py)}) ---")
+    lines.append(f"T{t} ;select tool {t}")
+    lines.append(f"G0 X{_fnum(px)} Y{_fnum(py)} Z{_fnum(tz)} F10000 ;move to T{t} purge position")
+    lines.append(f"G0 Z{_fnum(pz)} F500 ;lower to purge height")
+    lines.append("G92 E0 ;reset extruder")
+
+    cum_y = py
+    cum_e = 0
+    for i, stage in enumerate(stages):
+        cum_y += stage["y_travel"]
+        cum_e += stage["extrude"]
+        label = speed_labels[min(i, len(speed_labels) - 1)]
+        lines.append(
+            f"G1 Y{_fnum(cum_y)} E{_fnum(cum_e)} F{stage['speed']}"
+            f" ;phase {i + 1}: {label} ({stage['extrude']}mm)"
+        )
+
+    lines.append("G92 E0 ;reset extruder")
+    lines.append(f"G0 Z{_fnum(tz)} F500 ;raise Z")
+    return lines
+
+
 # ---------------------------------------------------------------------------
 # Start GCode Expression Builder
 # ---------------------------------------------------------------------------
@@ -497,26 +571,33 @@ def build_start_gcode_single(config: PrinterConfig) -> str:
             lines[-1] += "Pellet Extruder "
         lines[-1] += "Start GCode ---"
 
-    # Heating sequence
+    # Heating sequence (T<n>/H<n> follow tool_index for IDEX-frame single mode)
+    t = config.tool_index
     if config.has_heated_bed:
         lines.append("M140 S{material_bed_temperature_layer_0} \t;Heat build surface")
-    lines.append("M104 T0 S{material_print_temperature_layer_0} \t;Heat nozzle")
+    lines.append(f"M104 T{t} S{{material_print_temperature_layer_0}} \t;Heat nozzle")
     if config.has_barrel_heater:
-        lines.append("M104 H0 S{material_barrel_temperature_layer_0} \t;Heat barrel")
+        lines.append(f"M104 H{t} S{{material_barrel_temperature_layer_0}} \t;Heat barrel")
     if config.has_heated_bed:
         lines.append("M190 S{material_bed_temperature_layer_0} \t;Wait for bed temperature")
-    lines.append("M109 T0 S{material_print_temperature_layer_0} \t;Wait for nozzle temperature")
+    lines.append(f"M109 T{t} S{{material_print_temperature_layer_0}} \t;Wait for nozzle temperature")
     if config.has_barrel_heater:
-        lines.append("M109 H0 S{material_barrel_temperature_layer_0} \t;Wait for barrel temperature")
+        lines.append(f"M109 H{t} S{{material_barrel_temperature_layer_0}} \t;Wait for barrel temperature")
 
     # Homing and setup
     if config.include_homing:
         lines.append("G21 ;metric values")
         lines.append("M107 ;fan off")
-        lines.append("G28 ;home all axes")
-        lines.append("M420 S1 ;restore bed level mesh")
-        lines.append("G90 ;absolute positioning")
-        lines.append("G1 X0 Y0 Z5 F5000 ;move nozzle up 5mm for safe homing")
+        if config.idex_frame:
+            lines.append("G90 ;absolute positioning")
+            lines.append("G28 Z0 ;move Z to min endstops")
+            lines.append("G28 X0 Y0 ;move X/Y to min endstops")
+            lines.append("G1 X0 Y0 Z5 F5000 ;safety Z axis movement")
+        else:
+            lines.append("G28 ;home all axes")
+            lines.append("M420 S1 ;restore bed level mesh")
+            lines.append("G90 ;absolute positioning")
+            lines.append("G1 X0 Y0 Z5 F5000 ;move nozzle up 5mm for safe homing")
 
     if config.include_bed_leveling:
         lines.append("G29 ;auto bed leveling")
@@ -524,10 +605,15 @@ def build_start_gcode_single(config: PrinterConfig) -> str:
 
     lines.append("M82 ;set extruder to absolute mode")
     lines.append("M107 ;start with the fan off")
-    lines.append("G1 X0 Y0 Z15.0 F5000 ;move the platform down 15mm")
+    if not config.park_purge:
+        lines.append("G1 X0 Y0 Z15.0 F5000 ;move the platform down 15mm")
 
     # Purge sequence
-    if config.include_purge:
+    if config.include_purge and config.park_purge:
+        # Off-bed park-side purge (IDEX frame, one active head)
+        lines.append("")
+        lines.extend(_build_park_purge_single(config))
+    elif config.include_purge:
         lines.append("")
         if config.extruder_type == ExtruderType.PELLET:
             lines.append("; Pellet extruder purge sequence")
@@ -584,14 +670,20 @@ def build_end_gcode(config: PrinterConfig) -> str:
         lines[-1] += "Pellet Extruder "
     lines[-1] += "End GCode ---"
 
-    # Turn off heaters
-    lines.append("M104 T0 S0 ;nozzle 0 heater off")
-    if config.printer_type == PrinterType.IDEX:
-        lines.append("M104 T1 S0 ;nozzle 1 heater off")
+    # Turn off heaters. On an IDEX frame (dual OR single-mode) switch off BOTH
+    # nozzle heaters; the frame's H0 pellet barrel is switched off defensively
+    # even from the filament definition, since the hardware always has it.
+    t = config.tool_index
+    on_idex_frame = config.printer_type == PrinterType.IDEX or config.idex_frame
+    lines.append(f"M104 T{t} S0 ;nozzle {t} heater off")
+    if on_idex_frame:
+        lines.append(f"M104 T{1 - t} S0 ;nozzle {1 - t} heater off")
     if config.has_barrel_heater:
-        lines.append("M104 H0 S0 ;barrel heater 0 off")
+        lines.append(f"M104 H{t} S0 ;barrel heater {t} off")
         if config.printer_type == PrinterType.IDEX:
-            lines.append("M104 H1 S0 ;barrel heater 1 off")
+            lines.append(f"M104 H{1 - t} S0 ;barrel heater {1 - t} off")
+    elif config.idex_frame:
+        lines.append("M104 H0 S0 ;frame barrel heater off (defensive)")
     if config.has_heated_bed:
         lines.append("M140 S0 ;heated bed heater off")
 
@@ -602,7 +694,7 @@ def build_end_gcode(config: PrinterConfig) -> str:
     else:
         lines.append("G1 Z+0.5 E-2 F3000 ;move Z up a bit and retract slightly")
 
-    if config.printer_type == PrinterType.IDEX:
+    if on_idex_frame:
         lines.append("G28 X0 Y0 ;move X/Y to home")
     else:
         lines.append("G28 ;move to home")
@@ -809,6 +901,60 @@ PRESETS = {
         include_bed_leveling=True,
         include_purge=True,
         include_melody=False,
+    ),
+    "penrose_600_swappable_pellet": PrinterConfig(
+        name="Penrose 600 Swappable (Pellet)",
+        printer_type=PrinterType.SINGLE,
+        extruder_type=ExtruderType.PELLET,
+        has_barrel_heater=True,
+        has_heated_bed=True,
+        include_header_comments=True,
+        include_homing=True,
+        include_bed_leveling=True,
+        include_purge=True,
+        include_melody=True,
+    ),
+    "penrose_600_swappable_fdm": PrinterConfig(
+        name="Penrose 600 Swappable (Filament)",
+        printer_type=PrinterType.SINGLE,
+        extruder_type=ExtruderType.FILAMENT,
+        has_barrel_heater=False,
+        has_heated_bed=True,
+        include_header_comments=True,
+        include_homing=True,
+        include_bed_leveling=True,
+        include_purge=True,
+        include_melody=True,
+    ),
+    "penrose_600_idex_choosable_pellet": PrinterConfig(
+        name="Penrose 600 IDEX Choosable (Pellet)",
+        printer_type=PrinterType.SINGLE,
+        extruder_type=ExtruderType.PELLET,
+        has_barrel_heater=True,
+        has_heated_bed=True,
+        include_header_comments=True,
+        include_homing=True,
+        include_bed_leveling=True,
+        include_purge=True,
+        include_melody=False,
+        tool_index=0,
+        park_purge=True,
+        idex_frame=True,
+    ),
+    "penrose_600_idex_choosable_fdm": PrinterConfig(
+        name="Penrose 600 IDEX Choosable (Filament)",
+        printer_type=PrinterType.SINGLE,
+        extruder_type=ExtruderType.FILAMENT,
+        has_barrel_heater=False,
+        has_heated_bed=True,
+        include_header_comments=True,
+        include_homing=True,
+        include_bed_leveling=True,
+        include_purge=True,
+        include_melody=False,
+        tool_index=1,
+        park_purge=True,
+        idex_frame=True,
     ),
 }
 
