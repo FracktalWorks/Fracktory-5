@@ -33,14 +33,31 @@
     },
     "overrides":
     {
-        "machine_name": { "default_value": "Penrose 600" },
-        "machine_width": { "default_value": 700 },
-        "machine_depth": { "default_value": 600 },
-        "machine_height": { "default_value": 400 },
-        "machine_extruder_count": { "default_value": 1 },
-        "machine_nozzle_size": { "default_value": 1.5 },
-
+        "adhesion_type": { "default_value": "brim" },
+        "bridge_skin_material_flow": { "value": "round(material_flow * 0.80)" },
+        "bridge_wall_coast": { "value": "100" },
+        "bridge_wall_material_flow": { "value": "round(material_flow * 0.80)" },
+        "brim_line_count": { "value": "6" },
+        "coasting_enable": { "value": true },
+        "coasting_min_volume": { "value": "round(coasting_volume * 10, 2)" },
+        "coasting_speed": { "value": "80" },
+        "coasting_volume": { "value": "round(machine_nozzle_size ** 3 * 1.5, 3)" },
+        "cool_fan_speed": { "value": "100" },
+        "cool_fan_speed_0": { "value": "0" },
+        "cool_min_layer_time": { "value": "10" },
+        "cool_min_speed": { "value": "max(15, round(speed_print * 0.25))" },
+        "infill_sparse_density": { "value": "15" },
+        "initial_layer_line_width_factor": { "value": 110 },
+        "layer_height": { "value": "0.4" },
+        "layer_height_0": { "value": "0.5" },
+        "line_width": { "value": "round(machine_nozzle_size * 1.0, 2)" },
         "machine_acceleration": { "value": 2500 },
+        "machine_barrel_heater": { "default_value": true },
+        "machine_depth": { "default_value": 600 },
+        "machine_end_gcode": { "default_value": ";--- Penrose 600 Pellet Extruder End GCode ---\nM104 T0 S0 ;extruder heater off\nM104 H0 S0 ;barrel heater off\nM140 S0 ;heated bed heater off\nG91 ;relative positioning\nG1 Z+0.5 E-2 F3000 ;move Z up a bit and retract slightly\nG28 ;move to home\nM84 ;steppers off\nM107 ;fan off\nG90 ;absolute positioning\n\nM300 S0 P333\nM300 S880 P166\nM300 S880 P166\nM300 S1318 P166\nM300 S1567 P166\nM300 S0 P166\nM300 S880 P166\nM300 S0 P166\nM300 S880 P166\nM300 S0 P166\nM300 S880 P166\nM300 S0 P166\nM300 S1567 P166\nM300 S0 P166\nM300 S880 P166\n" },
+        "machine_extruder_count": { "default_value": 1 },
+        "machine_heated_bed": { "default_value": true },
+        "machine_height": { "default_value": 400 },
         "machine_max_acceleration_e": { "value": 400 },
         "machine_max_acceleration_x": { "value": 2500 },
         "machine_max_acceleration_y": { "value": 2500 },
@@ -52,81 +69,49 @@
         "machine_max_jerk_xy": { "value": 4 },
         "machine_max_jerk_z": { "value": 0.4 },
         "machine_max_print_speed": { "value": "120" },
+        "machine_name": { "default_value": "Penrose 600" },
+        "machine_nozzle_size": { "default_value": 1.5 },
+        "machine_start_gcode": { "default_value": ";Machine Model: {machine_name}\n;Nozzle Size: {machine_nozzle_size}\n;Sliced at: {day} {date} {time}\n;--- Penrose 600 Pellet Extruder Start GCode ---\nM140 S{material_bed_temperature_layer_0} \t;Heat build surface\nM104 T0 S{material_print_temperature_layer_0} \t;Heat nozzle\nM104 H0 S{material_barrel_temperature_layer_0} \t;Heat barrel\nM190 S{material_bed_temperature_layer_0} \t;Wait for bed temperature\nM109 T0 S{material_print_temperature_layer_0} \t;Wait for nozzle temperature\nM109 H0 S{material_barrel_temperature_layer_0} \t;Wait for barrel temperature\nG21 ;metric values\nM107 ;fan off\nG28 ;home all axes\nM420 S1 ;restore bed level mesh\nG90 ;absolute positioning\nG1 X0 Y0 Z5 F5000 ;move nozzle up 5mm for safe homing\nG29 ;auto bed leveling\nM500 ;save settings\nM82 ;set extruder to absolute mode\nM107 ;start with the fan off\nG1 X0 Y0 Z15.0 F5000 ;move the platform down 15mm\n\n; Pellet extruder purge (off-bed X=-20 Y=-5)\nG0 X-20 Y-5 Z5 F10000 ;Move to purge position\nG0 Z3 F500 ;Lower to purge height\nG92 E0 ;Reset extruder\nG1 E500 F500 ;Purge 500mm\nG1 E1000 F1000 ;Purge 500mm\nG92 E0 ;Reset extruder\nG0 Z5 F500 ;Raise Z\n\nG92 E0 ;zero the extruded length\nM117 Printing...\n\nM300 S880 P166\nM300 S0 P166\nM300 S880 P166\nM300 S1318 P166\nM300 S1567 P166\nM300 S0 P166\n" },
         "machine_visual_print_speed": { "value": "60" },
-
+        "machine_width": { "default_value": 700 },
+        "material_barrel_temperature":
+        {
+            "enabled": true,
+            "value": "default_material_barrel_temperature if default_material_barrel_temperature > 0 else max(round(material_print_temperature * 0.95), 120)"
+        },
+        "material_barrel_temperature_layer_0": { "enabled": true },
+        "material_bed_temp_prepend": { "value": false },
+        "material_diameter": { "default_value": 1.75 },
+        "material_flow": { "value": "100" },
+        "material_flow_layer_0": { "value": "100" },
+        "material_print_temp_prepend": { "value": false },
+        "material_print_temp_wait": { "value": false },
+        "max_flow_acceleration": { "value": "0.5 if machine_nozzle_size <= 0.6 else 0.75 if machine_nozzle_size <= 1.0 else 1.0 if machine_nozzle_size <= 2.0 else 1.5" },
+        "meshfix_maximum_deviation": { "value": "max(0.02, machine_nozzle_size * 0.04)" },
+        "meshfix_maximum_resolution": { "value": "max(0.5, machine_nozzle_size * 0.8)" },
+        "retraction_amount": { "value": "1.5" },
+        "retraction_combing": { "value": "'all'" },
+        "retraction_combing_max_distance": { "value": "0" },
+        "retraction_enable": { "value": true },
+        "retraction_hop_enabled": { "value": true },
+        "retraction_prime_speed": { "value": "30" },
+        "retraction_speed": { "value": "30" },
+        "speed_layer_0": { "value": "min(speed_print, 30)" },
         "speed_print": { "value": "min(80, int(max_volumetric_flow_rate / (layer_height * line_width))) if max_volumetric_flow_rate > 0 else 60" },
+        "speed_topbottom": { "value": "min(round(speed_print * 0.9, 0), 150)" },
         "speed_travel":
         {
             "maximum_value": "600",
             "maximum_value_warning": "600",
             "value": "max(250, speed_print)"
         },
-        "speed_topbottom": { "value": "min(round(speed_print * 0.9, 0), 150)" },
         "speed_wall": { "value": "min(round(speed_print * 0.9, 0), 150)" },
         "speed_wall_0": { "value": "min(round(speed_wall * 0.85, 0), 120)" },
-        "speed_layer_0": { "value": "min(speed_print, 30)" },
-
-        "material_diameter": { "default_value": 1.75 },
-
-        "retraction_enable": { "value": true },
-        "retraction_amount": { "value": "1.5" },
-        "retraction_speed": { "value": "30" },
-        "retraction_prime_speed": { "value": "30" },
-        "retraction_hop_enabled": { "value": true },
-        "retraction_combing": { "value": "'all'" },
-        "retraction_combing_max_distance": { "value": "0" },
-
-        "cool_fan_speed": { "value": "100" },
-        "cool_fan_speed_0": { "value": "0" },
-        "cool_min_layer_time": { "value": "10" },
-        "cool_min_speed": { "value": "max(15, round(speed_print * 0.25))" },
-
-        "material_flow": { "value": "100" },
-        "material_flow_layer_0": { "value": "100" },
-
-        "machine_heated_bed": { "default_value": true },
-        "machine_barrel_heater": { "default_value": true },
-
-        "material_barrel_temperature": { "value": "default_material_barrel_temperature if default_material_barrel_temperature > 0 else max(round(material_print_temperature * 0.95), 120)", "enabled": true },
-        "material_barrel_temperature_layer_0": { "enabled": true },
-
-        "material_bed_temp_prepend": { "value": false },
-        "material_print_temp_prepend": { "value": false },
-        "material_print_temp_wait": { "value": false },
-
-        "bridge_skin_material_flow": { "value": "round(material_flow * 0.80)" },
-        "bridge_wall_coast": { "value": "100" },
-        "bridge_wall_material_flow": { "value": "round(material_flow * 0.80)" },
-
-        "coasting_enable": { "value": true },
-        "coasting_volume": { "value": "round(machine_nozzle_size ** 3 * 1.5, 3)" },
-        "coasting_min_volume": { "value": "round(coasting_volume * 10, 2)" },
-        "coasting_speed": { "value": "80" },
-
-        "max_flow_acceleration": { "value": "0.5 if machine_nozzle_size <= 0.6 else 0.75 if machine_nozzle_size <= 1.0 else 1.0 if machine_nozzle_size <= 2.0 else 1.5" },
-        "meshfix_maximum_deviation": { "value": "max(0.02, machine_nozzle_size * 0.04)" },
-        "meshfix_maximum_resolution": { "value": "max(0.5, machine_nozzle_size * 0.8)" },
-
-        "machine_start_gcode": { "default_value": ";Machine Model: {machine_name}\n;Nozzle Size: {machine_nozzle_size}\n;Sliced at: {day} {date} {time}\n;--- Penrose 600 Pellet Extruder Start GCode ---\nM140 S{material_bed_temperature_layer_0} \t;Heat build surface\nM104 T0 S{material_print_temperature_layer_0} \t;Heat nozzle\nM104 H0 S{material_barrel_temperature_layer_0} \t;Heat barrel\nM190 S{material_bed_temperature_layer_0} \t;Wait for bed temperature\nM109 T0 S{material_print_temperature_layer_0} \t;Wait for nozzle temperature\nM109 H0 S{material_barrel_temperature_layer_0} \t;Wait for barrel temperature\nG21 ;metric values\nM107 ;fan off\nG28 ;home all axes\nM420 S1 ;restore bed level mesh\nG90 ;absolute positioning\nG1 X0 Y0 Z5 F5000 ;move nozzle up 5mm for safe homing\nG29 ;auto bed leveling\nM500 ;save settings\nM82 ;set extruder to absolute mode\nM107 ;start with the fan off\nG1 X0 Y0 Z15.0 F5000 ;move the platform down 15mm\n\n; Pellet extruder purge (off-bed X=-20 Y=-5)\nG0 X-20 Y-5 Z5 F10000 ;Move to purge position\nG0 Z3 F500 ;Lower to purge height\nG92 E0 ;Reset extruder\nG1 E500 F500 ;Purge 500mm\nG1 E1000 F1000 ;Purge 500mm\nG92 E0 ;Reset extruder\nG0 Z5 F500 ;Raise Z\n\nG92 E0 ;zero the extruded length\nM117 Printing...\n\nM300 S880 P166\nM300 S0 P166\nM300 S880 P166\nM300 S1318 P166\nM300 S1567 P166\nM300 S0 P166\n" },
-        "machine_end_gcode": { "default_value": ";--- Penrose 600 Pellet Extruder End GCode ---\nM104 T0 S0 ;extruder heater off\nM104 H0 S0 ;barrel heater off\nM140 S0 ;heated bed heater off\nG91 ;relative positioning\nG1 Z+0.5 E-2 F3000 ;move Z up a bit and retract slightly\nG28 ;move to home\nM84 ;steppers off\nM107 ;fan off\nG90 ;absolute positioning\n\nM300 S0 P333\nM300 S880 P166\nM300 S880 P166\nM300 S1318 P166\nM300 S1567 P166\nM300 S0 P166\nM300 S880 P166\nM300 S0 P166\nM300 S880 P166\nM300 S0 P166\nM300 S880 P166\nM300 S0 P166\nM300 S1567 P166\nM300 S0 P166\nM300 S880 P166\n" },
-
-        "line_width": { "value": "round(machine_nozzle_size * 1.0, 2)" },
-        "wall_line_width_0": { "value": "round(machine_nozzle_size * 0.95, 2)" },
-        "initial_layer_line_width_factor": { "value": 110 },
-
-        "layer_height": { "value": "0.4" },
-        "layer_height_0": { "value": "0.5" },
-
-        "infill_sparse_density": { "value": "15" },
-
-        "adhesion_type": { "default_value": "brim" },
-        "brim_line_count": { "value": "6" },
-
+        "support_structure": { "value": "'tree'" },
         "travel_avoid_distance": { "value": "machine_nozzle_size * 1.5" },
         "travel_avoid_supports": { "value": true },
         "wall_0_wipe_dist": { "value": "machine_nozzle_size * 2" },
-        "z_seam_corner": { "value": "'z_seam_corner_inner'" },
-
-        "support_structure": { "value": "'tree'" }
+        "wall_line_width_0": { "value": "round(machine_nozzle_size * 0.95, 2)" },
+        "z_seam_corner": { "value": "'z_seam_corner_inner'" }
     }
 }

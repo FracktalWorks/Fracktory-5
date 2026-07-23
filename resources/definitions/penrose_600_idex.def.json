@@ -58,6 +58,7 @@
         "machine_acceleration": { "value": 2500 },
         "machine_barrel_heater": { "default_value": true },
         "machine_depth": { "default_value": 600 },
+        "machine_end_gcode": { "default_value": ";--- Penrose 600 IDEX Pellet Extruder End GCode ---\nM104 T0 S0 ;nozzle 0 heater off\nM104 T1 S0 ;nozzle 1 heater off\nM104 H0 S0 ;barrel heater 0 off\nM104 H1 S0 ;barrel heater 1 off\nM140 S0 ;heated bed heater off\nG91 ;relative positioning\nG1 Z+0.5 E-2 F3000 ;move Z up a bit and retract slightly\nG28 X0 Y0 ;move X/Y to home\nM84 ;steppers off\nM107 ;fan off\nG90 ;absolute positioning\n" },
         "machine_head_with_fans_polygon":
         {
             "default_value": [
@@ -67,7 +68,6 @@
                 [-25, -50]
             ]
         },
-        "machine_end_gcode": { "default_value": ";--- Penrose 600 IDEX Pellet Extruder End GCode ---\nM104 T0 S0 ;nozzle 0 heater off\nM104 T1 S0 ;nozzle 1 heater off\nM104 H0 S0 ;barrel heater 0 off\nM104 H1 S0 ;barrel heater 1 off\nM140 S0 ;heated bed heater off\nG91 ;relative positioning\nG1 Z+0.5 E-2 F3000 ;move Z up a bit and retract slightly\nG28 X0 Y0 ;move X/Y to home\nM84 ;steppers off\nM107 ;fan off\nG90 ;absolute positioning\n" },
         "machine_heated_bed": { "default_value": true },
         "machine_height": { "default_value": 625 },
         "machine_max_acceleration_e": { "value": 400 },
