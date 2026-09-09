@@ -16,7 +16,7 @@ Column
     {
         id: title
         anchors.horizontalCenter: parent.horizontalCenter
-        text: catalog.i18nc("@label", "Sign in to the Fracktal Knowledge Base")
+        text: catalog.i18nc("@label", "Sign in to the AddiPrint Knowledge Base")
         font: UM.Theme.getFont("large_bold")
     }
 
@@ -55,7 +55,7 @@ Column
     {
         anchors.horizontalCenter: parent.horizontalCenter
         height: UM.Theme.getSize("account_button").height
-        text: catalog.i18nc("@button", "Sign Up for Fracktal Works Knowledge Base")
+        text: catalog.i18nc("@button", "Sign Up for AddiPrint Knowledge Base")
         onClicked: Qt.openUrlExternally("https://care.fracktal.in/portal/en/signup")
     }
 }

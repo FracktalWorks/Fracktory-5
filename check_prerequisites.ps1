@@ -1,5 +1,5 @@
-﻿# Check Prerequisites for Fracktory Installers
-Write-Host "=== Fracktory Installer Prerequisites Checker ===" -ForegroundColor Cyan
+﻿# Check Prerequisites for AddiSlice Installers
+Write-Host "=== AddiSlice Installer Prerequisites Checker ===" -ForegroundColor Cyan
 
 $allGood = $true
 
@@ -9,7 +9,7 @@ Write-Host "`nChecking Source Environment..." -ForegroundColor Yellow
 if (Test-Path "cura_inst\Scripts\python.exe") {
     Write-Host "   Virtual environment found" -ForegroundColor Green
     
-    # Test if Fracktory can be imported
+    # Test if AddiSlice can be imported
     & ".\cura_inst\Scripts\python.exe" -c "import cura" 2>$null | Out-Null
     
     if ($LASTEXITCODE -eq 0) {

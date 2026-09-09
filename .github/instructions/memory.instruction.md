@@ -2,12 +2,12 @@
 applyTo: '**'
 ---
 
-# Fracktory-5 Agent Memory
+# AddiSlice Agent Memory
 
 ## Project Overview
-- **Fracktory-5**: Cura fork (v5.9.12) by Fracktal Works for their 3D printers
-- **Repository**: `C:\Users\VijayRaghavVarada\Documents\Github\Fracktory-5`
-- **Branch**: Fracktory-5.9
+- **AddiSlice**: Cura fork (v5.9.12) by AddiPrint for their 3D printers
+- **Repository**: `C:\Users\VijayRaghavVarada\Documents\Github\AddiSlice`
+- **Branch**: AddiSlice-5.9
 
 ## Key Documentation
 - `docs/agents.md` — Comprehensive AI agent guide for printer creation and management (includes Quality Profile System, Material System, Start/End GCode, Common Pitfalls)
@@ -18,10 +18,10 @@ applyTo: '**'
   - Definition: `resources/definitions/penrose_600_idex.def.json`
   - Quality Definition: `resources/definitions/penrose_pellet_quality.def.json`
   - Extruders: `resources/extruders/penrose_600_idex_extruder_0.def.json`, `_1.def.json`
-  - Variants: `resources/variants/fracktalworks/Penrose 600 IDEX/` (0.6, 0.8, 1.0, 1.5, 2.0, 3.0mm)
+  - Variants: `resources/variants/addiprint/Penrose 600 IDEX/` (0.6, 0.8, 1.0, 1.5, 2.0, 3.0mm)
   - Quality Profiles: `resources/quality/penrose_pellet_quality/` (82 files: 10 globals + 72 variant+material stubs)
-  - Pellet Materials: `resources/materials/Fracktal Works Pellet/` (4 files: PLA, ABS, TPU 95A, Nylon)
-  - Preferred defaults: nozzle=0.6mm, material=fracktal_pla_pellet, quality_type=pellet_030
+  - Pellet Materials: `resources/materials/AddiPrint Pellet/` (4 files: PLA, ABS, TPU 95A, Nylon)
+  - Preferred defaults: nozzle=0.6mm, material=addiprint_pla_pellet, quality_type=pellet_030
 - **Penrose 600** (pellet extruder, barrel heater, single extruder)
   - Definition: `resources/definitions/penrose_600.def.json`
 
@@ -35,9 +35,9 @@ applyTo: '**'
 - **Quality types**: pellet_020, pellet_030, pellet_040, pellet_050, pellet_060, pellet_080, pellet_100, pellet_120, pellet_160, pellet_240
 
 ## Material System
-- **Pellet materials**: `fracktal_pla_pellet`, `fracktal_abs_pellet`, `fracktal_tpu95a_pellet`, `fracktal_nylon_pellet`
+- **Pellet materials**: `addiprint_pla_pellet`, `addiprint_abs_pellet`, `addiprint_tpu95a_pellet`, `addiprint_nylon_pellet`
 - **exclude_materials**: `["_175", "generic_"]` — substring match blocks filament and generic materials
-- **Material XML location**: `resources/materials/Fracktal Works Pellet/`
+- **Material XML location**: `resources/materials/AddiPrint Pellet/`
 - **Quality stubs** reference these via `material` metadata (must match base_file of material XML)
 
 ## Custom Settings Added to fdmprinter.def.json
@@ -77,7 +77,7 @@ Settings tuned for screw-based pellet extrusion (25 overrides in penrose_600_ide
   - 1000mm extrusion per tool (4 phases: 150+200+300+350mm at varied speeds)
   - 140mm Y travel during purge (Y=-5 to Y=135)
 - **Klipper axis limits**: X T0 [-85,600], X T1 [0,640], Y [-10,605], Z [0,625]
-- **Klipper firmware configs**: `FracktalWorks/PenroseControlCenter` repo, `octoprint_PenroseControlCenter/firmware/`
+- **Klipper firmware configs**: `AddiPrint/PenroseControlCenter` repo, `octoprint_PenroseControlCenter/firmware/`
   - `PRINTER_PENROSE_600.cfg` — IDEX config, PRINTER_VARIABLES (purge positions, bed size, fan names)
   - `CORE_GCODE_MACROS.cfg` — Marlin-compatible G-codes (M104, M109, M218, M500, etc.)
   - `BASE_PENROSE.cfg` — Common hardware (steppers, MCU pins, heaters)

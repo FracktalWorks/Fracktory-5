@@ -1,4 +1,4 @@
-name: Fracktory Windows Installer
+name: AddiSlice Windows Installer
 run-name: ${{ inputs.version }} for Windows-${{ inputs.architecture }} by @${{ github.actor }}
 
 on:
@@ -12,13 +12,13 @@ on:
 
       installer_name:
         description: 'Name of the .exe and .msi'
-        default: 'Fracktory_setup'
+        default: 'AddiSlice_setup'
         required: False
         type: string
 
       app_name:
         description: 'Name of the Application in the installer'
-        default: 'Fracktory'
+        default: 'AddiSlice'
         required: False
         type: string
 
@@ -128,7 +128,7 @@ jobs:
         if: ${{ inputs.conan_internal }}
         run: conan config install https://github.com/Ultimaker/conan-config.git -a "-b runner/internal"
       
-      - name: Clone CuraEngine from Fracktal Works repository
+      - name: Clone CuraEngine from AddiPrint repository
         run: |
           cd ..
           git clone https://github.com/FracktalWorks/CuraEngine.git
@@ -159,7 +159,7 @@ jobs:
 
       - name: Create the Cura dist
         run: |
-          pyinstaller ./cura_inst/Fracktory.spec
+          pyinstaller ./cura_inst/AddiSlice.spec
 
       # - name: Setup Sentry CLI
       #   uses: mathieu-bour/setup-sentry-cli@v1
@@ -171,10 +171,10 @@ jobs:
 
       # - name: Upload and remove debug symbols
       #   run: |
-      #     sentry-cli debug-files upload .\Fracktory\CuraEngine.exe
-      #     sentry-cli debug-files upload .\Fracktory\CuraEngine.pdb
-      #     sentry-cli debug-files upload .\Fracktory\Arcus.dll
-      #     sentry-cli debug-files upload .\Fracktory\polyclipping.dll
+      #     sentry-cli debug-files upload .\AddiSlice\CuraEngine.exe
+      #     sentry-cli debug-files upload .\AddiSlice\CuraEngine.pdb
+      #     sentry-cli debug-files upload .\AddiSlice\Arcus.dll
+      #     sentry-cli debug-files upload .\AddiSlice\polyclipping.dll
       #   working-directory: dist
 
       - name: Get installer helper scripts
@@ -203,7 +203,7 @@ jobs:
 
       - name: Create the Windows msi installer (Powershell)
         run: |
-          python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\Fracktory "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
+          python ..\cura_inst\packaging\msi\create_windows_msi.py ..\cura_inst .\AddiSlice "${{inputs.installer_name}}.msi" "${{ inputs.app_name }}"
         working-directory: dist
 
       # - name: Sign the Windows msi installer (Powershell)

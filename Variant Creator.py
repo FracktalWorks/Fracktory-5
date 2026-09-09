@@ -1,5 +1,5 @@
 """
-Variant Creator - A utility script for Fracktory-5 that generates printer nozzle variants.
+Variant Creator - A utility script for AddiSlice that generates printer nozzle variants.
 Creates .cfg files for different nozzle sizes (regular and volcano) based on a printer definition.
 Automatically calculates optimal settings for each nozzle variant and handles both single and dual-nozzle printers.
 """
@@ -9,7 +9,7 @@ import json
 
 # Define relative paths
 definitions_folder = os.path.join("resources", "definitions")
-variants_folder = os.path.join("resources", "variants", "fracktalworks")
+variants_folder = os.path.join("resources", "variants", "addiprint")
 
 def load_definition(file_path):
     """Load a JSON definition file."""
@@ -114,7 +114,7 @@ name = Model {size:g} mm
 version = 4
 
 [metadata]
-author = Fracktal Works
+author = AddiPrint
 hardware_type = nozzle
 setting_version = 23
 type = variant

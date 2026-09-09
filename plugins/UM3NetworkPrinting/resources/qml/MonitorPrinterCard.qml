@@ -277,7 +277,7 @@ Item
         MonitorInfoBlurb
         {
             id: cameraDisabledInfo
-            text: catalog.i18nc("@info", "Webcam feeds for cloud printers cannot be viewed from Fracktory." +
+            text: catalog.i18nc("@info", "Webcam feeds for cloud printers cannot be viewed from AddiSlice." +
                 " Click \"Manage printer\" to visit Ultimaker Digital Factory and view this webcam.")
             target: cameraButton
         }

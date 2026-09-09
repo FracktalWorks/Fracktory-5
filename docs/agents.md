@@ -1,8 +1,8 @@
 ﻿# AI Agent Guide: Printer Profile Creation & Management
 
-> **Audience**: AI coding agents (GitHub Copilot, Cursor, etc.) working on the Fracktory-5 codebase.
+> **Audience**: AI coding agents (GitHub Copilot, Cursor, etc.) working on the AddiSlice codebase.
 
-This document provides comprehensive guidance for creating, editing, and maintaining 3D printer definitions in Fracktory (a Cura fork by Fracktal Works).
+This document provides comprehensive guidance for creating, editing, and maintaining 3D printer definitions in AddiSlice (a Cura fork by AddiPrint).
 
 ---
 
@@ -31,13 +31,13 @@ This document provides comprehensive guidance for creating, editing, and maintai
 | Task | Key Files |
 |------|-----------|
 | Base settings for all printers | `resources/definitions/fdmprinter.def.json` |
-| Fracktal base (single extruder) | `resources/definitions/base_fracktal_printer.def.json` |
-| Fracktal base (dual extruder) | `resources/definitions/base_fracktal_dual_printer.def.json` |
-| Fracktal base (IDEX) | `resources/definitions/base_fracktal_idex_printer.def.json` |
+| AddiPrint base (single extruder) | `resources/definitions/base_addiprint_printer.def.json` |
+| AddiPrint base (dual extruder) | `resources/definitions/base_addiprint_dual_printer.def.json` |
+| AddiPrint base (IDEX) | `resources/definitions/base_addiprint_idex_printer.def.json` |
 | Printer extruder definitions | `resources/extruders/<printer_id>_extruder_N.def.json` |
-| Nozzle variants | `resources/variants/fracktalworks/<Printer Name>/*.inst.cfg` |
-| Filament material XML profiles | `resources/materials/Fracktal Works/*.xml.fdm_material` |
-| Pellet material XML profiles | `resources/materials/Fracktal Works Pellet/*.xml.fdm_material` |
+| Nozzle variants | `resources/variants/addiprint/<Printer Name>/*.inst.cfg` |
+| Filament material XML profiles | `resources/materials/AddiPrint/*.xml.fdm_material` |
+| Pellet material XML profiles | `resources/materials/AddiPrint Pellet/*.xml.fdm_material` |
 | Quality profiles (global + stubs) | `resources/quality/<quality_definition>/` |
 | Quality base definition | `resources/definitions/<quality_definition>.def.json` |
 | GCode expression generator script | `scripts/generate_start_gcode.py` |
@@ -85,16 +85,16 @@ This is because these values are treated as Python expressions by Cura and may r
 
 ```
 fdmprinter.def.json (root - all settings defined here)
-  -> base_fracktal_printer.def.json (single extruder Fracktal base)
+  -> base_addiprint_printer.def.json (single extruder AddiPrint base)
        -> penrose_600.def.json (specific printer)
        -> julia_advanced.def.json, dragon_400.def.json, ... (specific printers)
-       -> base_fracktal_dual_printer.def.json (dual extruder base)
+       -> base_addiprint_dual_printer.def.json (dual extruder base)
             -> julia_pro_dual.def.json, twin_dragon_*.def.json, volterra_dual.def.json
-            -> base_fracktal_idex_printer.def.json (IDEX base)
+            -> base_addiprint_idex_printer.def.json (IDEX base)
                  -> penrose_600_idex.def.json (specific IDEX printer)
 ```
 
-Note: `base_fracktal_dual_printer` inherits `base_fracktal_printer` (verified
+Note: `base_addiprint_dual_printer` inherits `base_addiprint_printer` (verified
 in the file), so single-extruder base settings and metadata (e.g.
 `exclude_materials`) flow to dual and IDEX machines too. Definition metadata
 inheritance is per-key: a child key replaces the parent's value wholesale
@@ -115,10 +115,10 @@ Model each such product as a **pair of single-extruder definitions**, one per
 mode, over shared hidden bases:
 
 ```
-base_penrose_pellet.def.json (hidden; pellet slicing philosophy, inherits base_fracktal_printer)
+base_penrose_pellet.def.json (hidden; pellet slicing philosophy, inherits base_addiprint_printer)
   -> penrose_600_swappable_pellet.def.json          (visible)
   -> penrose_600_idex_choosable_pellet.def.json     (visible)
-base_fracktal_printer.def.json
+base_addiprint_printer.def.json
   -> penrose_600_swappable_fdm.def.json             (visible; filament tuning free)
   -> penrose_600_idex_choosable_fdm.def.json        (visible)
 ```
@@ -126,12 +126,12 @@ base_fracktal_printer.def.json
 - The pellet leaves keep `exclude_materials: ["_175","generic_"]` +
   `quality_definition: penrose_pellet_quality`; the filament leaves inherit
   `exclude_materials: ["_pellet"]` + set `quality_definition:
-  base_fracktal_printer`. Segregation then holds per entry (verify with
+  base_addiprint_printer`. Segregation then holds per entry (verify with
   `.claude/skills/printer-configuration/verify_material_segregation.py`).
 - **Quality is reused, not duplicated**: stubs key on `variant` name +
   `material`, not on the machine id, so new variants named `Pellet X.X mm` /
   `Model X.X mm` reuse the existing `penrose_pellet_quality` /
-  `base_fracktal_printer` stubs. Zero new quality files.
+  `base_addiprint_printer` stubs. Zero new quality files.
 - The user "switches mode" by selecting the matching machine in Cura's
   printer list.
 - IDEX-choosable leaves are modeled single-extruder (one active head); the
@@ -166,11 +166,11 @@ base_fracktal_printer.def.json
 {
     "version": 2,
     "name": "Human Readable Printer Name",
-    "inherits": "base_fracktal_printer",   // or "base_fracktal_idex_printer"
+    "inherits": "base_addiprint_printer",   // or "base_addiprint_idex_printer"
     "id": "printer_id",
     "metadata": {
         "visible": true,
-        "manufacturer": "Fracktal Works",
+        "manufacturer": "AddiPrint",
         "category": "Category Name",       // e.g., "Pellet Series", "FDM Series"
         "has_machine_materials": false,     // true if printer has specific materials
         "has_machine_quality": true,
@@ -180,7 +180,7 @@ base_fracktal_printer.def.json
         "machine_variant_shortcode": "XX",  // Short code for variant naming
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.4 mm",
-        "quality_definition": "base_fracktal_printer",
+        "quality_definition": "base_addiprint_printer",
         "variants_name": "Nozzle",
         "machine_extruder_trains": {
             "0": "printer_id_extruder_0"
@@ -205,7 +205,7 @@ base_fracktal_printer.def.json
 {
     "version": 2,
     "name": "Printer Name Extruder N",
-    "inherits": "base_fracktal_extruder_0",    // or base_fracktal_idex_extruder_N
+    "inherits": "base_addiprint_extruder_0",    // or base_addiprint_idex_extruder_N
     "metadata": {
         "machine": "printer_id",
         "position": "0"                         // "0" or "1"
@@ -217,7 +217,7 @@ base_fracktal_printer.def.json
 }
 ```
 
-#### 3. Create Variant Files (`resources/variants/fracktalworks/<Printer Name>/`)
+#### 3. Create Variant Files (`resources/variants/addiprint/<Printer Name>/`)
 
 Use `Variant Creator.py` or create manually. See [Variant Files](#variant-files) section.
 
@@ -268,7 +268,7 @@ See the [Quality Profile System](#quality-profile-system) section for full detai
 
 #### 8. Create Pellet Materials (if using pellet extruders)
 
-See the [Material System](#material-system) section. Create separate material profiles in `resources/materials/Fracktal Works Pellet/` and use `exclude_materials` to hide filament materials.
+See the [Material System](#material-system) section. Create separate material profiles in `resources/materials/AddiPrint Pellet/` and use `exclude_materials` to hide filament materials.
 
 ---
 
@@ -364,7 +364,7 @@ name = Extra Fine - 0.3mm             # Display name (should match global)
 version = 4
 
 [metadata]
-material = fracktal_pla_pellet        # REQUIRED: must match material base_file
+material = addiprint_pla_pellet        # REQUIRED: must match material base_file
 quality_type = pellet_030             # Must match a global quality_type
 setting_version = 23
 type = quality
@@ -414,7 +414,7 @@ For each cell with ✓, create one stub per material. Total stubs = ✓ count ×
         "has_variants": true,                 // REQUIRED: enables variant-aware quality filtering
         "quality_definition": "penrose_pellet_quality",  // Namespace for quality searches
         "preferred_quality_type": "pellet_030",          // Default selection
-        "preferred_material": "fracktal_pla_pellet",     // Default material
+        "preferred_material": "addiprint_pla_pellet",     // Default material
         "preferred_variant_name": "Pellet 0.6 mm"        // Default nozzle
     }
 }
@@ -430,7 +430,7 @@ A thin definition file that serves as a namespace/lookup key for quality profile
     "name": "Penrose Pellet Quality Base",
     "inherits": "fdmprinter",
     "metadata": {
-        "author": "Fracktal Works",
+        "author": "AddiPrint",
         "file_formats": "text/x-gcode",
         "has_machine_quality": true,
         "has_variants": true,
@@ -485,9 +485,9 @@ For printers using non-standard feed stock (pellets, granules), create separate 
 
 | Aspect | Filament Materials | Pellet Materials |
 |--------|-------------------|-----------------|
-| Folder | `resources/materials/Fracktal Works/` | `resources/materials/Fracktal Works Pellet/` |
-| ID pattern | `fracktal_<type>_175` | `fracktal_<type>_pellet` |
-| Example | `fracktal_pla_175` | `fracktal_pla_pellet` |
+| Folder | `resources/materials/AddiPrint/` | `resources/materials/AddiPrint Pellet/` |
+| ID pattern | `addiprint_<type>_175` | `addiprint_<type>_pellet` |
+| Example | `addiprint_pla_175` | `addiprint_pla_pellet` |
 | Diameter | 1.75mm | 1.75mm (for Cura's volume calculations) |
 
 ### Filtering Materials Per Printer (`exclude_materials`)
@@ -510,9 +510,9 @@ def isExcludedMaterialBaseFile(self, material_base_file: str) -> bool:
 ```
 
 **Design pattern:** Give pellet materials IDs that DON'T contain the exclusion patterns:
-- Filament IDs: `fracktal_pla_175` (contains `_175` → excluded)
+- Filament IDs: `addiprint_pla_175` (contains `_175` → excluded)
 - Generic IDs: `generic_pla_175` (contains `generic_` → excluded)
-- Pellet IDs: `fracktal_pla_pellet` (contains neither → NOT excluded ✓)
+- Pellet IDs: `addiprint_pla_pellet` (contains neither → NOT excluded ✓)
 
 ### Material XML Format
 
@@ -522,7 +522,7 @@ def isExcludedMaterialBaseFile(self, material_base_file: str) -> bool:
              xmlns:cura="http://www.ultimaker.com/cura" version="1.3">
     <metadata>
         <name>
-            <brand>Fracktal Works</brand>
+            <brand>AddiPrint</brand>
             <material>PLA</material>         <!-- Material type for fallback matching -->
             <color>Generic</color>
             <label>PLA Pellet</label>         <!-- Display name in UI -->
@@ -558,10 +558,10 @@ Quality stubs' `material` metadata must match the material's `base_file` (typica
 
 ```ini
 # In quality stub:
-material = fracktal_pla_pellet    # Must match the material file's base_file
+material = addiprint_pla_pellet    # Must match the material file's base_file
 
-# The material file: fracktal_pla_pellet.xml.fdm_material
-# Its base_file = "fracktal_pla_pellet"
+# The material file: addiprint_pla_pellet.xml.fdm_material
+# Its base_file = "addiprint_pla_pellet"
 ```
 
 ---
@@ -815,7 +815,7 @@ Where N = 0 or 1 (corresponding to extruder number).
 
 ### IDEX Base Settings
 
-The `base_fracktal_idex_printer.def.json` defines:
+The `base_addiprint_idex_printer.def.json` defines:
 - `print_mode` enum setting (in `settings.dual.children`)
 - `print_mode_gcode` derived setting (generates T0/T1/M605 commands)
 - `is_idex` boolean (in `settings.machine_settings.children`)
@@ -833,9 +833,9 @@ The `base_fracktal_idex_printer.def.json` defines:
 
 ### Location
 
-`resources/variants/fracktalworks/<Printer Name>/printer_id_<variant_shortcode>_<size>.inst.cfg`
+`resources/variants/addiprint/<Printer Name>/printer_id_<variant_shortcode>_<size>.inst.cfg`
 
-Example: `resources/variants/fracktalworks/Penrose 600 IDEX/penrose_600_idex_PE_1.5.inst.cfg`
+Example: `resources/variants/addiprint/Penrose 600 IDEX/penrose_600_idex_PE_1.5.inst.cfg`
 
 ### Format
 
@@ -893,8 +893,8 @@ The key (e.g., "barrel temperature") comes from the material XML `<setting>` ele
 |-----------|-----------|---------|
 | Printer definition | `<printer_id>.def.json` | `penrose_600_idex.def.json` |
 | Extruder definition | `<printer_id>_extruder_N.def.json` | `penrose_600_idex_extruder_0.def.json` |
-| Base extruder (IDEX) | `base_fracktal_idex_extruder_N.def.json` | `base_fracktal_idex_extruder_0.def.json` |
-| Variant folder | `fracktalworks/<Printer Name>/` | `fracktalworks/Penrose 600 IDEX/` |
+| Base extruder (IDEX) | `base_addiprint_idex_extruder_N.def.json` | `base_addiprint_idex_extruder_0.def.json` |
+| Variant folder | `addiprint/<Printer Name>/` | `addiprint/Penrose 600 IDEX/` |
 | Variant file | `<printer_id>_<shortcode>_<size>.inst.cfg` | `penrose_600_idex_PE_1.5.inst.cfg` |
 
 **Printer ID**: lowercase, underscores, no spaces (e.g., `penrose_600_idex`)
@@ -941,7 +941,7 @@ Screw extruders perform best with minimal speed variation. Keep wall/topbottom s
 Without effective retraction, bridges need reduced flow to prevent sagging:
 - `bridge_wall_material_flow`: `round(material_flow * 0.80)` (20% reduction)
 - `bridge_skin_material_flow`: `round(material_flow * 0.80)` (20% reduction)
-- `bridge_wall_coast`: `100` (full coast before bridge — base_fracktal sets this to 0!)
+- `bridge_wall_coast`: `100` (full coast before bridge — base_addiprint sets this to 0!)
 
 ### Nozzle-Scaled Settings
 
@@ -1019,7 +1019,7 @@ The `variant` field in quality stubs must **exactly** match the variant file's `
 Each `quality_type` has ONE global `layer_height`. You cannot have `pellet_030` mean 0.3mm for one nozzle and 0.35mm for another. Instead, create separate quality types (e.g., `pellet_030` and `pellet_035`).
 
 ### 15. Not enabling coasting for pellet extruders
-`base_fracktal_printer` sets `bridge_wall_coast: 0` and `coasting_enable: false` — designed for filament. Pellet printers **must** override these since coasting is the primary ooze management tool when retraction is limited. Also remember `retraction_combing_max_distance` should be `0` (unlimited combing, no retraction during combing moves).
+`base_addiprint_printer` sets `bridge_wall_coast: 0` and `coasting_enable: false` — designed for filament. Pellet printers **must** override these since coasting is the primary ooze management tool when retraction is limited. Also remember `retraction_combing_max_distance` should be `0` (unlimited combing, no retraction during combing moves).
 
 ---
 
@@ -1066,7 +1066,7 @@ Utility for duplicating and renaming material profiles and related resources.
 Here is a complete checklist for creating a new pellet extruder IDEX printer similar to the Penrose 600 IDEX:
 
 1. **Create definition**: `resources/definitions/my_printer_idex.def.json`
-   - Set `"inherits": "base_fracktal_idex_printer"`
+   - Set `"inherits": "base_addiprint_idex_printer"`
    - Set build volume, feedrates, acceleration from firmware config
    - Set `machine_barrel_heater`, temperature formula, temp prepend overrides
 
@@ -1074,7 +1074,7 @@ Here is a complete checklist for creating a new pellet extruder IDEX printer sim
    - `resources/extruders/my_printer_idex_extruder_0.def.json`
    - `resources/extruders/my_printer_idex_extruder_1.def.json`
 
-3. **Create variants**: `resources/variants/fracktalworks/My Printer IDEX/`
+3. **Create variants**: `resources/variants/addiprint/My Printer IDEX/`
    - One `.inst.cfg` per nozzle size
 
 4. **Generate gcode**:
@@ -1085,4 +1085,4 @@ Here is a complete checklist for creating a new pellet extruder IDEX printer sim
 
 5. **Add preset** to `scripts/generate_start_gcode.py` PRESETS dict for future re-generation
 
-6. **Test**: Load in Fracktory, verify all print modes generate correct gcode
+6. **Test**: Load in AddiSlice, verify all print modes generate correct gcode

@@ -5,19 +5,19 @@ type: software
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
-title: Fracktory
+title: AddiSlice
 abstract: >-
   A state-of-the-art slicer application built on top
   of the Uranium framework.
 authors:
-  - name: Fracktal Works
+  - name: AddiPrint
 contact:
   - email: info@fracktal.in
-    name: "Fracktal WOrks"
-url: "https://ultimaker.com/software/Fracktory"
-repository-code: "https://github.com/FracktalWorks/Fracktory-5"
+    name: "AddiPrint WOrks"
+url: "https://ultimaker.com/software/AddiSlice"
+repository-code: "https://github.com/FracktalWorks/AddiSlice"
 license: LGPL-3.0
-license-url: "https://github.com/FracktalWorks/Fracktory-5/blob/main/LICENSE"
+license-url: "https://github.com/FracktalWorks/AddiSlice/blob/AddiSlice-5.9/LICENSE"
 version: 5.4.0
 date-released: "2023-07-04"
 keywords:

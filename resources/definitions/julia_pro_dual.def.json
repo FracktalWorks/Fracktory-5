@@ -1,7 +1,7 @@
 {
     "version": 2,
     "name": "Julia Pro Dual ABL",
-    "inherits": "base_fracktal_dual_printer",
+    "inherits": "base_addiprint_dual_printer",
     "id": "julia_pro_dual",
     "metadata":
     {
@@ -12,10 +12,10 @@
         "has_machine_quality": true,
         "has_variants": true,
         "machine_variant_shortcode": "PD",
-        "preferred_material": "fracktal_pla_175",
+        "preferred_material": "addiprint_pla_175",
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.6 mm",
-        "quality_definition": "base_fracktal_printer",
+        "quality_definition": "base_addiprint_printer",
         "variants_name": "Nozzle"
     },
     "overrides":

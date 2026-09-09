@@ -21,7 +21,7 @@
     -->
     <xsl:key
             name="UltiMaker_Cura_exe_ToRemove"
-            match="wix:Component[ substring( wix:File/@Source, string-length( wix:File/@Source ) - 17 ) = 'Fracktory.exe' ]"
+            match="wix:Component[ substring( wix:File/@Source, string-length( wix:File/@Source ) - 17 ) = 'AddiSlice.exe' ]"
             use="@Id"
     />
     <xsl:key

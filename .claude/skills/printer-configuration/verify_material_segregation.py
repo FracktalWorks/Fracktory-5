@@ -21,7 +21,7 @@ import sys
 
 REPO = os.getcwd()
 if not os.path.isdir(os.path.join(REPO, "resources", "definitions")):
-    sys.exit("Run from the Fracktory-5 repo root.")
+    sys.exit("Run from the AddiSlice repo root.")
 
 DEFS = os.path.join(REPO, "resources", "definitions")
 MATS = os.path.join(REPO, "resources", "materials")

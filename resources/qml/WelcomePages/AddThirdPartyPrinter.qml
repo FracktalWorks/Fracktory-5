@@ -36,7 +36,7 @@ Item
 
             Layout.fillWidth: true
             Layout.fillHeight: contentShown
-            title: catalog.i18nc("@label", "Add a Fracktal Works 3D printer")
+            title: catalog.i18nc("@label", "Add a AddiPrint 3D printer")
             contentShown: true  // by default expand the network printer list
 
             onClicked:

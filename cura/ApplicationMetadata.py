@@ -4,12 +4,12 @@
 # ---------
 # General constants used in Cura
 # ---------
-DEFAULT_CURA_APP_NAME = "Fracktory"
-DEFAULT_CURA_DISPLAY_NAME = "Fracktory"
+DEFAULT_CURA_APP_NAME = "AddiSlice"
+DEFAULT_CURA_DISPLAY_NAME = "AddiSlice"
 DEFAULT_CURA_VERSION = "dev"
 DEFAULT_CURA_BUILD_TYPE = ""
 DEFAULT_CURA_DEBUG_MODE = False
-DEFAULT_CURA_LATEST_URL = "https://raw.githubusercontent.com/FracktalWorks/Fracktory-5/main/latest.json"
+DEFAULT_CURA_LATEST_URL = "https://raw.githubusercontent.com/FracktalWorks/AddiSlice/AddiSlice-5.9/latest.json"
 
 # Each release has a fixed SDK version coupled with it. It doesn't make sense to make it configurable because, for
 # example Cura 3.2 with SDK version 6.1 will not work. So the SDK version is hard-coded here and left out of the
@@ -70,7 +70,7 @@ except ImportError:
     CuraAppDisplayName = DEFAULT_CURA_DISPLAY_NAME
 '''
 
-CuraAppDisplayName = "Fracktory"
+CuraAppDisplayName = "AddiSlice"
 
 try:
     from cura.CuraVersion import ConanInstalls

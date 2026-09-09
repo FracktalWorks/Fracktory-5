@@ -1,5 +1,5 @@
 """Skill companion tool: load every printer definition through the real
-Uranium loader (from dist/Fracktory) and report deserialization problems the
+Uranium loader (from dist/AddiSlice) and report deserialization problems the
 static printer-linter cannot see — e.g. overrides silently dropped because a
 key has stray whitespace or references a nonexistent setting.
 
@@ -12,8 +12,8 @@ import sys
 
 REPO = os.getcwd()
 if not os.path.isdir(os.path.join(REPO, "resources", "definitions")):
-    sys.exit("Run from the Fracktory-5 repo root.")
-sys.path.insert(0, os.path.join(REPO, "dist", "Fracktory"))
+    sys.exit("Run from the AddiSlice repo root.")
+sys.path.insert(0, os.path.join(REPO, "dist", "AddiSlice"))
 
 from UM.Resources import Resources
 Resources.addSearchPath(os.path.join(REPO, "resources"))

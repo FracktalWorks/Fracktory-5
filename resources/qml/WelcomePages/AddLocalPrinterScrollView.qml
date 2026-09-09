@@ -22,7 +22,7 @@ Item
     property var currentSections: new Set()
     // By default (when this list shows up) we always expand the "Ultimaker" section.
     property var preferredCategories: {
-        "Fracktal Works": -1,
+        "AddiPrint": -1,
         "Custom": -2
     }
 

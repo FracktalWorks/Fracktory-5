@@ -1,7 +1,7 @@
 {
     "version": 2,
     "name": "Julia Classic",
-    "inherits": "base_fracktal_printer",
+    "inherits": "base_addiprint_printer",
     "id": "julia_intermediate",
     "metadata":
     {
@@ -10,7 +10,7 @@
         "file_formats": "text/x-gcode",
         "category": "Julia Series",
         "machine_variant_shortcode": "JI",
-        "quality_definition": "base_fracktal_printer"
+        "quality_definition": "base_addiprint_printer"
     },
     "overrides":
     {

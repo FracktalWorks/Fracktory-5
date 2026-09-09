@@ -1,7 +1,7 @@
 {
     "version": 2,
     "name": "Twin Dragon 600",
-    "inherits": "base_fracktal_idex_printer",
+    "inherits": "base_addiprint_idex_printer",
     "id": "twin_dragon_600",
     "metadata":
     {
@@ -19,7 +19,7 @@
         ],
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.4 mm",
-        "quality_definition": "base_fracktal_printer",
+        "quality_definition": "base_addiprint_printer",
         "variants_name": "Nozzle"
     },
     "overrides":

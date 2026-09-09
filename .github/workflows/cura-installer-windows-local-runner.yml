@@ -1,4 +1,4 @@
-name: Fracktory Windows Installer Local Runner
+name: AddiSlice Windows Installer Local Runner
 run-name: ${{ inputs.version }} for Windows-${{ inputs.architecture }} by @${{ github.actor }}
 
 on:
@@ -12,13 +12,13 @@ on:
 
       installer_name:
         description: 'Name of the .exe and .msi'
-        default: 'Fracktory_setup'
+        default: 'AddiSlice_setup'
         required: False
         type: string
 
       app_name:
         description: 'Name of the Application in the installer'
-        default: 'Fracktory'
+        default: 'AddiSlice'
         required: False
         type: string
 
@@ -169,7 +169,7 @@ jobs:
           .\cura_inst\Scripts\activate_github_actions_version_env.ps1
       - name: Create the Cura dist
         run: |
-          pyinstaller ./cura_inst/Fracktory.spec
+          pyinstaller ./cura_inst/AddiSlice.spec
     
       - name: Get installer helper scripts
         run: |
@@ -197,28 +197,28 @@ jobs:
         run: |
           $env:NSIS_PATH = "C:\Program Files (x86)\NSIS"
           $env:Path += ";$env:NSIS_PATH"
-          python cura_inst\packaging\NSIS\create_windows_installer.py cura_inst dist "Fracktory-${{ inputs.version }}.exe"
+          python cura_inst\packaging\NSIS\create_windows_installer.py cura_inst dist "AddiSlice-${{ inputs.version }}.exe"
         working-directory: ${{ github.workspace }}
 
       - name: Build MSI Installer
         run: |
           $env:WIX_PATH = "C:\Program Files (x86)\WiX Toolset v3.14\bin"
           $env:Path += ";$env:WIX_PATH"
-          python cura_inst\packaging\msi\create_windows_msi.py cura_inst dist\Fracktory "Fracktory-${{ inputs.version }}.msi" "Fracktory"
+          python cura_inst\packaging\msi\create_windows_msi.py cura_inst dist\AddiSlice "AddiSlice-${{ inputs.version }}.msi" "AddiSlice"
         working-directory: ${{ github.workspace }}
 
       - name: Upload EXE Installer
         uses: actions/upload-artifact@v4
         with:
-          name: Fracktory-Installer-EXE-${{ inputs.version }}
-          path: "**/Fracktory-${{ inputs.version }}.exe"
+          name: AddiSlice-Installer-EXE-${{ inputs.version }}
+          path: "**/AddiSlice-${{ inputs.version }}.exe"
           retention-days: 5
 
       - name: Upload the MSI
         uses: actions/upload-artifact@v4
         with:
-          name: Fracktory-Installer-MSI-${{ inputs.version }}
-          path: "**/Fracktory-${{ inputs.version }}.msi"
+          name: AddiSlice-Installer-MSI-${{ inputs.version }}
+          path: "**/AddiSlice-${{ inputs.version }}.msi"
           retention-days: 5
 
       

@@ -1,21 +1,21 @@
-# Fracktory
-*A 3D printing slicer based on Ultimaker Cura, customized for FracktalWorks 3D printers*
+# AddiSlice
+*A 3D printing slicer based on Ultimaker Cura, customized for AddiPrint 3D printers*
 
 ## 📚 Documentation
 
 ### 🔧 Build and Installation Guides
-- **[Prerequisites](#prerequisites)** - Required tools and software for building Fracktory
-- **[Building from Source](#building-from-source)** - Instructions for compiling Fracktory from source code
+- **[Prerequisites](#prerequisites)** - Required tools and software for building AddiSlice
+- **[Building from Source](#building-from-source)** - Instructions for compiling AddiSlice from source code
 - **[Creating Installers](#creating-installers)** - Quick guide to building MSI and EXE installers  
 - **[Version Management](#version-management)** - How to update version numbers for new releases
 
 ### 📋 Detailed Guides
 - **[Installer Guide](docs/INSTALLER_GUIDE.md)** - Complete step-by-step instructions for creating MSI and EXE installers
-- **[Update Guide](docs/UPDATING.md)** - Instructions for updating Fracktory from the latest Cura fork changes
+- **[Update Guide](docs/UPDATING.md)** - Instructions for updating AddiSlice from the latest Cura fork changes
 - **[CI/CD Setup Guide](docs/CICD_SETUP.md)** - GitHub Actions and self-hosted runner configuration
 
 ### 📄 Project Information
-- **[Contributing Guidelines](CONTRIBUTING.md)** - How to contribute to the Fracktory project
+- **[Contributing Guidelines](CONTRIBUTING.md)** - How to contribute to the AddiSlice project
 - **[Security Policy](SECURITY.md)** - Reporting security vulnerabilities
 
 ### 🔧 Additional Resources
@@ -32,7 +32,7 @@
 
 ## Prerequisites
 
-The following programs are required for building Fracktory from source on Windows (based on [Ultimaker Cura requirements](https://github.com/Ultimaker/Cura/wiki/Getting-Started)):
+The following programs are required for building AddiSlice from source on Windows (based on [Ultimaker Cura requirements](https://github.com/Ultimaker/Cura/wiki/Getting-Started)):
 
 - Windows 10 or higher
 - Visual Studio with MSVC 2022 or higher
@@ -95,7 +95,7 @@ The following specific versions have been tested and work reliably:
      5. Click "OK" to close all windows.
 
 7. **Install Conan**:
-   - **For Fracktory 5.9 and earlier:**
+   - **For AddiSlice 5.9 and earlier:**
      ```powershell
      pip install "conan>=1.58.0,<2.0.0"
      ```
@@ -125,7 +125,7 @@ If any program is not available in the PATH, follow these steps to add it:
 
 ## Building from Source
 
-**⚠️ Important:** Perform all git clone operations in a separate workspace folder (e.g., `C:\Workspace`) to avoid cloning repositories inside the Fracktory repository.
+**⚠️ Important:** Perform all git clone operations in a separate workspace folder (e.g., `C:\Workspace`) to avoid cloning repositories inside the AddiSlice repository.
 
 ### Step 1: Clean Previous Builds
 
@@ -141,7 +141,7 @@ Delete `.conan` folders in your user directory and system drives (C:/ or D:/).
 
 **Option 1: If conan-config folder doesn't exist (first time):**
 ```powershell
-# Navigate to your workspace folder (NOT inside Fracktory-5)
+# Navigate to your workspace folder (NOT inside AddiSlice)
 cd C:\Workspace  # or your preferred workspace location
 
 # Clone and setup Conan config
@@ -159,10 +159,10 @@ If using a custom CuraEngine (see [troubleshooting guide](https://github.com/Ult
 
 **Option 1: If CuraEngine folder doesn't exist (first time):**
 ```powershell
-# Ensure you're in your workspace folder (NOT inside Fracktory-5)
+# Ensure you're in your workspace folder (NOT inside AddiSlice)
 cd C:\Workspace  # or your preferred workspace location
 
-# Clone FracktalWorks CuraEngine
+# Clone AddiPrint CuraEngine
 git clone https://github.com/FracktalWorks/CuraEngine.git
 cd CuraEngine
 git checkout Engine-5.9.1
@@ -182,17 +182,17 @@ conan create . curaengine/5.9.1@FracktalWorks/stable --build=missing --update
 cd ..
 ```
 
-### Step 4: Clone and Build Fracktory
+### Step 4: Clone and Build AddiSlice
 
-**Option 1: If Fracktory-5 repository doesn't exist (first time):**
+**Option 1: If AddiSlice repository doesn't exist (first time):**
 ```powershell
 # Ensure you're in your workspace folder
 cd C:\Workspace  # or your preferred workspace location
 
-# Clone Fracktory-5 repository
-git clone https://github.com/FracktalWorks/Fracktory-5.git
-cd Fracktory-5
-git checkout Fracktory-5.9
+# Clone AddiSlice repository
+git clone https://github.com/FracktalWorks/AddiSlice.git
+cd AddiSlice
+git checkout AddiSlice-5.9
 
 # Build with custom CuraEngine:
 conan install . --build=missing --update --require-override=curaengine/5.9.1@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
@@ -201,11 +201,11 @@ conan install . --build=missing --update --require-override=curaengine/5.9.1@Fra
 # conan install . --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
 ```
 
-**Option 2: If Fracktory-5 repository already exists:**
+**Option 2: If AddiSlice repository already exists:**
 ```powershell
-# Navigate to existing Fracktory-5 folder
-cd C:\Workspace\Fracktory-5  # or your Fracktory-5 location
-git checkout Fracktory-5.9
+# Navigate to existing AddiSlice folder
+cd C:\Workspace\AddiSlice  # or your AddiSlice location
+git checkout AddiSlice-5.9
 git pull
 
 # Build with custom CuraEngine:
@@ -214,16 +214,16 @@ conan install . --build=missing --update --require-override=curaengine/5.9.1@Fra
 # OR build with Ultimaker's CuraEngine:
 # conan install . --build=missing --update -o cura:devtools=True -g VirtualPythonEnv
 ```
-### 🚀 Running Fracktory
+### 🚀 Running AddiSlice
 
-1. Navigate to the Fracktory-5 directory:
+1. Navigate to the AddiSlice directory:
    ```powershell
-   cd C:\Workspace\Fracktory-5  # or your Fracktory-5 location
+   cd C:\Workspace\AddiSlice  # or your AddiSlice location
    ```
 
-2. Set the Python environment path (replace with your actual Fracktory-5 directory path):
+2. Set the Python environment path (replace with your actual AddiSlice directory path):
    ```powershell
-   $env:PYTHONPATH = 'C:\Workspace\Fracktory-5\venv\Scripts'  # or your Fracktory-5 location
+   $env:PYTHONPATH = 'C:\Workspace\AddiSlice\venv\Scripts'  # or your AddiSlice location
    ```
 
 3. Activate the virtual environment:
@@ -231,17 +231,17 @@ conan install . --build=missing --update --require-override=curaengine/5.9.1@Fra
    .\venv\Scripts\activate.ps1
    ```
 
-4. Run Fracktory:
+4. Run AddiSlice:
    ```powershell
    python cura_app.py
    ```
 
 ## Creating Installers
 
-Once you can successfully run Fracktory from source, you can create MSI and EXE installers for distribution.
+Once you can successfully run AddiSlice from source, you can create MSI and EXE installers for distribution.
 
 ### 📋 Prerequisites
-- **Successfully built and running Fracktory** (completed steps above)
+- **Successfully built and running AddiSlice** (completed steps above)
 - **NSIS** (for .exe installers) - [Download here](https://nsis.sourceforge.io/Download)
 - **WiX Toolset v3.14** (for .msi installers) - [Download here](https://wixtoolset.org/releases/)
 
@@ -254,9 +254,9 @@ Creating installers involves additional steps beyond building from source:
 5. Create installer packages
 
 ### 📁 What You Get
-- **`dist\Fracktory\Fracktory.exe`** - Standalone executable  
-- **`dist\Fracktory-{version}.exe`** - NSIS installer (if NSIS available)
-- **`dist\Fracktory-{version}.msi`** - MSI installer (if WiX available)
+- **`dist\AddiSlice\AddiSlice.exe`** - Standalone executable  
+- **`dist\AddiSlice-{version}.exe`** - NSIS installer (if NSIS available)
+- **`dist\AddiSlice-{version}.msi`** - MSI installer (if WiX available)
 
 *Version is automatically detected from `conandata.yml` (currently 5.9.9)*
 
@@ -278,18 +278,18 @@ Modify the `conandata.yml` file in the root directory to set the new version:
 version: "5.9.10"  # Update this to your new version
 sources:
   "5.9.10":  # Update this key to match the version above
-    url: "https://github.com/FracktalWorks/Fracktory-5/archive/refs/tags/v5.9.10.tar.gz"
+    url: "https://github.com/FracktalWorks/AddiSlice/archive/refs/tags/v5.9.10.tar.gz"
     strip_root: true
 ```
 
 **Key Points:**
 - The `version` field sets the Conan package version used in installers
 - The sources key must match the version number exactly
-- This version appears in installer filenames (e.g., `Fracktory-5.9.10.exe`)
+- This version appears in installer filenames (e.g., `AddiSlice-5.9.10.exe`)
 
 #### Step 2: Update Version for Update Checks
 
-Modify the `latest.json` file in the `Fracktory-5` folder to configure automatic update notifications:
+Modify the `latest.json` file in the `AddiSlice` folder to configure automatic update notifications:
 
 ```json
 {
@@ -298,7 +298,7 @@ Modify the `latest.json` file in the `Fracktory-5` folder to configure automatic
       "major": 5,
       "minor": 9,
       "revision": 10,
-      "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
+      "url": "https://github.com/FracktalWorks/AddiSlice/releases"
     }
   },
   "cura-beta": {
@@ -308,7 +308,7 @@ Modify the `latest.json` file in the `Fracktory-5` folder to configure automatic
       "revision": 10,
       "postfix_type": "beta",
       "postfix_version": 1,
-      "url": "https://github.com/FracktalWorks/Fracktory-5/releases"
+      "url": "https://github.com/FracktalWorks/AddiSlice/releases"
     }
   }
 }
@@ -325,7 +325,7 @@ Before creating installers, verify version consistency:
 
 1. **Check conandata.yml version:** `5.9.10`
 2. **Check latest.json version:** `5.9.10` (major: 5, minor: 9, revision: 10)
-3. **Generated installer names:** `Fracktory-5.9.10.exe` and `Fracktory-5.9.10.msi`
+3. **Generated installer names:** `AddiSlice-5.9.10.exe` and `AddiSlice-5.9.10.msi`
 
 All three should match for proper version management.
 
@@ -336,7 +336,7 @@ All three should match for proper version management.
 
 ### 📚 Understanding Cura's Configuration System
 
-Fracktory uses Cura's container stack system for managing printer configurations. All configuration files are located in the `resources/` folder and work together to create a complete printing profile.
+AddiSlice uses Cura's container stack system for managing printer configurations. All configuration files are located in the `resources/` folder and work together to create a complete printing profile.
 
 #### 🏗️ Container Stack Architecture
 
@@ -356,8 +356,8 @@ Cura organizes settings using a hierarchical **container stack** system (based o
 
 | Folder | Purpose | Examples |
 |--------|---------|----------|
-| **`definitions/`** | Base printer specifications | `base_fracktal_printer.def.json`, `julia_2022_advanced.def.json` |
-| **`extruders/`** | Extruder configurations | `base_fracktal_extruder_0.def.json` |
+| **`definitions/`** | Base printer specifications | `base_addiprint_printer.def.json`, `julia_2022_advanced.def.json` |
+| **`extruders/`** | Extruder configurations | `base_addiprint_extruder_0.def.json` |
 | **`variants/`** | Nozzle specifications | `0.4mm_nozzle.inst.cfg`, `0.6mm_volcano.inst.cfg` |
 | **`materials/`** | Material properties | `PLA.xml.fdm_material`, `ABS.xml.fdm_material` |
 | **`intent/`** | Print intent profiles | `engineering/`, `visual/`, `quick/` |
@@ -384,7 +384,7 @@ For detailed information, see [Ultimaker's Profiles & Settings documentation](ht
 
 #### Step 1: Create Printer Definition
 1. Create a new `.def.json` file in `resources/definitions/`
-2. Base it on existing definitions (e.g., `base_fracktal_printer.def.json`)
+2. Base it on existing definitions (e.g., `base_addiprint_printer.def.json`)
 3. Define printer-specific parameters:
    - Build volume
    - Extruder count
@@ -417,7 +417,7 @@ python scripts/generate_start_gcode.py --printer penrose_600_idex --write resour
 Use the `resourcesRenamerUtility.py` script for efficient material management:
 
 1. **Rename files** (Option 1):
-   - Provide path to existing material folder (e.g., `resources/intent/base_fracktal_printer/PLA`)
+   - Provide path to existing material folder (e.g., `resources/intent/base_addiprint_printer/PLA`)
    - Enter old material name (e.g., "PLA")
    - Enter new material name (e.g., "TPU")
 
@@ -430,12 +430,12 @@ Use the `resourcesRenamerUtility.py` script for efficient material management:
 For comprehensive material integration:
 
 ##### 1. Material File Creation
-- Place new material XML in `resources/materials/Fracktal Works/`
+- Place new material XML in `resources/materials/AddiPrint/`
 - Include all metadata: temperatures, cooling, properties
 - Set reasonable default `speed_print` (e.g., 60 mm/s)
 
 ##### 2. Intent Profile Creation
-- Create profiles in `resources/intent/base_fracktal_printer/<MaterialName>/Model <NozzleSize>/`
+- Create profiles in `resources/intent/base_addiprint_printer/<MaterialName>/Model <NozzleSize>/`
 - Generate intents for each profile type (engineering, visual, quick) and nozzle size
 - Use existing materials (ABS, Nylon, PC) as templates
 
@@ -450,7 +450,7 @@ For comprehensive material integration:
 - Ensure speed/temperature logic matches project standards
 - **TODO**: Implement flow limiting per nozzle size in Quality Settings
 
-This process ensures new materials are fully integrated and behave as expected in Fracktory.
+This process ensures new materials are fully integrated and behave as expected in AddiSlice.
 
 ### ⚙️ Custom Settings Management
 
@@ -459,7 +459,7 @@ This process ensures new materials are fully integrated and behave as expected i
 | Setting Type | Location | Reason |
 |--------------|----------|--------|
 | **Customer-facing** (used in material profiles) | `fdmprinter.def.json` | Material profiles reference base fdmprinter definitions |
-| **Internal** (used by quality/intent profiles) | `base_fracktal_printer.def.json` | Inherited by all printers using this base |
+| **Internal** (used by quality/intent profiles) | `base_addiprint_printer.def.json` | Inherited by all printers using this base |
 
 #### 📝 Setting Structure Example
 

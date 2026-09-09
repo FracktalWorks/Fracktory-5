@@ -1,6 +1,6 @@
-# Creating Fracktory Installers
+# Creating AddiSlice Installers
 
-This guide explains how to create MSI and EXE installers for Fracktory. It covers the complete process from a clean slate, including removing any existing build artifacts.
+This guide explains how to create MSI and EXE installers for AddiSlice. It covers the complete process from a clean slate, including removing any existing build artifacts.
 
 ## Prerequisites
 
@@ -47,16 +47,16 @@ gh auth login
 
 **⚠️ Important Version Update:** Before creating installers, ensure you've updated version numbers in both `conandata.yml` and `latest.json`. See [Changing Cura Version](../README.md#changing-cura-version) for detailed instructions.
 
-**⚠️ Important:** Perform all git clone operations in a separate workspace folder (e.g., `C:\Workspace`) to avoid cloning repositories inside the Fracktory repository.
+**⚠️ Important:** Perform all git clone operations in a separate workspace folder (e.g., `C:\Workspace`) to avoid cloning repositories inside the AddiSlice repository.
 
 ### Step 1: Clean Up Existing Build Artifacts
 
 Before starting a fresh build, remove any existing installation folders and build artifacts:
 
 ```powershell
-# Set your Fracktory-5 location
-$fracktoryPath = "C:\path\to\Fracktory-5"  # Change this to your actual path
-cd $fracktoryPath
+# Set your AddiSlice location
+$addislicePath = "C:\path\to\AddiSlice"  # Change this to your actual path
+cd $addislicePath
 
 # Remove old Conan installation folder
 if (Test-Path "cura_inst") { Remove-Item -Recurse -Force "cura_inst" }
@@ -72,7 +72,7 @@ if (Test-Path "build_msi") { Remove-Item -Recurse -Force "build_msi" }
 Remove-Item -Force "*.msi" -ErrorAction SilentlyContinue
 Remove-Item -Force "*.wixpdb" -ErrorAction SilentlyContinue
 Remove-Item -Force "HeatFile.wxs" -ErrorAction SilentlyContinue
-Remove-Item -Force "Fracktory.wxs" -ErrorAction SilentlyContinue
+Remove-Item -Force "AddiSlice.wxs" -ErrorAction SilentlyContinue
 
 # Remove any old virtual environment folders
 if (Test-Path "venv") { Remove-Item -Recurse -Force "venv" }
@@ -94,7 +94,7 @@ conan --version
 ### Step 3: Setup Conan Configuration
 
 ```powershell
-# Navigate to your workspace folder (NOT inside Fracktory-5)
+# Navigate to your workspace folder (NOT inside AddiSlice)
 cd C:\Workspace  # or your preferred workspace location
 
 # Clone and setup Conan config (if not already done)
@@ -113,7 +113,7 @@ conan remote remove cura-private -f
 **⚠️ Version Note:** The CuraEngine version must match the requirement in `conandata.yml`. Check the file for the current required version (e.g., `curaengine/5.9.2`).
 
 ```powershell
-# Ensure you're in your workspace folder (NOT inside Fracktory-5)
+# Ensure you're in your workspace folder (NOT inside AddiSlice)
 cd C:\Workspace
 
 # Clone or update CuraEngine
@@ -133,14 +133,14 @@ conan create . curaengine/5.9.2@FracktalWorks/stable --build=missing --update
 cd ..
 ```
 
-### Step 5: Run Conan Install for Fracktory
+### Step 5: Run Conan Install for AddiSlice
 
 ```powershell
-# Navigate to Fracktory-5 repository
-cd $fracktoryPath  # Use the path set in Step 1
+# Navigate to AddiSlice repository
+cd $addislicePath  # Use the path set in Step 1
 
 # Pull latest changes
-git checkout Fracktory-5.9
+git checkout AddiSlice-5.9
 git pull
 
 # Run Conan install (creates cura_inst folder with all dependencies)
@@ -196,26 +196,26 @@ This converts:
 .\cura_inst\Scripts\activate_local_version_env.ps1
 
 # Verify version is set correctly
-Write-Host "Building Fracktory version: $env:CURA_VERSION_FULL"
+Write-Host "Building AddiSlice version: $env:CURA_VERSION_FULL"
 ```
 
 ### Step 9: Create PyInstaller Executable
 
 ```powershell
 # Run PyInstaller to create the distributable folder
-.\cura_inst\Scripts\python.exe -m PyInstaller .\cura_inst\Fracktory.spec
+.\cura_inst\Scripts\python.exe -m PyInstaller .\cura_inst\AddiSlice.spec
 
 # Verify the output
-Get-ChildItem "dist\Fracktory\Fracktory.exe"
+Get-ChildItem "dist\AddiSlice\AddiSlice.exe"
 ```
 
-This creates `dist\Fracktory\` containing the standalone application (~1.3 GB).
+This creates `dist\AddiSlice\` containing the standalone application (~1.3 GB).
 
 **Important:** The PyInstaller build copies resources from `cura_inst\share\cura\resources`. Since we synced our custom resources in Step 6, they will be included automatically. Verify your custom printer definitions are present:
 
 ```powershell
 # Verify custom printers are included (e.g., Volterra 300 ALF)
-Test-Path "dist\Fracktory\share\cura\resources\definitions\volterra_300_alf.def.json"
+Test-Path "dist\AddiSlice\share\cura\resources\definitions\volterra_300_alf.def.json"
 ```
 
 ### Step 10: Create NSIS Installer (.exe)
@@ -228,20 +228,20 @@ $nsisPath = "C:\Program Files (x86)\NSIS"
 
 # Create the NSIS installer
 # Note: This runs for a long time due to LZMA compression
-& "$nsisPath\makensis.exe" /V4 "dist\Fracktory.nsi"
+& "$nsisPath\makensis.exe" /V4 "dist\AddiSlice.nsi"
 
-# The output will be: dist\Fracktory-{version}-Windows-X64.exe
+# The output will be: dist\AddiSlice-{version}-Windows-X64.exe
 ```
 
 **Alternative: Run as Background Job** (allows you to continue working):
 ```powershell
-$fracktoryPath = "C:\path\to\Fracktory-5"  # Your Fracktory-5 location
+$addislicePath = "C:\path\to\AddiSlice"  # Your AddiSlice location
 $job = Start-Job -ScriptBlock {
     param($path)
     Set-Location $path
-    & "C:\Program Files (x86)\NSIS\makensis.exe" /V4 "dist\Fracktory.nsi" 2>&1 | 
+    & "C:\Program Files (x86)\NSIS\makensis.exe" /V4 "dist\AddiSlice.nsi" 2>&1 | 
         Out-File "nsis_build.log"
-} -ArgumentList $fracktoryPath
+} -ArgumentList $addislicePath
 
 # Check job status
 Get-Job $job.Id | Select-Object State
@@ -267,8 +267,8 @@ $version = $env:CURA_VERSION_FULL  # e.g., "5.9.10"
 # Create build_msi output directory
 New-Item -ItemType Directory -Force -Path "build_msi"
 
-# Step 11a: Run heat.exe to harvest files from dist\Fracktory
-& "$wixPath\heat.exe" dir "dist\Fracktory\" `
+# Step 11a: Run heat.exe to harvest files from dist\AddiSlice
+& "$wixPath\heat.exe" dir "dist\AddiSlice\" `
     -dr APPLICATIONFOLDER `
     -cg NewFilesGroup `
     -sw5150 `
@@ -277,7 +277,7 @@ New-Item -ItemType Directory -Force -Path "build_msi"
     -t "ExcludeComponents.xslt" `
     -out "HeatFile.wxs"
 
-# Step 11b: Generate Fracktory.wxs from Jinja template
+# Step 11b: Generate AddiSlice.wxs from Jinja template
 .\cura_inst\Scripts\python.exe -c @"
 import os
 from jinja2 import Template
@@ -285,21 +285,21 @@ from datetime import datetime
 import uuid
 
 source_path = os.getcwd()
-app_name = 'Fracktory'
+app_name = 'AddiSlice'
 version = '$version'
 version_parts = version.split('.')
 
-with open('packaging/msi/Fracktory.wxs.jinja', 'r') as f:
+with open('packaging/msi/AddiSlice.wxs.jinja', 'r') as f:
     template = Template(f.read())
 
 wxs_content = template.render(
     app_name=app_name,
-    main_app='Fracktory.exe',
+    main_app='AddiSlice.exe',
     version=version,
     version_major=version_parts[0],
     version_minor=version_parts[1],
     version_patch=version_parts[2] if len(version_parts) > 2 else '0',
-    company='Fracktal',
+    company='AddiPrint',
     web_site='https://fracktal.in',
     year=datetime.now().year,
     upgrade_code=str(uuid.uuid5(uuid.NAMESPACE_DNS, app_name)),
@@ -309,39 +309,39 @@ wxs_content = template.render(
     cura_icon=f'{source_path}/packaging/icons/Cura.ico',
 )
 
-with open('Fracktory.wxs', 'w') as f:
+with open('AddiSlice.wxs', 'w') as f:
     f.write(wxs_content)
-print('Generated Fracktory.wxs')
+print('Generated AddiSlice.wxs')
 "@
 
 # Step 11c: Run candle.exe to compile WiX source files
 & "$wixPath\candle.exe" -arch x64 `
-    "-dCuraDir=dist\Fracktory\" `
+    "-dCuraDir=dist\AddiSlice\" `
     -ext WixFirewallExtension `
     -out "build_msi\" `
-    "Fracktory.wxs" "HeatFile.wxs"
+    "AddiSlice.wxs" "HeatFile.wxs"
 
 # Step 11d: Run light.exe to link and create the MSI
 # Note: This takes significant time with high compression
 & "$wixPath\light.exe" `
-    "build_msi\Fracktory.wixobj" `
+    "build_msi\AddiSlice.wixobj" `
     "build_msi\HeatFile.wixobj" `
     -sw1076 `
     "-dcl:high" `
     -sval `
     -ext WixUIExtension `
     -ext WixFirewallExtension `
-    -out "Fracktory-$version-Windows-X64.msi"
+    -out "AddiSlice-$version-Windows-X64.msi"
 
-# The output will be: Fracktory-{version}-Windows-X64.msi in the project root
+# The output will be: AddiSlice-{version}-Windows-X64.msi in the project root
 ```
 
 ## What You Get
 
 After successful completion:
-- **`dist\Fracktory\`** - Standalone application folder (~1.3 GB)
-- **`dist\Fracktory-{version}-Windows-X64.exe`** - NSIS installer (~280 MB)
-- **`Fracktory-{version}-Windows-X64.msi`** - MSI installer (~380 MB)
+- **`dist\AddiSlice\`** - Standalone application folder (~1.3 GB)
+- **`dist\AddiSlice-{version}-Windows-X64.exe`** - NSIS installer (~280 MB)
+- **`AddiSlice-{version}-Windows-X64.msi`** - MSI installer (~380 MB)
 
 Where `{version}` is read from `conandata.yml` (e.g., 5.9.10).
 
@@ -355,7 +355,7 @@ Where `{version}` is read from `conandata.yml` (e.g., 5.9.10).
 - Your Conan environment isn't set up properly
 - Re-run Conan install with `--build=missing`
 
-### "Fracktory.spec not found"
+### "AddiSlice.spec not found"
 - This file is generated during Conan install
 - Re-run Step 5 (Conan install)
 
@@ -399,7 +399,7 @@ $env:Path += ";C:\Program Files\GitHub CLI"
 gh auth login
 
 # Set default repository
-gh repo set-default FracktalWorks/Fracktory-5
+gh repo set-default FracktalWorks/AddiSlice
 ```
 
 ### Step 2: View Existing Release
@@ -410,13 +410,13 @@ gh release view $env:CURA_VERSION_FULL
 ### Step 3: Upload Installers
 ```powershell
 # Delete old assets if they exist (use actual asset names from release)
-gh release delete-asset $env:CURA_VERSION_FULL "Fracktory-$env:CURA_VERSION_FULL-Windows-X64.exe" --yes 2>$null
-gh release delete-asset $env:CURA_VERSION_FULL "Fracktory-$env:CURA_VERSION_FULL-Windows-X64.msi" --yes 2>$null
+gh release delete-asset $env:CURA_VERSION_FULL "AddiSlice-$env:CURA_VERSION_FULL-Windows-X64.exe" --yes 2>$null
+gh release delete-asset $env:CURA_VERSION_FULL "AddiSlice-$env:CURA_VERSION_FULL-Windows-X64.msi" --yes 2>$null
 
 # Upload new installers
 gh release upload $env:CURA_VERSION_FULL `
-    "dist\Fracktory-$env:CURA_VERSION_FULL-Windows-X64.exe" `
-    "Fracktory-$env:CURA_VERSION_FULL-Windows-X64.msi" `
+    "dist\AddiSlice-$env:CURA_VERSION_FULL-Windows-X64.exe" `
+    "AddiSlice-$env:CURA_VERSION_FULL-Windows-X64.msi" `
     --clobber
 
 # Verify upload
@@ -426,10 +426,10 @@ gh release view $env:CURA_VERSION_FULL
 ### Creating a New Release (if it doesn't exist)
 ```powershell
 gh release create $env:CURA_VERSION_FULL `
-    "dist\Fracktory-$env:CURA_VERSION_FULL-Windows-X64.exe" `
-    "Fracktory-$env:CURA_VERSION_FULL-Windows-X64.msi" `
-    --title "Fracktory $env:CURA_VERSION_FULL" `
-    --notes "Fracktory version $env:CURA_VERSION_FULL release"
+    "dist\AddiSlice-$env:CURA_VERSION_FULL-Windows-X64.exe" `
+    "AddiSlice-$env:CURA_VERSION_FULL-Windows-X64.msi" `
+    --title "AddiSlice $env:CURA_VERSION_FULL" `
+    --notes "AddiSlice version $env:CURA_VERSION_FULL release"
 ```
 
 ## Process Summary
@@ -455,9 +455,9 @@ gh release create $env:CURA_VERSION_FULL `
 | Item | Location |
 |------|----------|
 | Conan install folder | `cura_inst/` |
-| PyInstaller output | `dist/Fracktory/` |
-| NSIS installer | `dist/Fracktory-{version}-Windows-X64.exe` |
-| MSI installer | `Fracktory-{version}-Windows-X64.msi` (project root) |
+| PyInstaller output | `dist/AddiSlice/` |
+| NSIS installer | `dist/AddiSlice-{version}-Windows-X64.exe` |
+| MSI installer | `AddiSlice-{version}-Windows-X64.msi` (project root) |
 | Local resources | `resources/` |
 | WiX templates | `packaging/msi/` |
 | NSIS templates | Generated in `dist/` during PyInstaller |
@@ -468,15 +468,15 @@ gh release create $env:CURA_VERSION_FULL `
 conan install . local/test --require-override=curaengine/5.9.2@FracktalWorks/stable --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo -s arcus:build_type=RelWithDebInfo -s clipper:build_type=RelWithDebInfo
 
 # PyInstaller
-.\cura_inst\Scripts\python.exe -m PyInstaller .\cura_inst\Fracktory.spec
+.\cura_inst\Scripts\python.exe -m PyInstaller .\cura_inst\AddiSlice.spec
 
 # NSIS
-& "C:\Program Files (x86)\NSIS\makensis.exe" /V4 "dist\Fracktory.nsi"
+& "C:\Program Files (x86)\NSIS\makensis.exe" /V4 "dist\AddiSlice.nsi"
 
 # WiX (heat → candle → light)
-& "C:\Program Files (x86)\WiX Toolset v3.14\bin\heat.exe" dir "dist\Fracktory\" -dr APPLICATIONFOLDER -cg NewFilesGroup -sw5150 -gg -g1 -sf -srd -var "var.CuraDir" -t "ExcludeComponents.xslt" -out "HeatFile.wxs"
-& "C:\Program Files (x86)\WiX Toolset v3.14\bin\candle.exe" -arch x64 "-dCuraDir=dist\Fracktory\" -ext WixFirewallExtension -out "build_msi\" "Fracktory.wxs" "HeatFile.wxs"
-& "C:\Program Files (x86)\WiX Toolset v3.14\bin\light.exe" "build_msi\Fracktory.wixobj" "build_msi\HeatFile.wixobj" -sw1076 "-dcl:high" -sval -ext WixUIExtension -ext WixFirewallExtension -out "Fracktory-$version-Windows-X64.msi"
+& "C:\Program Files (x86)\WiX Toolset v3.14\bin\heat.exe" dir "dist\AddiSlice\" -dr APPLICATIONFOLDER -cg NewFilesGroup -sw5150 -gg -g1 -sf -srd -var "var.CuraDir" -t "ExcludeComponents.xslt" -out "HeatFile.wxs"
+& "C:\Program Files (x86)\WiX Toolset v3.14\bin\candle.exe" -arch x64 "-dCuraDir=dist\AddiSlice\" -ext WixFirewallExtension -out "build_msi\" "AddiSlice.wxs" "HeatFile.wxs"
+& "C:\Program Files (x86)\WiX Toolset v3.14\bin\light.exe" "build_msi\AddiSlice.wixobj" "build_msi\HeatFile.wixobj" -sw1076 "-dcl:high" -sval -ext WixUIExtension -ext WixFirewallExtension -out "AddiSlice-$version-Windows-X64.msi"
 ```
 
 ### Version Configuration

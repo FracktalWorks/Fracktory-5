@@ -3,7 +3,7 @@
     "name": "Penrose Pellet Quality Base",
     "inherits": "fdmprinter",
     "metadata": {
-        "author": "Fracktal Works",
+        "author": "AddiPrint",
         "file_formats": "text/x-gcode",
         "has_machine_quality": true,
         "has_variants": true,

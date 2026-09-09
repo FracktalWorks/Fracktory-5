@@ -18,7 +18,7 @@ class CuraConan(ConanFile):
     name = "cura"
     license = "LGPL-3.0"
     author = "UltiMaker"
-    url = "github.com/FracktalWorks/Fracktory-5"
+    url = "github.com/FracktalWorks/AddiSlice"
     description = "3D printer / slicing GUI built on top of the Uranium framework"
     topics = ("conan", "python", "pyqt6", "qt", "qml", "3d-printing", "slicer")
     build_policy = "missing"
@@ -43,7 +43,7 @@ class CuraConan(ConanFile):
         "staging": "False",
         "devtools": False,
         "cloud_api_version": "1",
-        "display_name": "Fracktory",
+        "display_name": "AddiSlice",
         "cura_debug_mode": False,  # Not yet implemented
         "internal": "False",
         "enable_i18n": False,
@@ -331,7 +331,7 @@ class CuraConan(ConanFile):
         # Collect all dll's from PyQt6 and place them in the root
         binaries.extend([(f"{p}", ".") for p in Path(self._site_packages, "PyQt6", "Qt6").glob("**/*.dll")])
 
-        with open(os.path.join(self.recipe_folder, "Fracktory.spec.jinja"), "r") as f:
+        with open(os.path.join(self.recipe_folder, "AddiSlice.spec.jinja"), "r") as f:
             pyinstaller = Template(f.read())
 
         version = self.conf.get("user.cura:version", default = self.version, check_type = str)
@@ -351,7 +351,7 @@ class CuraConan(ConanFile):
                 print(f"WARNING: Attempt to delete binary {unwanted_path} results in: {str(ex)}")
 
         # Write the actual file:
-        with open(os.path.join(location, "Fracktory.spec"), "w") as f:
+        with open(os.path.join(location, "AddiSlice.spec"), "w") as f:
             f.write(pyinstaller.render(
                 name = str(self.options.display_name).replace(" ", "-"),
                 display_name = self._app_name,

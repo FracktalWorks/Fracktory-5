@@ -126,7 +126,7 @@ class MaterialCalibration(QObject, Extension):
 
     @cached_property
     def _pluginSettingsFilePath(self)->str:
-        ''' Returns the path to the plugin settings file using Cura/Fracktory user preferences directory '''
+        ''' Returns the path to the plugin settings file using Cura/AddiSlice user preferences directory '''
         from UM.Resources import Resources
         import os
         settings_dir = os.path.join(Resources.getStoragePath(Resources.Preferences), "plugins")

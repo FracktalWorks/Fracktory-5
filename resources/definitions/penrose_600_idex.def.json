@@ -1,7 +1,7 @@
 {
     "version": 2,
     "name": "Penrose 600 IDEX",
-    "inherits": "base_fracktal_idex_printer",
+    "inherits": "base_addiprint_idex_printer",
     "id": "penrose_600_idex",
     "metadata":
     {
@@ -29,7 +29,7 @@
             0
         ],
         "post_processing_scripts": "[DiagonalZHop]\\\nextruder_nb = 1\\\n\\\n[CreateThumbnail]\\\nwidth = 128\\\nheight = 128\\\n\\\n[MixHopper]\\\nextrusion_interval = 2000.0\\\nmix_gcode = MIX_HOPPER\\\n\\\n",
-        "preferred_material": "fracktal_pla_pellet",
+        "preferred_material": "addiprint_pla_pellet",
         "preferred_quality_type": "pellet_060",
         "preferred_variant_name": "Pellet 1.5 mm",
         "quality_definition": "penrose_pellet_quality",

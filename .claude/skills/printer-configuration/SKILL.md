@@ -1,20 +1,20 @@
 ---
 name: printer-configuration
-description: Fleet-wide runbook for configuring Fracktal printers in Fracktory-5 — printers, settings, nozzle variants, quality profiles, materials, intents, and how settings surface in the frontend UI. Use when editing anything under resources/ (definitions, extruders, variants, quality, materials, intent, setting_visibility) for any printer (Julia, Dragon, Twin Dragon, Volterra, Snowflake, Penrose pellet), or when adding/changing a setting and verifying how it displays.
+description: Fleet-wide runbook for configuring AddiPrint printers in AddiSlice — printers, settings, nozzle variants, quality profiles, materials, intents, and how settings surface in the frontend UI. Use when editing anything under resources/ (definitions, extruders, variants, quality, materials, intent, setting_visibility) for any printer (Julia, Dragon, Twin Dragon, Volterra, Snowflake, Penrose pellet), or when adding/changing a setting and verifying how it displays.
 ---
 
-# Printer Configuration (all Fracktal printers)
+# Printer Configuration (all AddiPrint printers)
 
 Internal skill. Deep reference: `docs/agents.md` (read the relevant section
 before editing). This is the operational path.
 
 ## Architecture in 30 seconds
 
-- Inheritance: `fdmprinter` → `base_fracktal_printer` (single) →
-  `base_fracktal_dual_printer` → `base_fracktal_idex_printer`; leaf printer
+- Inheritance: `fdmprinter` → `base_addiprint_printer` (single) →
+  `base_addiprint_dual_printer` → `base_addiprint_idex_printer`; leaf printer
   defs are thin (build volume, feedrates, names). Bases carry the tuning
   philosophy. Override as close to the leaf as possible.
-- Two quality namespaces: `base_fracktal_printer` (all filament printers,
+- Two quality namespaces: `base_addiprint_printer` (all filament printers,
   variants "Model X.X mm", global types micro/high/normal/low/coarse/…)
   and `penrose_pellet_quality` (Penrose 600 + IDEX, variants "Pellet X.X mm",
   types `pellet_020`…`pellet_240`).
@@ -29,11 +29,11 @@ before editing). This is the operational path.
 | Change | Home |
 |---|---|
 | One machine, all nozzles/materials | `resources/definitions/<printer>.def.json` `overrides` |
-| Whole family (all filament / all IDEX) | the matching `base_fracktal_*.def.json` |
-| Per-nozzle (nozzle size, flow limit, heat-zone, first-layer height) | `resources/variants/fracktalworks/<Printer>/*.inst.cfg` `[values]` |
+| Whole family (all filament / all IDEX) | the matching `base_addiprint_*.def.json` |
+| Per-nozzle (nozzle size, flow limit, heat-zone, first-layer height) | `resources/variants/addiprint/<Printer>/*.inst.cfg` `[values]` |
 | Per-material (temps, cooling, density) | `resources/materials/<brand>/*.xml.fdm_material` |
 | Per-quality layer height (global) or per-material tweak (stub) | `resources/quality/<namespace>/…` |
-| Engineering/Visual/Draft picks (Recommended mode) | `resources/intent/base_fracktal_printer/…` (filament only) |
+| Engineering/Visual/Draft picks (Recommended mode) | `resources/intent/base_addiprint_printer/…` (filament only) |
 | New user-facing setting | `fdmprinter.def.json` (+ XML map in `plugins/XmlMaterialProfile/XmlMaterialProfile.py` if material-settable); family-internal settings may live in a base def (`bridge_over_support`, `print_mode`) |
 | Which settings are visible by default | `resources/setting_visibility/{basic,advanced,expert}.cfg` |
 
@@ -54,7 +54,7 @@ before editing). This is the operational path.
    material-tree build time in `cura/Machines/VariantNode.py:63,134` (excluded
    materials never enter the tree, so they can't appear in menus OR be loaded
    from a saved config — Cura falls back to a same-class material). Filament
-   printers exclude `_pellet` (inherited from `base_fracktal_printer`); pellet
+   printers exclude `_pellet` (inherited from `base_addiprint_printer`); pellet
    (Penrose) printers exclude `["_175", "generic_"]` (their own per-key
    override). This is what keeps filament out of pellet machines and pellets
    out of filament machines — verify with
@@ -105,7 +105,7 @@ before editing). This is the operational path.
    `NozzleModel` (hardware_type=nozzle variants), materials =
    `MaterialBrandsModel`/`BaseMaterialsModel` (brand/material/GUID).
 8. IDEX print modes also surface as a toolbar Tool
-   (`plugins/FracktoryIDEX/tools/print_modes/PrintModesPanel.qml`);
+   (`plugins/AddiSliceIDEX/tools/print_modes/PrintModesPanel.qml`);
    `machine_disallowed_areas` in the IDEX base draws per-mode keep-out zones
    on the build plate.
 
@@ -155,13 +155,13 @@ before editing). This is the operational path.
   `verify_definitions_load.py`) — new rules belong in `printer-linter/`.
 - Generic ASA/CPE materials are excluded fleet-wide (no quality stubs ever
   existed for them, so they showed unfiltered quality lists). Reverse by
-  removing `generic_asa`/`generic_cpe` from `base_fracktal_printer`
+  removing `generic_asa`/`generic_cpe` from `base_addiprint_printer`
   `exclude_materials` AND adding proper stub sets.
 
 Fixed 2026-07-23 (in-app verification still pending): barrel-temp formula
 moved `default_value`→`value` in both Penrose defs; `_pellet` added to
-`exclude_materials` in `base_fracktal_printer` (inherited fleet-wide, Penrose
-overrides keep their own list); `fracktal_cf-petg_175` filename space removed;
+`exclude_materials` in `base_addiprint_printer` (inherited fleet-wide, Penrose
+overrides keep their own list); `addiprint_cf-petg_175` filename space removed;
 `support_xy_distance ` trailing-space key fixed in the dual base; UTF-8 BOMs
 stripped from 25 pellet quality files (FastConfigParser tolerated them but the
 stdlib-configparser version-upgrade path did not); stray `2` line removed from

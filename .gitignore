@@ -93,7 +93,7 @@ conan.lock
 conan_imports_manifest.txt
 conanbuildinfo.txt
 graph_info.json
-Fracktory.spec
+AddiSlice.spec
 .run/
 /printer-linter/src/printerlinter.egg-info/
 /plugins/CuraEngineGradualFlow
@@ -102,7 +102,7 @@ Fracktory.spec
 curaengine_plugin_gradual_flow
 curaengine_plugin_gradual_flow.exe
 /runner_scripts
-Fracktory.nsi
+AddiSlice.nsi
 fileassoc.nsh
 .github/workflows/requirements-runner.txt
 

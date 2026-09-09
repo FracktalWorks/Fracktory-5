@@ -1,4 +1,4 @@
-# GitHub Release Upload Script for Fracktory 5.9.12
+# GitHub Release Upload Script for AddiSlice 5.9.12
 # This script creates a GitHub release and uploads the installer artifacts
 
 param(
@@ -10,18 +10,18 @@ $ErrorActionPreference = "Stop"
 
 # Configuration
 $Owner = "FracktalWorks"
-$Repo = "Fracktory-5"
+$Repo = "AddiSlice"
 $TagName = "v5.9.12"
-$ReleaseName = "Fracktory v5.9.12"
+$ReleaseName = "AddiSlice v5.9.12"
 $ReleaseBody = @"
-# Fracktory v5.9.12
+# AddiSlice v5.9.12
 
 ## Installation
 
 ### Windows Users
 Download one of the following installers:
-- **Fracktory-5.9.12.exe** - NSIS installer (recommended for most users)
-- **Fracktory-5.9.12.msi** - MSI installer (for enterprise deployments)
+- **AddiSlice-5.9.12.exe** - NSIS installer (recommended for most users)
+- **AddiSlice-5.9.12.msi** - MSI installer (for enterprise deployments)
 
 ### System Requirements
 - Windows 10/11 (64-bit)
@@ -39,8 +39,8 @@ Download one of the following installers:
 
 # Files to upload
 $Files = @(
-    "dist\Fracktory-5.9.12.exe",
-    "dist\Fracktory-5.9.12.msi"
+    "dist\AddiSlice-5.9.12.exe",
+    "dist\AddiSlice-5.9.12.msi"
 )
 
 $Headers = @{
@@ -53,7 +53,7 @@ Write-Host "Creating GitHub release..." -ForegroundColor Cyan
 
 $ReleaseData = @{
     tag_name = $TagName
-    target_commitish = "Fracktory-5.9"
+    target_commitish = "AddiSlice-5.9"
     name = $ReleaseName
     body = $ReleaseBody
     draft = $false

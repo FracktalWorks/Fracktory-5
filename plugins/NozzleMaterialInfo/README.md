@@ -62,5 +62,5 @@ Check the Cura log files if the plugin doesn't seem to be working. The plugin lo
 
 ## License
 
-Copyright (c) 2025 FracktalWorks
+Copyright (c) 2025 AddiPrint
 This plugin is released under the terms of the LGPLv3 or higher.

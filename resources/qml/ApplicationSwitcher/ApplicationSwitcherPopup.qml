@@ -52,28 +52,28 @@ Popup
                 {
                     displayName: "Marketplace", //Not translated, since it's a brand name.
                     thumbnail: UM.Theme.getIcon("Shop", "high"),
-                    description: catalog.i18nc("@tooltip:button", "Extend Fracktory with plugins and material profiles."),
+                    description: catalog.i18nc("@tooltip:button", "Extend AddiSlice with plugins and material profiles."),
                     link: "https://fracktal.in",
                     permissionsRequired: []
                 },
                 {
-                    displayName: catalog.i18nc("@label:button", "Sponsor Fracktory"),
+                    displayName: catalog.i18nc("@label:button", "Sponsor AddiSlice"),
                     thumbnail: UM.Theme.getIcon("Heart"),
                     description: catalog.i18nc("@tooltip:button", "Show your support for Cura with a donation."),
                     link: "https://www.buymeacoffee.com/vjvarada",
                     permissionsRequired: []
                 },
                 {
-                    displayName: catalog.i18nc("@label:button", "Fracktal support"),
+                    displayName: catalog.i18nc("@label:button", "AddiPrint support"),
                     thumbnail: UM.Theme.getIcon("Help", "high"),
-                    description: catalog.i18nc("@tooltip:button", "Learn how to get started with Fracktory."),
+                    description: catalog.i18nc("@tooltip:button", "Learn how to get started with AddiSlice."),
                     link: "https://care.fracktal.in/",
                     permissionsRequired: []
                 },
                 {
                     displayName: catalog.i18nc("@label:button", "Ask a question"),
                     thumbnail: UM.Theme.getIcon("Speak", "high"),
-                    description: catalog.i18nc("@tooltip:button", "Consult the Fracktal Knowledge Base."),
+                    description: catalog.i18nc("@tooltip:button", "Consult the AddiPrint Knowledge Base."),
                     link: "https://care.fracktal.in/",
                     permissionsRequired: []
                 },
@@ -81,13 +81,13 @@ Popup
                     displayName: catalog.i18nc("@label:button", "Report a bug"),
                     thumbnail: UM.Theme.getIcon("Bug", "high"),
                     description: catalog.i18nc("@tooltip:button", "Let developers know that something is going wrong."),
-                    link: "https://github.com/FracktalWorks/Fracktory-5/issues/new/choose",
+                    link: "https://github.com/FracktalWorks/AddiSlice/issues/new/choose",
                     permissionsRequired: []
                 },
                 {
                     displayName: "Fracktal.in", //Not translated, since it's a URL.
                     thumbnail: UM.Theme.getIcon("Browser"),
-                    description: catalog.i18nc("@tooltip:button", "Visit the Fracktal  website."),
+                    description: catalog.i18nc("@tooltip:button", "Visit the AddiPrint  website."),
                     link: "https://fracktal.in",
                     permissionsRequired: []
                 }

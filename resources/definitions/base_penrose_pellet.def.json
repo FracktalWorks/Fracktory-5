@@ -1,11 +1,11 @@
 {
     "version": 2,
     "name": "Base Penrose Pellet Definition",
-    "inherits": "base_fracktal_printer",
+    "inherits": "base_addiprint_printer",
     "metadata":
     {
         "visible": false,
-        "author": "Fracktal Works",
+        "author": "AddiPrint",
         "manufacturer": "Penrose Series",
         "category": "Penrose Series",
         "exclude_materials": [
@@ -17,7 +17,7 @@
         "has_materials": true,
         "has_variant_materials": false,
         "has_variants": true,
-        "preferred_material": "fracktal_pla_pellet",
+        "preferred_material": "addiprint_pla_pellet",
         "preferred_quality_type": "pellet_060",
         "preferred_variant_name": "Pellet 1.5 mm",
         "quality_definition": "penrose_pellet_quality",

@@ -1,4 +1,4 @@
-# Copyright (c) 2025 FracktalWorks
+# Copyright (c) 2025 AddiPrint
 # NozzleMaterialInfo is released under the terms of the LGPLv3 or higher.
 
 from typing import Optional, Dict, Any

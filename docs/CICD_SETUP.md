@@ -1,10 +1,10 @@
 # CI/CD Setup Guide
 
-This guide explains how to set up and run the GitHub Actions workflow for automated Fracktory installer creation using local runners.
+This guide explains how to set up and run the GitHub Actions workflow for automated AddiSlice installer creation using local runners.
 
 ## Overview
 
-The Fracktory project uses GitHub Actions with self-hosted Windows runners to create MSI and EXE installers. This approach provides:
+The AddiSlice project uses GitHub Actions with self-hosted Windows runners to create MSI and EXE installers. This approach provides:
 - **Full control** over the build environment
 - **Better performance** than hosted runners
 - **Access to licensed tools** (NSIS, WiX Toolset)
@@ -31,7 +31,7 @@ The Fracktory project uses GitHub Actions with self-hosted Windows runners to cr
 ### Step 1: Create Runner on GitHub
 
 1. **Navigate to Repository Settings:**
-   - Go to: https://github.com/FracktalWorks/Fracktory-5/settings/actions/runners
+   - Go to: https://github.com/FracktalWorks/AddiSlice/settings/actions/runners
 
 2. **Add New Runner:**
    - Click **"New self-hosted runner"**
@@ -54,12 +54,12 @@ The Fracktory project uses GitHub Actions with self-hosted Windows runners to cr
 
 2. **Configure the Runner:**
    ```powershell
-   ./config.cmd --url https://github.com/FracktalWorks/Fracktory-5 --token YOUR_TOKEN_HERE
+   ./config.cmd --url https://github.com/FracktalWorks/AddiSlice --token YOUR_TOKEN_HERE
    ```
 
 3. **Runner Configuration Settings:**
    - **Runner group:** Default
-   - **Runner name:** `windows-fracktory-builder` (or your preferred name)
+   - **Runner name:** `windows-addislice-builder` (or your preferred name)
    - **Labels:** `self-hosted,Windows,X64` (default)
    - **Work folder:** Use default (`_work`)
 
@@ -112,7 +112,7 @@ You have two options for running the GitHub Actions runner:
 ### Step 4: Verify Runner Registration
 
 1. **Check GitHub Settings:**
-   - Go back to: https://github.com/FracktalWorks/Fracktory-5/settings/actions/runners
+   - Go back to: https://github.com/FracktalWorks/AddiSlice/settings/actions/runners
    - Your runner should appear with a green dot (online status)
 
 2. **Runner Labels:**
@@ -126,10 +126,10 @@ You have two options for running the GitHub Actions runner:
 ### Step 1: Trigger Workflow
 
 1. **Navigate to Actions Tab:**
-   - Go to: https://github.com/FracktalWorks/Fracktory-5/actions
+   - Go to: https://github.com/FracktalWorks/AddiSlice/actions
 
 2. **Select Workflow:**
-   - Click **"Fracktory Windows Installer Local Runner"**
+   - Click **"AddiSlice Windows Installer Local Runner"**
 
 3. **Run Workflow:**
    - Click **"Run workflow"** button
@@ -140,8 +140,8 @@ You have two options for running the GitHub Actions runner:
 | Parameter | Description | Default | Notes |
 |-----------|-------------|---------|-------|
 | **version** | Version of the application | `5.9.9` | Must match your conandata.yml |
-| **installer_name** | Name of the .exe and .msi | `Fracktory_setup` | Base filename for installers |
-| **app_name** | Application name in installer | `Fracktory` | Display name in Windows |
+| **installer_name** | Name of the .exe and .msi | `AddiSlice_setup` | Base filename for installers |
+| **app_name** | Application name in installer | `AddiSlice` | Display name in Windows |
 | **conan_args** | Additional Conan arguments | `''` | For advanced users |
 | **enterprise** | Build as Enterprise edition | `false` | Usually keep false |
 | **staging** | Use staging API | `false` | Usually keep false |
@@ -176,8 +176,8 @@ You have two options for running the GitHub Actions runner:
    - Look for **"Artifacts"** section
 
 2. **Available Downloads:**
-   - **`Fracktory-Installer-EXE-{version}`** - Contains the NSIS .exe installer
-   - **`Fracktory-Installer-MSI-{version}`** - Contains the MSI installer
+   - **`AddiSlice-Installer-EXE-{version}`** - Contains the NSIS .exe installer
+   - **`AddiSlice-Installer-MSI-{version}`** - Contains the MSI installer
    - **`windows-run-info`** - Contains build information
 
 3. **Download and Test:**
@@ -201,7 +201,7 @@ The workflow performs these key setup steps:
    ```yaml
    - Install Conan 1.65.0
    - Clone Ultimaker conan-config
-   - Configure Conan with FracktalWorks settings
+   - Configure Conan with AddiPrint settings
    ```
 
 3. **CuraEngine Build:**
@@ -231,17 +231,17 @@ The workflow creates installers using:
 
 1. **PyInstaller Executable:**
    ```powershell
-   pyinstaller ./cura_inst/Fracktory.spec
+   pyinstaller ./cura_inst/AddiSlice.spec
    ```
 
 2. **NSIS EXE Installer:**
    ```powershell
-   python cura_inst\packaging\NSIS\create_windows_installer.py cura_inst dist "Fracktory-5.9.9.exe"
+   python cura_inst\packaging\NSIS\create_windows_installer.py cura_inst dist "AddiSlice-5.9.9.exe"
    ```
 
 3. **WiX MSI Installer:**
    ```powershell
-   python cura_inst\packaging\msi\create_windows_msi.py cura_inst dist\Fracktory "Fracktory-5.9.9.msi" "Fracktory"
+   python cura_inst\packaging\msi\create_windows_msi.py cura_inst dist\AddiSlice "AddiSlice-5.9.9.msi" "AddiSlice"
    ```
 
 ## Troubleshooting
@@ -354,9 +354,9 @@ Remove-Item -Recurse -Force _work\*
 ```
 
 ### Workflow Trigger
-1. Go to: https://github.com/FracktalWorks/Fracktory-5/actions
-2. Select "Fracktory Windows Installer Local Runner"
+1. Go to: https://github.com/FracktalWorks/AddiSlice/actions
+2. Select "AddiSlice Windows Installer Local Runner"
 3. Click "Run workflow"
 4. Fill parameters and click "Run workflow"
 
-This setup ensures reliable, automated installer creation for the Fracktory project using GitHub Actions and self-hosted runners.
+This setup ensures reliable, automated installer creation for the AddiSlice project using GitHub Actions and self-hosted runners.

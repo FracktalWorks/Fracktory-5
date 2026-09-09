@@ -1,7 +1,7 @@
 {
     "version": 2,
     "name": "Penrose 600 Swappable (Filament)",
-    "inherits": "base_fracktal_printer",
+    "inherits": "base_addiprint_printer",
     "id": "penrose_600_swappable_fdm",
     "metadata":
     {
@@ -20,10 +20,10 @@
             0,
             0
         ],
-        "preferred_material": "fracktal_pla_175",
+        "preferred_material": "addiprint_pla_175",
         "preferred_quality_type": "normal",
         "preferred_variant_name": "Model 0.4 mm",
-        "quality_definition": "base_fracktal_printer",
+        "quality_definition": "base_addiprint_printer",
         "variants_name": "Nozzle"
     },
     "overrides":

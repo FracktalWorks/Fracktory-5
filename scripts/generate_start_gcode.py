@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-generate_start_gcode.py - Standalone Start/End GCode Expression Builder for Fracktory
+generate_start_gcode.py - Standalone Start/End GCode Expression Builder for AddiSlice
 
 This script programmatically builds the Python expression strings used in Cura printer
 definition files for machine_start_gcode and machine_end_gcode. These expressions use
@@ -37,7 +37,7 @@ Architecture Notes:
     - The GcodeStartEndFormatter regex:
       r"{(?P<condition>if|else|elif|endif)?\\s*(?P<expression>.*?)\\s*(?:,\\s*(?P<extruder_nr_expr>.*))?\\s*}(?P<end_of_line>\\n?)"
 
-Author: Fracktal Works
+Author: AddiPrint
 """
 
 import argparse
@@ -159,7 +159,7 @@ def nozzle_temp_tag(extruder_nr: int) -> str:
     Generate a nozzle temperature replacement tag that handles the layer_0 fallback.
 
     If material_print_temperature_layer_0 is 0 (unset), falls back to material_print_temperature.
-    This matches the pattern used in base_fracktal_idex_printer.def.json.
+    This matches the pattern used in base_addiprint_idex_printer.def.json.
 
     Returns a Python expression fragment like:
         ("S{material_print_temperature, 0}" if extruderValue(0, 'material_print_temperature_layer_0') == 0
@@ -1028,7 +1028,7 @@ def build_gcode(config: PrinterConfig) -> tuple:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate start/end GCode expressions for Fracktory printer definitions",
+        description="Generate start/end GCode expressions for AddiSlice printer definitions",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=textwrap.dedent("""\
             Examples:

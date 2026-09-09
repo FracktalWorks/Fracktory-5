@@ -1,7 +1,7 @@
 {
     "version": 2,
     "name": "Snowflake",
-    "inherits": "base_fracktal_printer",
+    "inherits": "base_addiprint_printer",
     "id": "snowflake",
     "metadata":
     {
@@ -14,7 +14,7 @@
             0,
             0
         ],
-        "quality_definition": "base_fracktal_printer"
+        "quality_definition": "base_addiprint_printer"
     },
     "overrides":
     {

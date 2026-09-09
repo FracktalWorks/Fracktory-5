@@ -173,8 +173,8 @@ class CuraApplication(QtApplication):
 
         self.default_theme = "cura-dark"
 
-        self.change_log_url = "https://ultimaker.com/Fracktory-latest-features?utm_source=cura&utm_medium=software&utm_campaign=cura-update-features"
-        self.beta_change_log_url = "https://ultimaker.com/Fracktory-beta-features?utm_source=cura&utm_medium=software&utm_campaign=cura-update-features"
+        self.change_log_url = "https://ultimaker.com/AddiSlice-latest-features?utm_source=cura&utm_medium=software&utm_campaign=cura-update-features"
+        self.beta_change_log_url = "https://ultimaker.com/AddiSlice-beta-features?utm_source=cura&utm_medium=software&utm_campaign=cura-update-features"
 
         self._boot_loading_time = time.time()
 

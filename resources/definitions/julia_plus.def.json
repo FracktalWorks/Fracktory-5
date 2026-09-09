@@ -1,7 +1,7 @@
 {
     "version": 2,
     "name": "Julia Plus",
-    "inherits": "base_fracktal_printer",
+    "inherits": "base_addiprint_printer",
     "id": "julia_plus",
     "metadata":
     {
@@ -9,7 +9,7 @@
         "manufacturer": "Julia Series",
         "category": "Legacy Machines",
         "machine_variant_shortcode": "JP",
-        "quality_definition": "base_fracktal_printer"
+        "quality_definition": "base_addiprint_printer"
     },
     "overrides":
     {

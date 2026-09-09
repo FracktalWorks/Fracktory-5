@@ -1,6 +1,6 @@
 {
     "name": "Nozzle Material Info",
-    "author": "FracktalWorks",
+    "author": "AddiPrint",
     "version": "1.0.0",
     "api": 8,
     "description": "Adds nozzle and material information to the start of G-code files",

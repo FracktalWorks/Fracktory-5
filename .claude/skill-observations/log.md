@@ -14,7 +14,7 @@ DECLINED = user decided not to pursue
 
 **Status:** ACTIONED — skill created at `.claude/skills/pellet-printer-tuning/SKILL.md`
 **Date:** 2026-07-23
-**Session context:** Building repo navigation knowledge for Fracktory-5 ahead of Penrose pellet settings changes
+**Session context:** Building repo navigation knowledge for AddiSlice ahead of Penrose pellet settings changes
 **Skill:** New skill candidate: pellet-printer-tuning
 **Type:** internal
 **Phase/Area:** resources/ editing workflow

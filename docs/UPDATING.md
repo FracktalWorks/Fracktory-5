@@ -1,10 +1,10 @@
-# Updating Fracktory
+# Updating AddiSlice
 
-This guide covers the process of updating Fracktory to incorporate changes from the latest Ultimaker Cura releases.
+This guide covers the process of updating AddiSlice to incorporate changes from the latest Ultimaker Cura releases.
 
 ## Updating to Latest Ultimaker Cura Version
 
-Follow these steps to update Fracktory with the latest Ultimaker Cura version:
+Follow these steps to update AddiSlice with the latest Ultimaker Cura version:
 
 1. **Navigate to Ultimaker Cura repository**: Go to the [Ultimaker Cura repository](https://github.com/Ultimaker/Cura) and select the release you want to update to:
 
@@ -28,7 +28,7 @@ Follow these steps to update Fracktory with the latest Ultimaker Cura version:
 
 ![alt text](create_branch_from_commit.png)
 
-6. **Create new Fracktory branch**: Create a new branch for Fracktory-5 with the new version number (e.g., "Fracktory-5.6.0"):
+6. **Create new AddiSlice branch**: Create a new branch for AddiSlice with the new version number (e.g., "AddiSlice-5.6.0"):
 
 ![alt text](create_branch.png)
 
@@ -46,7 +46,7 @@ This is what it might look like before deleting:
 After deleting only the core resource files are left:
 ![alt text](resources_new.png)
 
-9. **Merge previous Fracktory version**: Merge the previous Fracktory 5 release branch into the current branch. Use squash and merge for a cleaner commit history: 
+9. **Merge previous AddiSlice version**: Merge the previous AddiSlice 5 release branch into the current branch. Use squash and merge for a cleaner commit history: 
 
 ![alt text](merge.png)
 
@@ -66,7 +66,7 @@ After deleting only the core resource files are left:
 
 ![alt text](latest_json.png)
 
-13. **Update GitHub Actions**: Update the `cura-installer-windows.yml` workflow with the latest version numbers for Fracktory and CuraEngine. You may need to update the build environment if GitHub Actions, Python version, or Conan have been updated upstream: 
+13. **Update GitHub Actions**: Update the `cura-installer-windows.yml` workflow with the latest version numbers for AddiSlice and CuraEngine. You may need to update the build environment if GitHub Actions, Python version, or Conan have been updated upstream: 
 
 ![alt text](application_version.png)
 
@@ -90,12 +90,12 @@ After deleting only the core resource files are left:
 
 ![alt text](default_engine.png)
 
-16. **Rebuild**: Follow the build instructions to compile Fracktory and CuraEngine again. The build environment may need updates - reference the [Running Cura from Source guide](https://github.com/Ultimaker/Cura/wiki/Running-Cura-from-Source).
+16. **Rebuild**: Follow the build instructions to compile AddiSlice and CuraEngine again. The build environment may need updates - reference the [Running Cura from Source guide](https://github.com/Ultimaker/Cura/wiki/Running-Cura-from-Source).
 
-17. **Update GitHub Actions**: Ensure GitHub Actions work properly by referencing the [Cura Windows Installer Workflow](https://github.com/Ultimaker/cura-workflows/blob/main/.github/workflows/cura-installer-windows.yml) and updating `\Fracktory-5\.github\workflows\cura-installer-windows.yml` accordingly.
+17. **Update GitHub Actions**: Ensure GitHub Actions work properly by referencing the [Cura Windows Installer Workflow](https://github.com/Ultimaker/cura-workflows/blob/main/.github/workflows/cura-installer-windows.yml) and updating `\AddiSlice\.github\workflows\cura-installer-windows.yml` accordingly.
 
 ## Summary
 
-This process ensures that Fracktory stays up-to-date with the latest Ultimaker Cura improvements while maintaining FracktalWorks-specific customizations. After completing these steps, you'll have a new Fracktory version that incorporates the latest upstream changes.
+This process ensures that AddiSlice stays up-to-date with the latest Ultimaker Cura improvements while maintaining AddiPrint-specific customizations. After completing these steps, you'll have a new AddiSlice version that incorporates the latest upstream changes.
 
 For questions about this process or if you encounter issues, please refer to the main [README](README.md) or open an issue in the repository.
